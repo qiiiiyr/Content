@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "id": "2026-W47/1-wifi",
+    "lang": "en",
+    "platform": "youtube",
+    "mediaId": "",
+    "postedAt": "2026-11-15T21:53:26.912Z",
+    "error": "missing secret/env YT_CLIENT_ID (see docs/SETUP.md)"
+  },
+  {
+    "id": "2026-W47/1-wifi",
+    "lang": "en",
+    "platform": "instagram",
+    "mediaId": "",
+    "postedAt": "2026-11-15T21:53:26.913Z",
+    "error": "missing secret/env IG_USER_ID_EN (see docs/SETUP.md)"
+  }
+]
