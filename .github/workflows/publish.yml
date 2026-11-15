@@ -1,0 +1,48 @@
+# Daily: render and post the next episode in each language. 12:17 UTC = 19:17 WIB (ID), 17:23 UTC = 12:23 New York (EN).
+name: publish
+on:
+  schedule:
+    - cron: '17 12 * * *'
+    - cron: '23 17 * * *'
+  workflow_dispatch:
+    inputs:
+      lang:
+        description: en or id
+        default: en
+      dry_run:
+        type: boolean
+        default: true
+concurrency: publish
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: ./.github/actions/setup
+      - run: node scripts/publish.ts --lang "$POST_LANG" $DRY
+        env:
+          POST_LANG: ${{ github.event.schedule == '17 12 * * *' && 'id' || inputs.lang || 'en' }}
+          DRY: ${{ inputs.dry_run && '--dry-run' || '' }}
+          PRIVACY: ${{ vars.PRIVACY || 'private' }}
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN_EN: ${{ secrets.YT_REFRESH_TOKEN_EN }}
+          YT_REFRESH_TOKEN_ID: ${{ secrets.YT_REFRESH_TOKEN_ID }}
+          IG_USER_ID_EN: ${{ secrets.IG_USER_ID_EN }}
+          IG_USER_ID_ID: ${{ secrets.IG_USER_ID_ID }}
+          IG_TOKEN_EN: ${{ secrets.IG_TOKEN_EN }}
+          IG_TOKEN_ID: ${{ secrets.IG_TOKEN_ID }}
+      - name: Save what was posted
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add state/posted.json
+          git diff --cached --quiet && exit 0
+          git commit -m "Posted $(date -u +%F)"
+          for i in 1 2 3 4; do git pull --rebase -q && git push && exit 0; sleep $((i * 5)); done; exit 1

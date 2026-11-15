@@ -1,0 +1,25 @@
+import {api} from '../http.ts';
+import {GRAPH, igAccount} from '../post/instagram.ts';
+import type {Lang} from '../../src/types.ts';
+import type {CompetitorVideo} from '../review.ts';
+
+/** views, reach, saves and shares for one of our Reels. */
+export const ownInstagram = async (lang: Lang, mediaId: string): Promise<Record<string, number>> => {
+	const {token} = igAccount(lang);
+	const {data} = await api(`${GRAPH}/${mediaId}/insights?metric=views,reach,saved,shares&access_token=${token}`);
+	return Object.fromEntries(data.map((d: any) => [d.name, d.values?.[0]?.value ?? d.total_value?.value ?? 0]));
+};
+
+/** A competitor's latest posts via business_discovery (Business/Creator accounts only). Likes stand in for views,
+ * which this endpoint does not return. Returns null if the account is not found or not a professional account. */
+export const competitorInstagram = async (username: string, theme: string, lang: string): Promise<CompetitorVideo[] | null> => {
+	const {user, token} = igAccount('en');
+	const fields = `business_discovery.username(${username}){media.limit(50){caption,like_count,timestamp,permalink}}`;
+	try {
+		const res = await api(`${GRAPH}/${user}?fields=${encodeURIComponent(fields)}&access_token=${token}`);
+		return (res.business_discovery?.media?.data ?? []).map((m: any) => ({theme, platform: 'instagram', lang, account: username, title: (m.caption ?? '').split('\n')[0].slice(0, 120), url: m.permalink, views: m.like_count ?? 0, publishedAt: m.timestamp}));
+	} catch (e) {
+		console.warn(`instagram @${username}: ${(e as Error).message.slice(0, 200)}`);
+		return null;
+	}
+};

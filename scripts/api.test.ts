@@ -1,0 +1,33 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {competitorYoutube} from './stats/youtube.ts';
+import {checkMeta, sceneCount} from './check.ts';
+import {readMeta} from './lib.ts';
+
+test('competitor YouTube: handle -> uploads -> view counts (recorded response shapes)', async () => {
+	const replies: Record<string, unknown> = {
+		'/channels': {items: [{contentDetails: {relatedPlaylists: {uploads: 'UU1'}}}]},
+		'/playlistItems': {items: [{contentDetails: {videoId: 'v1'}}, {contentDetails: {videoId: 'v2'}}]},
+		'/videos': {items: [{id: 'v1', snippet: {title: 'How GPS works', publishedAt: '2026-11-01T00:00:00Z'}, statistics: {viewCount: '1200'}}, {id: 'v2', snippet: {title: 'x', publishedAt: '2026-11-02T00:00:00Z'}, statistics: {}}]},
+	};
+	const real = globalThis.fetch;
+	globalThis.fetch = (async (url: string) => new Response(JSON.stringify(replies[Object.keys(replies).find((k) => url.includes(k))!]))) as typeof fetch;
+	try {
+		const vs = await competitorYoutube('t', '@x', 'everyday-tech', 'en');
+		assert.deepEqual(vs?.map((v) => [v.title, v.views, v.url]), [['How GPS works', 1200, 'https://youtu.be/v1'], ['x', 0, 'https://youtu.be/v2']]);
+		replies['/channels'] = {};
+		assert.equal(await competitorYoutube('t', '@missing', 'everyday-tech', 'en'), null);
+	} finally {
+		globalThis.fetch = real;
+	}
+});
+
+test('episode validation catches the usual mistakes', () => {
+	const m = readMeta('2026-W47/1-wifi');
+	assert.deepEqual(checkMeta(m, 7, ['everyday-tech']), []);
+	const errs = checkMeta({...m, theme: 'nope', sources: ['x'], scenes: m.scenes.slice(0, 2)}, 7, ['everyday-tech']);
+	assert.ok(errs.some((e) => e.includes('themes.json')));
+	assert.ok(errs.some((e) => e.includes('2 source')));
+	assert.ok(errs.some((e) => e.includes('exports 7 scenes')));
+	assert.equal(sceneCount('export default [A, B,\n C];'), 3);
+});

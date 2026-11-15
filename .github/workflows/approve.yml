@@ -1,0 +1,33 @@
+# After you merge the weekly pull request: drop unticked episodes, undo an unticked theme switch, delete previews.
+name: apply review
+on:
+  pull_request:
+    types: [closed]
+    branches: [main]
+permissions:
+  contents: write
+jobs:
+  apply:
+    if: github.event.pull_request.merged
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/approve.ts
+        env:
+          PR_BODY: ${{ github.event.pull_request.body }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A episodes strategy.json
+          git diff --cached --quiet || { git commit -m "Apply weekly review: remove rejected items" && git push; }
+      - run: gh release delete "preview-pr-${{ github.event.pull_request.number }}" -y --cleanup-tag || true
+        env:
+          GH_TOKEN: ${{ github.token }}

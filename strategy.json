@@ -1,0 +1,16 @@
+{
+  "currentTheme": "everyday-tech",
+  "themeSince": "2026-11-16",
+  "testTheme": "internet",
+  "thresholds": {
+    "minWeeksOnTheme": 4,
+    "minTestEpisodes": 4,
+    "switchRatio": 1.5,
+    "fallingWeeks": 3,
+    "hitMultiple": 3,
+    "hitWindowDays": 30,
+    "followupMultiple": 2,
+    "minAgeDays": 3
+  },
+  "lessons": []
+}

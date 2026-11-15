@@ -1,0 +1,33 @@
+# Weekly, a few hours before the Claude review: our numbers + competitors' numbers + the keep/switch rule.
+name: collect stats
+on:
+  schedule:
+    - cron: '41 21 * * 5' # Friday 21:41 UTC = Saturday 04:41 WIB
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/collect.ts
+        env:
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN_EN: ${{ secrets.YT_REFRESH_TOKEN_EN }}
+          YT_REFRESH_TOKEN_ID: ${{ secrets.YT_REFRESH_TOKEN_ID }}
+          IG_USER_ID_EN: ${{ secrets.IG_USER_ID_EN }}
+          IG_USER_ID_ID: ${{ secrets.IG_USER_ID_ID }}
+          IG_TOKEN_EN: ${{ secrets.IG_TOKEN_EN }}
+          IG_TOKEN_ID: ${{ secrets.IG_TOKEN_ID }}
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/stats
+          git diff --cached --quiet || { git commit -m "Weekly stats $(date -u +%F)" && git push; }

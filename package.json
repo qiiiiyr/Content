@@ -1,0 +1,26 @@
+{
+  "name": "how-it-works",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "studio": "remotion studio",
+    "build": "node scripts/build.ts",
+    "check": "node scripts/check.ts",
+    "test": "node --test 'scripts/**/*.test.ts' && node scripts/check.ts && tsc --noEmit",
+    "collect": "node scripts/collect.ts",
+    "publish:today": "node scripts/publish.ts"
+  },
+  "dependencies": {
+    "@fontsource/inter": "5.3.0",
+    "@remotion/cli": "4.0.543",
+    "@remotion/media": "4.0.543",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "remotion": "4.0.543"
+  },
+  "devDependencies": {
+    "@types/node": "22.19.1",
+    "@types/react": "19.2.2",
+    "typescript": "5.9.3"
+  }
+}
