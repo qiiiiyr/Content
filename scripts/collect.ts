@@ -1,6 +1,6 @@
 // Weekly: gathers our numbers and competitors' numbers, runs the review rule, writes data/stats/<week>.json.
 // Usage: node scripts/collect.ts [--offline]   (--offline skips all API calls; for testing the pipeline)
-import {mkdirSync, writeFileSync} from 'node:fs';
+import {existsSync, mkdirSync, readdirSync, writeFileSync} from 'node:fs';
 import {LANGS, readJson, readMeta} from './lib.ts';
 import {decide, findHits, followups, isoWeek, type CompetitorVideo, type EpisodeScore, type Strategy} from './review.ts';
 import type {Posted} from './publish.ts';
@@ -21,7 +21,7 @@ if (!offline) {
 	const {ownInstagram} = await import('./stats/instagram.ts');
 	for (const lang of LANGS) {
 		const yt = posted.some((p) => p.lang === lang && p.platform === 'youtube') ? await ownYoutube(lang) : {};
-		for (const p of posted.filter((p) => p.lang === lang)) {
+		for (const p of posted.filter((p) => p.lang === lang && !p.error)) {
 			if (p.platform === 'youtube') {
 				const s = yt[p.mediaId] ?? {views: 0, avgViewPct: 0, subsGained: 0};
 				own.push({...p, views: s.views, extra: {avgViewPct: s.avgViewPct, subsGained: s.subsGained}});
@@ -34,9 +34,16 @@ if (!offline) {
 }
 
 // One score per episode: views summed over both languages and platforms, dated by its first post.
+// Frozen the first week it is minAgeDays old and reused after that, so every episode is compared at a similar age.
+const lastStats = existsSync('data/stats') ? readdirSync('data/stats').sort().at(-1) : undefined;
+const previous = lastStats ? readJson<{episodes: EpisodeScore[]}>(`data/stats/${lastStats}`, {episodes: []}).episodes : [];
+const frozen = new Map(previous.filter((e) => e.frozen).map((e) => [e.id, e]));
 const episodes: EpisodeScore[] = [...Map.groupBy(own, (p) => p.id).entries()].map(([id, ps]) => {
+	if (frozen.has(id)) return frozen.get(id)!;
 	const meta = readMeta(id);
-	return {id, theme: meta.theme, test: meta.test, postedAt: ps.map((p) => p.postedAt).sort()[0], score: ps.reduce((a, p) => a + p.views, 0)};
+	const postedAt = ps.map((p) => p.postedAt).sort()[0];
+	const old = now.getTime() - Date.parse(postedAt) >= strategy.thresholds.minAgeDays * 86_400_000;
+	return {id, theme: meta.theme, test: meta.test, postedAt, score: ps.reduce((a, p) => a + p.views, 0), frozen: old};
 });
 
 // Competitors.

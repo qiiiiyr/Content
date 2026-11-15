@@ -10,7 +10,7 @@
     "hitMultiple": 3,
     "hitWindowDays": 30,
     "followupMultiple": 2,
-    "minAgeDays": 3
+    "minAgeDays": 7
   },
   "lessons": []
 }

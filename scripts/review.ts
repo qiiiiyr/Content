@@ -13,12 +13,13 @@ export type Strategy = {
 		hitMultiple: number; // competitor video >= this x its channel median = hit
 		hitWindowDays: number;
 		followupMultiple: number; // own episode >= this x own median gets a follow-up
-		minAgeDays: number; // ignore own posts younger than this (views still climbing)
+		minAgeDays: number; // an episode's score is frozen once it is this old (views still climbing before that)
 	};
 	lessons: string[];
 };
 
-export type EpisodeScore = {id: string; theme: string; test: boolean; postedAt: string; score: number};
+// frozen = score taken once the episode was minAgeDays old; lifetime views keep growing, so only frozen scores compare fairly.
+export type EpisodeScore = {id: string; theme: string; test: boolean; postedAt: string; score: number; frozen?: boolean};
 export type CompetitorVideo = {theme: string; platform: string; lang: string; account: string; title: string; url: string; views: number; publishedAt: string};
 export type Hit = CompetitorVideo & {multiple: number};
 export type Decision = {action: 'keep' | 'switch'; to?: string; reason: string; currentMedian: number; nextTestTheme: string};
@@ -53,27 +54,30 @@ export const findHits = (videos: CompetitorVideo[], multiple: number, windowDays
 
 export const decide = (episodes: EpisodeScore[], hits: Hit[], themes: string[], s: Strategy, now: Date): Decision => {
 	const t = s.thresholds;
-	const mature = episodes.filter((e) => now.getTime() - Date.parse(e.postedAt) >= t.minAgeDays * DAY);
+	const mature = episodes.filter((e) => e.frozen);
 	const current = mature.filter((e) => e.theme === s.currentTheme).sort((a, b) => a.postedAt.localeCompare(b.postedAt));
 	const currentMedian = median(current.slice(-20).map((e) => e.score));
 	const hitsFor = (theme: string) => hits.filter((h) => h.theme === theme).length;
 	const others = themes.filter((th) => th !== s.currentTheme);
-	const testCount = (th: string) => episodes.filter((e) => e.theme === th).length;
-	// Rotate tests: the least-tested candidate next, competitor hits break ties.
-	const nextTestTheme = [...others].sort((a, b) => testCount(a) - testCount(b) || hitsFor(b) - hitsFor(a))[0] ?? s.currentTheme;
-	const keep = (reason: string): Decision => ({action: 'keep', reason, currentMedian, nextTestTheme});
+	// Only test episodes count for a candidate: after a switch, the old theme's regular episodes are not tests.
+	const tests = (th: string) => mature.filter((e) => e.test && e.theme === th);
+	const testCount = (th: string) => episodes.filter((e) => e.test && e.theme === th).length;
+	// Rotate tests: the least-tested candidate next (never the theme being switched to), competitor hits break ties.
+	const nextTest = (exclude?: string) => others.filter((th) => th !== exclude).sort((a, b) => testCount(a) - testCount(b) || hitsFor(b) - hitsFor(a))[0] ?? s.currentTheme;
+	const keep = (reason: string): Decision => ({action: 'keep', reason, currentMedian, nextTestTheme: nextTest()});
+	const switchTo = (to: string, reason: string): Decision => ({action: 'switch', to, reason, currentMedian, nextTestTheme: nextTest(to)});
 
 	const weeksOn = Math.floor((now.getTime() - Date.parse(s.themeSince)) / (7 * DAY));
 	if (weeksOn < t.minWeeksOnTheme) return keep(`"${s.currentTheme}" has run ${weeksOn} of the minimum ${t.minWeeksOnTheme} weeks`);
 
 	const candidates = others
-		.map((th) => ({th, eps: mature.filter((e) => e.theme === th)}))
+		.map((th) => ({th, eps: tests(th)}))
 		.filter((c) => c.eps.length >= t.minTestEpisodes)
 		.map((c) => ({th: c.th, m: median(c.eps.map((e) => e.score))}))
 		.sort((a, b) => b.m - a.m);
 	const best = candidates[0];
 	if (best && best.m >= t.switchRatio * currentMedian && best.m > 0) {
-		return {action: 'switch', to: best.th, reason: `test episodes of "${best.th}" have median ${best.m} vs ${currentMedian} for "${s.currentTheme}" (>= ${t.switchRatio}x)`, currentMedian, nextTestTheme};
+		return switchTo(best.th, `test episodes of "${best.th}" have median ${best.m} vs ${currentMedian} for "${s.currentTheme}" (>= ${t.switchRatio}x)`);
 	}
 
 	const weekly = [...Map.groupBy(current, (e) => isoWeek(new Date(e.postedAt))).entries()].sort(([a], [b]) => a.localeCompare(b)).map(([, es]) => median(es.map((e) => e.score)));
@@ -81,7 +85,7 @@ export const decide = (episodes: EpisodeScore[], hits: Hit[], themes: string[], 
 	const falling = recent.length === t.fallingWeeks + 1 && recent.every((m, i) => i === 0 || m < recent[i - 1]);
 	const hottest = [...others].sort((a, b) => hitsFor(b) - hitsFor(a))[0];
 	if (falling && hottest && hitsFor(hottest) > hitsFor(s.currentTheme)) {
-		return {action: 'switch', to: hottest, reason: `"${s.currentTheme}" weekly median fell ${t.fallingWeeks} weeks running and "${hottest}" competitors have more hits (${hitsFor(hottest)} vs ${hitsFor(s.currentTheme)})`, currentMedian, nextTestTheme};
+		return switchTo(hottest, `"${s.currentTheme}" weekly median fell ${t.fallingWeeks} weeks running and "${hottest}" competitors have more hits (${hitsFor(hottest)} vs ${hitsFor(s.currentTheme)})`);
 	}
 	return keep(falling ? 'median is falling but no candidate theme looks stronger' : 'current theme is holding up');
 };

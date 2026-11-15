@@ -11,7 +11,7 @@ const strategy: Strategy = {
 	thresholds: {minWeeksOnTheme: 4, minTestEpisodes: 4, switchRatio: 1.5, fallingWeeks: 3, hitMultiple: 3, hitWindowDays: 30, followupMultiple: 2, minAgeDays: 3},
 	lessons: [],
 };
-const ep = (theme: string, score: number, postedAt: string, i = 0): EpisodeScore => ({id: `${theme}${score}${i}`, theme, test: theme !== 'a', postedAt, score});
+const ep = (theme: string, score: number, postedAt: string, i = 0, test = theme !== 'a'): EpisodeScore => ({id: `${theme}${score}${i}`, theme, test, postedAt, score, frozen: true});
 
 test('median and iso week', () => {
 	assert.equal(median([]), 0);
@@ -55,9 +55,22 @@ test('switches on 3 falling weeks only if a candidate has more competitor hits',
 	assert.equal(decide(bumpy, [hit('c')], ['a', 'c'], strategy, now).action, 'keep');
 });
 
-test('ignores posts younger than minAgeDays', () => {
-	const eps = [ep('a', 100, '2026-12-01'), ...[1, 2, 3, 4].map((i) => ep('b', 1000, '2026-12-19', i))];
+test('ignores scores that are not frozen yet', () => {
+	const eps = [ep('a', 100, '2026-12-01'), ...[1, 2, 3, 4].map((i) => ({...ep('b', 1000, '2026-12-19', i), frozen: false}))];
 	assert.equal(decide(eps, [], ['a', 'b'], strategy, now).action, 'keep');
+});
+
+test('after a switch, the old theme regular episodes are not counted as tests (no switch back)', () => {
+	const old = [1, 2, 3, 4, 5].map((i) => ep('a', 900, '2026-10-01', i, false)); // A was the main theme before
+	const eps = [...old, ...[1, 2, 3].map((i) => ep('b', 100, '2026-12-01', i, false))];
+	assert.equal(decide(eps, [], ['a', 'b'], {...strategy, currentTheme: 'b'}, now).action, 'keep');
+});
+
+test('the next test theme is never the theme being switched to', () => {
+	const hit = (theme: string) => ({theme, platform: 'youtube', lang: 'en', account: 'x', title: '', url: '', views: 1, publishedAt: '', multiple: 3});
+	const eps = [ep('a', 400, '2026-11-17'), ep('a', 300, '2026-11-24'), ep('a', 200, '2026-12-01'), ep('a', 100, '2026-12-08'), ep('b', 50, '2026-12-01')];
+	const d = decide(eps, [hit('c')], ['a', 'b', 'c'], strategy, now); // c: hottest and least tested
+	assert.deepEqual([d.action, d.to, d.nextTestTheme], ['switch', 'c', 'b']);
 });
 
 test('follow-ups are 2x the median', () => {
@@ -80,4 +93,7 @@ test('posting queue: oldest unposted episode per language, only missing platform
 	assert.deepEqual(nextToPost(ids, posted, 'en'), {id: '2026-W47/2-gps', platforms: ['youtube', 'instagram']});
 	assert.deepEqual(nextToPost(ids, posted, 'id'), {id: '2026-W47/1-wifi', platforms: ['instagram']});
 	assert.equal(nextToPost(ids.slice(0, 1), posted.slice(0, 2), 'en'), null);
+	// a failed upload is recorded, so the queue moves on instead of retrying it forever
+	const failed = [...posted, {id: '2026-W47/1-wifi', lang: 'id' as const, platform: 'instagram' as const, mediaId: '', postedAt: '', error: 'ERROR'}];
+	assert.deepEqual(nextToPost(ids, failed, 'id'), {id: '2026-W47/2-gps', platforms: ['youtube', 'instagram']});
 });
