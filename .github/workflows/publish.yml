@@ -17,6 +17,8 @@ permissions:
   contents: write
 jobs:
   publish:
+    # The daily schedule stays off until the PRIVACY variable exists (docs/SETUP.md step 3); manual runs always work.
+    if: github.event_name == 'workflow_dispatch' || vars.PRIVACY != ''
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:

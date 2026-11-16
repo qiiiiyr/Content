@@ -9,6 +9,15 @@ export type Posted = {id: string; lang: Lang; platform: Platform; mediaId: strin
 export const PLATFORMS: Platform[] = ['youtube', 'instagram'];
 const STATE = 'state/posted.json';
 
+const REQUIRED: Record<Platform, (l: string) => string[]> = {
+	youtube: (l) => ['YT_CLIENT_ID', 'YT_CLIENT_SECRET', `YT_REFRESH_TOKEN_${l}`],
+	instagram: (l) => [`IG_USER_ID_${l}`, `IG_TOKEN_${l}`],
+};
+
+/** Secrets still missing for these platforms. Checked before rendering, so an unfinished setup never burns an episode. */
+export const missingSecrets = (platforms: Platform[], lang: Lang, vars: Record<string, string | undefined>): string[] =>
+	platforms.flatMap((p) => REQUIRED[p](lang.toUpperCase())).filter((n) => !vars[n]);
+
 export const nextToPost = (ids: string[], posted: Posted[], lang: Lang): {id: string; platforms: Platform[]} | null => {
 	for (const id of ids) {
 		const platforms = PLATFORMS.filter((p) => !posted.some((x) => x.id === id && x.lang === lang && x.platform === p));
@@ -36,6 +45,11 @@ if (import.meta.main) {
 	console.log(`${dry ? '[dry run] ' : ''}${lang}: ${next.id} -> ${next.platforms.join(', ')}\n  title: ${title}\n${text.replace(/^/gm, '  | ')}`);
 	if (dry) process.exit(0);
 
+	const missing = missingSecrets(next.platforms, lang, process.env);
+	if (missing.length) {
+		console.error(`missing secrets: ${missing.join(', ')} (see docs/SETUP.md). Nothing rendered or recorded.`);
+		process.exit(1);
+	}
 	const {build} = await import('./build.ts');
 	const {uploadYoutube} = await import('./post/youtube.ts');
 	const {uploadInstagram} = await import('./post/instagram.ts');

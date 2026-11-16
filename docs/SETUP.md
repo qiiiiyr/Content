@@ -53,7 +53,7 @@ GitHub's **Settings → Secrets and variables → Actions**, never into a chat.
 1. Make `main` the default branch (Settings → General). Scheduled workflows only run there.
 2. Settings → Actions → General → Workflow permissions: **Read and write**, and tick "Allow GitHub Actions to
    create and approve pull requests" (needed for preview comments).
-3. Add the 8 secrets above. Add a repository **variable** `PRIVACY` = `private` for now.
+3. Add the 8 secrets above. Add a repository **variable** `PRIVACY` = `private` for now. This also switches on the daily posting schedule; until it exists the schedule does nothing.
 
 ## 5. Test
 

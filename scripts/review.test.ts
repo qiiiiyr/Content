@@ -1,7 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {decide, findHits, followups, isoWeek, median, parseChecklist, type EpisodeScore, type Strategy} from './review.ts';
-import {nextToPost} from './publish.ts';
+import {missingSecrets, nextToPost} from './publish.ts';
 
 const now = new Date('2026-12-20T00:00:00Z');
 const strategy: Strategy = {
@@ -96,4 +96,9 @@ test('posting queue: oldest unposted episode per language, only missing platform
 	// a failed upload is recorded, so the queue moves on instead of retrying it forever
 	const failed = [...posted, {id: '2026-W47/1-wifi', lang: 'id' as const, platform: 'instagram' as const, mediaId: '', postedAt: '', error: 'ERROR'}];
 	assert.deepEqual(nextToPost(ids, failed, 'id'), {id: '2026-W47/2-gps', platforms: ['youtube', 'instagram']});
+});
+
+test('missing secrets are named per language and platform', () => {
+	assert.deepEqual(missingSecrets(['youtube', 'instagram'], 'id', {YT_CLIENT_ID: 'x', YT_CLIENT_SECRET: 'x', YT_REFRESH_TOKEN_EN: 'x', IG_USER_ID_ID: 'x'}), ['YT_REFRESH_TOKEN_ID', 'IG_TOKEN_ID']);
+	assert.deepEqual(missingSecrets(['instagram'], 'en', {IG_USER_ID_EN: 'x', IG_TOKEN_EN: 'x'}), []);
 });
