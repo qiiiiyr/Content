@@ -53,9 +53,21 @@ npm test
 REMOTION_BROWSER=/opt/pw-browsers/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell node scripts/build.ts <week>/<n-slug> en
 ```
 
-Render at least episodes 1 and 3 in English and look at one frame per scene (ffmpeg `-ss <t> -frames:v 1`):
-text inside the frame, nothing overlapping the captions, the diagram readable on a phone. Fix what you see.
-The pull request renders every episode in both languages again in CI.
+Render episode 1 in English only, then build ONE contact sheet and view that single image:
+
+```bash
+ffmpeg -v error -y -i out/<week>__1-<slug>.en.mp4 -vf "fps=1/6,scale=360:-1,tile=8x1" out/sheet.png
+```
+
+Check: text inside the frame, nothing overlapping the captions, the diagram readable on a phone. Fix what you see.
+CI renders and checks every episode in both languages on the pull request, so do not render the others here.
+
+## Keep the run cheap
+
+Each run should cost well under the first one (about $4). Use at most 8 web searches in total (the stats file already
+holds the competitor data). Do not read `graphify-out/` or run graphify. Do not re-read files you already read.
+Write each episode file once; `npm test` is the check, not a second read. Stop after a green `npm test`, the one
+contact-sheet image and the pull request.
 
 ## Pull request
 
