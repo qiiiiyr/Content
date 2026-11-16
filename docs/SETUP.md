@@ -12,6 +12,15 @@ GitHub's **Settings → Secrets and variables → Actions**, never into a chat.
    to its own **Facebook Page** (Instagram → Settings → Accounts Center). The Page link is required for posting
    from code and for reading competitor accounts.
 4. Put your affiliate / Gumroad link in each bio once you have one.
+5. Upload the artwork from `assets/profile/` (names: English = Cutaway, Indonesian = Bongkar Pasang):
+   - `avatar-en.png` / `avatar-id.png`: profile picture. YouTube Studio → Customization → Branding → Picture;
+     Instagram → Edit profile → Change photo. Both crop it to a circle.
+   - `banner-en.png` / `banner-id.png`: YouTube banner only (Branding → Banner image). Instagram has none.
+   - `logo-*.png`: the name next to the mark, for posts or a pinned image.
+   - `loop-*.mp4`: 4 s animated logo for Instagram Stories or a pinned post. Neither platform plays an animated
+     profile picture, so use the static `avatar` files there.
+   Re-render after a change with `npx remotion still src/index.ts Avatar assets/profile/avatar-en.png --props='{"lang":"en"}'`
+   (compositions `Avatar`, `Logo`, `Banner`, `AvatarLoop` in `src/Brand.tsx`).
 
 ## 2. YouTube API (free)
 
