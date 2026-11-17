@@ -35,8 +35,8 @@ export const checkInstagram = async (lang: Lang): Promise<boolean> => {
 	}
 	try {
 		const {user, token} = igAccount(lang);
-		const r = await api(`${GRAPH}/${user}?fields=username,account_type&access_token=${token}`);
-		console.log(`instagram ${lang}: login OK -> @${r.username} (${r.account_type ?? 'account'})`);
+		const r = await api(`${GRAPH}/${user}?fields=username&access_token=${token}`);
+		console.log(`instagram ${lang}: login OK -> @${r.username}`);
 		return true;
 	} catch (e) {
 		const msg = (e as Error).message;
