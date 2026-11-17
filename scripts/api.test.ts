@@ -46,6 +46,9 @@ test('YouTube client secrets: common paste mistakes are repaired', () => {
 	assert.ok(!isAuthError('YouTube upload init -> 400: quotaExceeded'));
 	assert.ok(isAuthError('GET https://graph.facebook.com/v23.0/1 -> 400: {"error":{"type":"OAuthException","code":190}}'));
 	assert.ok(!isAuthError('POST https://graph.facebook.com/v23.0/1/media -> 400: {"error":{"message":"aspect ratio","type":"OAuthException","code":36003}}'));
+	assert.ok(isAuthError('POST https://graph.facebook.com/v23.0/1/media -> 403: {"error":{"type":"OAuthException","code":10}}')); // permission
+	assert.ok(isAuthError('POST https://graph.facebook.com/v23.0/1/media -> 400: {"error":{"type":"OAuthException","code":613}}')); // rate limit
+	assert.ok(!isAuthError('POST https://graph.facebook.com/v23.0/1/media -> 400: {"error":{"type":"OAuthException","code":2207026}}')); // video format
 });
 
 test('Instagram: a saved Facebook Page ID is resolved to the linked Instagram account', async () => {

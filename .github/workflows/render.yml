@@ -5,6 +5,10 @@ name: render previews
 on:
   pull_request:
     paths: ['episodes/**', 'src/**']
+# A newer push replaces the running previews, so two runs never fight over the same release.
+concurrency:
+  group: render-${{ github.event.number }}
+  cancel-in-progress: true
 permissions:
   contents: write
   pull-requests: write
