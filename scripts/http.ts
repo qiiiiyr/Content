@@ -8,6 +8,8 @@ export const api = async (url: string, init?: RequestInit): Promise<any> => {
 
 export const env = (name: string): string => {
 	const v = process.env[name];
-	if (!v) throw new Error(`missing secret/env ${name} (see docs/SETUP.md)`);
-	return v;
+	// Pasted secrets often carry a trailing newline, spaces or quotes; strip them so a copy-paste slip is not fatal.
+	const clean = v?.trim().replace(/^["']|["']$/g, '').trim();
+	if (!clean) throw new Error(`missing secret/env ${name} (see docs/SETUP.md)`);
+	return clean;
 };

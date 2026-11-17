@@ -18,6 +18,9 @@ const REQUIRED: Record<Platform, (l: string) => string[]> = {
 export const missingSecrets = (platforms: Platform[], lang: Lang, vars: Record<string, string | undefined>): string[] =>
 	platforms.flatMap((p) => REQUIRED[p](lang.toUpperCase())).filter((n) => !vars[n]);
 
+/** Errors from logging in (bad or expired secrets), as opposed to the platform rejecting the video. */
+export const isAuthError = (msg: string): boolean => /oauth2\.googleapis\.com\/token|OAuthException|missing secret/.test(msg);
+
 export const nextToPost = (ids: string[], posted: Posted[], lang: Lang): {id: string; platforms: Platform[]} | null => {
 	for (const id of ids) {
 		const platforms = PLATFORMS.filter((p) => !posted.some((x) => x.id === id && x.lang === lang && x.platform === p));
@@ -45,7 +48,12 @@ if (import.meta.main) {
 	const title = meta.title[lang];
 	const text = description(meta, lang);
 	console.log(`${dry ? '[dry run] ' : ''}${lang}: ${next.id} -> ${next.platforms.join(', ')}\n  title: ${title}\n${text.replace(/^/gm, '  | ')}`);
-	if (dry) process.exit(0);
+	if (dry) {
+		// The dry run also proves the YouTube logins work, for both channels, so setup mistakes show before a real post.
+		const {checkYoutube} = await import('./post/youtube.ts');
+		const ok = [await checkYoutube('en'), await checkYoutube('id')];
+		process.exit(ok.every(Boolean) ? 0 : 1);
+	}
 
 	const missing = missingSecrets(next.platforms, lang, process.env);
 	if (missing.length) {
@@ -64,10 +72,12 @@ if (import.meta.main) {
 			posted.push({id: next.id, lang, platform, mediaId, postedAt});
 			console.log(`posted ${platform}: ${mediaId}`);
 		} catch (e) {
-			// Recorded so one rejected video cannot block the queue; the red run tells the owner.
 			failed = true;
-			posted.push({id: next.id, lang, platform, mediaId: '', postedAt, error: (e as Error).message.slice(0, 500)});
 			console.error(`FAILED ${platform}: ${(e as Error).message}`);
+			// A login failure is a setup problem, not this video's: leave the episode queued so it posts once fixed.
+			if (isAuthError((e as Error).message)) continue;
+			// Recorded so one rejected video cannot block the queue; the red run tells the owner.
+			posted.push({id: next.id, lang, platform, mediaId: '', postedAt, error: (e as Error).message.slice(0, 500)});
 		}
 		writeFileSync(STATE, JSON.stringify(posted, null, 2) + '\n'); // saved per platform so a later failure never causes a double post
 	}

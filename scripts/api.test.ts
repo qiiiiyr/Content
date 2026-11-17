@@ -3,6 +3,8 @@ import assert from 'node:assert/strict';
 import {competitorYoutube} from './stats/youtube.ts';
 import {checkMeta, sceneCount} from './check.ts';
 import {readMeta} from './lib.ts';
+import {youtubeClient} from './post/youtube.ts';
+import {isAuthError} from './publish.ts';
 
 test('competitor YouTube: handle -> uploads -> view counts (recorded response shapes)', async () => {
 	const replies: Record<string, unknown> = {
@@ -30,4 +32,15 @@ test('episode validation catches the usual mistakes', () => {
 	assert.ok(errs.some((e) => e.includes('2 source')));
 	assert.ok(errs.some((e) => e.includes('exports 7 scenes')));
 	assert.equal(sceneCount('export default [A, B,\n C];'), 3);
+});
+
+test('YouTube client secrets: common paste mistakes are repaired', () => {
+	const ID = '123456789012-abcdef123.apps.googleusercontent.com';
+	assert.deepEqual(youtubeClient(ID, 'GOCSPX-s'), {id: ID, secret: 'GOCSPX-s', fixes: []});
+	assert.deepEqual(youtubeClient('GOCSPX-s', ID).id, ID); // swapped
+	assert.equal(youtubeClient(`Client ID: ${ID}`, 'GOCSPX-s').id, ID); // extra text
+	const json = JSON.stringify({web: {client_id: ID, client_secret: 'GOCSPX-j'}});
+	assert.deepEqual([youtubeClient(json, 'x').id, youtubeClient(json, 'x').secret], [ID, 'GOCSPX-j']); // whole JSON file
+	assert.ok(isAuthError('POST https://oauth2.googleapis.com/token -> 401: {"error": "invalid_client"}'));
+	assert.ok(!isAuthError('YouTube upload init -> 400: quotaExceeded'));
 });
