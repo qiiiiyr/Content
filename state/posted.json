@@ -1,10 +1,1 @@
-[
-  {
-    "id": "2026-W47/1-wifi",
-    "lang": "en",
-    "platform": "youtube",
-    "mediaId": "",
-    "postedAt": "2026-11-17T11:04:10.490Z",
-    "error": "POST https://oauth2.googleapis.com/token -> 401: {\n  \"error\": \"invalid_client\",\n  \"error_description\": \"The OAuth client was not found.\"\n}"
-  }
-]
+[]
