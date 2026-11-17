@@ -68,13 +68,16 @@ if (import.meta.main) {
 	const {build, videoFile} = await import('./build.ts');
 	const {uploadYoutube, checkYoutube} = await import('./post/youtube.ts');
 	const {uploadInstagram, checkInstagram} = await import('./post/instagram.ts');
-	// Log in before the 30-minute render, so a dead token fails in seconds and leaves the episode queued.
+	// Log in before the 30-minute render. A platform whose login fails is skipped (its post stays queued) and the run
+	// ends red so you hear about it; the other platform still posts on schedule.
+	const loggedIn: Platform[] = [];
 	for (const platform of next.platforms) {
-		if (!(platform === 'youtube' ? await checkYoutube(lang) : await checkInstagram(lang))) {
-			console.error(`${platform} login failed (see above). Nothing rendered or recorded.`);
-			process.exit(1);
-		}
+		if (platform === 'youtube' ? await checkYoutube(lang) : await checkInstagram(lang)) loggedIn.push(platform);
+		else console.error(`${platform} login failed (see above): skipped, the post stays queued.`);
 	}
+	if (!loggedIn.length) process.exit(1);
+	const skipped = loggedIn.length < next.platforms.length;
+	next.platforms = loggedIn;
 	// The weekly preview job saved the exact video the human reviewed in the `videos` release: post that one. Render only
 	// if it is missing (seconds instead of a 30-40 minute render, and what was approved is what goes out).
 	const saved = videoFile(next.id, lang);
@@ -99,5 +102,5 @@ if (import.meta.main) {
 		}
 		writeFileSync(STATE, JSON.stringify(posted, null, 2) + '\n'); // saved per platform so a later failure never causes a double post
 	}
-	if (failed) process.exit(1);
+	if (failed || skipped) process.exit(1);
 }
