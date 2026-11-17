@@ -15,7 +15,7 @@ for YouTube, but check anyway.
 | 2. YouTube API | upload and stats access | `YT_CLIENT_ID`, `YT_CLIENT_SECRET`, `YT_REFRESH_TOKEN_EN`, `YT_REFRESH_TOKEN_ID` |
 | 3. Instagram accounts + Facebook Pages | 2 accounts linked to 2 Pages | none yet |
 | 4. Instagram API | upload and stats access | `IG_USER_ID_EN`, `IG_TOKEN_EN`, `IG_USER_ID_ID`, `IG_TOKEN_ID` |
-| 5. GitHub settings and tests | switch it on | variable `PRIVACY` |
+| 5. GitHub settings and tests | switch it on | optional variables `POSTING`, `PRIVACY` |
 
 ---
 
@@ -49,7 +49,7 @@ for YouTube, but check anyway.
    authorization code for tokens** → copy the **refresh token** into the secret `YT_REFRESH_TOKEN_EN`. Repeat with the
    Bongkar Pasang channel for `YT_REFRESH_TOKEN_ID`.
 5. Uploads from new API projects may be forced to **private** until YouTube audits the project. If your first test
-   video stays private after `PRIVACY` is `public`, request the free audit:
+   video stays private even though uploads are public, request the free audit:
    <https://support.google.com/youtube/contact/yt_api_form>. Until it passes, publish by hand from the preview links
    during your weekly review.
 
@@ -128,17 +128,19 @@ Meta calls it the "Instagram Graph API". It is not a separate site: you make a M
 1. Settings → General → make `main` the default branch (scheduled workflows only run there).
 2. Settings → Actions → General → Workflow permissions: **Read and write**, and tick "Allow GitHub Actions to create
    and approve pull requests" (needed for the preview comments).
-3. Add the 8 secrets from parts 2 and 4. Add a repository **variable** (not a secret) `PRIVACY` = `private`. This also
-   switches on the daily posting schedule; until it exists the schedule does nothing.
+3. Add the 8 secrets from parts 2 and 4. Posting is **on and public** by default: every day at 19:17 WIB (ID) and
+   12:23 New York time (EN). Two optional repository **variables** (Settings → Secrets and variables → Actions →
+   Variables) change that: `POSTING` = `off` pauses the schedule, `PRIVACY` = `private` uploads YouTube videos as
+   private (Instagram has no private mode).
 4. **Check logins.** Actions → **publish** → Run workflow → lang `en`, dry run ticked. The log prints, for each of the
    4 accounts, either `login OK -> <channel or @username>` or what is wrong and how to fix it (secret values are never
    printed). Fix anything red and run again.
 5. **Test a real post.** Run again with dry run unticked (set "only" to `youtube` or `instagram` to test one platform).
-   YouTube is private while `PRIVACY` is `private`; Instagram has no private mode, so that first Reel is public. Look at
-   both, delete them if you like.
+   Both are public unless `PRIVACY` = `private`. Look at both.
 6. Actions → **collect stats** → Run workflow: writes `data/stats/<week>.json`. Its `unresolvedCompetitors` list shows
    handles the weekly review will fix.
-7. Set `PRIVACY` to `public`. From now on posting runs daily at 19:17 WIB (ID) and 12:23 New York time (EN).
+7. Done: posting runs daily at 19:17 WIB (ID) and 12:23 New York time (EN), one episode per language, until the queue
+   runs out (the weekly pull request refills it).
 
 ## If something fails
 

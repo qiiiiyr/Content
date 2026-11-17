@@ -14,6 +14,8 @@ permissions:
   pull-requests: write
 jobs:
   plan:
+    # The repo is public: pull requests from strangers' forks get no renders (no free CI, no code run on our behalf).
+    if: github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     outputs:
       ids: ${{ steps.ids.outputs.ids }}
@@ -30,6 +32,7 @@ jobs:
           if echo "$changed" | grep -q '^src/'; then ids=$(printf '%s\n%s\n' "$ids" "$(ls -d episodes/*/*/ | sed 's#^episodes/##; s#/$##' | tail -1)"); fi
           echo "ids=$(echo "$ids" | grep . | sort -u | jq -R . | jq -sc .)" >> "$GITHUB_OUTPUT"
   test:
+    if: github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -48,7 +51,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
-      - run: node scripts/build.ts "${{ matrix.id }}" ${{ matrix.lang }}
+      - run: node scripts/build.ts "$ID" "$EP_LANG"
+        env:
+          ID: ${{ matrix.id }} # from folder names in the PR: passed as data, never pasted into the script
+          EP_LANG: ${{ matrix.lang }}
       - uses: actions/upload-artifact@v4
         with:
           name: preview-${{ strategy.job-index }}

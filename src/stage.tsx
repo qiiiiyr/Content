@@ -3,7 +3,7 @@
 // Units are arbitrary; the engine is about 7 tall.
 import {useMemo, type ReactNode} from 'react';
 import {ThreeCanvas} from '@remotion/three';
-import {useThree} from '@react-three/fiber';
+import {useFrame, useThree} from '@react-three/fiber';
 import {Easing, interpolate, useCurrentFrame, useVideoConfig} from 'remotion';
 import * as THREE from 'three';
 import {RoomEnvironment} from 'three/examples/jsm/environments/RoomEnvironment.js';
@@ -43,17 +43,31 @@ const Camera = ({keys}: {keys: CamKey[]}) => {
 	return null;
 };
 
-/** Studio reflections for the metals and filmic tone mapping, so brass and steel look like metal and not grey paint. */
+/**
+ * Studio reflections and filmic tone mapping, so brass and steel look like metal and not grey paint.
+ * Reflections go on metal materials only: on the software renderer the reflection lookup is the most expensive part of
+ * a frame, and the wall and bench (most of the screen) do not need it. That halves render time.
+ */
 const Look = () => {
 	const {gl, scene} = useThree();
-	useMemo(() => {
+	const env = useMemo(() => {
 		const pm = new THREE.PMREMGenerator(gl);
-		scene.environment = pm.fromScene(new RoomEnvironment(), 0.04).texture;
-		scene.environmentIntensity = 0.75;
+		const t = pm.fromScene(new RoomEnvironment(), 0.04).texture;
 		pm.dispose();
 		gl.toneMapping = THREE.ACESFilmicToneMapping;
 		gl.toneMappingExposure = 1.05;
-	}, [gl, scene]);
+		return t;
+	}, [gl]);
+	useFrame(() =>
+		scene.traverse((o) => {
+			const m = (o as THREE.Mesh).material as THREE.MeshStandardMaterial | undefined;
+			if (m?.isMeshStandardMaterial && m.metalness > 0.5 && m.envMap !== env) {
+				m.envMap = env;
+				m.envMapIntensity = 0.75;
+				m.needsUpdate = true;
+			}
+		}),
+	);
 	return null;
 };
 

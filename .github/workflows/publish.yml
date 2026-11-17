@@ -20,8 +20,8 @@ permissions:
   contents: write
 jobs:
   publish:
-    # The daily schedule stays off until the PRIVACY variable exists (docs/SETUP.md step 3); manual runs always work.
-    if: github.event_name == 'workflow_dispatch' || vars.PRIVACY != ''
+    # Posts daily, publicly. To pause the schedule set the repo variable POSTING=off; manual runs always work.
+    if: github.event_name == 'workflow_dispatch' || vars.POSTING != 'off'
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
@@ -34,7 +34,7 @@ jobs:
           ONLY: ${{ inputs.only && format('--only {0}', inputs.only) || '' }}
           POST_LANG: ${{ github.event.schedule == '17 12 * * *' && 'id' || inputs.lang || 'en' }}
           DRY: ${{ inputs.dry_run && '--dry-run' || '' }}
-          PRIVACY: ${{ vars.PRIVACY || 'private' }}
+          PRIVACY: ${{ vars.PRIVACY || 'public' }}
           YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
           YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
           YT_REFRESH_TOKEN_EN: ${{ secrets.YT_REFRESH_TOKEN_EN }}
