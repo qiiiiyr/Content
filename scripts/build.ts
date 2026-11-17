@@ -36,7 +36,7 @@ export const build = (id: string, lang: Lang): string => {
 	const name = `out/${id.replace('/', '__')}.${lang}`;
 	writeFileSync(`${name}.props.json`, JSON.stringify(props));
 	const browser = process.env.REMOTION_BROWSER ? [`--browser-executable=${process.env.REMOTION_BROWSER}`] : [];
-	execFileSync('npx', ['remotion', 'render', 'src/index.ts', 'Episode', `${name}.mp4`, `--props=${name}.props.json`, '--gl=swangle', '--scale=0.667', ...browser], {stdio: 'inherit'});
+	execFileSync('npx', ['remotion', 'render', 'src/index.ts', 'Episode', `${name}.mp4`, `--props=${name}.props.json`, '--gl=swangle', '--scale=0.6666666666666666', ...browser], {stdio: 'inherit'});
 	return `${name}.mp4`;
 };
 
