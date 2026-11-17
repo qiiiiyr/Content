@@ -5,8 +5,8 @@ import {LANGS, readMeta} from './lib.ts';
 import type {Lang, RenderProps} from '../src/types.ts';
 
 const VOICES: Record<Lang, {voice: string; rate: string}> = {
-	en: {voice: 'en-US-AndrewNeural', rate: '+8%'},
-	id: {voice: 'id-ID-ArdiNeural', rate: '+5%'},
+	en: {voice: 'en-US-BrianMultilingualNeural', rate: '+4%'},
+	id: {voice: 'id-ID-ArdiNeural', rate: '+3%'},
 };
 const FPS = 30;
 const PAUSE = 0.35; // seconds of breathing room after each scene's narration
