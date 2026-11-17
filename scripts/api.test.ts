@@ -4,6 +4,7 @@ import {competitorYoutube} from './stats/youtube.ts';
 import {checkMeta, sceneCount} from './check.ts';
 import {readMeta} from './lib.ts';
 import {youtubeClient} from './post/youtube.ts';
+import {igUser} from './post/instagram.ts';
 import {isAuthError} from './publish.ts';
 
 test('competitor YouTube: handle -> uploads -> view counts (recorded response shapes)', async () => {
@@ -43,4 +44,18 @@ test('YouTube client secrets: common paste mistakes are repaired', () => {
 	assert.deepEqual([youtubeClient(json, 'x').id, youtubeClient(json, 'x').secret], [ID, 'GOCSPX-j']); // whole JSON file
 	assert.ok(isAuthError('POST https://oauth2.googleapis.com/token -> 401: {"error": "invalid_client"}'));
 	assert.ok(!isAuthError('YouTube upload init -> 400: quotaExceeded'));
+});
+
+test('Instagram: a saved Facebook Page ID is resolved to the linked Instagram account', async () => {
+	process.env.IG_USER_ID_EN = 'PAGE';
+	process.env.IG_TOKEN_EN = 't';
+	const real = globalThis.fetch;
+	try {
+		globalThis.fetch = (async (url: string) => new Response(url.includes('/PAGE?') ? JSON.stringify({instagram_business_account: {id: 'IG1'}}) : '{}')) as typeof fetch;
+		assert.deepEqual(await igUser('en'), {user: 'IG1', token: 't', fromPage: true});
+		globalThis.fetch = (async () => new Response('{"error":{"code":100}}', {status: 400})) as typeof fetch; // an Instagram ID rejects the field
+		assert.deepEqual(await igUser('en'), {user: 'PAGE', token: 't', fromPage: false});
+	} finally {
+		globalThis.fetch = real;
+	}
 });
