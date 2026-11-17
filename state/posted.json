@@ -12,5 +12,13 @@
     "platform": "youtube",
     "mediaId": "1Aj3Ps24nYo",
     "postedAt": "2026-11-17T14:12:46.096Z"
+  },
+  {
+    "id": "2026-W47/1-four-stroke",
+    "lang": "id",
+    "platform": "instagram",
+    "mediaId": "",
+    "postedAt": "2026-11-17T20:10:40.919Z",
+    "error": "POST https://graph.facebook.com/v23.0/1401723836363243/media -> 400: {\"error\":{\"message\":\"Unsupported post request. Object with ID '1401723836363243' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph API documentation at https:\\/\\/developers.facebook.com\\/docs\\/graph-api\",\"type\":\"GraphMethodException\",\"code\":100,\"error_subcode\":33,\"fbtrace_id\":\"A7iT6kGwvIHCNRz0aV1elyw\"}}"
   }
 ]
