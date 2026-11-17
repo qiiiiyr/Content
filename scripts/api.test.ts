@@ -58,8 +58,12 @@ test('Instagram: a saved Facebook Page ID is resolved to the linked Instagram ac
 	try {
 		globalThis.fetch = (async (url: string) => new Response(url.includes('/PAGE?') ? JSON.stringify({instagram_business_account: {id: 'IG1'}}) : '{}')) as typeof fetch;
 		assert.deepEqual(await igUser('en'), {user: 'IG1', token: 't', fromPage: true});
-		globalThis.fetch = (async () => new Response('{"error":{"code":100}}', {status: 400})) as typeof fetch; // an Instagram ID rejects the field
-		assert.deepEqual(await igUser('en'), {user: 'PAGE', token: 't', fromPage: false});
+		process.env.IG_USER_ID_EN = 'IG2'; // an Instagram ID rejects the field: kept as is
+		globalThis.fetch = (async () => new Response('{"error":{"message":"(#100) Tried accessing nonexisting field (instagram_business_account)","code":100}}', {status: 400})) as typeof fetch;
+		assert.deepEqual(await igUser('en'), {user: 'IG2', token: 't', fromPage: false});
+		process.env.IG_USER_ID_EN = 'PAGE2'; // any other failure stops, never falls back to the saved Page ID
+		globalThis.fetch = (async () => new Response('{"error":{"message":"rate limit","code":4}}', {status: 400})) as typeof fetch;
+		await assert.rejects(igUser('en'), /rate limit/);
 	} finally {
 		globalThis.fetch = real;
 	}

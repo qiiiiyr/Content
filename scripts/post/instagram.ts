@@ -9,13 +9,25 @@ export const igAccount = (lang: Lang) => ({user: env(`IG_USER_ID_${lang.toUpperC
  * The Instagram user ID to post as. If the saved ID is a Facebook Page ID (a common copy mistake), the linked Instagram
  * account is looked up from it, so the secret does not have to be exact. Only Pages answer instagram_business_account.
  */
-export const igUser = async (lang: Lang): Promise<{user: string; token: string; fromPage: boolean}> => {
+const resolved = new Map<string, Promise<{user: string; token: string; fromPage: boolean}>>();
+export const igUser = (lang: Lang): Promise<{user: string; token: string; fromPage: boolean}> => {
 	const {user, token} = igAccount(lang);
-	try {
-		const r = await api(`${GRAPH}/${user}?fields=instagram_business_account&access_token=${token}`);
-		if (r.instagram_business_account?.id) return {user: r.instagram_business_account.id, token, fromPage: true};
-	} catch {} // an Instagram account rejects that field: the saved ID is already right
-	return {user, token, fromPage: false};
+	// Looked up once per run and reused, so the login check and the upload always use the same account.
+	const key = `${user}:${token}`;
+	if (!resolved.has(key)) {
+		const p = api(`${GRAPH}/${user}?fields=instagram_business_account&access_token=${token}`).then(
+			(r) => (r.instagram_business_account?.id ? {user: r.instagram_business_account.id, token, fromPage: true} : {user, token, fromPage: false}),
+			(e: Error) => {
+				// Only an Instagram account rejects that field, which means the saved ID is already right; anything else
+				// (rate limit, network, permissions) must stop the upload, never fall back to a Page ID.
+				if (/nonexisting field \(instagram_business_account\)/.test(e.message)) return {user, token, fromPage: false};
+				resolved.delete(key);
+				throw e;
+			},
+		);
+		resolved.set(key, p);
+	}
+	return resolved.get(key)!;
 };
 
 /** Uploads the file directly (resumable), so the video never needs a public URL. */
