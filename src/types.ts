@@ -17,5 +17,5 @@ export type Word = {t: number; w: string}; // t = seconds from scene start
 export type RenderProps = {
 	id: string;
 	lang: Lang;
-	scenes: {audio: string; words: Word[]; frames: number}[];
+	scenes: {audio: string; words: Word[]; frames: number; hl?: string[]}[]; // hl = words to highlight in the captions
 };

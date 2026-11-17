@@ -16,19 +16,19 @@ test('competitor YouTube: handle -> uploads -> view counts (recorded response sh
 	const real = globalThis.fetch;
 	globalThis.fetch = (async (url: string) => new Response(JSON.stringify(replies[Object.keys(replies).find((k) => url.includes(k))!]))) as typeof fetch;
 	try {
-		const vs = await competitorYoutube('t', '@x', 'everyday-tech', 'en');
+		const vs = await competitorYoutube('t', '@x', 'engines-inside', 'en');
 		assert.deepEqual(vs?.map((v) => [v.title, v.views, v.url]), [['How GPS works', 1200, 'https://youtu.be/v1'], ['x', 0, 'https://youtu.be/v2']]);
 		replies['/channels'] = {};
-		assert.equal(await competitorYoutube('t', '@missing', 'everyday-tech', 'en'), null);
+		assert.equal(await competitorYoutube('t', '@missing', 'engines-inside', 'en'), null);
 	} finally {
 		globalThis.fetch = real;
 	}
 });
 
 test('episode validation catches the usual mistakes', () => {
-	const m = readMeta('2026-W47/1-wifi');
-	assert.deepEqual(checkMeta(m, 7, ['everyday-tech']), []);
-	const errs = checkMeta({...m, theme: 'nope', sources: ['x'], scenes: m.scenes.slice(0, 2)}, 7, ['everyday-tech']);
+	const m = readMeta('2026-W47/1-four-stroke');
+	assert.deepEqual(checkMeta(m, 7, ['engines-inside']), []);
+	const errs = checkMeta({...m, theme: 'nope', sources: ['x'], scenes: m.scenes.slice(0, 2)}, 7, ['engines-inside']);
 	assert.ok(errs.some((e) => e.includes('themes.json')));
 	assert.ok(errs.some((e) => e.includes('2 source')));
 	assert.ok(errs.some((e) => e.includes('exports 7 scenes')));
@@ -44,6 +44,11 @@ test('YouTube client secrets: common paste mistakes are repaired', () => {
 	assert.deepEqual([youtubeClient(json, 'x').id, youtubeClient(json, 'x').secret], [ID, 'GOCSPX-j']); // whole JSON file
 	assert.ok(isAuthError('POST https://oauth2.googleapis.com/token -> 401: {"error": "invalid_client"}'));
 	assert.ok(!isAuthError('YouTube upload init -> 400: quotaExceeded'));
+	assert.ok(isAuthError('GET https://graph.facebook.com/v23.0/1 -> 400: {"error":{"type":"OAuthException","code":190}}'));
+	assert.ok(!isAuthError('POST https://graph.facebook.com/v23.0/1/media -> 400: {"error":{"message":"aspect ratio","type":"OAuthException","code":36003}}'));
+	assert.ok(isAuthError('POST https://graph.facebook.com/v23.0/1/media -> 403: {"error":{"type":"OAuthException","code":10}}')); // permission
+	assert.ok(isAuthError('POST https://graph.facebook.com/v23.0/1/media -> 400: {"error":{"type":"OAuthException","code":613}}')); // rate limit
+	assert.ok(!isAuthError('POST https://graph.facebook.com/v23.0/1/media -> 400: {"error":{"type":"OAuthException","code":2207026}}')); // video format
 });
 
 test('Instagram: a saved Facebook Page ID is resolved to the linked Instagram account', async () => {

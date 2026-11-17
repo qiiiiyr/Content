@@ -16,7 +16,7 @@ export const checkMeta = (m: Meta, sceneCount: number, themes: string[]): string
 		if (!m.title?.[lang] || m.title[lang].length > 100) errors.push(`title.${lang} missing or over 100 characters`);
 		if (!m.description?.[lang]) errors.push(`description.${lang} missing`);
 		if (m.scenes?.some((s) => !s[lang]?.trim())) errors.push(`a scene has no ${lang} narration`);
-		const words = (m.scenes ?? []).map((s) => s[lang] ?? '').join(' ').split(/\s+/).filter(Boolean).length;
+		const words = (m.scenes ?? []).map((s) => (s[lang] ?? '').replaceAll('*', '')).join(' ').split(/\s+/).filter(Boolean).length;
 		const [min, max] = WORDS[lang];
 		if (words < min || words > max) errors.push(`${lang} narration is ${words} words, expected ${min}-${max}`);
 	}

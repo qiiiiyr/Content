@@ -38,7 +38,8 @@ if (!offline) {
 const lastStats = existsSync('data/stats') ? readdirSync('data/stats').sort().at(-1) : undefined;
 const previous = lastStats ? readJson<{episodes: EpisodeScore[]}>(`data/stats/${lastStats}`, {episodes: []}).episodes : [];
 const frozen = new Map(previous.filter((e) => e.frozen).map((e) => [e.id, e]));
-const episodes: EpisodeScore[] = [...Map.groupBy(own, (p) => p.id).entries()].map(([id, ps]) => {
+// posts of deleted episodes (test uploads, removed folders) have no meta.json to read, so they are left out
+const episodes: EpisodeScore[] = [...Map.groupBy(own.filter((p) => existsSync(`episodes/${p.id}/meta.json`)), (p) => p.id).entries()].map(([id, ps]) => {
 	if (frozen.has(id)) return frozen.get(id)!;
 	const meta = readMeta(id);
 	const postedAt = ps.map((p) => p.postedAt).sort()[0];
