@@ -1,4 +1,4 @@
-// Usage: node scripts/publish.ts --lang en|id [--dry-run]
+// Usage: node scripts/publish.ts --lang en|id [--dry-run] [--only youtube|instagram]
 // Posts the oldest episode not yet posted in that language to every platform it is missing from.
 import {writeFileSync} from 'node:fs';
 import {listEpisodes, readJson, readMeta} from './lib.ts';
@@ -34,8 +34,10 @@ if (import.meta.main) {
 	if (!['en', 'id'].includes(lang)) throw new Error('usage: node scripts/publish.ts --lang en|id [--dry-run]');
 	const dry = process.argv.includes('--dry-run');
 	const posted = readJson<Posted[]>(STATE, []);
+	const only = process.argv.includes('--only') ? process.argv[process.argv.indexOf('--only') + 1] : '';
 	const next = nextToPost(listEpisodes(), posted, lang);
-	if (!next) {
+	if (next && only) next.platforms = next.platforms.filter((p) => p === only);
+	if (!next || !next.platforms.length) {
 		console.error(`nothing left to post in ${lang}: the queue is empty, merge next week's batch`);
 		process.exit(1); // a red run makes GitHub email the owner instead of the channel going quiet
 	}

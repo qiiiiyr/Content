@@ -9,6 +9,9 @@ on:
       lang:
         description: en or id
         default: en
+      only:
+        description: youtube, instagram, or empty for both
+        default: ''
       dry_run:
         type: boolean
         default: true
@@ -26,8 +29,9 @@ jobs:
         with:
           ref: main
       - uses: ./.github/actions/setup
-      - run: node scripts/publish.ts --lang "$POST_LANG" $DRY
+      - run: node scripts/publish.ts --lang "$POST_LANG" $DRY $ONLY
         env:
+          ONLY: ${{ inputs.only && format('--only {0}', inputs.only) || '' }}
           POST_LANG: ${{ github.event.schedule == '17 12 * * *' && 'id' || inputs.lang || 'en' }}
           DRY: ${{ inputs.dry_run && '--dry-run' || '' }}
           PRIVACY: ${{ vars.PRIVACY || 'private' }}
