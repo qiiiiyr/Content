@@ -1,6 +1,18 @@
 /** fetch that throws with the response body on a non-2xx status, and parses JSON. */
 export const api = async (url: string, init?: RequestInit): Promise<any> => {
-	const res = await fetch(url, init);
+	let res: Response;
+	// A connection kept open during a 30-minute render is often dead by the next request ("fetch failed"): retry on a new one.
+	for (let attempt = 1; ; attempt++) {
+		try {
+			res = await fetch(url, init);
+			break;
+		} catch (e) {
+			const why = `${(e as Error).message}${(e as {cause?: Error}).cause ? ` (${(e as {cause?: Error}).cause!.message})` : ''}`;
+			if (attempt === 3) throw new Error(`${init?.method ?? 'GET'} ${url.split('?')[0]} -> network error: ${why}`);
+			console.warn(`network error, retrying: ${why}`);
+			await new Promise((r) => setTimeout(r, 3000 * attempt));
+		}
+	}
 	const text = await res.text();
 	if (!res.ok) throw new Error(`${init?.method ?? 'GET'} ${url.split('?')[0]} -> ${res.status}: ${text.slice(0, 500)}`);
 	return text ? JSON.parse(text) : {};

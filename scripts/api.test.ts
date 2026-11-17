@@ -6,6 +6,7 @@ import {readMeta} from './lib.ts';
 import {youtubeClient} from './post/youtube.ts';
 import {igUser} from './post/instagram.ts';
 import {isAuthError} from './publish.ts';
+import {api} from './http.ts';
 
 test('competitor YouTube: handle -> uploads -> view counts (recorded response shapes)', async () => {
 	const replies: Record<string, unknown> = {
@@ -49,6 +50,22 @@ test('YouTube client secrets: common paste mistakes are repaired', () => {
 	assert.ok(isAuthError('POST https://graph.facebook.com/v23.0/1/media -> 403: {"error":{"type":"OAuthException","code":10}}')); // permission
 	assert.ok(isAuthError('POST https://graph.facebook.com/v23.0/1/media -> 400: {"error":{"type":"OAuthException","code":613}}')); // rate limit
 	assert.ok(!isAuthError('POST https://graph.facebook.com/v23.0/1/media -> 400: {"error":{"type":"OAuthException","code":2207026}}')); // video format
+	assert.ok(isAuthError('POST https://graph.facebook.com/v23.0/1/media -> network error: fetch failed (other side closed)')); // retried tomorrow
+});
+
+test('a dropped connection is retried on a new one', async () => {
+	const real = globalThis.fetch;
+	let calls = 0;
+	globalThis.fetch = (async () => {
+		if (++calls === 1) throw new TypeError('fetch failed', {cause: new Error('other side closed')});
+		return new Response('{"ok":1}');
+	}) as typeof fetch;
+	try {
+		assert.deepEqual(await api('https://x.test/a'), {ok: 1});
+		assert.equal(calls, 2);
+	} finally {
+		globalThis.fetch = real;
+	}
 });
 
 test('Instagram: a saved Facebook Page ID is resolved to the linked Instagram account', async () => {
