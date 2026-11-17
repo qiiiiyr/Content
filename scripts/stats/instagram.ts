@@ -1,5 +1,5 @@
 import {api} from '../http.ts';
-import {GRAPH, igAccount} from '../post/instagram.ts';
+import {GRAPH, igAccount, igUser} from '../post/instagram.ts';
 import type {Lang} from '../../src/types.ts';
 import type {CompetitorVideo} from '../review.ts';
 
@@ -13,7 +13,7 @@ export const ownInstagram = async (lang: Lang, mediaId: string): Promise<Record<
 /** A competitor's latest posts via business_discovery (Business/Creator accounts only). Likes stand in for views,
  * which this endpoint does not return. Returns null if the account is not found or not a professional account. */
 export const competitorInstagram = async (username: string, theme: string, lang: string): Promise<CompetitorVideo[] | null> => {
-	const {user, token} = igAccount('en');
+	const {user, token} = await igUser('en');
 	const fields = `business_discovery.username(${username}){media.limit(50){caption,like_count,timestamp,permalink}}`;
 	try {
 		const res = await api(`${GRAPH}/${user}?fields=${encodeURIComponent(fields)}&access_token=${token}`);

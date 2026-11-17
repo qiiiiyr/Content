@@ -5,9 +5,22 @@ import type {Lang} from '../../src/types.ts';
 export const GRAPH = 'https://graph.facebook.com/v23.0';
 export const igAccount = (lang: Lang) => ({user: env(`IG_USER_ID_${lang.toUpperCase()}`), token: env(`IG_TOKEN_${lang.toUpperCase()}`)});
 
+/**
+ * The Instagram user ID to post as. If the saved ID is a Facebook Page ID (a common copy mistake), the linked Instagram
+ * account is looked up from it, so the secret does not have to be exact. Only Pages answer instagram_business_account.
+ */
+export const igUser = async (lang: Lang): Promise<{user: string; token: string; fromPage: boolean}> => {
+	const {user, token} = igAccount(lang);
+	try {
+		const r = await api(`${GRAPH}/${user}?fields=instagram_business_account&access_token=${token}`);
+		if (r.instagram_business_account?.id) return {user: r.instagram_business_account.id, token, fromPage: true};
+	} catch {} // an Instagram account rejects that field: the saved ID is already right
+	return {user, token, fromPage: false};
+};
+
 /** Uploads the file directly (resumable), so the video never needs a public URL. */
 export const uploadInstagram = async (file: string, lang: Lang, caption: string): Promise<string> => {
-	const {user, token} = igAccount(lang);
+	const {user, token} = await igUser(lang);
 	const q = new URLSearchParams({media_type: 'REELS', upload_type: 'resumable', share_to_feed: 'true', caption, access_token: token});
 	const container = await api(`${GRAPH}/${user}/media?${q}`, {method: 'POST'});
 	await api(container.uri, {method: 'POST', headers: {Authorization: `OAuth ${token}`, offset: '0', file_size: String(statSync(file).size)}, body: readFileSync(file)});
@@ -34,9 +47,9 @@ export const checkInstagram = async (lang: Lang): Promise<boolean> => {
 		return true;
 	}
 	try {
-		const {user, token} = igAccount(lang);
+		const {user, token, fromPage} = await igUser(lang);
 		const r = await api(`${GRAPH}/${user}?fields=username,media_count&access_token=${token}`);
-		console.log(`instagram ${lang}: login OK -> @${r.username} (${r.media_count} posts)`);
+		console.log(`instagram ${lang}: login OK -> @${r.username} (${r.media_count} posts)${fromPage ? `; IG_USER_ID_${L} holds the Facebook Page ID, found the linked Instagram account automatically (you can leave it)` : ''}`);
 		return true;
 	} catch (e) {
 		const msg = (e as Error).message;
