@@ -35,12 +35,16 @@ export const checkInstagram = async (lang: Lang): Promise<boolean> => {
 	}
 	try {
 		const {user, token} = igAccount(lang);
-		const r = await api(`${GRAPH}/${user}?fields=username&access_token=${token}`);
-		console.log(`instagram ${lang}: login OK -> @${r.username}`);
+		const r = await api(`${GRAPH}/${user}?fields=username,media_count&access_token=${token}`);
+		console.log(`instagram ${lang}: login OK -> @${r.username} (${r.media_count} posts)`);
 		return true;
 	} catch (e) {
 		const msg = (e as Error).message;
 		const code = msg.match(/"code":\s*(\d+)/)?.[1];
+		if (/nonexisting field \(media_count\)/.test(msg)) {
+			console.log(`instagram ${lang}: login FAILED. IG_USER_ID_${L} is not an Instagram account, most likely it is the Facebook Page ID. Use the id inside instagram_business_account (docs/SETUP.md part 4C step 2).`);
+			return false;
+		}
 		console.log(`instagram ${lang}: login FAILED (${msg.slice(0, 160)}). ${code ? (FIX[code] ?? '') : ''}`);
 		return false;
 	}
