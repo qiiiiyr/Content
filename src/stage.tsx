@@ -156,7 +156,7 @@ export const Stage = ({cam, children}: {cam: CamKey[]; children: ReactNode}) => 
 			<fog attach="fog" args={['#cdbfa4', 30, 70]} />
 			<ambientLight intensity={0.35} />
 			<hemisphereLight args={['#fff1d6', '#6b4a2a', 0.55]} />
-			<directionalLight position={[8, 14, 10]} intensity={2.6} color="#ffe2b0" castShadow shadow-mapSize={[2048, 2048]} shadow-bias={-0.0004} shadow-normalBias={0.03} shadow-camera-left={-14} shadow-camera-right={14} shadow-camera-top={14} shadow-camera-bottom={-6} />
+			<directionalLight position={[8, 14, 10]} intensity={2.6} color="#ffe2b0" castShadow shadow-mapSize={[1024, 1024]} shadow-bias={-0.0004} shadow-normalBias={0.03} shadow-camera-left={-14} shadow-camera-right={14} shadow-camera-top={14} shadow-camera-bottom={-6} />
 			<pointLight position={[-7, 6, 7]} intensity={45} color="#9fd8d0" />
 			<pointLight position={[6, 9, -2]} intensity={30} color="#ffd9a0" />
 			{/* back wall: plaster texture with plank seams, a pinned blueprint, a hanging tag hook */}

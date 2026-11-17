@@ -6,7 +6,7 @@
     "studio": "remotion studio",
     "build": "node scripts/build.ts",
     "check": "node scripts/check.ts",
-    "test": "node --test 'scripts/**/*.test.ts' && node scripts/check.ts && tsc --noEmit",
+    "test": "node --test 'scripts/**/*.test.ts' && python3 scripts/tts.py --self-check && node scripts/check.ts && tsc --noEmit",
     "collect": "node scripts/collect.ts"
   },
   "dependencies": {

@@ -73,8 +73,10 @@ test('the next test theme is never the theme being switched to', () => {
 	assert.deepEqual([d.action, d.to, d.nextTestTheme], ['switch', 'c', 'b']);
 });
 
-test('follow-ups are 2x the median', () => {
+test('follow-ups are 2x the median of mature episodes; young ones do not drag the median down', () => {
 	assert.deepEqual(followups([ep('a', 10, ''), ep('a', 10, ''), ep('a', 30, '')], 2).map((e) => e.score), [30]);
+	const young = [1, 2, 3, 4].map((i) => ({...ep('a', 1, '', i), frozen: false}));
+	assert.deepEqual(followups([ep('a', 1000, '', 1), ep('a', 1000, '', 2), ep('a', 1000, '', 3), ...young], 2), []);
 });
 
 test('checklist parsing', () => {

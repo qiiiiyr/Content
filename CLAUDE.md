@@ -28,7 +28,7 @@ Let `W` = this ISO week (e.g. `2026-W47`) and `N` = next ISO week. The batch you
      words and visuals, never copied), then `themes.json` ideas. Never repeat a topic already in `episodes/`.
    - Copy the structure of `episodes/2026-W47/1-four-stroke/`: `meta.json` (narration per scene in both languages,
      titles ending in ` #shorts`, description, 4-6 hashtags, at least 2 sources) and `Scenes.tsx` (one component
-     per scene, built from `src/kit.tsx`).
+     per scene, built from `src/stage.tsx`).
 6. **Verify, then open the pull request** (see below). `npm test` must pass.
 
 ## Episode rules

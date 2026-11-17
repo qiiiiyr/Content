@@ -19,7 +19,8 @@ export const missingSecrets = (platforms: Platform[], lang: Lang, vars: Record<s
 	platforms.flatMap((p) => REQUIRED[p](lang.toUpperCase())).filter((n) => !vars[n]);
 
 /** Errors from logging in (bad or expired secrets), as opposed to the platform rejecting the video. */
-export const isAuthError = (msg: string): boolean => /oauth2\.googleapis\.com\/token|OAuthException|missing secret/.test(msg);
+// Meta labels almost every error OAuthException, so only its token codes (190 expired/invalid, 102 session) count.
+export const isAuthError = (msg: string): boolean => /oauth2\.googleapis\.com\/token|"code":\s*(190|102)\b|missing secret/.test(msg);
 
 export const nextToPost = (ids: string[], posted: Posted[], lang: Lang): {id: string; platforms: Platform[]} | null => {
 	for (const id of ids) {

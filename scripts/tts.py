@@ -94,5 +94,17 @@ async def main():
         await speak(item["text"], job["voice"], job["rate"], item["out"])
 
 
+def self_check():
+    """Offline check of the splitting and delivery rules (run by npm test)."""
+    assert chunks("At six thousand rpm. Is it fast?") == ["At six thousand rpm.", "Is it fast?"]
+    long = "One two three four five six seven, eight nine ten eleven twelve thirteen."
+    assert chunks(long) == ["One two three four five six seven,", "eight nine ten eleven twelve thirteen."]
+    assert prosody(0, 3, "Hook.", "+4%") == ("+8%", "+3Hz")  # hook: faster, higher
+    assert prosody(2, 3, "End.", "+4%") == ("+0%", "-3Hz")  # last: slower, lower
+    assert prosody(1, 3, "Why?", "+4%")[1] == "+5Hz"  # questions rise
+    assert prosody(1, 3, "Mid.", "+0%")[1] in ("+1Hz", "-1Hz") and "+0Hz" not in {prosody(i, 3, "x?", "+0%")[1] for i in range(3)}
+    print("tts self-check OK")
+
+
 if __name__ == "__main__":
-    asyncio.run(main())
+    self_check() if "--self-check" in sys.argv else asyncio.run(main())

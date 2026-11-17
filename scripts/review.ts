@@ -92,8 +92,9 @@ export const decide = (episodes: EpisodeScore[], hits: Hit[], themes: string[], 
 
 /** Own episodes worth a follow-up: at least `multiple` x the median of all mature episodes. */
 export const followups = (episodes: EpisodeScore[], multiple: number): EpisodeScore[] => {
-	const m = median(episodes.map((e) => e.score));
-	return episodes.filter((e) => m > 0 && e.score >= multiple * m).sort((a, b) => b.score - a.score);
+	const mature = episodes.filter((e) => e.frozen);
+	const m = median(mature.map((e) => e.score));
+	return mature.filter((e) => m > 0 && e.score >= multiple * m).sort((a, b) => b.score - a.score);
 };
 
 /** Reads the weekly pull request's checklist: unticked episodes and an unticked theme switch are rejected. */

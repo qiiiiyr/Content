@@ -1,13 +1,13 @@
-# How It Actually Works
+# Cutaway / Bongkar Pasang
 
-Automated "how technology works" Shorts and Reels in English and Indonesian, with a weekly review that adapts the
+Automated 3D "how motorcycles and cars work" Shorts and Reels in English (Cutaway) and Indonesian (Bongkar Pasang), with a weekly review that adapts the
 content to what performs, for us and for competitors, and switches theme when the numbers say so.
 
 | When | What | Where |
 |---|---|---|
 | Fri night | own + competitor stats, keep/switch rule | `collect.yml` → `data/stats/` |
 | Sat | report, strategy update, 7 new episodes, one PR | Claude scheduled task, `CLAUDE.md` |
-| Sat | render previews | `render.yml` |
+| Sat | render previews (one parallel job per episode and language) | `render.yml` |
 | Sun | you review and merge (about 10 min) | GitHub app |
 | Daily | render and post one episode per language | `publish.yml` → `state/posted.json` |
 
@@ -18,7 +18,7 @@ content to what performs, for us and for competitors, and switches theme when th
 ```bash
 npm test                                   # unit tests, episode validation, type check
 npm run studio                             # preview episodes in the browser
-node scripts/build.ts 2026-W47/1-wifi en   # render one episode -> out/
+node scripts/build.ts 2026-W47/1-four-stroke en   # render one episode -> out/ (3D: about 10 min)
 node scripts/publish.ts --lang en --dry-run
 ```
 

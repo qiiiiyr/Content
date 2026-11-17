@@ -44,6 +44,8 @@ test('YouTube client secrets: common paste mistakes are repaired', () => {
 	assert.deepEqual([youtubeClient(json, 'x').id, youtubeClient(json, 'x').secret], [ID, 'GOCSPX-j']); // whole JSON file
 	assert.ok(isAuthError('POST https://oauth2.googleapis.com/token -> 401: {"error": "invalid_client"}'));
 	assert.ok(!isAuthError('YouTube upload init -> 400: quotaExceeded'));
+	assert.ok(isAuthError('GET https://graph.facebook.com/v23.0/1 -> 400: {"error":{"type":"OAuthException","code":190}}'));
+	assert.ok(!isAuthError('POST https://graph.facebook.com/v23.0/1/media -> 400: {"error":{"message":"aspect ratio","type":"OAuthException","code":36003}}'));
 });
 
 test('Instagram: a saved Facebook Page ID is resolved to the linked Instagram account', async () => {

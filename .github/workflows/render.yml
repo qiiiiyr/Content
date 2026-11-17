@@ -1,4 +1,6 @@
-# On the weekly batch pull request: validate, render every new or changed episode, post preview links.
+# On the weekly batch pull request: validate, render every new or changed episode (one parallel job per episode and
+# language, since a 3D render takes 10+ minutes), then post the preview links. A change to src/ alone (the look of
+# every episode) renders the newest episode so the change can be seen.
 name: render previews
 on:
   pull_request:
@@ -7,22 +9,57 @@ permissions:
   contents: write
   pull-requests: write
 jobs:
-  render:
+  plan:
     runs-on: ubuntu-latest
-    timeout-minutes: 240
+    outputs:
+      ids: ${{ steps.ids.outputs.ids }}
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: ./.github/actions/setup
-      - run: npm test
-      - name: Render changed episodes
-        run: |
-          for id in $(git diff --name-only "origin/$BASE_REF...HEAD" -- episodes | cut -d/ -f2,3 | sort -u); do
-            if [ -f "episodes/$id/meta.json" ]; then node scripts/build.ts "$id"; fi
-          done
+      - id: ids
         env:
           BASE_REF: ${{ github.base_ref }}
+        run: |
+          changed=$(git diff --name-only "origin/$BASE_REF...HEAD")
+          ids=$(echo "$changed" | grep '^episodes/' | cut -d/ -f2,3 | sort -u | while read -r id; do if [ -f "episodes/$id/meta.json" ]; then echo "$id"; fi; done)
+          if echo "$changed" | grep -q '^src/'; then ids=$(printf '%s\n%s\n' "$ids" "$(ls -d episodes/*/*/ | sed 's#^episodes/##; s#/$##' | tail -1)"); fi
+          echo "ids=$(echo "$ids" | grep . | sort -u | jq -R . | jq -sc .)" >> "$GITHUB_OUTPUT"
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+      - run: npm test
+  render:
+    needs: [plan, test]
+    if: needs.plan.outputs.ids != '[]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        id: ${{ fromJson(needs.plan.outputs.ids) }}
+        lang: [en, id]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+      - run: node scripts/build.ts "${{ matrix.id }}" ${{ matrix.lang }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: preview-${{ strategy.job-index }}
+          path: out/*.mp4
+          retention-days: 7
+  comment:
+    needs: render
+    if: always() && needs.render.result != 'skipped'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: preview-*
+          merge-multiple: true
+          path: out
       - name: Upload previews and comment links
         if: hashFiles('out/*.mp4') != ''
         env:
@@ -31,7 +68,7 @@ jobs:
           REPO: ${{ github.repository }}
         run: |
           tag="preview-pr-$PR"
-          gh release delete "$tag" -y --cleanup-tag || true
-          gh release create "$tag" out/*.mp4 --prerelease --title "Preview for PR #$PR" --notes "Preview renders, not published. Deleted when the PR is merged."
+          gh release delete "$tag" -R "$REPO" -y --cleanup-tag || true
+          gh release create "$tag" out/*.mp4 -R "$REPO" --prerelease --title "Preview for PR #$PR" --notes "Preview renders, not published. Deleted when the PR is merged."
           { echo "### Preview videos"; for f in out/*.mp4; do n=$(basename "$f"); echo "- [$n](https://github.com/$REPO/releases/download/$tag/$n)"; done; } > comment.md
-          gh pr comment "$PR" --body-file comment.md
+          gh pr comment "$PR" -R "$REPO" --body-file comment.md
