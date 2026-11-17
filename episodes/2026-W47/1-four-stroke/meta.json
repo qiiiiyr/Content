@@ -1,0 +1,48 @@
+{
+  "theme": "engines-inside",
+  "test": false,
+  "title": {
+    "en": "Your engine explodes 50 times a second #shorts",
+    "id": "Mesinmu meledak 50 kali per detik #shorts"
+  },
+  "description": {
+    "en": "One piston, four moves: intake, compression, power, exhaust. See how a four-stroke engine in a car or motorcycle turns tiny explosions into spin.",
+    "id": "Satu piston, empat gerakan: isap, kompresi, usaha, buang. Lihat bagaimana mesin empat tak di mobil atau motor mengubah ledakan kecil menjadi putaran."
+  },
+  "hashtags": ["engine", "motorcycle", "cars", "howitworks", "mechanics"],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Four-stroke_engine",
+    "https://www.britannica.com/technology/gasoline-engine/Introduction",
+    "https://www.energy.gov/eere/vehicles/internal-combustion-engine-basics"
+  ],
+  "scenes": [
+    {
+      "en": "At six thousand rpm, each cylinder in your engine fires *fifty times a second*.",
+      "id": "Pada enam ribu rpm, setiap silinder di mesinmu menyala *lima puluh kali per detik*."
+    },
+    {
+      "en": "It does it with one piston and four moves. First, *intake*: the piston drops and sucks in air and fuel.",
+      "id": "Semuanya dikerjakan satu piston dengan empat gerakan. Pertama, *isap*: piston turun dan menyedot campuran udara dan bensin."
+    },
+    {
+      "en": "Then *compression*: the piston rises and squeezes that mix into a space about ten times smaller.",
+      "id": "Lalu *kompresi*: piston naik dan memadatkan campuran itu hingga sekitar sepuluh kali lebih kecil."
+    },
+    {
+      "en": "Now the spark plug fires. The mix burns, expands, and shoves the piston down. That is the *power* stroke, the only one that makes power.",
+      "id": "Sekarang busi memercik. Campuran terbakar, mengembang, dan mendorong piston ke bawah. Inilah langkah *usaha*, satu-satunya langkah yang menghasilkan tenaga."
+    },
+    {
+      "en": "Last, *exhaust*: the piston rises again and pushes the burnt gas out.",
+      "id": "Terakhir, *buang*: piston naik lagi dan mendorong gas bekas keluar."
+    },
+    {
+      "en": "A rod and a crankshaft turn that up and down push into spin. All four moves take *two full turns* of the crank.",
+      "id": "Batang piston dan poros engkol mengubah dorongan naik-turun itu jadi putaran. Keempat gerakan butuh *dua putaran penuh* poros engkol."
+    },
+    {
+      "en": "So an engine is not one big bang. It is thousands of tiny, perfectly timed ones. Follow for more.",
+      "id": "Jadi mesin bukan satu ledakan besar. Tapi ribuan ledakan kecil dengan waktu yang sangat pas. Ikuti untuk lainnya."
+    }
+  ]
+}

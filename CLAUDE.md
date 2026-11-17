@@ -1,7 +1,7 @@
-# How It Actually Works — weekly review and batch
+# Cutaway / Bongkar Pasang — weekly review and batch
 
-Two faceless channels (English `en`, Indonesian `id`) on YouTube Shorts and Instagram Reels. Each episode is a
-45-60 second animated explainer. GitHub Actions render and post; a weekly Claude session (you) reviews the numbers
+Two faceless channels (English `en` = Cutaway, Indonesian `id` = Bongkar Pasang) on YouTube Shorts and Instagram Reels about
+how motorcycles and cars work. Each episode is a 45-60 second 3D animated explainer. GitHub Actions render and post; a weekly Claude session (you) reviews the numbers
 and writes next week's batch as one pull request. A human approves by merging.
 
 ## Weekly procedure (the scheduled task runs this)
@@ -26,7 +26,7 @@ Let `W` = this ISO week (e.g. `2026-W47`) and `N` = next ISO week. The batch you
    - 5 on `currentTheme` (`"test": false`) and 2 on `testTheme` (`"test": true`) in slots 3 and 6.
    - Topic priority: follow-ups of `followups`, then topics suggested by competitor hits (rewritten in our own
      words and visuals, never copied), then `themes.json` ideas. Never repeat a topic already in `episodes/`.
-   - Copy the structure of `episodes/2026-W47/1-wifi/`: `meta.json` (narration per scene in both languages,
+   - Copy the structure of `episodes/2026-W47/1-four-stroke/`: `meta.json` (narration per scene in both languages,
      titles ending in ` #shorts`, description, 4-6 hashtags, at least 2 sources) and `Scenes.tsx` (one component
      per scene, built from `src/kit.tsx`).
 6. **Verify, then open the pull request** (see below). `npm test` must pass.
@@ -39,10 +39,17 @@ Let `W` = this ISO week (e.g. `2026-W47`) and `N` = next ISO week. The batch you
   that works in under 2 seconds: a surprising fact or question, never "In this video". Last scene ends with a short
   follow line. Indonesian must sound natural and casual (use "kamu"), not a literal translation; keep tech terms
   people actually say (router, chip, Bluetooth).
-- **Visuals:** every scene gets its own diagram that shows the mechanism: what moves where, what changes. Do not
-  reuse a previous episode's layout. All on-screen text goes through `<T en="…" id="…" />`. Keep diagrams between
-  y=220 and y=1300; captions are drawn automatically below. Use `colors` from the kit; no images, emoji or fonts
-  from the internet. Add new kit components to `src/kit.tsx` only if two or more episodes need them.
+- **Visuals:** a 3D miniature diorama, built from `src/stage.tsx` (React Three Fiber): a warm workshop wall and bench, brass
+  and dark-metal parts, glass cutaways, a slow macro camera. One scene = one camera move (`cam` keys, `t` is 0..1 of the
+  scene) around the mechanism doing the thing being narrated. Animate with `useScene().p` (0..1 through the scene), never
+  with fixed seconds: scene length follows the narration. Show cause and effect (what moves, what burns, what flows), keep
+  the subject in the upper two thirds (captions sit at y=1130-1390 of 1920, platform UI below) and keep the framing
+  portrait (about 0.32 x distance wide at the subject). Build new parts (gearbox, brake disc, wheel, battery cell) in
+  `src/stage.tsx` the first time you need them and reuse them after; `Engine` and `cycleState` show the pattern.
+  Use `colors`/materials from the kit; no images, emoji or fonts from the internet. Last scene ends on `<PaperTag>`
+  (`src/Tag.tsx`), the brand's hanging tag, with the series name and episode number.
+- **Captions:** wrap the 1-3 key words of each scene in `*asterisks*` in `meta.json` (numbers, the term being defined): they
+  get a highlight box. The asterisks are stripped before speech and word counts.
 - YouTube's "inauthentic content" policy removes monetization from template-like, repetitive videos. Variety in
   topic, hook, layout and pacing is the defence; so is accuracy.
 
@@ -52,6 +59,8 @@ Let `W` = this ISO week (e.g. `2026-W47`) and `N` = next ISO week. The batch you
 npm test
 REMOTION_BROWSER=/opt/pw-browsers/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell node scripts/build.ts <week>/<n-slug> en
 ```
+
+A 3D render takes about 3-6 minutes. For a quick look at one scene use `npx remotion still src/index.ts Episode out/x.png --frame=<n> --props=out/<week>__<n-slug>.en.props.json --gl=swangle --scale=0.5` (the props file is written by the build).
 
 Render episode 1 in English only, then build ONE contact sheet and view that single image:
 

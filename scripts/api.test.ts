@@ -13,19 +13,19 @@ test('competitor YouTube: handle -> uploads -> view counts (recorded response sh
 	const real = globalThis.fetch;
 	globalThis.fetch = (async (url: string) => new Response(JSON.stringify(replies[Object.keys(replies).find((k) => url.includes(k))!]))) as typeof fetch;
 	try {
-		const vs = await competitorYoutube('t', '@x', 'everyday-tech', 'en');
+		const vs = await competitorYoutube('t', '@x', 'engines-inside', 'en');
 		assert.deepEqual(vs?.map((v) => [v.title, v.views, v.url]), [['How GPS works', 1200, 'https://youtu.be/v1'], ['x', 0, 'https://youtu.be/v2']]);
 		replies['/channels'] = {};
-		assert.equal(await competitorYoutube('t', '@missing', 'everyday-tech', 'en'), null);
+		assert.equal(await competitorYoutube('t', '@missing', 'engines-inside', 'en'), null);
 	} finally {
 		globalThis.fetch = real;
 	}
 });
 
 test('episode validation catches the usual mistakes', () => {
-	const m = readMeta('2026-W47/1-wifi');
-	assert.deepEqual(checkMeta(m, 7, ['everyday-tech']), []);
-	const errs = checkMeta({...m, theme: 'nope', sources: ['x'], scenes: m.scenes.slice(0, 2)}, 7, ['everyday-tech']);
+	const m = readMeta('2026-W47/1-four-stroke');
+	assert.deepEqual(checkMeta(m, 7, ['engines-inside']), []);
+	const errs = checkMeta({...m, theme: 'nope', sources: ['x'], scenes: m.scenes.slice(0, 2)}, 7, ['engines-inside']);
 	assert.ok(errs.some((e) => e.includes('themes.json')));
 	assert.ok(errs.some((e) => e.includes('2 source')));
 	assert.ok(errs.some((e) => e.includes('exports 7 scenes')));

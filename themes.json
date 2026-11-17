@@ -1,56 +1,56 @@
 {
   "themes": [
     {
-      "key": "everyday-tech",
-      "name": "How everyday tech works",
-      "ideas": ["Wi-Fi", "GPS", "touchscreens", "QR codes", "contactless payment (NFC)", "microwave ovens", "noise-cancelling headphones", "phone fast charging", "Bluetooth", "barcode scanners", "smoke detectors", "fingerprint sensors"],
+      "key": "engines-inside",
+      "name": "How engines work: pistons, valves, fuel and fire",
+      "ideas": ["four-stroke engine", "two-stroke vs four-stroke", "why a V8 sounds different", "turbochargers", "fuel injection vs carburetor", "spark plugs", "why engines have flywheels", "VTEC and variable valve timing", "rotary (Wankel) engine", "diesel vs petrol ignition"],
       "competitors": {
-        "youtube": {"en": ["@BranchEducation", "@Lesics", "@Techquickie", "@EngineeringMindset"], "id": ["@KokBisa", "@GadgetIn", "@DroidLime"]},
+        "youtube": {"en": ["@EngineeringExplained", "@Lesics", "@ChrisFix", "@TheStraightPipes"], "id": ["@OTOMOTIFNET", "@MotorPlusOnline", "@GridOto"]},
         "instagram": {"en": [], "id": []}
       }
     },
     {
-      "key": "internet",
-      "name": "How the internet works",
-      "ideas": ["HTTPS and the padlock", "DNS", "undersea cables", "data centers", "IP addresses", "how a message reaches the other side of the world", "5G vs 4G", "VPNs", "cookies", "why buffering happens"],
+      "key": "drivetrain",
+      "name": "How power reaches the wheels: gearbox, clutch, differential, chain",
+      "ideas": ["manual gearbox", "how a clutch works", "automatic transmission torque converter", "CVT", "differential", "motorcycle chain drive vs shaft", "limited-slip differential", "all-wheel drive", "dual-clutch gearbox", "quickshifter"],
       "competitors": {
-        "youtube": {"en": ["@ByteByteGo", "@PowerCertAnimatedVideos", "@NetworkChuck", "@Computerphile"], "id": ["@ProgrammerZamanNow", "@WebProgrammingUNPAS", "@SekolahKoding"]},
+        "youtube": {"en": ["@EngineeringExplained", "@Lesics", "@RevZilla"], "id": ["@OTOMOTIFNET", "@MotorPlusOnline"]},
         "instagram": {"en": [], "id": []}
       }
     },
     {
-      "key": "ai",
-      "name": "AI explained",
-      "ideas": ["how chatbots predict words", "how image generators work", "face unlock", "voice assistants", "recommendation algorithms", "spam filters", "self-driving car sensors", "deepfakes and how to spot them"],
+      "key": "grip-and-stopping",
+      "name": "Brakes, suspension, tires and handling",
+      "ideas": ["disc brakes", "ABS", "why motorcycles counter-steer", "how suspension works", "traction control", "tire grip and tread", "why brake fade happens", "engine braking", "launch control", "why bikes lean"],
       "competitors": {
-        "youtube": {"en": ["@3blue1brown", "@TwoMinutePapers", "@WelchLabsVideo"], "id": ["@KokBisa"]},
+        "youtube": {"en": ["@EngineeringExplained", "@RevZilla", "@MotoGeo"], "id": ["@MotorPlusOnline", "@GridOto"]},
         "instagram": {"en": [], "id": []}
       }
     },
     {
-      "key": "gadgets-inside",
-      "name": "How phones and gadgets work inside",
-      "ideas": ["phone cameras", "lithium batteries", "OLED vs LCD", "processors and transistors", "SSDs vs hard drives", "smartwatch heart-rate sensors", "phone vibration motors", "wireless charging"],
+      "key": "electric-vehicles",
+      "name": "Electric cars and bikes: batteries, motors, charging",
+      "ideas": ["how an EV motor works", "regenerative braking", "lithium battery packs", "fast charging", "why EVs have one gear", "hybrid systems", "battery thermal management", "solid-state batteries", "electric motorcycles"],
       "competitors": {
-        "youtube": {"en": ["@JerryRigEverything", "@HughJeffreys", "@iFixit"], "id": ["@GadgetIn", "@JagatReview", "@DroidLime"]},
+        "youtube": {"en": ["@EngineeringExplained", "@Lesics", "@Donut"], "id": ["@OTOMOTIFNET", "@GridOto"]},
         "instagram": {"en": [], "id": []}
       }
     },
     {
-      "key": "tech-history",
-      "name": "Tech history: why things are the way they are",
-      "ideas": ["why QWERTY", "why USB plugs only fit one way", "the first website", "why 1080p", "floppy disk save icon", "why phones have 3.5mm jacks (and lost them)", "the Y2K bug", "why the internet uses www"],
+      "key": "car-safety-tech",
+      "name": "Safety and driver-assist tech in cars and bikes",
+      "ideas": ["airbags", "seat belt pretensioners", "crumple zones", "cruise control and adaptive cruise", "blind-spot sensors", "tire pressure sensors", "lane keeping", "immobilizer keys", "keyless entry relay attacks"],
       "competitors": {
-        "youtube": {"en": ["@TechAltar", "@Techmoan", "@Asianometry"], "id": ["@KokBisa"]},
+        "youtube": {"en": ["@Lesics", "@Donut", "@carwow"], "id": ["@OTOMOTIFNET", "@GridOto"]},
         "instagram": {"en": [], "id": []}
       }
     },
     {
-      "key": "how-things-are-made",
-      "name": "How everyday machines and things work and are made (adjacent to tech)",
-      "ideas": ["escalators", "elevators safety brakes", "traffic lights sensors", "airplane wings", "refrigerators", "how chips are made", "car engines vs EV motors", "solar panels"],
+      "key": "vehicle-history",
+      "name": "Why vehicles are the way they are: engineering stories",
+      "ideas": ["why cars have 4 wheels and bikes 2", "why Formula 1 cars have wings", "the first mass-produced car", "why motorcycles have a kickstand on the left", "why cars drive on different sides", "origin of horsepower", "why tires are black", "how the Vespa changed Italy"],
       "competitors": {
-        "youtube": {"en": ["@Lesics", "@PracticalEngineeringChannel", "@SmarterEveryDay"], "id": ["@KokBisa"]},
+        "youtube": {"en": ["@Donut", "@Lesics", "@TheStraightPipes"], "id": ["@OTOMOTIFNET"]},
         "instagram": {"en": [], "id": []}
       }
     }
