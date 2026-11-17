@@ -49,9 +49,10 @@ if (import.meta.main) {
 	const text = description(meta, lang);
 	console.log(`${dry ? '[dry run] ' : ''}${lang}: ${next.id} -> ${next.platforms.join(', ')}\n  title: ${title}\n${text.replace(/^/gm, '  | ')}`);
 	if (dry) {
-		// The dry run also proves the YouTube logins work, for both channels, so setup mistakes show before a real post.
+		// The dry run also proves the YouTube and Instagram logins work, for both accounts, so setup mistakes show before a real post.
 		const {checkYoutube} = await import('./post/youtube.ts');
-		const ok = [await checkYoutube('en'), await checkYoutube('id')];
+		const {checkInstagram} = await import('./post/instagram.ts');
+		const ok = [await checkYoutube('en'), await checkYoutube('id'), await checkInstagram('en'), await checkInstagram('id')];
 		process.exit(ok.every(Boolean) ? 0 : 1);
 	}
 
