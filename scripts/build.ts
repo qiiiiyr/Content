@@ -16,6 +16,9 @@ export const highlights = (text: string): string[] => [...text.matchAll(/\*([^*]
 
 const seconds = (file: string) => Number(execFileSync('ffprobe', ['-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', file]).toString());
 
+/** Where a render of this episode and language lands, also the asset name in the `videos` release. */
+export const videoFile = (id: string, lang: Lang) => `out/${id.replace('/', '__')}.${lang}.mp4`;
+
 export const build = (id: string, lang: Lang): string => {
 	const meta = readMeta(id);
 	const base = `tts/${id}/${lang}`;
@@ -33,7 +36,7 @@ export const build = (id: string, lang: Lang): string => {
 		})),
 	};
 	mkdirSync('out', {recursive: true});
-	const name = `out/${id.replace('/', '__')}.${lang}`;
+	const name = videoFile(id, lang).replace(/\.mp4$/, '');
 	writeFileSync(`${name}.props.json`, JSON.stringify(props));
 	const browser = process.env.REMOTION_BROWSER ? [`--browser-executable=${process.env.REMOTION_BROWSER}`] : [];
 	execFileSync('npx', ['remotion', 'render', 'src/index.ts', 'Episode', `${name}.mp4`, `--props=${name}.props.json`, '--gl=swangle', '--scale=0.6666666666666666', ...browser], {stdio: 'inherit'});

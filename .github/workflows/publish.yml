@@ -23,7 +23,7 @@ jobs:
     # Posts daily, publicly. To pause the schedule set the repo variable POSTING=off; manual runs always work.
     if: github.event_name == 'workflow_dispatch' || vars.POSTING != 'off'
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 120
     steps:
       - uses: actions/checkout@v4
         with:
@@ -35,6 +35,7 @@ jobs:
           POST_LANG: ${{ github.event.schedule == '17 12 * * *' && 'id' || inputs.lang || 'en' }}
           DRY: ${{ inputs.dry_run && '--dry-run' || '' }}
           PRIVACY: ${{ vars.PRIVACY || 'public' }}
+          GH_TOKEN: ${{ github.token }} # to download the reviewed render from the videos release
           YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
           YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
           YT_REFRESH_TOKEN_EN: ${{ secrets.YT_REFRESH_TOKEN_EN }}

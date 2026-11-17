@@ -1,6 +1,8 @@
 // Usage: node scripts/publish.ts --lang en|id [--dry-run] [--only youtube|instagram]
 // Posts the oldest episode not yet posted in that language to every platform it is missing from.
-import {writeFileSync} from 'node:fs';
+import {spawnSync} from 'node:child_process';
+import {existsSync, writeFileSync} from 'node:fs';
+import {basename} from 'node:path';
 import {listEpisodes, readJson, readMeta} from './lib.ts';
 import type {Lang, Meta} from '../src/types.ts';
 
@@ -63,7 +65,7 @@ if (import.meta.main) {
 		console.error(`missing secrets: ${missing.join(', ')} (see docs/SETUP.md). Nothing rendered or recorded.`);
 		process.exit(1);
 	}
-	const {build} = await import('./build.ts');
+	const {build, videoFile} = await import('./build.ts');
 	const {uploadYoutube, checkYoutube} = await import('./post/youtube.ts');
 	const {uploadInstagram, checkInstagram} = await import('./post/instagram.ts');
 	// Log in before the 30-minute render, so a dead token fails in seconds and leaves the episode queued.
@@ -73,7 +75,13 @@ if (import.meta.main) {
 			process.exit(1);
 		}
 	}
-	const file = build(next.id, lang);
+	// The weekly preview job saved the exact video the human reviewed in the `videos` release: post that one. Render only
+	// if it is missing (seconds instead of a 30-40 minute render, and what was approved is what goes out).
+	const saved = videoFile(next.id, lang);
+	const repo = process.env.GITHUB_REPOSITORY;
+	const got = repo && spawnSync('gh', ['release', 'download', 'videos', '-R', repo, '-p', basename(saved), '-D', 'out', '--clobber'], {stdio: 'inherit'}).status === 0 && existsSync(saved);
+	console.log(got ? `using the reviewed render ${basename(saved)} from the videos release` : 'no reviewed render saved for this episode: rendering now');
+	const file = got ? saved : build(next.id, lang);
 	let failed = false;
 	for (const platform of next.platforms) {
 		const postedAt = new Date().toISOString();

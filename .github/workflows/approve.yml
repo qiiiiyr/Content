@@ -1,4 +1,4 @@
-# After you merge the weekly pull request: drop unticked episodes, undo an unticked theme switch, delete previews.
+# After you merge the weekly pull request: drop unticked episodes, undo an unticked theme switch. Renders stay in the `videos` release for posting.
 name: apply review
 on:
   pull_request:
@@ -30,6 +30,3 @@ jobs:
           git diff --cached --quiet && exit 0
           git commit -m "Apply weekly review: remove rejected items"
           for i in 1 2 3 4; do git pull --rebase -q && git push && exit 0; sleep $((i * 5)); done; exit 1
-      - run: gh release delete "preview-pr-${{ github.event.pull_request.number }}" -y --cleanup-tag || true
-        env:
-          GH_TOKEN: ${{ github.token }}

@@ -1,5 +1,6 @@
 # On the weekly batch pull request: validate, render every new or changed episode (one parallel job per episode and
-# language, since a 3D render takes 10+ minutes), then post the preview links. A change to src/ alone (the look of
+# language, since a 3D render takes 30+ minutes), save each video in the `videos` release (the daily post uses it),
+# then post the preview links. A change to src/ alone (the look of
 # every episode) renders the newest episode so the change can be seen.
 name: render previews
 on:
@@ -55,6 +56,14 @@ jobs:
         env:
           ID: ${{ matrix.id }} # from folder names in the PR: passed as data, never pasted into the script
           EP_LANG: ${{ matrix.lang }}
+      # Kept in one release, `videos`: the daily post downloads the exact file you reviewed instead of rendering again.
+      - name: Save the render
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          gh release view videos -R "$REPO" >/dev/null 2>&1 || gh release create videos -R "$REPO" --title "Rendered episodes" --notes "Renders from the weekly preview workflow. The daily post downloads its video from here." || true
+          gh release upload videos out/*.mp4 -R "$REPO" --clobber
       - uses: actions/upload-artifact@v4
         with:
           name: preview-${{ strategy.job-index }}
@@ -70,15 +79,12 @@ jobs:
           pattern: preview-*
           merge-multiple: true
           path: out
-      - name: Upload previews and comment links
+      - name: Comment preview links
         if: hashFiles('out/*.mp4') != ''
         env:
           GH_TOKEN: ${{ github.token }}
           PR: ${{ github.event.number }}
           REPO: ${{ github.repository }}
         run: |
-          tag="preview-pr-$PR"
-          gh release delete "$tag" -R "$REPO" -y --cleanup-tag || true
-          gh release create "$tag" out/*.mp4 -R "$REPO" --prerelease --title "Preview for PR #$PR" --notes "Preview renders, not published. Deleted when the PR is merged."
-          { echo "### Preview videos"; for f in out/*.mp4; do n=$(basename "$f"); echo "- [$n](https://github.com/$REPO/releases/download/$tag/$n)"; done; } > comment.md
+          { echo "### Preview videos (these exact files are what gets posted)"; for f in out/*.mp4; do n=$(basename "$f"); echo "- [$n](https://github.com/$REPO/releases/download/videos/$n)"; done; } > comment.md
           gh pr comment "$PR" -R "$REPO" --body-file comment.md
