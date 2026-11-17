@@ -64,8 +64,15 @@ if (import.meta.main) {
 		process.exit(1);
 	}
 	const {build} = await import('./build.ts');
-	const {uploadYoutube} = await import('./post/youtube.ts');
-	const {uploadInstagram} = await import('./post/instagram.ts');
+	const {uploadYoutube, checkYoutube} = await import('./post/youtube.ts');
+	const {uploadInstagram, checkInstagram} = await import('./post/instagram.ts');
+	// Log in before the 30-minute render, so a dead token fails in seconds and leaves the episode queued.
+	for (const platform of next.platforms) {
+		if (!(platform === 'youtube' ? await checkYoutube(lang) : await checkInstagram(lang))) {
+			console.error(`${platform} login failed (see above). Nothing rendered or recorded.`);
+			process.exit(1);
+		}
+	}
 	const file = build(next.id, lang);
 	let failed = false;
 	for (const platform of next.platforms) {

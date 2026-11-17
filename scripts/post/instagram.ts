@@ -34,7 +34,7 @@ export const uploadInstagram = async (file: string, lang: Lang, caption: string)
 };
 
 const FIX: Record<string, string> = {
-	'190': 'the token is expired or invalid. Make a new Page token (docs/SETUP.md, Instagram part C).',
+	'190': 'the token is expired or invalid. Make a new Page token from an EXTENDED user token, so it never expires (docs/SETUP.md part 4B step 3, then 4C).',
 	'10': 'the app lacks a permission. Add instagram_content_publish and instagram_basic and make a new token.',
 	'100': 'the Instagram user ID is wrong, or this token cannot see that account. Re-run the instagram_business_account lookup with the same Page.',
 };
@@ -49,8 +49,13 @@ export const checkInstagram = async (lang: Lang): Promise<boolean> => {
 	try {
 		const {user, token, fromPage} = await igUser(lang);
 		const r = await api(`${GRAPH}/${user}?fields=username,media_count&access_token=${token}`);
-		console.log(`instagram ${lang}: login OK -> @${r.username} (${r.media_count} posts)${fromPage ? `; IG_USER_ID_${L} holds the Facebook Page ID, found the linked Instagram account automatically (you can leave it)` : ''}`);
-		return true;
+		// A Page token made from a short-lived user token dies within hours; one made from an extended token never expires.
+		// Meta may refuse debug_token for a Page token; then the expiry is unknown and the check does not block posting.
+		const exp: number | null = await api(`${GRAPH}/debug_token?input_token=${token}&access_token=${token}`).then((d) => d.data?.expires_at ?? 0, () => null);
+		const hours = exp ? (exp * 1000 - Date.now()) / 3_600_000 : Infinity;
+		console.log(`instagram ${lang}: login OK -> @${r.username} (${r.media_count} posts); token ${exp === null ? 'expiry unknown' : exp ? `EXPIRES in ${Math.max(0, Math.round(hours))} h` : 'never expires'}${fromPage ? `; IG_USER_ID_${L} holds the Facebook Page ID, found the linked Instagram account automatically (you can leave it)` : ''}`);
+		if (hours < 7 * 24) console.log(`instagram ${lang}: token FAILS soon. ${FIX['190']}`);
+		return hours >= 7 * 24;
 	} catch (e) {
 		const msg = (e as Error).message;
 		const code = msg.match(/"code":\s*(\d+)/)?.[1];
