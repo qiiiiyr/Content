@@ -26,7 +26,11 @@ GitHub's **Settings → Secrets and variables → Actions**, never into a chat.
 
 1. <https://console.cloud.google.com> → new project → **APIs & Services → Library**: enable **YouTube Data API v3**
    and **YouTube Analytics API**.
-2. **OAuth consent screen**: External, add your email as a test user, then press **Publish app** so it is
+2. **OAuth consent screen**: External. Publishing needs an app name, a support email, a homepage and a privacy
+   policy link, and both links must be on a domain listed under **Authorised domains**. Free route: turn on GitHub
+   Pages for this repo (Settings → Pages → Deploy from a branch → `main`, folder `/docs`), then use
+   `https://qiiiiyr.github.io/Content/` (home page) and `https://qiiiiyr.github.io/Content/privacy.html` (privacy
+   policy), and add `qiiiiyr.github.io` as an authorised domain. Then press **Publish app** so it is
    "In production". In "Testing" your login expires every 7 days and posting stops.
 3. **Credentials → Create credentials → OAuth client ID → Web application**, authorised redirect URI
    `https://developers.google.com/oauthplayground`. Save the client ID and secret as secrets `YT_CLIENT_ID` and
