@@ -43,14 +43,6 @@
   },
   {
     "id": "2026-W48/1-turbo",
-    "lang": "id",
-    "platform": "instagram",
-    "mediaId": "",
-    "postedAt": "2026-11-18T16:02:27.830Z",
-    "error": "POST https://rupload.facebook.com/ig-api-upload/v27.0/18099423242226892 -> 400: {\"debug_info\":{\"retriable\":false,\"type\":\"ProcessingFailedError\",\"message\":\"Request processing failed\"}}"
-  },
-  {
-    "id": "2026-W48/1-turbo",
     "lang": "en",
     "platform": "instagram",
     "mediaId": "18224940040337313",

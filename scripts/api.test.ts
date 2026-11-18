@@ -46,6 +46,7 @@ test('YouTube client secrets: common paste mistakes are repaired', () => {
 	assert.ok(isAuthError('POST https://oauth2.googleapis.com/token -> 401: {"error": "invalid_client"}'));
 	assert.ok(!isAuthError('YouTube upload init -> 400: quotaExceeded'));
 	assert.ok(isAuthError('GET https://graph.facebook.com/v23.0/1 -> 400: {"error":{"type":"OAuthException","code":190}}'));
+	assert.ok(isAuthError('POST https://rupload.facebook.com/ig-api-upload/v27.0/1 -> 400: {"debug_info":{"type":"ProcessingFailedError"}}'));
 	assert.ok(!isAuthError('POST https://graph.facebook.com/v23.0/1/media -> 400: {"error":{"message":"aspect ratio","type":"OAuthException","code":36003}}'));
 	assert.ok(isAuthError('POST https://graph.facebook.com/v23.0/1/media -> 403: {"error":{"type":"OAuthException","code":10}}')); // permission
 	assert.ok(isAuthError('POST https://graph.facebook.com/v23.0/1/media -> 400: {"error":{"type":"OAuthException","code":613}}')); // rate limit
