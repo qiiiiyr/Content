@@ -286,7 +286,7 @@ const Valve = ({x, open, color, spring}: {x: number; open: number; color: string
 const pistonProfile = [new THREE.Vector2(0, -0.3), new THREE.Vector2(0.92, -0.3), new THREE.Vector2(0.94, -0.25), new THREE.Vector2(0.94, 0.3), new THREE.Vector2(0.86, 0.3), new THREE.Vector2(0, 0.22)];
 
 /** One cylinder, cut away: glass wall, piston, rod, crank, two valves with springs, spark plug and the gas inside. */
-export const Engine = ({s, x = 0, scale = 1, valves = true}: {s: EngineState; x?: number; scale?: number; valves?: boolean}) => {
+export const Engine = ({s, x = 0, scale = 1, valves = true, injector = false}: {s: EngineState; x?: number; scale?: number; valves?: boolean; injector?: boolean}) => {
 	const springGeo = useMemo(() => new THREE.TubeGeometry(new Helix(0.17, 0.7, 7), 120, 0.03, 8, false), []);
 	const base = useMemo(() => new RoundedBoxGeometry(4.6, 0.4, 3.2, 3, 0.1), []);
 	const head = useMemo(() => new RoundedBoxGeometry(2.3, 0.5, 2.3, 3, 0.12), []);
@@ -372,10 +372,10 @@ export const Engine = ({s, x = 0, scale = 1, valves = true}: {s: EngineState; x?
 			))}
 			{valves && <Valve x={-0.45} open={s.intake ?? 0} color="#4fd1c5" spring={springGeo} />}
 			{valves && <Valve x={0.45} open={s.exhaust ?? 0} color="#9ca3af" spring={springGeo} />}
-			{/* spark plug */}
+			{/* spark plug, or a dark steel fuel injector (diesel) so the picture never contradicts "no spark plug" */}
 			<mesh position={[0, HEAD + 1.05, 0.5]} castShadow>
-				<cylinderGeometry args={[0.1, 0.12, 0.9, 20]} />
-				<meshPhysicalMaterial {...mat.ceramic} />
+				<cylinderGeometry args={injector ? [0.13, 0.09, 0.9, 20] : [0.1, 0.12, 0.9, 20]} />
+				{injector ? <meshStandardMaterial {...mat.dark} /> : <meshPhysicalMaterial {...mat.ceramic} />}
 			</mesh>
 			<mesh position={[0, HEAD + 0.62, 0.5]} castShadow>
 				<cylinderGeometry args={[0.17, 0.17, 0.14, 6]} />
