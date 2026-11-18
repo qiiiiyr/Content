@@ -6,7 +6,9 @@ and writes next week's batch as one pull request. A human approves by merging.
 
 ## Weekly procedure (the scheduled task runs this)
 
-Let `W` = this ISO week (e.g. `2026-W47`) and `N` = next ISO week. The batch you write is for `N`.
+Let `W` = this ISO week (e.g. `2026-W47`) and `N` = the week after the newest folder in `episodes/` (normally next ISO
+week; later if an earlier run already wrote that week, so a manual run never collides with the Saturday one). The batch you
+write is for `N`. Posting goes oldest first, so batches simply queue up behind each other.
 
 1. **Read the numbers.** Open the newest `data/stats/*.json` (written Friday night by `collect.yml`). It holds
    `decision` (keep/switch, computed in code: do not redo or override the arithmetic), `followups`, `competitorHits`,
