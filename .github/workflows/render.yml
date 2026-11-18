@@ -64,6 +64,10 @@ jobs:
         run: |
           gh release view videos -R "$REPO" >/dev/null 2>&1 || gh release create videos -R "$REPO" --title "Rendered episodes" --notes "Renders from the weekly preview workflow. The daily post downloads its video from here." || true
           gh release upload videos out/*.mp4 -R "$REPO" --clobber
+          # A small copy (480 px, a few MB) for watching inside the dashboard review.
+          mkdir -p out/small && for f in out/*.mp4; do ffmpeg -v error -y -i "$f" -vf scale=480:-2 -c:v libx264 -crf 30 -preset veryfast -c:a aac -b:a 64k -movflags +faststart "out/small/$(basename "$f")"; done
+          gh release view previews -R "$REPO" >/dev/null 2>&1 || gh release create previews -R "$REPO" --title "Review previews" --notes "Small copies of the renders, shown in the dashboard review." || true
+          gh release upload previews out/small/*.mp4 -R "$REPO" --clobber
       - uses: actions/upload-artifact@v4
         with:
           name: preview-${{ strategy.job-index }}

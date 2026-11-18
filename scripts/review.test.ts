@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {decide, findHits, followups, isoWeek, median, parseChecklist, type EpisodeScore, type Strategy} from './review.ts';
+import {decide, findHits, followups, isoWeek, median, parseChecklist, untick, type EpisodeScore, type Strategy} from './review.ts';
 import {missingSecrets, nextToPost} from './publish.ts';
 
 const now = new Date('2026-12-20T00:00:00Z');
@@ -107,6 +107,13 @@ test('posting queue: oldest unposted episode per language, only missing platform
 	// each platform has its own place: an Instagram-only run skips past episodes Instagram already has
 	assert.deepEqual(nextToPost(ids, posted, 'id', (_, p) => p === 'youtube'), {id: '2026-W47/2-gps', platforms: ['youtube']});
 	assert.deepEqual(nextToPost(ids, posted, 'en', (id, p) => !(p === 'youtube' && id.endsWith('gps'))), {id: '2026-W47/2-gps', platforms: ['instagram']});
+});
+
+test('dashboard decisions untick exactly the rejected lines, and parse back the same', () => {
+	const body = 'Report: reports/2026-W48.md\n## Episodes\n- [x] episodes/2026-W49/1-abs — ABS (a)\n- [x] episodes/2026-W49/2-abs-2 — B (a)\n## Theme\n- [x] Switch theme to "b" from 2026-12-07';
+	const out = untick(body, ['2026-W49/1-abs'], true);
+	assert.deepEqual(parseChecklist(out), {rejected: ['2026-W49/1-abs'], switchRejected: true});
+	assert.equal(untick(body, [], false), body);
 });
 
 test('missing secrets are named per language and platform', () => {

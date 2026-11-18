@@ -98,6 +98,19 @@ export const followups = (episodes: EpisodeScore[], multiple: number): EpisodeSc
 };
 
 /** Reads the weekly pull request's checklist: unticked episodes and an unticked theme switch are rejected. */
+/** The pull request body with the rejected episodes (and the theme switch, if rejected) unticked: what the dashboard review sends. */
+export const untick = (body: string, rejected: string[], switchRejected: boolean): string =>
+	body
+		.split('\n')
+		.map((l) => {
+			const m = l.match(/^(\s*[-*]\s*)\[(?:x|X)\](\s*)(.+)$/);
+			if (!m) return l;
+			const id = m[3].match(/episodes\/(\d{4}-W\d{2}\/[\w-]+)/)?.[1];
+			const off = (id && rejected.includes(id)) || (switchRejected && /^switch theme/i.test(m[3].trim()));
+			return off ? `${m[1]}[ ]${m[2]}${m[3]}` : l;
+		})
+		.join('\n');
+
 export const parseChecklist = (body: string): {rejected: string[]; switchRejected: boolean} => {
 	const lines = body.split('\n').map((l) => l.match(/^\s*[-*]\s*\[( |x|X)\]\s*(.+)$/)).filter((m) => m !== null);
 	const unticked = lines.filter((m) => m[1] === ' ').map((m) => m[2].trim());

@@ -156,10 +156,12 @@ Meta calls it the "Instagram Graph API". It is not a separate site: you make a M
 | `me/accounts` returns nothing | In the pop-up of part 4B you did not tick the Pages. Generate the token again and tick both. |
 | Account not found when linking | The Instagram account is not Creator/Business yet (part 3B), or you are logged in to the wrong Facebook profile. |
 
-## Your weekly routine (about 10 minutes, Saturday or Sunday)
+## Your weekly routine (about 20 minutes, Saturday evening or Sunday morning)
 
-Open the "Weekly review" pull request on your phone: read the report, watch the preview links, untick anything wrong,
-merge. Unticked episodes and an unticked theme switch are removed automatically after the merge.
+Open the dashboard's **Weekly review** section: read the report, watch the previews (English and Indonesian), untick
+anything wrong, press **Approve and merge**. A Claude task (every 2 hours on weekends) unticks those items in the pull
+request and merges it; unticked episodes and an unticked theme switch are then removed automatically. You can still
+review on GitHub instead: open the "Weekly review" pull request, untick, merge.
 
 ## Artwork reference
 
