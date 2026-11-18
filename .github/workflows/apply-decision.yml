@@ -1,0 +1,41 @@
+# The dashboard review: when the review sync task pushes review-decision.json ({"rejected": [...], "switchRejected": bool})
+# to a weekly review branch, untick those items in the pull request, remove them from the branch, and merge.
+# (A merge made here does not start "apply review", so the removal happens on the branch first.)
+name: apply dashboard review
+on:
+  push:
+    branches: ['review/**']
+    paths: ['review-decision.json']
+permissions:
+  contents: write
+  pull-requests: write
+concurrency: apply-decision
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - env:
+          GH_TOKEN: ${{ github.token }}
+          BRANCH: ${{ github.ref_name }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          pr=$(gh pr list -R "$REPO" --head "$BRANCH" --base main --state open --json number --jq '.[0].number // empty')
+          [ -n "$pr" ] || { echo "no open pull request for $BRANCH"; exit 1; }
+          gh pr view "$pr" -R "$REPO" --json body --jq .body > /tmp/body.md
+          node scripts/untick.ts "$(cat review-decision.json)" < /tmp/body.md > /tmp/new.md
+          PR_BODY="$(cat /tmp/new.md)" BASE_SHA="$(git merge-base origin/main HEAD)" node scripts/approve.ts
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm -q review-decision.json
+          git add -A episodes strategy.json
+          git commit -m "Apply the dashboard review"
+          git push origin "HEAD:$BRANCH"
+          gh pr edit "$pr" -R "$REPO" --body-file /tmp/new.md
+          gh pr merge "$pr" -R "$REPO" --merge
