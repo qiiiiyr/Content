@@ -1,0 +1,52 @@
+{
+  "theme": "engines-inside",
+  "test": false,
+  "title": {
+    "en": "This engine fires every turn. Yours fires every other #shorts",
+    "id": "Mesin ini meledak tiap putaran. Punyamu cuma tiap dua #shorts"
+  },
+  "description": {
+    "en": "How a two-stroke works: no valves, ports in the cylinder wall, a power stroke every turn of the crank. Why it's light and punchy, and why it's dirtier.",
+    "id": "Cara kerja mesin dua tak: tanpa klep, ada lubang porting di dinding silinder, dan langkah usaha di tiap putaran. Kenapa ringan dan galak, tapi juga lebih kotor."
+  },
+  "hashtags": ["twostroke", "engine", "motorcycle", "howitworks", "mechanics"],
+  "sources": [
+    "https://pressbooks.siit.ca/sigamaintenanceworkerprep/chapter/two-and-four-stroke-engines",
+    "https://www.constructionequipment.com/two-stroke-basics",
+    "https://en.wikipedia.org/wiki/Two-stroke_engine"
+  ],
+  "scenes": [
+    {
+      "en": "The engine on the right fires *every single turn*. The one on the left, every other.",
+      "id": "Mesin di kanan meledak *di setiap putaran*. Yang di kiri, cuma tiap dua putaran."
+    },
+    {
+      "en": "It's a *two-stroke*. No valves: the piston itself uncovers holes in the cylinder wall, called *ports*.",
+      "id": "Ini mesin *dua tak*. Nggak ada klep: piston sendiri yang membuka lubang di dinding silinder, namanya *porting*."
+    },
+    {
+      "en": "Going up, the piston *compresses* the mix above it, while fresh mix gets sucked into the crankcase below.",
+      "id": "Saat naik, piston *memadatkan* campuran di atasnya, sementara campuran baru tersedot ke bak mesin di bawah."
+    },
+    {
+      "en": "Spark. The blast drives it down: the *power stroke*.",
+      "id": "Busi memercik. Ledakannya mendorong piston turun: *langkah usaha*."
+    },
+    {
+      "en": "Near the bottom, the ports open. Burnt gas *rushes out*, and fresh mix flows up from below.",
+      "id": "Mendekati bawah, porting terbuka. Gas bekas *menyembur keluar*, dan campuran baru naik dari bawah."
+    },
+    {
+      "en": "Twice the power strokes means *lots of power* for its weight. That's why chainsaws and dirt bikes loved it.",
+      "id": "Langkah usaha dua kali lebih sering, jadi *tenaganya besar* untuk bobotnya. Makanya gergaji mesin dan motor trail dulu suka banget."
+    },
+    {
+      "en": "The cost: oil is mixed into the fuel, and some fresh mix escapes unburnt. So it's *dirtier*.",
+      "id": "Harganya: oli dicampur ke bensin, dan sebagian campuran baru ikut kabur tanpa terbakar. Jadi lebih *kotor*."
+    },
+    {
+      "en": "Fewer parts, more bangs. Follow for more.",
+      "id": "Part lebih sedikit, ledakan lebih banyak. Follow untuk video lainnya."
+    }
+  ]
+}

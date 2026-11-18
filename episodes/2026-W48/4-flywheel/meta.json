@@ -1,0 +1,48 @@
+{
+  "theme": "engines-inside",
+  "test": false,
+  "title": {
+    "en": "Your engine only pushes 1 stroke in 4. So why is it smooth? #shorts",
+    "id": "Mesinmu cuma mendorong 1 dari 4 langkah. Kok bisa halus? #shorts"
+  },
+  "description": {
+    "en": "A four-stroke cylinder only makes power on one stroke. The flywheel stores that push and spends it through the other three, and the starter motor turns it to start the engine.",
+    "id": "Silinder empat tak cuma menghasilkan tenaga di satu langkah. Roda gila menyimpan dorongan itu dan membagikannya ke tiga langkah lainnya, dan motor starter memutarnya saat mesin dinyalakan."
+  },
+  "hashtags": ["flywheel", "engine", "cars", "motorcycle", "howitworks"],
+  "sources": [
+    "https://www.britannica.com/technology/flywheel",
+    "https://en.wikipedia.org/wiki/Flywheel",
+    "https://en.wikipedia.org/wiki/Four-stroke_engine"
+  ],
+  "scenes": [
+    {
+      "en": "Your engine only pushes on *one stroke in four*. So why doesn't it jerk to a stop in between?",
+      "id": "Mesinmu cuma mendorong di *satu dari empat langkah*. Terus kenapa nggak tersendat di sela-selanya?"
+    },
+    {
+      "en": "Watch one cylinder. The *power stroke* shoves the crank. Then come three strokes where the crank does all the work.",
+      "id": "Lihat satu silinder ini. *Langkah usaha* mendorong poros engkol. Lalu ada tiga langkah di mana poros engkol yang harus kerja."
+    },
+    {
+      "en": "The fix is a heavy disc on the crankshaft: the *flywheel*.",
+      "id": "Solusinya piringan berat di poros engkol: *roda gila*."
+    },
+    {
+      "en": "On the power stroke, it soaks up energy and *speeds up* a little.",
+      "id": "Saat langkah usaha, roda gila menyerap energi dan *sedikit lebih cepat*."
+    },
+    {
+      "en": "Through the other three strokes it gives that energy back, *slowing* a little, and keeps the piston moving.",
+      "id": "Di tiga langkah lainnya, energi itu dikembalikan. Putarannya *sedikit melambat*, tapi piston tetap jalan."
+    },
+    {
+      "en": "In most cars its toothed rim has one more job: the *starter motor* meshes with it to crank the engine to life.",
+      "id": "Di kebanyakan mobil, gerigi di pinggirnya punya tugas lain: *motor starter* mengait ke situ untuk menghidupkan mesin."
+    },
+    {
+      "en": "More cylinders smooth out the pulses, but almost every engine still leans on a flywheel. Follow for more.",
+      "id": "Makin banyak silinder, makin halus. Tapi hampir semua mesin tetap butuh roda gila. Follow untuk video lainnya."
+    }
+  ]
+}

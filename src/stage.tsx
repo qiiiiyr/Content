@@ -239,7 +239,7 @@ export type EngineState = {
 	flow?: {kind: 'in' | 'out'; t: number}; // particles through a valve, t = seconds
 };
 
-const Rod = ({from, to, r = 0.12, material = mat.steel}: {from: V3; to: V3; r?: number; material?: object}) => {
+export const Rod = ({from, to, r = 0.12, material = mat.steel}: {from: V3; to: V3; r?: number; material?: object}) => {
 	const a = new THREE.Vector3(...from);
 	const b = new THREE.Vector3(...to);
 	const mid = a.clone().add(b).multiplyScalar(0.5);
@@ -286,7 +286,7 @@ const Valve = ({x, open, color, spring}: {x: number; open: number; color: string
 const pistonProfile = [new THREE.Vector2(0, -0.3), new THREE.Vector2(0.92, -0.3), new THREE.Vector2(0.94, -0.25), new THREE.Vector2(0.94, 0.3), new THREE.Vector2(0.86, 0.3), new THREE.Vector2(0, 0.22)];
 
 /** One cylinder, cut away: glass wall, piston, rod, crank, two valves with springs, spark plug and the gas inside. */
-export const Engine = ({s, x = 0, scale = 1}: {s: EngineState; x?: number; scale?: number}) => {
+export const Engine = ({s, x = 0, scale = 1, valves = true, injector = false}: {s: EngineState; x?: number; scale?: number; valves?: boolean; injector?: boolean}) => {
 	const springGeo = useMemo(() => new THREE.TubeGeometry(new Helix(0.17, 0.7, 7), 120, 0.03, 8, false), []);
 	const base = useMemo(() => new RoundedBoxGeometry(4.6, 0.4, 3.2, 3, 0.1), []);
 	const head = useMemo(() => new RoundedBoxGeometry(2.3, 0.5, 2.3, 3, 0.12), []);
@@ -370,12 +370,12 @@ export const Engine = ({s, x = 0, scale = 1}: {s: EngineState; x?: number; scale
 					<meshStandardMaterial {...mat.steel} />
 				</mesh>
 			))}
-			<Valve x={-0.45} open={s.intake ?? 0} color="#4fd1c5" spring={springGeo} />
-			<Valve x={0.45} open={s.exhaust ?? 0} color="#9ca3af" spring={springGeo} />
-			{/* spark plug */}
+			{valves && <Valve x={-0.45} open={s.intake ?? 0} color="#4fd1c5" spring={springGeo} />}
+			{valves && <Valve x={0.45} open={s.exhaust ?? 0} color="#9ca3af" spring={springGeo} />}
+			{/* spark plug, or a dark steel fuel injector (diesel) so the picture never contradicts "no spark plug" */}
 			<mesh position={[0, HEAD + 1.05, 0.5]} castShadow>
-				<cylinderGeometry args={[0.1, 0.12, 0.9, 20]} />
-				<meshPhysicalMaterial {...mat.ceramic} />
+				<cylinderGeometry args={injector ? [0.13, 0.09, 0.9, 20] : [0.1, 0.12, 0.9, 20]} />
+				{injector ? <meshStandardMaterial {...mat.dark} /> : <meshPhysicalMaterial {...mat.ceramic} />}
 			</mesh>
 			<mesh position={[0, HEAD + 0.62, 0.5]} castShadow>
 				<cylinderGeometry args={[0.17, 0.17, 0.14, 6]} />
@@ -441,3 +441,300 @@ export const cycleState = (deg: number, sec: number): EngineState => {
 	else Object.assign(s, {exhaust: lift(540), gas: mix(fire, smoke, (d - 540) / 60), gasGlow: 0, flow: {kind: 'out' as const, t: sec}});
 	return s;
 };
+
+// ---- drivetrain and accessory parts ---------------------------------------------------------------------------
+type Mat = Record<string, unknown>;
+const TAU = Math.PI * 2;
+
+/** A spur gear with its axle along local z, turned by `angle` radians. Rotate the group to point the axle elsewhere. */
+export const Gear = ({r = 1, teeth = 16, width = 0.4, angle = 0, material = mat.brass, position = [0, 0, 0], rotation = [0, 0, 0]}: {r?: number; teeth?: number; width?: number; angle?: number; material?: Mat; position?: V3; rotation?: V3}) => (
+	<group position={position} rotation={rotation}>
+		<group rotation={[0, 0, angle]}>
+			<mesh rotation={[Math.PI / 2, 0, 0]} castShadow receiveShadow>
+				<cylinderGeometry args={[r, r, width, 48]} />
+				<meshStandardMaterial {...material} />
+			</mesh>
+			{Array.from({length: teeth}, (_, i) => {
+				const a = (i / teeth) * TAU;
+				return (
+					<mesh key={i} position={[Math.cos(a) * (r + 0.1), Math.sin(a) * (r + 0.1), 0]} rotation={[0, 0, a]} castShadow>
+						<boxGeometry args={[0.24, (Math.PI * r) / teeth, width]} />
+						<meshStandardMaterial {...material} />
+					</mesh>
+				);
+			})}
+			<mesh rotation={[Math.PI / 2, 0, 0]}>
+				<cylinderGeometry args={[r * 0.28, r * 0.28, width + 0.12, 24]} />
+				<meshStandardMaterial {...mat.dark} />
+			</mesh>
+			<mesh position={[r * 0.6, 0, width / 2 + 0.01]}>
+				<circleGeometry args={[r * 0.1, 16]} />
+				<meshPhysicalMaterial {...mat.red} />
+			</mesh>
+		</group>
+	</group>
+);
+
+/** A road wheel with its axle along local z: dark tyre with tread blocks, steel rim and spokes. */
+export const Wheel = ({r = 1.3, angle = 0, position = [0, 0, 0], rotation = [0, 0, 0]}: {r?: number; angle?: number; position?: V3; rotation?: V3}) => (
+	<group position={position} rotation={rotation}>
+		<group rotation={[0, 0, angle]}>
+			<mesh castShadow receiveShadow>
+				<torusGeometry args={[r - 0.28, 0.32, 18, 48]} />
+				<meshStandardMaterial color="#26282c" roughness={0.85} />
+			</mesh>
+			{Array.from({length: 24}, (_, i) => (
+				<mesh key={i} position={[Math.cos((i / 24) * TAU) * (r + 0.02), Math.sin((i / 24) * TAU) * (r + 0.02), 0]} rotation={[0, 0, (i / 24) * TAU]}>
+					<boxGeometry args={[0.1, 0.14, 0.5]} />
+					<meshStandardMaterial color="#1c1d20" roughness={0.9} />
+				</mesh>
+			))}
+			{Array.from({length: 5}, (_, i) => (
+				<mesh key={i} rotation={[0, 0, (i / 5) * TAU]} position={[0, 0, 0.05]} castShadow>
+					<boxGeometry args={[0.16, (r - 0.5) * 2, 0.12]} />
+					<meshStandardMaterial {...mat.steel} />
+				</mesh>
+			))}
+			<mesh rotation={[Math.PI / 2, 0, 0]}>
+				<cylinderGeometry args={[0.26, 0.26, 0.4, 20]} />
+				<meshPhysicalMaterial {...mat.red} />
+			</mesh>
+		</group>
+	</group>
+);
+
+/** Beads flowing along a polyline: air, fuel or exhaust. t = seconds, so the flow keeps moving whatever the scene length. */
+export const Stream = ({path, t, n = 16, color = '#9fe8f0', size = 0.1, speed = 0.8, opacity = 0.95, glow = 1}: {path: V3[]; t: number; n?: number; color?: string; size?: number; speed?: number; opacity?: number; glow?: number}) => {
+	const seg = path.length - 1;
+	return (
+		<>
+			{Array.from({length: n}, (_, i) => {
+				const u = ((t * speed + i / n) % 1) * seg;
+				const k = Math.min(seg - 1, Math.floor(u));
+				const q = u - k;
+				const [a, b] = [path[k], path[k + 1]];
+				return (
+					<mesh key={i} position={[a[0] + (b[0] - a[0]) * q, a[1] + (b[1] - a[1]) * q, a[2] + (b[2] - a[2]) * q]}>
+						<sphereGeometry args={[size, 10, 10]} />
+						<meshStandardMaterial color={color} emissive={color} emissiveIntensity={glow} transparent opacity={opacity} depthWrite={false} />
+					</mesh>
+				);
+			})}
+		</>
+	);
+};
+
+const Blades = ({x, spin, n, material, glow = 0}: {x: number; spin: number; n: number; material: Mat; glow?: number}) => (
+	<group position={[x, 0, 0]} rotation={[spin, 0, 0]}>
+		<mesh rotation={[0, 0, Math.PI / 2]} castShadow>
+			<cylinderGeometry args={[0.18, 0.42, 0.8, 24]} />
+			<meshStandardMaterial {...material} />
+		</mesh>
+		{Array.from({length: n}, (_, i) => (
+			<group key={i} rotation={[(i / n) * TAU, 0, 0]}>
+				<mesh position={[0, 0.62, 0]} rotation={[0, 0.45, 0]} castShadow>
+					<boxGeometry args={[0.7, 0.7, 0.05]} />
+					<meshStandardMaterial {...material} emissive="#ff6a1a" emissiveIntensity={glow} />
+				</mesh>
+			</group>
+		))}
+	</group>
+);
+
+/**
+ * Turbocharger cut away, shaft along x: hot turbine on the left (exhaust side), compressor on the right (air side),
+ * bearing housing between, glass scrolls around both wheels. `spin` = shaft angle in radians, `heat` 0..1 reddens the turbine.
+ */
+export const Turbo = ({spin, heat = 0.5, wastegate = 0, position = [0, 3, 0]}: {spin: number; heat?: number; wastegate?: number; position?: V3}) => (
+	<group position={position}>
+		<mesh rotation={[0, 0, Math.PI / 2]} castShadow>
+			<cylinderGeometry args={[0.12, 0.12, 4.2, 20]} />
+			<meshStandardMaterial {...mat.steel} />
+		</mesh>
+		<mesh rotation={[0, 0, Math.PI / 2]} castShadow receiveShadow>
+			<cylinderGeometry args={[0.55, 0.55, 1.1, 32]} />
+			<meshStandardMaterial {...mat.dark} />
+		</mesh>
+		<Blades x={-1.5} spin={spin} n={11} material={mat.dark} glow={heat * 1.4} />
+		<Blades x={1.5} spin={spin} n={12} material={mat.steel} />
+		{[-1.5, 1.5].map((x) => (
+			<mesh key={x} position={[x, 0, 0]} rotation={[0, 0, Math.PI / 2]} renderOrder={2}>
+				<cylinderGeometry args={[1.35, 1.35, 1.0, 48, 1, true]} />
+				<meshPhysicalMaterial color={x < 0 ? '#f0c9a8' : '#d6ecf0'} transparent opacity={0.18} side={THREE.DoubleSide} roughness={0.05} clearcoat={1} depthWrite={false} />
+			</mesh>
+		))}
+		{[-2.0, -1.0, 1.0, 2.0].map((x) => (
+			<mesh key={x} position={[x, 0, 0]} rotation={[0, 0, Math.PI / 2]} castShadow>
+				<torusGeometry args={[1.38, 0.06, 10, 48]} />
+				<meshStandardMaterial {...mat.brass} />
+			</mesh>
+		))}
+		{heat > 0.05 && <pointLight position={[-1.5, 0, 1]} color="#ff8a3c" intensity={heat * 25} distance={5} />}
+		{/* wastegate flap on the exhaust side: swings open to let gas bypass the turbine */}
+		<group position={[-2.3, 1.45, 0]} rotation={[0, 0, wastegate * 1.1]}>
+			<mesh position={[0.3, 0, 0]} castShadow>
+				<boxGeometry args={[0.6, 0.08, 0.6]} />
+				<meshStandardMaterial {...mat.brass} />
+			</mesh>
+		</group>
+		{/* stand */}
+		<mesh position={[0, -1.5, 0]} castShadow>
+			<boxGeometry args={[0.4, 1.9, 0.4]} />
+			<meshStandardMaterial {...mat.dark} />
+		</mesh>
+		<mesh position={[0, -2.5, 0]} receiveShadow castShadow>
+			<boxGeometry args={[3.4, 0.2, 2.2]} />
+			<meshStandardMaterial {...mat.dark} />
+		</mesh>
+	</group>
+);
+
+const Disc = ({r, w, z, material}: {r: number; w: number; z: number; material: Mat}) => (
+	<mesh position={[0, 0, z]} rotation={[Math.PI / 2, 0, 0]} castShadow receiveShadow>
+		<cylinderGeometry args={[r, r, w, 56]} />
+		<meshStandardMaterial {...material} />
+	</mesh>
+);
+
+/**
+ * Car clutch, exploded slightly, axle along x (engine side at +x, gearbox at -x).
+ * `release` 0..1 = pedal travel (0 = clamped), `engine` / `disc` = angles in radians of the engine side and the gearbox side.
+ */
+export const Clutch = ({release, engine, disc, heat = 0, position = [0, 3, 0]}: {release: number; engine: number; disc: number; heat?: number; position?: V3}) => {
+	const gap = release * 0.35;
+	return (
+		<group position={position} rotation={[0, Math.PI / 2, 0]}>
+			{/* engine side: crank stub, flywheel with starter teeth, pressure plate and diaphragm fingers */}
+			<group rotation={[0, 0, engine]}>
+				<Disc r={0.25} w={1.6} z={2.2} material={mat.steel} />
+				<Gear r={2.1} teeth={48} width={0.35} position={[0, 0, 1.2]} material={mat.steel} />
+				<Disc r={1.75} w={0.2} z={0.6 - gap} material={mat.steel} />
+				<Disc r={1.9} w={0.08} z={0.4 - gap} material={mat.dark} />
+				{Array.from({length: 12}, (_, i) => (
+					<group key={i} rotation={[0, 0, (i / 12) * TAU]}>
+						<mesh position={[0, 1.0, 0.3 - gap * 0.5]} rotation={[0.35 - release * 0.5, 0, 0]} castShadow>
+							<boxGeometry args={[0.3, 1.4, 0.05]} />
+							<meshStandardMaterial {...mat.brass} />
+						</mesh>
+					</group>
+				))}
+			</group>
+			{/* gearbox side: friction disc with lining, input shaft */}
+			<group rotation={[0, 0, disc]}>
+				<Disc r={1.6} w={0.16} z={0.9 - gap * 0.5} material={{color: '#7a4a2a', roughness: 0.9, metalness: 0.1, emissive: '#ff5a1a', emissiveIntensity: heat}} />
+				<Disc r={0.6} w={0.4} z={0.9 - gap * 0.5} material={mat.dark} />
+				{Array.from({length: 6}, (_, i) => (
+					<mesh key={i} position={[Math.cos((i / 6) * TAU) * 1.1, Math.sin((i / 6) * TAU) * 1.1, 0.8 - gap * 0.5]} castShadow>
+						<sphereGeometry args={[0.1, 10, 10]} />
+						<meshPhysicalMaterial {...mat.red} />
+					</mesh>
+				))}
+				<Disc r={0.2} w={3.6} z={-1} material={mat.steel} />
+				<Gear r={0.7} teeth={14} width={0.4} position={[0, 0, -2.5]} />
+			</group>
+			{/* release bearing slides toward the fingers as the pedal goes down */}
+			<mesh position={[0, 0, -0.4 + release * 0.45]} rotation={[Math.PI / 2, 0, 0]} castShadow>
+				<torusGeometry args={[0.42, 0.14, 12, 32]} />
+				<meshStandardMaterial {...mat.brass} />
+			</mesh>
+			{heat > 0.05 && <pointLight position={[0, 0, 0.9]} color="#ff7a2a" intensity={heat * 30} distance={6} />}
+		</group>
+	);
+};
+
+/**
+ * Open differential with wheels, axles along x, driveshaft coming in along +z.
+ * `left` / `right` = wheel angles in radians. The cage turns at their average; the spider gears turn with their difference.
+ */
+export const Differential = ({left, right, position = [0, 2, 0], track = 7}: {left: number; right: number; position?: V3; track?: number}) => {
+	const cage = (left + right) / 2;
+	const spider = (right - left) * 1.4;
+	const ring = 2.2;
+	return (
+		<group position={position}>
+			{/* driveshaft and pinion: pinion turns ring/pinion-ratio times faster than the cage */}
+			<group position={[-0.3, 0, 2.6]}>
+				<Gear r={0.55} teeth={10} width={0.35} angle={-cage * (ring / 0.55)} position={[0, 0, -1.25]} material={mat.steel} />
+				<Disc r={0.14} w={3} z={0.2} material={mat.steel} />
+			</group>
+			{/* cage: ring gear plus the frame that carries the spider gears */}
+			<group rotation={[cage, 0, 0]}>
+				<Gear r={ring} teeth={36} width={0.3} rotation={[0, Math.PI / 2, 0]} position={[-0.9, 0, 0]} />
+				{[1, -1].map((s) => (
+					<mesh key={s} position={[0, s * 1.05, 0]} castShadow>
+						<boxGeometry args={[1.8, 0.14, 0.5]} />
+						<meshStandardMaterial {...mat.dark} />
+					</mesh>
+				))}
+				{[1, -1].map((s) => (
+					<Gear key={s} r={0.38} teeth={9} width={0.22} angle={s * spider} rotation={[Math.PI / 2, 0, 0]} position={[0, s * 0.66, 0]} material={mat.steel} />
+				))}
+			</group>
+			{/* side gears, axles, wheels */}
+			{([[-1, left], [1, right]] as const).map(([s, a]) => (
+				<group key={s}>
+					<Gear r={0.55} teeth={12} width={0.22} angle={a} rotation={[0, Math.PI / 2, 0]} position={[s * 0.62, 0, 0]} material={mat.brass} />
+					<group rotation={[a, 0, 0]}>
+						<mesh position={[s * (track / 4 + 0.3), 0, 0]} rotation={[0, 0, Math.PI / 2]} castShadow>
+							<cylinderGeometry args={[0.13, 0.13, track / 2 - 0.4, 16]} />
+							<meshStandardMaterial {...mat.steel} />
+						</mesh>
+					</group>
+					<Wheel angle={a} rotation={[0, Math.PI / 2, 0]} position={[s * track / 2, 0, 0]} />
+				</group>
+			))}
+		</group>
+	);
+};
+
+/** A spark plug about 6 tall, standing on the bench. `spark` 0..1 fires the arc across the gap. */
+export const SparkPlug = ({spark = 0, gap = 0.28, position = [0, 0, 0]}: {spark?: number; gap?: number; position?: V3}) => (
+	<group position={position}>
+		<mesh position={[0, 0.9, 0]} castShadow>
+			<cylinderGeometry args={[0.45, 0.45, 1.2, 32]} />
+			<meshStandardMaterial {...mat.steel} />
+		</mesh>
+		{Array.from({length: 7}, (_, i) => (
+			<mesh key={i} position={[0, 0.4 + i * 0.15, 0]}>
+				<torusGeometry args={[0.46, 0.035, 8, 32]} />
+				<meshStandardMaterial {...mat.steel} />
+			</mesh>
+		))}
+		<mesh position={[0, 1.85, 0]} castShadow>
+			<cylinderGeometry args={[0.72, 0.72, 0.7, 6]} />
+			<meshStandardMaterial {...mat.steel} />
+		</mesh>
+		<mesh position={[0, 3.2, 0]} castShadow>
+			<cylinderGeometry args={[0.32, 0.42, 2.0, 32]} />
+			<meshPhysicalMaterial {...mat.ceramic} />
+		</mesh>
+		{[2.6, 2.9, 3.2, 3.5, 3.8].map((y) => (
+			<mesh key={y} position={[0, y, 0]}>
+				<torusGeometry args={[0.37, 0.05, 10, 32]} />
+				<meshPhysicalMaterial {...mat.ceramic} />
+			</mesh>
+		))}
+		<mesh position={[0, 4.45, 0]} castShadow>
+			<cylinderGeometry args={[0.16, 0.16, 0.6, 20]} />
+			<meshStandardMaterial {...mat.brass} />
+		</mesh>
+		{/* centre electrode, and the bent ground electrode one gap below it */}
+		<mesh position={[0, 0.2, 0]}>
+			<cylinderGeometry args={[0.07, 0.07, 0.4, 16]} />
+			<meshStandardMaterial {...mat.brass} />
+		</mesh>
+		<mesh position={[0.36, -0.05 - gap / 2, 0]} castShadow>
+			<boxGeometry args={[0.12, 0.6 + gap, 0.2]} />
+			<meshStandardMaterial {...mat.dark} />
+		</mesh>
+		<mesh position={[0.15, -gap, 0]} castShadow>
+			<boxGeometry args={[0.55, 0.12, 0.2]} />
+			<meshStandardMaterial {...mat.dark} />
+		</mesh>
+		<mesh position={[0, -gap / 2 + 0.03, 0]} scale={[1, 1, 1]}>
+			<cylinderGeometry args={[0.03 + spark * 0.05, 0.03 + spark * 0.05, gap - 0.06, 8]} />
+			<meshStandardMaterial color="#e8f4ff" emissive="#9fd0ff" emissiveIntensity={spark * 10} transparent opacity={spark} />
+		</mesh>
+		{spark > 0.05 && <pointLight position={[0, -gap / 2, 0.4]} color="#bfe0ff" intensity={spark * 30} distance={5} />}
+	</group>
+);
