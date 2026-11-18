@@ -139,7 +139,9 @@ Meta calls it the "Instagram Graph API". It is not a separate site: you make a M
    Both are public unless `PRIVACY` = `private`. Look at both.
 6. Actions → **collect stats** → Run workflow: writes `data/stats/<week>.json`. Its `unresolvedCompetitors` list shows
    handles the weekly review will fix.
-7. Done: posting runs daily at 19:17 WIB (ID) and 12:23 New York time (EN), one episode per language, until the queue
+7. Actions → **snapshot** runs every morning at 06:30 WIB and writes `data/snapshot.json` (followers, views, likes and
+   comments for all 4 accounts). A red run means one login needs fixing; the dashboard shows these numbers.
+8. Done: posting runs daily at 19:17 WIB (ID) and 12:23 New York time (EN), one episode per language, until the queue
    runs out (the weekly pull request refills it).
 
 ## If something fails
