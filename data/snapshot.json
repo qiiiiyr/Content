@@ -1,0 +1,116 @@
+{
+ "at": "2026-11-18T05:04:19.440Z",
+ "channels": [
+  {
+   "lang": "en",
+   "platform": "youtube",
+   "name": "CutawayEN",
+   "followers": 0,
+   "views": 0,
+   "posts": 1
+  },
+  {
+   "lang": "en",
+   "platform": "instagram",
+   "name": "@cutawayen",
+   "followers": 0,
+   "views": 0,
+   "posts": 1
+  },
+  {
+   "lang": "id",
+   "platform": "youtube",
+   "name": "CutawayID",
+   "followers": 0,
+   "views": 0,
+   "posts": 0
+  },
+  {
+   "lang": "id",
+   "platform": "instagram",
+   "name": "@cutawayid",
+   "followers": 0,
+   "views": 1239,
+   "posts": 1
+  }
+ ],
+ "posts": [
+  {
+   "id": "2026-W47/1-wifi",
+   "title": "2026-W47/1-wifi",
+   "lang": "en",
+   "platform": "youtube",
+   "url": "https://youtu.be/W5S23G1AEQY",
+   "postedAt": "2026-11-17T14:06:29.870Z",
+   "views": 0,
+   "likes": 0,
+   "comments": 0
+  },
+  {
+   "id": "2026-W47/1-four-stroke",
+   "title": "Your engine explodes 50 times a second",
+   "lang": "en",
+   "platform": "youtube",
+   "url": "https://youtu.be/aQAamtKxKX8",
+   "postedAt": "2026-11-18T00:24:07.767Z",
+   "views": 666,
+   "likes": 26,
+   "comments": 0
+  },
+  {
+   "id": "2026-W47/1-wifi",
+   "title": "2026-W47/1-wifi",
+   "lang": "id",
+   "platform": "youtube",
+   "url": "https://youtu.be/1Aj3Ps24nYo",
+   "postedAt": "2026-11-17T14:12:46.096Z",
+   "views": 0,
+   "likes": 0,
+   "comments": 0
+  },
+  {
+   "id": "2026-W47/1-four-stroke",
+   "title": "Mesinmu meledak 50 kali per detik",
+   "lang": "id",
+   "platform": "instagram",
+   "url": "https://www.instagram.com/reel/Df266V_CcLQ/",
+   "postedAt": "2026-11-17T21:41:32.609Z",
+   "views": 1239,
+   "likes": 26,
+   "comments": 0,
+   "reach": 1061,
+   "saves": 1,
+   "shares": 0
+  }
+ ],
+ "history": [
+  {
+   "date": "2026-11-18",
+   "lang": "en",
+   "platform": "youtube",
+   "followers": 0,
+   "views": 0
+  },
+  {
+   "date": "2026-11-18",
+   "lang": "en",
+   "platform": "instagram",
+   "followers": 0,
+   "views": 0
+  },
+  {
+   "date": "2026-11-18",
+   "lang": "id",
+   "platform": "youtube",
+   "followers": 0,
+   "views": 0
+  },
+  {
+   "date": "2026-11-18",
+   "lang": "id",
+   "platform": "instagram",
+   "followers": 0,
+   "views": 1239
+  }
+ ]
+}
