@@ -25,6 +25,18 @@ export const missingSecrets = (platforms: Platform[], lang: Lang, vars: Record<s
 // rate limit (4, 17, 32, 613) are setup or temporary problems, as is a network failure; anything else is the video's fault.
 export const isAuthError = (msg: string): boolean => /oauth2\.googleapis\.com\/token|"code":\s*(190|102|10|4|17|32|613|2\d\d)\b|missing secret|network error|fetch failed/.test(msg);
 
+/** Records from this run (`mine`) added to what is on main now (`theirs`), so two runs that save at once both keep theirs. */
+export const mergePosted = (theirs: Posted[], mine: Posted[]): Posted[] => [
+	...theirs,
+	...mine.filter((m) => !theirs.some((t) => t.id === m.id && t.lang === m.lang && t.platform === m.platform)),
+];
+
+if (import.meta.main && process.argv[2] === '--merge-into') {
+	// node scripts/publish.ts --merge-into state/posted.json /tmp/mine.json
+	const [file, mineFile] = process.argv.slice(3);
+	writeFileSync(file, JSON.stringify(mergePosted(readJson<Posted[]>(file, []), readJson<Posted[]>(mineFile, [])), null, 2) + '\n');
+}
+
 /** Oldest episode still missing a platform in this language; `wants` drops platforms an episode should not go to. */
 export const nextToPost = (ids: string[], posted: Posted[], lang: Lang, wants: (id: string, p: Platform) => boolean = () => true): {id: string; platforms: Platform[]} | null => {
 	for (const id of ids) {
@@ -37,7 +49,7 @@ export const nextToPost = (ids: string[], posted: Posted[], lang: Lang, wants: (
 const description = (m: Meta, lang: Lang) =>
 	[m.description[lang], '', lang === 'id' ? 'Sumber:' : 'Sources:', ...m.sources, '', lang === 'id' ? 'Narasi: suara AI.' : 'Narration: AI voice.', '', m.hashtags.map((h) => `#${h}`).join(' ')].join('\n');
 
-if (import.meta.main) {
+if (import.meta.main && process.argv[2] !== '--merge-into') {
 	const lang = process.argv[process.argv.indexOf('--lang') + 1] as Lang;
 	if (!['en', 'id'].includes(lang)) throw new Error('usage: node scripts/publish.ts --lang en|id [--dry-run]');
 	const dry = process.argv.includes('--dry-run');

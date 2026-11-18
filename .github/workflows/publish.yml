@@ -1,7 +1,7 @@
 # Each language posts to YouTube once a day and to Instagram twice a day. Times (UTC -> local):
 #   ID: Instagram 04:47 (11:47 WIB), YouTube 12:17 + Instagram 12:19 (19:17 WIB)
 #   EN: YouTube 17:23 + Instagram 17:25 (12:23 New York), Instagram 23:53 (18:53 New York)
-# Two runs a couple of minutes apart simply queue (concurrency below); never schedule three close together.
+# Each schedule slot has its own queue, so a late run (GitHub often starts them hours late) never cancels another.
 name: publish
 on:
   schedule:
@@ -22,7 +22,7 @@ on:
       dry_run:
         type: boolean
         default: true
-concurrency: publish
+concurrency: publish-${{ github.event.schedule || format('{0}-{1}', inputs.lang, inputs.only) }}
 permissions:
   contents: write
 jobs:
@@ -65,7 +65,14 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add state/posted.json
-          git diff --cached --quiet && exit 0
-          git commit -m "Posted $(date -u +%F)"
-          for i in 1 2 3 4; do git pull --rebase -q && git push && exit 0; sleep $((i * 5)); done; exit 1
+          # Another run may have saved meanwhile: start from main each try and add this run's records to it.
+          cp state/posted.json /tmp/mine.json
+          for i in 1 2 3 4 5; do
+            git fetch -q origin main && git reset -q --hard origin/main
+            node scripts/publish.ts --merge-into state/posted.json /tmp/mine.json
+            git add state/posted.json
+            git diff --cached --quiet && exit 0
+            git commit -qm "Posted $(date -u +%F)" && git push -q origin HEAD:main && exit 0
+            sleep $((i * 5))
+          done
+          exit 1

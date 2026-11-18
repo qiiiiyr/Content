@@ -1,7 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {decide, findHits, followups, isoWeek, median, parseChecklist, untick, type EpisodeScore, type Strategy} from './review.ts';
-import {missingSecrets, nextToPost} from './publish.ts';
+import {mergePosted, missingSecrets, nextToPost} from './publish.ts';
 
 const now = new Date('2026-12-20T00:00:00Z');
 const strategy: Strategy = {
@@ -114,6 +114,13 @@ test('dashboard decisions untick exactly the rejected lines, and parse back the 
 	const out = untick(body, ['2026-W49/1-abs'], true);
 	assert.deepEqual(parseChecklist(out), {rejected: ['2026-W49/1-abs'], switchRejected: true});
 	assert.equal(untick(body, [], false), body);
+});
+
+test('saving posts merges with what another run saved meanwhile', () => {
+	const a = {id: 'w/1', lang: 'id' as const, platform: 'instagram' as const, mediaId: 'a', postedAt: ''};
+	const b = {id: 'w/1', lang: 'id' as const, platform: 'youtube' as const, mediaId: 'b', postedAt: ''};
+	assert.deepEqual(mergePosted([a], [a, b]), [a, b]);
+	assert.deepEqual(mergePosted([a, b], [a]), [a, b]);
 });
 
 test('missing secrets are named per language and platform', () => {
