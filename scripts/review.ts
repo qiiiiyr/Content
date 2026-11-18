@@ -20,8 +20,8 @@ export type Strategy = {
 
 // frozen = score taken once the episode was minAgeDays old; lifetime views keep growing, so only frozen scores compare fairly.
 export type EpisodeScore = {id: string; theme: string; test: boolean; postedAt: string; score: number; frozen?: boolean};
-export type CompetitorVideo = {theme: string; platform: string; lang: string; account: string; title: string; url: string; views: number; publishedAt: string};
-export type Hit = CompetitorVideo & {multiple: number};
+export type CompetitorVideo = {theme: string; platform: string; lang: string; account: string; title: string; url: string; views: number; publishedAt: string; likes?: number; comments?: number; thumb?: string};
+export type Hit = CompetitorVideo & {multiple: number; engagement?: number};
 export type Decision = {action: 'keep' | 'switch'; to?: string; reason: string; currentMedian: number; nextTestTheme: string};
 
 const DAY = 86_400_000;
@@ -47,7 +47,7 @@ export const findHits = (videos: CompetitorVideo[], multiple: number, windowDays
 	return [...byAccount.values()]
 		.flatMap((vs) => {
 			const m = median(vs.map((v) => v.views));
-			return vs.filter((v) => m > 0 && v.views >= multiple * m && now.getTime() - Date.parse(v.publishedAt) <= windowDays * DAY).map((v) => ({...v, multiple: Math.round((v.views / m) * 10) / 10}));
+			return vs.filter((v) => m > 0 && v.views >= multiple * m && now.getTime() - Date.parse(v.publishedAt) <= windowDays * DAY).map((v) => ({...v, multiple: Math.round((v.views / m) * 10) / 10, engagement: v.platform !== 'youtube' || v.likes === undefined ? undefined : Math.round((((v.likes ?? 0) + (v.comments ?? 0)) / v.views) * 1000) / 10}));
 		})
 		.sort((a, b) => b.multiple - a.multiple);
 };

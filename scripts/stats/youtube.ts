@@ -26,5 +26,5 @@ export const competitorYoutube = async (token: string, handle: string, theme: st
 	const items = (await api(`${YT}/playlistItems?part=contentDetails&maxResults=50&playlistId=${ch.contentDetails.relatedPlaylists.uploads}`, h)).items ?? [];
 	if (!items.length) return [];
 	const videos = (await api(`${YT}/videos?part=snippet,statistics&id=${items.map((i: any) => i.contentDetails.videoId).join(',')}`, h)).items ?? [];
-	return videos.map((v: any) => ({theme, platform: 'youtube', lang, account: handle, title: v.snippet.title, url: `https://youtu.be/${v.id}`, views: Number(v.statistics.viewCount ?? 0), publishedAt: v.snippet.publishedAt}));
+	return videos.map((v: any) => ({theme, platform: 'youtube', lang, account: handle, title: v.snippet.title, url: `https://youtu.be/${v.id}`, views: Number(v.statistics.viewCount ?? 0), publishedAt: v.snippet.publishedAt, likes: Number(v.statistics.likeCount ?? 0), comments: Number(v.statistics.commentCount ?? 0), thumb: (v.snippet.thumbnails?.maxres ?? v.snippet.thumbnails?.high)?.url}));
 };

@@ -17,21 +17,32 @@ write is for `N`. Posting goes oldest first, so batches simply queue up behind e
 2. **Research competitors.** Look at the hit videos' titles and topics. Use web search for what is trending in the
    current theme. Fix every handle in `unresolvedCompetitors` in `themes.json` (find the real handle or remove it).
    Add Instagram competitors (Business/Creator usernames) where `instagram` lists are empty.
-3. **Write `reports/W.md`**: a short table of last week's episodes (views, avg % watched where present), the top
+3. **Raise the look (one upgrade a week).** The goal is for our 3D to match the best competitor content, so study what
+   already wins. From `competitorHits`, take the 3 with the highest `engagement` (likes + comments per view, YouTube) or
+   `multiple` that are animated or 3D explainers. For each, `curl -sL -o out/ref-N.jpg "<thumb>"` and view the image
+   (3 images in total, no more; skip any that fail to download). Also read the title and any caption/description in the
+   stats file. Write down what makes the look strong: lighting and shadow, depth of field, material detail, colour
+   grading, camera move, what is in focus, how the subject fills the frame. Then make **one** concrete upgrade to
+   `src/stage.tsx` (a better material, a new reusable part, lighting, a camera move helper) that the new batch uses, and
+   check it with one `npx remotion still` frame. Rules: never copy a competitor's artwork, layout or footage, only
+   the technique; the upgrade must not slow the render by more than about 10% (CI renders one episode in about 25
+   minutes); a change that fails the still or `npm test` is dropped, not shipped. Add a "Look upgrade" line to the
+   report: which hit inspired it, what changed, and the next idea. If nothing is worth taking, say so and change nothing.
+4. **Write `reports/W.md`**: a short table of last week's episodes (views, avg % watched where present), the top
    3 competitor hits and what made them work (topic, hook, title pattern), the decision and its reason, and 3-6
    concrete adjustments for next week. Plain language, under 400 words.
-4. **Update `strategy.json`**: set `testTheme` to `decision.nextTestTheme`. Keep `lessons` to the 10 most useful,
+5. **Update `strategy.json`**: set `testTheme` to `decision.nextTestTheme`. Keep `lessons` to the 10 most useful,
    each one short and actionable ("first scene must show the object, not a title card"). If `decision.action` is
    `switch`, set `currentTheme` to `decision.to` and `themeSince` to the Monday of week N+1 (the switch starts the
    week after this batch). Never edit `thresholds` unless the human asked.
-5. **Write 7 episodes in `episodes/N/`**, folders `1-<slug>` … `7-<slug>`, posted in that order, one per day:
+6. **Write 7 episodes in `episodes/N/`**, folders `1-<slug>` … `7-<slug>`, posted in that order, one per day:
    - 5 on `currentTheme` (`"test": false`) and 2 on `testTheme` (`"test": true`) in slots 3 and 6.
    - Topic priority: follow-ups of `followups`, then topics suggested by competitor hits (rewritten in our own
      words and visuals, never copied), then `themes.json` ideas. Never repeat a topic already in `episodes/`.
    - Copy the structure of `episodes/2026-W47/1-four-stroke/`: `meta.json` (narration per scene in both languages,
      titles ending in ` #shorts`, description, 4-6 hashtags, at least 2 sources) and `Scenes.tsx` (one component
      per scene, built from `src/stage.tsx`).
-6. **Verify, then open the pull request** (see below). `npm test` must pass.
+7. **Verify, then open the pull request** (see below). `npm test` must pass.
 
 ## Episode rules
 
@@ -75,7 +86,7 @@ CI renders and checks every episode in both languages on the pull request, so do
 
 ## Keep the run cheap
 
-Each run should cost well under the first one (about $4). Use at most 8 web searches in total (the stats file already
+Each run should cost well under the first one (about $4). Use at most 8 web searches in total and at most 3 reference images (the stats file already
 holds the competitor data). Do not read `graphify-out/` or run graphify. Do not re-read files you already read.
 Write each episode file once; `npm test` is the check, not a second read. Stop after a green `npm test`, the one
 contact-sheet image and the pull request.
