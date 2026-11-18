@@ -1,5 +1,5 @@
 # Manual: study reference videos (YouTube or Instagram links) for the look of our 3D. Downloads each one, saves a sheet
-# of 12 frames, a strip of the first 3 seconds (the hook) and its public numbers, as a run artifact for Claude to view.
+# of 12 frames, a strip of the first 3 seconds (the hook) and its public numbers, in the `references` release for Claude to view.
 name: reference videos
 on:
   workflow_dispatch:
@@ -8,7 +8,7 @@ on:
         description: links separated by spaces
         required: true
 permissions:
-  contents: read
+  contents: write # to save the frames in a release
 jobs:
   fetch:
     runs-on: ubuntu-latest
@@ -30,8 +30,10 @@ jobs:
             rm -f "$f" "out/ref-$n.info.json"
           done
           ls -la out
-      - uses: actions/upload-artifact@v4
-        with:
-          name: references
-          path: out/
-          retention-days: 7
+      # Saved in the `references` release (replaced on each run), which Claude's session can download.
+      - env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          gh release view references -R "$REPO" >/dev/null 2>&1 || gh release create references -R "$REPO" --title "Reference frames" --notes "Frame sheets of reference videos, from the reference videos workflow." || true
+          gh release upload references out/* -R "$REPO" --clobber
