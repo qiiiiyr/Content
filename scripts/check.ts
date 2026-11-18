@@ -35,6 +35,10 @@ if (import.meta.main) {
 		for (const e of errors) console.error(`${id}: ${e}`);
 		bad += errors.length;
 	}
+	// YouTube posts once a day, so a week may send at most 7 episodes there or its queue grows forever
+	for (const [week, ids] of Map.groupBy(listEpisodes().filter((id) => readMeta(id).youtube !== false), (id) => id.split('/')[0])) {
+		if (ids.length > 7) (console.error(`${week}: ${ids.length} episodes go to YouTube, at most 7 (set "youtube": false on the rest)`), bad++);
+	}
 	if (bad) process.exit(1);
 	console.log(`check: ${listEpisodes().length} episodes OK`);
 }

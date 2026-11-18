@@ -9,7 +9,7 @@ content to what performs, for us and for competitors, and switches theme when th
 | Sat | report, strategy update, 14 new episodes, one PR | Claude scheduled task, `CLAUDE.md` |
 | Sat | render previews (one parallel job per episode and language) | `render.yml` |
 | Sun | you review and merge (about 10 min) | GitHub app |
-| Twice daily | post one episode per language each time | `publish.yml` → `state/posted.json` |
+| Daily | per language: 1 YouTube Short, 2 Instagram Reels | `publish.yml` → `state/posted.json` |
 
 - One-time setup: [`docs/SETUP.md`](docs/SETUP.md)
 - Episode format and weekly procedure: [`CLAUDE.md`](CLAUDE.md)

@@ -25,9 +25,10 @@ export const missingSecrets = (platforms: Platform[], lang: Lang, vars: Record<s
 // rate limit (4, 17, 32, 613) are setup or temporary problems, as is a network failure; anything else is the video's fault.
 export const isAuthError = (msg: string): boolean => /oauth2\.googleapis\.com\/token|"code":\s*(190|102|10|4|17|32|613|2\d\d)\b|missing secret|network error|fetch failed/.test(msg);
 
-export const nextToPost = (ids: string[], posted: Posted[], lang: Lang): {id: string; platforms: Platform[]} | null => {
+/** Oldest episode still missing a platform in this language; `wants` drops platforms an episode should not go to. */
+export const nextToPost = (ids: string[], posted: Posted[], lang: Lang, wants: (id: string, p: Platform) => boolean = () => true): {id: string; platforms: Platform[]} | null => {
 	for (const id of ids) {
-		const platforms = PLATFORMS.filter((p) => !posted.some((x) => x.id === id && x.lang === lang && x.platform === p));
+		const platforms = PLATFORMS.filter((p) => wants(id, p) && !posted.some((x) => x.id === id && x.lang === lang && x.platform === p));
 		if (platforms.length) return {id, platforms};
 	}
 	return null;
@@ -42,8 +43,8 @@ if (import.meta.main) {
 	const dry = process.argv.includes('--dry-run');
 	const posted = readJson<Posted[]>(STATE, []);
 	const only = process.argv.includes('--only') ? process.argv[process.argv.indexOf('--only') + 1] : '';
-	const next = nextToPost(listEpisodes(), posted, lang);
-	if (next && only) next.platforms = next.platforms.filter((p) => p === only);
+	// Each platform keeps its own place in the queue: YouTube posts once a day, Instagram twice, so they drift apart.
+	const next = nextToPost(listEpisodes(), posted, lang, (id, p) => (!only || p === only) && !(p === 'youtube' && readMeta(id).youtube === false));
 	if (!next || !next.platforms.length) {
 		console.error(`nothing left to post in ${lang}: the queue is empty, merge next week's batch`);
 		process.exit(1); // a red run makes GitHub email the owner instead of the channel going quiet

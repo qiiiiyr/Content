@@ -1,11 +1,15 @@
-# Twice a day per language: post the next episode. ID at 04:47 and 12:17 UTC (11:47 and 19:17 WIB),
-# EN at 17:23 and 23:53 UTC (12:23 and 18:53 New York). Runs are hours apart so the `publish` queue never drops one.
+# Each language posts to YouTube once a day and to Instagram twice a day. Times (UTC -> local):
+#   ID: Instagram 04:47 (11:47 WIB), YouTube 12:17 + Instagram 12:19 (19:17 WIB)
+#   EN: YouTube 17:23 + Instagram 17:25 (12:23 New York), Instagram 23:53 (18:53 New York)
+# Two runs a couple of minutes apart simply queue (concurrency below); never schedule three close together.
 name: publish
 on:
   schedule:
     - cron: '47 4 * * *'
     - cron: '17 12 * * *'
+    - cron: '19 12 * * *'
     - cron: '23 17 * * *'
+    - cron: '25 17 * * *'
     - cron: '53 23 * * *'
   workflow_dispatch:
     inputs:
@@ -23,7 +27,7 @@ permissions:
   contents: write
 jobs:
   publish:
-    # Posts twice daily, publicly. To pause the schedule set the repo variable POSTING=off; manual runs always work.
+    # Posts on schedule, publicly. To pause the schedule set the repo variable POSTING=off; manual runs always work.
     if: github.event_name == 'workflow_dispatch' || vars.POSTING != 'off'
     runs-on: ubuntu-latest
     timeout-minutes: 120
@@ -32,10 +36,19 @@ jobs:
         with:
           ref: main
       - uses: ./.github/actions/setup
-      - run: node scripts/publish.ts --lang "$POST_LANG" $DRY $ONLY
+      - run: |
+          case "$SCHEDULE" in
+            '47 4 * * *' | '19 12 * * *') set -- --lang id --only instagram ;;
+            '17 12 * * *') set -- --lang id --only youtube ;;
+            '23 17 * * *') set -- --lang en --only youtube ;;
+            '25 17 * * *' | '53 23 * * *') set -- --lang en --only instagram ;;
+            *) set -- --lang "$POST_LANG" ${ONLY:+--only "$ONLY"} ;;
+          esac
+          node scripts/publish.ts "$@" $DRY
         env:
-          ONLY: ${{ inputs.only && format('--only {0}', inputs.only) || '' }}
-          POST_LANG: ${{ (github.event.schedule == '47 4 * * *' || github.event.schedule == '17 12 * * *') && 'id' || inputs.lang || 'en' }}
+          SCHEDULE: ${{ github.event.schedule }}
+          ONLY: ${{ inputs.only }}
+          POST_LANG: ${{ inputs.lang || 'en' }}
           DRY: ${{ inputs.dry_run && '--dry-run' || '' }}
           PRIVACY: ${{ vars.PRIVACY || 'public' }}
           GH_TOKEN: ${{ github.token }} # to download the reviewed render from the videos release

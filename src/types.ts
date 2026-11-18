@@ -8,6 +8,7 @@ export type Meta = {
 	description: Text;
 	hashtags: string[];
 	sources: string[];
+	youtube?: boolean; // false = Instagram only: Instagram posts all 14 a week, YouTube 7
 	scenes: Text[]; // narration, one entry per scene, same order as Scenes.tsx
 };
 

@@ -14,6 +14,13 @@ write is for `N`. Posting goes oldest first, so batches simply queue up behind e
    `decision` (keep/switch, computed in code: do not redo or override the arithmetic), `followups`, `competitorHits`,
    `hitsByTheme`, `episodes`, and `unresolvedCompetitors`. If it is missing or older than 3 days, say so in the
    report and continue with web research only.
+   **Then learn what lifts our views.** Read `data/snapshot.json` (daily: views, likes, comments per post; Instagram
+   reach, saves, shares) next to `avgViewPct` in the stats file. Find our weakest signal: low % watched or views
+   that stop early = hook and pacing; low likes or saves per view = payoff; low reach = topic, title, cover. Use 2-3 of
+   your web searches on current, specific advice for that signal on Shorts and Reels (prefer YouTube's and Instagram's
+   own creator channels and data-backed studies over listicles). Compare our best and worst post: what differs in the
+   first sentence, the first frame, the title. Turn it into at most 3 changes, put them in `lessons`, and apply them
+   to every episode of the new batch.
 2. **Research competitors.** Look at the hit videos' titles and topics. Use web search for what is trending in the
    current theme. Fix every handle in `unresolvedCompetitors` in `themes.json` (find the real handle or remove it).
    Add Instagram competitors (Business/Creator usernames) where `instagram` lists are empty.
@@ -37,8 +44,10 @@ write is for `N`. Posting goes oldest first, so batches simply queue up behind e
    each one short and actionable ("first scene must show the object, not a title card"). If `decision.action` is
    `switch`, set `currentTheme` to `decision.to` and `themeSince` to the Monday of week N+1 (the switch starts the
    week after this batch). Never edit `thresholds` unless the human asked.
-6. **Write 14 episodes in `episodes/N/`**, folders `1-<slug>` … `14-<slug>`, posted in that order, two per day:
+6. **Write 14 episodes in `episodes/N/`**, folders `1-<slug>` … `14-<slug>`, posted in that order:
    - 10 on `currentTheme` (`"test": false`) and 4 on `testTheme` (`"test": true`) in slots 3, 6, 10 and 13.
+   - Instagram posts all 14 (twice a day), YouTube only 7 (once a day): set `"youtube": false` in `meta.json` on the
+     7 with the weakest hooks, keeping 2 test episodes on YouTube. `npm test` fails if a week sends more than 7 to YouTube.
    - Topic priority: follow-ups of `followups`, then topics suggested by competitor hits (rewritten in our own
      words and visuals, never copied), then `themes.json` ideas. Never repeat a topic already in `episodes/`.
    - Copy the structure of `episodes/2026-W47/1-four-stroke/`: `meta.json` (narration per scene in both languages,

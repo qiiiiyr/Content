@@ -104,6 +104,9 @@ test('posting queue: oldest unposted episode per language, only missing platform
 	// a failed upload is recorded, so the queue moves on instead of retrying it forever
 	const failed = [...posted, {id: '2026-W47/1-wifi', lang: 'id' as const, platform: 'instagram' as const, mediaId: '', postedAt: '', error: 'ERROR'}];
 	assert.deepEqual(nextToPost(ids, failed, 'id'), {id: '2026-W47/2-gps', platforms: ['youtube', 'instagram']});
+	// each platform has its own place: an Instagram-only run skips past episodes Instagram already has
+	assert.deepEqual(nextToPost(ids, posted, 'id', (_, p) => p === 'youtube'), {id: '2026-W47/2-gps', platforms: ['youtube']});
+	assert.deepEqual(nextToPost(ids, posted, 'en', (id, p) => !(p === 'youtube' && id.endsWith('gps'))), {id: '2026-W47/2-gps', platforms: ['instagram']});
 });
 
 test('missing secrets are named per language and platform', () => {
