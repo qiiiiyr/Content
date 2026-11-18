@@ -1,21 +1,21 @@
 {
- "at": "2026-11-18T05:05:16.148Z",
+ "at": "2026-11-18T19:00:24.271Z",
  "channels": [
   {
    "lang": "en",
    "platform": "youtube",
    "name": "CutawayEN",
    "followers": 0,
-   "views": 671,
-   "posts": 1
+   "views": 1032,
+   "posts": 2
   },
   {
    "lang": "en",
    "platform": "instagram",
    "name": "@cutawayen",
    "followers": 0,
-   "views": 201,
-   "posts": 1
+   "views": 424,
+   "posts": 2
   },
   {
    "lang": "id",
@@ -23,15 +23,15 @@
    "name": "CutawayID",
    "followers": 0,
    "views": 0,
-   "posts": 0
+   "posts": 1
   },
   {
    "lang": "id",
    "platform": "instagram",
    "name": "@cutawayid",
    "followers": 0,
-   "views": 1239,
-   "posts": 1
+   "views": 1526,
+   "posts": 3
   }
  ],
  "posts": [
@@ -42,8 +42,19 @@
    "platform": "youtube",
    "url": "https://youtu.be/aQAamtKxKX8",
    "postedAt": "2026-11-18T00:24:07.767Z",
-   "views": 671,
-   "likes": 26,
+   "views": 1000,
+   "likes": 30,
+   "comments": 0
+  },
+  {
+   "id": "2026-W48/1-turbo",
+   "title": "This part spins 100,000 times a minute",
+   "lang": "en",
+   "platform": "youtube",
+   "url": "https://youtu.be/ONY_QuSKRCU",
+   "postedAt": "2026-11-18T17:26:25.113Z",
+   "views": 32,
+   "likes": 1,
    "comments": 0
   },
   {
@@ -53,12 +64,37 @@
    "platform": "instagram",
    "url": "https://www.instagram.com/reel/Df3Yqu-iBkF/",
    "postedAt": "2026-11-18T02:01:33.201Z",
-   "views": 201,
+   "views": 202,
    "likes": 3,
    "comments": 0,
-   "reach": 188,
+   "reach": 189,
    "saves": 1,
    "shares": 0
+  },
+  {
+   "id": "2026-W48/1-turbo",
+   "title": "This part spins 100,000 times a minute",
+   "lang": "en",
+   "platform": "instagram",
+   "url": "https://www.instagram.com/reel/Df45SW4CUg5/",
+   "postedAt": "2026-11-18T16:05:55.222Z",
+   "views": 222,
+   "likes": 1,
+   "comments": 0,
+   "reach": 194,
+   "saves": 0,
+   "shares": 0
+  },
+  {
+   "id": "2026-W47/1-four-stroke",
+   "title": "Mesinmu meledak 50 kali per detik",
+   "lang": "id",
+   "platform": "youtube",
+   "url": "https://youtu.be/Cfy8dvfsWCs",
+   "postedAt": "2026-11-18T15:26:43.169Z",
+   "views": 0,
+   "likes": 0,
+   "comments": 0
   },
   {
    "id": "2026-W47/1-four-stroke",
@@ -67,11 +103,39 @@
    "platform": "instagram",
    "url": "https://www.instagram.com/reel/Df266V_CcLQ/",
    "postedAt": "2026-11-17T21:41:32.609Z",
-   "views": 1239,
+   "views": 1251,
    "likes": 26,
    "comments": 0,
-   "reach": 1061,
+   "reach": 1071,
    "saves": 1,
+   "shares": 0
+  },
+  {
+   "id": "2026-W48/1-turbo",
+   "title": "Part ini berputar 100.000 kali per menit",
+   "lang": "id",
+   "platform": "instagram",
+   "url": "https://www.instagram.com/reel/Df48Jr0hpqG/",
+   "postedAt": "2026-11-18T16:30:57.137Z",
+   "views": 148,
+   "likes": 4,
+   "comments": 0,
+   "reach": 127,
+   "saves": 0,
+   "shares": 0
+  },
+  {
+   "id": "2026-W48/2-spark-plug",
+   "title": "Mesinmu bikin petir ribuan kali per menit",
+   "lang": "id",
+   "platform": "instagram",
+   "url": "https://www.instagram.com/reel/Df48styKJDQ/",
+   "postedAt": "2026-11-18T16:35:43.386Z",
+   "views": 127,
+   "likes": 0,
+   "comments": 0,
+   "reach": 117,
+   "saves": 0,
    "shares": 0
   }
  ],
@@ -81,14 +145,14 @@
    "lang": "en",
    "platform": "youtube",
    "followers": 0,
-   "views": 671
+   "views": 1032
   },
   {
    "date": "2026-11-18",
    "lang": "en",
    "platform": "instagram",
    "followers": 0,
-   "views": 201
+   "views": 424
   },
   {
    "date": "2026-11-18",
@@ -102,7 +166,7 @@
    "lang": "id",
    "platform": "instagram",
    "followers": 0,
-   "views": 1239
+   "views": 1526
   }
  ]
 }
