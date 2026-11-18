@@ -132,6 +132,11 @@ test('hourly run posts what is due today and catches up missed slots', () => {
 	assert.deepEqual(duePlatforms([ig('2026-11-19T05:41:10Z')], 'id', new Date('2026-11-19T12:41:00Z')), ['youtube', 'instagram']);
 	// yesterday's posts do not count for today
 	assert.deepEqual(duePlatforms([ig('2026-11-18T12:41:00Z')], 'id', new Date('2026-11-19T05:41:00Z')), ['instagram']);
+	// days are the audience's: a New York slot caught up at 00:24 UTC still belongs to the day before
+	const en = (platform: 'youtube' | 'instagram', postedAt: string) => ({id: 'x', lang: 'en' as const, platform, mediaId: 'm', postedAt});
+	assert.deepEqual(duePlatforms([en('youtube', '2026-11-19T00:24:00Z')], 'en', new Date('2026-11-19T17:30:00Z')), ['youtube', 'instagram']);
+	assert.deepEqual(duePlatforms([en('youtube', '2026-11-19T17:30:00Z'), en('instagram', '2026-11-19T17:31:00Z')], 'en', new Date('2026-11-19T23:41:00Z')), ['instagram']);
+	assert.deepEqual(duePlatforms([en('youtube', '2026-11-19T17:30:00Z')], 'en', new Date('2026-11-20T03:41:00Z')), ['instagram']); // 22:41 New York, still the 19th
 });
 
 test('missing secrets are named per language and platform', () => {

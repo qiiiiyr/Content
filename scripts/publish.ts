@@ -30,15 +30,25 @@ export const isAuthError = (msg: string): boolean => /oauth2\.googleapis\.com\/t
 /** When each platform posts, per language, as UTC "HH:MM": Instagram twice a day, YouTube once. */
 export const SLOTS: Record<Lang, Record<Platform, string[]>> = {
 	id: {instagram: ['04:47', '12:19'], youtube: ['12:17']}, // 11:47 and 19:19 WIB; YouTube 19:17 WIB
-	en: {youtube: ['17:23'], instagram: ['17:25', '22:25']}, // 12:23 New York; Instagram 12:25 and 17:25 New York
+	en: {youtube: ['17:23'], instagram: ['17:25', '22:25']}, // 12:23 New York; Instagram 12:25 and 17:25 New York (UTC-5)
 };
 
-/** Platforms with more slots passed today (UTC) than posts made today: what the hourly run posts now. Missed slots
- * (GitHub drops or delays scheduled runs) are caught up on the next hourly run. */
+/** Hours from UTC to the audience's clock: posts are counted per audience day, so a slot caught up late (after midnight
+ * UTC) still counts for the day it belonged to. New York ignores daylight saving: slots shift an hour in summer, no more. */
+const OFFSET_H: Record<Lang, number> = {id: 7, en: -5};
+const audience = (t: Date | string, lang: Lang) => new Date(new Date(t).getTime() + OFFSET_H[lang] * 3_600_000).toISOString();
+const shiftHm = (hm: string, lang: Lang) => {
+	const m = (((+hm.slice(0, 2) + OFFSET_H[lang]) * 60 + +hm.slice(3)) % 1440 + 1440) % 1440;
+	return `${String(Math.floor(m / 60)).padStart(2, '0')}:${String(m % 60).padStart(2, '0')}`;
+};
+
+/** Platforms with more slots passed today (audience's day) than posts made today: what the hourly run posts now. Missed
+ * slots (GitHub drops or delays scheduled runs) are caught up on the next hourly run. */
 export const duePlatforms = (posted: Posted[], lang: Lang, now: Date): Platform[] => {
-	const day = now.toISOString().slice(0, 10);
-	const hm = now.toISOString().slice(11, 16);
-	return PLATFORMS.filter((p) => SLOTS[lang][p].filter((t) => t <= hm).length > posted.filter((x) => x.lang === lang && x.platform === p && x.postedAt.startsWith(day)).length);
+	const t = audience(now, lang);
+	const day = t.slice(0, 10);
+	const hm = t.slice(11, 16);
+	return PLATFORMS.filter((p) => SLOTS[lang][p].filter((s) => shiftHm(s, lang) <= hm).length > posted.filter((x) => x.lang === lang && x.platform === p && audience(x.postedAt, lang).startsWith(day)).length);
 };
 
 /** Records from this run (`mine`) added to what is on main now (`theirs`), so two runs that save at once both keep theirs. */
