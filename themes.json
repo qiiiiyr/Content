@@ -6,7 +6,7 @@
       "ideas": ["four-stroke engine", "two-stroke vs four-stroke", "why a V8 sounds different", "turbochargers", "fuel injection vs carburetor", "spark plugs", "why engines have flywheels", "VTEC and variable valve timing", "rotary (Wankel) engine", "diesel vs petrol ignition"],
       "competitors": {
         "youtube": {"en": ["@EngineeringExplained", "@Lesics", "@ChrisFix", "@TheStraightPipes"], "id": ["@OTOMOTIFNET", "@MotorPlusOnline", "@GridOto"]},
-        "instagram": {"en": [], "id": []}
+        "instagram": {"en": ["scroll.engineer"], "id": []}
       }
     },
     {
@@ -24,7 +24,7 @@
       "ideas": ["disc brakes", "ABS", "why motorcycles counter-steer", "how suspension works", "traction control", "tire grip and tread", "why brake fade happens", "engine braking", "launch control", "why bikes lean"],
       "competitors": {
         "youtube": {"en": ["@EngineeringExplained", "@RevZilla", "@MotoGeo"], "id": ["@MotorPlusOnline", "@GridOto"]},
-        "instagram": {"en": [], "id": []}
+        "instagram": {"en": ["scroll.engineer"], "id": []}
       }
     },
     {

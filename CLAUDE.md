@@ -37,6 +37,8 @@ write is for `N`. Posting goes oldest first, so batches simply queue up behind e
    the technique; the upgrade must not slow the render by more than about 10% (CI renders one episode in about 25
    minutes); a change that fails the still or `npm test` is dropped, not shipped. Add a "Look upgrade" line to the
    report: which hit inspired it, what changed, and the next idea. If nothing is worth taking, say so and change nothing.
+   Also read `docs/look.md` (references the human picked, and the upgrade backlog): when no hit shows something
+   better, take the top open backlog item, and tick it there when it ships.
 4. **Write `reports/W.md`**: a short table of last week's episodes (views, avg % watched where present), the top
    3 competitor hits and what made them work (topic, hook, title pattern), the decision and its reason, and 3-6
    concrete adjustments for next week. Plain language, under 400 words.
