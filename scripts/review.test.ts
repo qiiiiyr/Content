@@ -27,6 +27,12 @@ test('hits: 3x the channel median, inside the window', () => {
 	assert.deepEqual(hits.map((h) => h.views), [400]);
 });
 
+test('hits carry engagement (likes + comments per view) on YouTube only', () => {
+	const v = (platform: string, views: number) => ({theme: 'a', platform, lang: 'en', account: platform, title: '', url: '', views, publishedAt: '2026-12-10', likes: views / 10, comments: views / 100});
+	const hits = findHits([v('youtube', 100), v('youtube', 100), v('youtube', 1000), v('instagram', 10), v('instagram', 10), v('instagram', 100)], 3, 30, now);
+	assert.deepEqual(hits.map((h) => [h.platform, h.engagement]), [['youtube', 11], ['instagram', undefined]]);
+});
+
 test('keeps a young theme even when a candidate is far ahead', () => {
 	const young = {...strategy, themeSince: '2026-12-01'};
 	const eps = [ep('a', 10, '2026-12-05'), ...[1, 2, 3, 4].map((i) => ep('b', 1000, '2026-12-05', i))];
