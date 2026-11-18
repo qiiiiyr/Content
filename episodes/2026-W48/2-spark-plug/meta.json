@@ -1,0 +1,48 @@
+{
+  "theme": "engines-inside",
+  "test": false,
+  "title": {
+    "en": "Your engine makes lightning thousands of times a minute #shorts",
+    "id": "Mesinmu bikin petir ribuan kali per menit #shorts"
+  },
+  "description": {
+    "en": "How a spark plug works: a centre electrode, a ceramic insulator, a gap of about a millimetre and tens of thousands of volts from the coil. And why worn plugs misfire.",
+    "id": "Cara kerja busi: elektroda tengah, isolator keramik, celah sekitar satu milimeter, dan puluhan ribu volt dari koil. Plus kenapa busi aus bikin mesin brebet."
+  },
+  "hashtags": ["sparkplug", "engine", "motorcycle", "cars", "howitworks"],
+  "sources": [
+    "https://www.ngkntk.com/newsroom/feature/emea/parts-of-a-spark-plug",
+    "https://www.mobil.com/en/lubricants/for-personal-vehicles/auto-care/vehicle-maintenance/how-do-spark-plugs-work",
+    "https://en.wikipedia.org/wiki/Spark_plug"
+  ],
+  "scenes": [
+    {
+      "en": "Your engine makes a tiny bolt of lightning *thousands of times a minute*.",
+      "id": "Mesinmu bikin petir mini *ribuan kali per menit*."
+    },
+    {
+      "en": "This is where. The spark plug: a metal *centre electrode* runs through a ceramic insulator, so the current can't leak away.",
+      "id": "Di sini tempatnya. Busi: *elektroda tengah* dari logam menembus isolator keramik, jadi listriknya nggak bocor ke mana-mana."
+    },
+    {
+      "en": "At the tip, a bent *ground electrode* waits about a millimetre away. That's the gap.",
+      "id": "Di ujungnya, *elektroda massa* yang bengkok menunggu sekitar satu milimeter jauhnya. Itulah celahnya."
+    },
+    {
+      "en": "Air and fuel don't conduct. So the ignition coil pushes the voltage up to *tens of thousands of volts*.",
+      "id": "Udara dan bensin bukan penghantar listrik. Jadi koil pengapian menaikkan tegangannya sampai *puluhan ribu volt*."
+    },
+    {
+      "en": "The gas in the gap breaks down, a *spark* jumps across, and the squeezed mix catches fire.",
+      "id": "Gas di celah itu akhirnya tembus, *percikan* melompat, dan campuran yang dipadatkan langsung terbakar."
+    },
+    {
+      "en": "As the electrodes wear, the gap grows and needs *more voltage*. One day the coil can't keep up: a misfire.",
+      "id": "Kalau elektrodanya aus, celahnya melebar dan butuh *tegangan lebih besar*. Suatu saat koilnya nggak sanggup lagi: mesin brebet."
+    },
+    {
+      "en": "Tiny lightning, perfectly timed. Follow for more.",
+      "id": "Petir mini, dengan waktu yang pas. Follow untuk video lainnya."
+    }
+  ]
+}

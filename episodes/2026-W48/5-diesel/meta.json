@@ -1,0 +1,48 @@
+{
+  "theme": "engines-inside",
+  "test": false,
+  "title": {
+    "en": "A diesel has no spark plugs. So what lights it? #shorts",
+    "id": "Mesin diesel nggak punya busi. Terus apinya dari mana? #shorts"
+  },
+  "description": {
+    "en": "Compression ignition: a diesel squeezes plain air until it is hot enough to light fuel sprayed straight into it. Why petrol engines can't, and what glow plugs do.",
+    "id": "Pengapian kompresi: diesel memadatkan udara murni sampai cukup panas untuk membakar solar yang disemprotkan langsung. Kenapa mesin bensin nggak bisa, dan apa gunanya busi pijar."
+  },
+  "hashtags": ["diesel", "engine", "cars", "howitworks", "mechanics"],
+  "sources": [
+    "https://hyperphysics.gsu.edu/hbase/thermo/diesel.html",
+    "https://www.cummins.com/en-in/news/how-do-diesel-engines-work",
+    "https://kids.britannica.com/students/article/diesel-engine/274002"
+  ],
+  "scenes": [
+    {
+      "en": "A diesel engine has *no spark plugs*. So what lights the fuel?",
+      "id": "Mesin diesel *nggak punya busi*. Terus apa yang membakar solarnya?"
+    },
+    {
+      "en": "Only air goes in. Then the piston squeezes it *15 to 20 times* smaller.",
+      "id": "Yang masuk cuma udara. Lalu piston memadatkannya *15 sampai 20 kali* lebih kecil."
+    },
+    {
+      "en": "Squeeze air that hard and it gets hot: *over 500 degrees* Celsius.",
+      "id": "Udara yang dipadatkan sekeras itu jadi panas banget: *lebih dari 500 derajat* Celsius."
+    },
+    {
+      "en": "At the top, an *injector* sprays diesel straight into that hot air, and it ignites by itself.",
+      "id": "Di titik paling atas, *injektor* menyemprotkan solar langsung ke udara panas itu, dan solarnya menyala sendiri."
+    },
+    {
+      "en": "That's *compression ignition*. A petrol engine can't squeeze this hard: its fuel would light too early. That's called knock.",
+      "id": "Inilah *pengapian kompresi*. Mesin bensin nggak bisa memadatkan sekeras ini: bensinnya bakal terbakar terlalu cepat. Namanya knocking."
+    },
+    {
+      "en": "On a cold start, *glow plugs* warm the cylinder to help it catch. They heat. They don't spark.",
+      "id": "Saat mesin masih dingin, *busi pijar* memanaskan silinder supaya gampang menyala. Busi pijar memanaskan, bukan memercik."
+    },
+    {
+      "en": "Same four strokes, different fire. Follow for more.",
+      "id": "Empat langkah yang sama, cara membakar yang beda. Follow untuk video lainnya."
+    }
+  ]
+}
