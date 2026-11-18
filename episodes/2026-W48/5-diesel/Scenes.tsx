@@ -8,7 +8,7 @@ const air = new THREE.Color('#dfeefa');
 const hot = new THREE.Color('#ff9a5a');
 const mod = (deg: number) => ((deg % 720) + 720) % 720;
 
-// diesel: pure air in, air heats as it is squeezed, no spark; the plug on the head is the injector here
+// diesel: pure air in, air heats as it is squeezed, no spark; the dark steel part on the head is the fuel injector
 const diesel = (deg: number, sec: number): EngineState => {
 	const d = mod(deg);
 	const s = {...cycleState(deg, sec), spark: 0};
@@ -38,7 +38,7 @@ const Diesel = ({cam, from, to, glowPlug = 0}: {cam: CamKey[]; from: number; to:
 	const deg = from + (to - from) * p;
 	return (
 		<Stage cam={cam}>
-			<Engine s={diesel(deg, sec)} />
+			<Engine s={diesel(deg, sec)} injector />
 			<Spray deg={deg} sec={sec} />
 			{glowPlug > 0 && (
 				<>
