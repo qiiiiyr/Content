@@ -17,13 +17,19 @@ on:
       dry_run:
         type: boolean
         default: true
-concurrency: publish-${{ github.event_name }}-${{ inputs.lang }}
+      due:
+        description: post whatever is due now, like the hourly schedule (the other inputs are ignored)
+        type: boolean
+        default: false
+# Backup timer: GitHub's scheduler can stop or drop runs, so an outside timer (cron-job.org, docs/SETUP.md part 6) also
+# starts this hourly with due=true. Scheduled and due runs share one queue, so they never post the same slot twice.
+concurrency: publish-${{ (github.event_name == 'schedule' || inputs.due) && 'due' || format('manual-{0}', inputs.lang) }}
 permissions:
   contents: write
 jobs:
   publish:
     # Posts on schedule, publicly. To pause the schedule set the repo variable POSTING=off; manual runs always work.
-    if: github.event_name == 'workflow_dispatch' || vars.POSTING != 'off'
+    if: (github.event_name == 'workflow_dispatch' && !inputs.due) || vars.POSTING != 'off'
     runs-on: ubuntu-latest
     timeout-minutes: 120
     steps:
@@ -39,7 +45,7 @@ jobs:
           fi
           node scripts/publish.ts --lang "$POST_LANG" ${ONLY:+--only "$ONLY"} $DRY
         env:
-          SCHEDULE: ${{ github.event.schedule }}
+          SCHEDULE: ${{ github.event.schedule || (inputs.due && 'due') || '' }}
           ONLY: ${{ inputs.only }}
           POST_LANG: ${{ inputs.lang || 'en' }}
           DRY: ${{ inputs.dry_run && '--dry-run' || '' }}

@@ -145,6 +145,26 @@ Meta calls it the "Instagram Graph API". It is not a separate site: you make a M
 8. Done: posting runs on that schedule (step 3): each language gets 1 YouTube Short and 2 Instagram Reels a day, until the queue
    runs out (the weekly pull request refills it).
 
+## 6. Backup timer for posting (5 minutes, free)
+
+GitHub starts scheduled runs late, drops them, and can stop them altogether (it did for a day after the default branch
+changed). An outside timer presses "run" on the publish workflow every hour as well; a run with nothing due ends in a
+minute, and it never posts a slot twice.
+
+1. **Key:** GitHub → your photo → Settings → Developer settings → Personal access tokens → **Fine-grained tokens** →
+   Generate new token. Name `cron-job publish`, expiration 1 year, Repository access: **Only select repositories** →
+   `qiiiiyr/Content`, Permissions → Repository permissions → **Actions: Read and write** (nothing else). Generate and copy it.
+2. **Timer:** sign up at https://cron-job.org (free) → Create cronjob:
+   - Title `Cutaway publish`, URL `https://api.github.com/repos/qiiiiyr/Content/actions/workflows/publish.yml/dispatches`
+   - Execution schedule: every hour at minute **11** (Custom: minutes `11`, every hour, every day)
+   - Advanced → Request method **POST**; Headers: `Accept: application/vnd.github+json`,
+     `Authorization: Bearer <the key>`, `X-GitHub-Api-Version: 2022-11-28`, `Content-Type: application/json`
+   - Request body: `{"ref":"main","inputs":{"due":"true"}}`
+   - Save, then **Test run**: the answer should be `204`, and a new run appears under Actions → publish.
+3. When the key expires (1 year), make a new one and replace it in the cronjob's Authorization header.
+
+To pause all automatic posting, set the repo variable `POSTING=off` (stops both the schedule and the timer).
+
 ## If something fails
 
 | Message | Meaning and fix |
