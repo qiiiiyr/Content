@@ -1,7 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {decide, findHits, followups, isoWeek, median, parseChecklist, untick, type EpisodeScore, type Strategy} from './review.ts';
-import {mergePosted, missingSecrets, nextToPost} from './publish.ts';
+import {duePlatforms, mergePosted, missingSecrets, nextToPost} from './publish.ts';
 
 const now = new Date('2026-12-20T00:00:00Z');
 const strategy: Strategy = {
@@ -121,6 +121,17 @@ test('saving posts merges with what another run saved meanwhile', () => {
 	const b = {id: 'w/1', lang: 'id' as const, platform: 'youtube' as const, mediaId: 'b', postedAt: ''};
 	assert.deepEqual(mergePosted([a], [a, b]), [a, b]);
 	assert.deepEqual(mergePosted([a, b], [a]), [a, b]);
+});
+
+test('hourly run posts what is due today and catches up missed slots', () => {
+	const ig = (postedAt: string) => ({id: 'w/1', lang: 'id' as const, platform: 'instagram' as const, mediaId: 'x', postedAt});
+	assert.deepEqual(duePlatforms([], 'id', new Date('2026-11-19T04:00:00Z')), []);
+	assert.deepEqual(duePlatforms([], 'id', new Date('2026-11-19T05:41:00Z')), ['instagram']);
+	assert.deepEqual(duePlatforms([ig('2026-11-19T05:41:10Z')], 'id', new Date('2026-11-19T06:41:00Z')), []);
+	// both slots passed, one post made: Instagram still owes one; YouTube owes its one
+	assert.deepEqual(duePlatforms([ig('2026-11-19T05:41:10Z')], 'id', new Date('2026-11-19T12:41:00Z')), ['youtube', 'instagram']);
+	// yesterday's posts do not count for today
+	assert.deepEqual(duePlatforms([ig('2026-11-18T12:41:00Z')], 'id', new Date('2026-11-19T05:41:00Z')), ['instagram']);
 });
 
 test('missing secrets are named per language and platform', () => {
