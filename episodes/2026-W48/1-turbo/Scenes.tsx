@@ -21,7 +21,7 @@ const Shot = ({cam, spin, flow, air = true, hot = true, gate = 0, heat = 0.6}: {
 	);
 };
 
-const Hook = () => <Shot cam={[{t: 0, pos: [0, 3.5, 24], look: [0, 2.4, 0]}, {t: 1, pos: [2, 3.2, 15], look: [0, 2.4, 0]}]} />;
+const Hook = () => <Shot cam={[{t: 0, pos: [0, 3.5, 24], look: [0, 1.4, 0]}, {t: 1, pos: [2, 3.2, 15], look: [0, 1.8, 0]}]} />;
 const Turbine = () => <Shot air={false} heat={0.9} cam={[{t: 0, pos: [-6, 4, 8], look: [-1.5, 2.3, 0]}, {t: 1, pos: [-3, 3.4, 6], look: [-1.5, 2.3, 0]}]} />;
 const Shaft = () => <Shot cam={[{t: 0, pos: [-2, 6.5, 9], look: [0, 2.4, 0]}, {t: 1, pos: [2, 3.6, 8], look: [0, 2.4, 0]}]} />;
 const Compressor = () => <Shot hot={false} heat={0.3} cam={[{t: 0, pos: [6.5, 4, 7], look: [1.5, 2.6, 0]}, {t: 1, pos: [3.4, 4.6, 6], look: [1.2, 3.2, 0]}]} />;
@@ -30,12 +30,12 @@ const Compressor = () => <Shot hot={false} heat={0.3} cam={[{t: 0, pos: [6.5, 4,
 const Power = () => {
 	const {p, sec} = useScene();
 	return (
-		<Stage cam={[{t: 0, pos: [0, 5, 19], look: [0.4, 3.4, 0]}, {t: 1, pos: [-2, 4.6, 15], look: [0.4, 3.4, 0]}]}>
-			<Engine x={-1.6} s={cycleState(p * 2880, sec)} />
-			<group position={[2.6, 6.4, 0]} scale={0.5}>
+		<Stage cam={[{t: 0, pos: [0, 5, 23], look: [0, 2.6, 0]}, {t: 1, pos: [-2, 5, 20], look: [0, 2.8, 0]}]}>
+			<Engine s={cycleState(p * 2880, sec)} />
+			<group position={[1.4, 8.6, 0]} scale={0.5}>
 				<Turbo spin={sec * 9} heat={0.6} position={[0, 0, 0]} />
 			</group>
-			<Stream path={[[3.4, 6.4, 0], [3.0, 8.0, 0.3], [-0.3, 8.2, 0.3], [-2.0, 6.6, 0.3]]} t={sec} n={18} />
+			<Stream path={[[2.2, 8.6, 0.3], [2.6, 9.6, 0.3], [-0.45, 9.8, 0.3], [-0.45, 6.4, 0.3]]} t={sec} n={18} />
 		</Stage>
 	);
 };
