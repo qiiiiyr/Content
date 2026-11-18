@@ -1,6 +1,6 @@
 // Daily: our channel totals and per-post numbers for YouTube and Instagram, in one file the dashboard reads.
 // Writes data/snapshot.json: {at, channels, posts, history}. Usage: node scripts/snapshot.ts
-import {mkdirSync, writeFileSync} from 'node:fs';
+import {existsSync, mkdirSync, writeFileSync} from 'node:fs';
 import {LANGS, readJson, readMeta} from './lib.ts';
 import {api} from './http.ts';
 import {youtubeToken} from './post/youtube.ts';
@@ -23,7 +23,7 @@ export const youtubeNumbers = async (lang: Lang, ids: string[]) => {
 	if (!ch) throw new Error('no YouTube channel for this login');
 	const videos = ids.length ? (await api(`${YT}/videos?part=statistics&id=${ids.join(',')}`, h)).items ?? [] : [];
 	return {
-		channel: {name: ch.snippet.title, followers: Number(ch.statistics.subscriberCount ?? 0), views: Number(ch.statistics.viewCount ?? 0), posts: Number(ch.statistics.videoCount ?? 0)},
+		channel: {name: ch.snippet.title, followers: Number(ch.statistics.subscriberCount ?? 0), views: Math.max(Number(ch.statistics.viewCount ?? 0), [...videos].reduce((t: number, v: any) => t + Number(v.statistics.viewCount ?? 0), 0)), posts: Number(ch.statistics.videoCount ?? 0)},
 		videos: new Map<string, {views: number; likes: number; comments: number}>(videos.map((v: any) => [v.id, {views: Number(v.statistics.viewCount ?? 0), likes: Number(v.statistics.likeCount ?? 0), comments: Number(v.statistics.commentCount ?? 0)}])),
 	};
 };
@@ -41,7 +41,8 @@ export const instagramNumbers = async (lang: Lang, mediaIds: string[]) => {
 	return {channel: {name: `@${a.username}`, followers: a.followers_count ?? 0, views: [...media.values()].reduce((t, m) => t + m.views, 0), posts: a.media_count ?? 0}, media};
 };
 
-const posted = readJson<Posted[]>('state/posted.json', []).filter((p) => !p.error);
+// test uploads of episodes that no longer exist are not part of the series, so they stay out of the numbers
+const posted = readJson<Posted[]>('state/posted.json', []).filter((p) => !p.error && existsSync(`episodes/${p.id}/meta.json`));
 const channels: Channel[] = [];
 const posts: Post[] = [];
 for (const lang of LANGS) {
