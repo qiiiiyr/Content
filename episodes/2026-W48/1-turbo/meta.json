@@ -1,0 +1,52 @@
+{
+  "theme": "engines-inside",
+  "test": false,
+  "title": {
+    "en": "This part spins 100,000 times a minute #shorts",
+    "id": "Part ini berputar 100.000 kali per menit #shorts"
+  },
+  "description": {
+    "en": "A turbocharger turns hot exhaust into extra power: a turbine, a shared shaft, a compressor that squeezes air into the engine. Plus turbo lag and the wastegate.",
+    "id": "Turbocharger mengubah gas buang panas jadi tenaga ekstra: turbin, satu poros, dan kompresor yang menjejalkan udara ke mesin. Plus turbo lag dan wastegate."
+  },
+  "hashtags": ["turbo", "engine", "cars", "howitworks", "mechanics"],
+  "sources": [
+    "https://www.explainthatstuff.com/how-turbochargers-work.html",
+    "https://savree.com/en/encyclopedia/automobile-turbocharger",
+    "https://en.wikipedia.org/wiki/Turbocharger"
+  ],
+  "scenes": [
+    {
+      "en": "This little part can spin over *100,000 times a minute*, and it runs on your engine's trash.",
+      "id": "Part kecil ini bisa berputar lebih dari *100.000 kali per menit*, dan bahan bakarnya sampah mesinmu."
+    },
+    {
+      "en": "It's a *turbocharger*. Hot exhaust gas, usually just thrown away, blasts through a turbine wheel.",
+      "id": "Namanya *turbocharger*. Gas buang panas, yang biasanya cuma dibuang, menyembur lewat roda turbin."
+    },
+    {
+      "en": "That turbine shares *one shaft* with a second wheel on the clean side: the compressor.",
+      "id": "Turbin itu berbagi *satu poros* dengan roda kedua di sisi yang bersih: kompresor."
+    },
+    {
+      "en": "The compressor grabs fresh air and *squeezes* it into the engine.",
+      "id": "Kompresor menyedot udara segar lalu *menjejalkannya* ke dalam mesin."
+    },
+    {
+      "en": "More air means room for more fuel, so the same small engine makes *more power*.",
+      "id": "Udara lebih banyak berarti bensin yang dibakar juga lebih banyak. Mesin kecil yang sama jadi *lebih bertenaga*."
+    },
+    {
+      "en": "But it needs exhaust to spin up. At low revs you wait a moment for the push: *turbo lag*.",
+      "id": "Tapi turbo butuh gas buang untuk berputar. Di putaran rendah, dorongannya telat sebentar: *turbo lag*."
+    },
+    {
+      "en": "And when boost gets too high, a *wastegate* opens and lets exhaust skip the turbine.",
+      "id": "Kalau tekanannya kebablasan, *wastegate* terbuka dan gas buang dibelokkan melewati turbin."
+    },
+    {
+      "en": "Engine trash, turned into power. Follow for more.",
+      "id": "Sampah mesin, disulap jadi tenaga. Follow untuk video lainnya."
+    }
+  ]
+}

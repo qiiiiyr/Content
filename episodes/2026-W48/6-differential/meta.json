@@ -1,0 +1,52 @@
+{
+  "theme": "drivetrain",
+  "test": true,
+  "title": {
+    "en": "Your wheels spin at different speeds in every corner #shorts",
+    "id": "Di tiap tikungan, roda mobilmu berputar beda kecepatan #shorts"
+  },
+  "description": {
+    "en": "Why a car needs a differential: the outer wheel travels further in a turn. Ring gear, spider gears and side gears, and the catch of an open diff on ice.",
+    "id": "Kenapa mobil butuh gardan: roda luar menempuh jarak lebih jauh saat belok. Ring gear, gigi satelit, gigi samping, dan kelemahan gardan terbuka di jalan licin."
+  },
+  "hashtags": ["differential", "cars", "drivetrain", "howitworks", "mechanics"],
+  "sources": [
+    "https://knowhow.napaonline.com/types-car-differentials-work/",
+    "https://www.evo.co.uk/car-technology/207593/differentials-explained-how-does-a-cars-diff-work",
+    "https://en.wikipedia.org/wiki/Differential_(mechanical_device)"
+  ],
+  "scenes": [
+    {
+      "en": "In every corner, your two driven wheels *spin at different speeds*. If they couldn't, the tyres would scrub and hop.",
+      "id": "Di setiap tikungan, dua roda penggerakmu *berputar dengan kecepatan beda*. Kalau nggak bisa, bannya bakal terseret dan melompat."
+    },
+    {
+      "en": "The outer wheel travels a *longer arc* than the inner one, in the same time.",
+      "id": "Roda luar menempuh *lintasan yang lebih panjang* daripada roda dalam, dalam waktu yang sama."
+    },
+    {
+      "en": "So the axle is split in two, with a *differential* in the middle.",
+      "id": "Makanya as roda dibelah dua, dengan *gardan* di tengahnya."
+    },
+    {
+      "en": "The driveshaft turns a big *ring gear*. It carries a cage with small spider gears inside.",
+      "id": "Kopel memutar *ring gear* yang besar. Ring gear itu membawa rumah berisi gigi-gigi satelit kecil."
+    },
+    {
+      "en": "Driving straight, the spider gears *don't spin*. The whole cage turns as one, and both wheels match.",
+      "id": "Saat jalan lurus, gigi satelit *nggak berputar*. Semuanya berputar jadi satu, dan kedua roda sama cepat."
+    },
+    {
+      "en": "In a turn, the spider gears start to roll: the outer wheel *speeds up*, and the inner wheel slows by the same amount.",
+      "id": "Saat belok, gigi satelit mulai berputar: roda luar *makin cepat*, dan roda dalam melambat dengan jumlah yang sama."
+    },
+    {
+      "en": "The catch: put one wheel on *ice*, and it just spins while the other barely pushes. That's why off-roaders lock their diffs.",
+      "id": "Kelemahannya: kalau satu roda di *jalan licin*, roda itu cuma muter sendiri, yang satunya hampir nggak mendorong. Makanya mobil offroad punya diff lock."
+    },
+    {
+      "en": "Two wheels, one engine, no arguments. Follow for more.",
+      "id": "Dua roda, satu mesin, nggak pakai ribut. Follow untuk video lainnya."
+    }
+  ]
+}

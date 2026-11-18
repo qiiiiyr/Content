@@ -1,0 +1,48 @@
+{
+  "theme": "drivetrain",
+  "test": true,
+  "title": {
+    "en": "Pressing the clutch doesn't connect anything #shorts",
+    "id": "Injak kopling itu bukan menyambung, tapi melepas #shorts"
+  },
+  "description": {
+    "en": "Inside a manual clutch: flywheel, friction disc, pressure plate and the diaphragm spring that clamps them together. Your foot only breaks the grip.",
+    "id": "Isi kopling manual: roda gila, kampas, pressure plate, dan pegas diafragma yang menjepit semuanya. Kakimu cuma melepas jepitannya."
+  },
+  "hashtags": ["clutch", "manual", "cars", "howitworks", "mechanics"],
+  "sources": [
+    "https://knowhow.napaonline.com/manual-transmission-clutch-guide-how-it-works-how-to-fix-it/",
+    "https://x-engineer.org/automotive-engineering/drivetrain/coupling-devices/how-a-clutch-works/",
+    "https://us.haynes.com/blogs/tips-tutorials/anatomy-your-cars-clutch"
+  ],
+  "scenes": [
+    {
+      "en": "Pressing the clutch pedal doesn't connect anything. It *pulls things apart*.",
+      "id": "Injak pedal kopling itu bukan menyambung. Justru *memisahkan*."
+    },
+    {
+      "en": "The engine spins a heavy *flywheel*. A pressure plate is bolted to it and spins along.",
+      "id": "Mesin memutar *roda gila* yang berat. Pressure plate dibaut ke situ dan ikut berputar."
+    },
+    {
+      "en": "Between them sits the *friction disc*, linked to the gearbox shaft.",
+      "id": "Di antara keduanya ada *kampas kopling*, yang tersambung ke poros girboks."
+    },
+    {
+      "en": "A strong *diaphragm spring* clamps the disc tight. Friction locks it, so engine and gearbox turn as one.",
+      "id": "*Pegas diafragma* yang kuat menjepit kampas itu. Gesekan mengunci semuanya, jadi mesin dan girboks berputar bareng."
+    },
+    {
+      "en": "Press the pedal, and a bearing pushes the spring's *centre fingers*. The plate pulls back, and the disc slows to a stop.",
+      "id": "Begitu pedal diinjak, bearing menekan *jari-jari* pegas di tengah. Pressure plate mundur, dan kampas melambat sampai diam."
+    },
+    {
+      "en": "Let the pedal up slowly, and the disc *slips* while it catches up. That slip makes heat, and it's why clutches wear out.",
+      "id": "Lepas pedalnya pelan-pelan, kampas akan *selip* sambil mengejar putaran mesin. Selip itu bikin panas, dan itulah kenapa kampas bisa habis."
+    },
+    {
+      "en": "So the clutch is locked by default. Your foot only breaks the grip. Follow for more.",
+      "id": "Jadi kopling itu aslinya selalu terkunci. Kakimu cuma melepas jepitannya. Follow untuk video lainnya."
+    }
+  ]
+}
