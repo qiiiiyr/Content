@@ -1,0 +1,25 @@
+# Manual, read-only: prints detailed YouTube and Instagram numbers (watch time, countries, traffic sources, Reel
+# insights) in the run log for a deep look at why posts do well or badly. Changes nothing.
+name: analyze
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/analyze.ts
+        env:
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN_EN: ${{ secrets.YT_REFRESH_TOKEN_EN }}
+          YT_REFRESH_TOKEN_ID: ${{ secrets.YT_REFRESH_TOKEN_ID }}
+          IG_USER_ID_EN: ${{ secrets.IG_USER_ID_EN }}
+          IG_USER_ID_ID: ${{ secrets.IG_USER_ID_ID }}
+          IG_TOKEN_EN: ${{ secrets.IG_TOKEN_EN }}
+          IG_TOKEN_ID: ${{ secrets.IG_TOKEN_ID }}
