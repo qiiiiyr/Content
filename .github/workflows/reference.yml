@@ -1,0 +1,37 @@
+# Manual: study reference videos (YouTube or Instagram links) for the look of our 3D. Downloads each one, saves a sheet
+# of 12 frames, a strip of the first 3 seconds (the hook) and its public numbers, as a run artifact for Claude to view.
+name: reference videos
+on:
+  workflow_dispatch:
+    inputs:
+      urls:
+        description: links separated by spaces
+        required: true
+permissions:
+  contents: read
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - run: pip install -q yt-dlp && sudo apt-get install -y -qq ffmpeg >/dev/null
+      - env:
+          URLS: ${{ inputs.urls }} # passed as data, never pasted into the script
+        run: |
+          mkdir out; n=0
+          for u in $URLS; do
+            n=$((n + 1))
+            if ! [[ "$u" =~ ^https://(www\.)?(youtube\.com|youtu\.be|instagram\.com)/ ]]; then echo "skipped (not YouTube/Instagram): $u"; continue; fi
+            yt-dlp -q --no-playlist -f 'b[height<=1280]/b' -o "out/ref-$n.%(ext)s" --write-info-json -- "$u" || { echo "download failed: $u"; continue; }
+            f=$(ls out/ref-$n.* | grep -v json | head -1)
+            d=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$f")
+            ffmpeg -v error -y -i "$f" -vf "fps=12/$d,scale=270:-1,tile=6x2" -frames:v 1 "out/ref-$n-sheet.png"
+            ffmpeg -v error -y -t 3 -i "$f" -vf "fps=2,scale=270:-1,tile=6x1" -frames:v 1 "out/ref-$n-hook.png"
+            jq '{url: .webpage_url, uploader, title, duration, view_count, like_count, comment_count, description}' "out/ref-$n.info.json" > "out/ref-$n.json"
+            rm -f "$f" "out/ref-$n.info.json"
+          done
+          ls -la out
+      - uses: actions/upload-artifact@v4
+        with:
+          name: references
+          path: out/
+          retention-days: 7
