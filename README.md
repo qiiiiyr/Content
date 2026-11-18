@@ -6,10 +6,10 @@ content to what performs, for us and for competitors, and switches theme when th
 | When | What | Where |
 |---|---|---|
 | Fri night | own + competitor stats, keep/switch rule | `collect.yml` → `data/stats/` |
-| Sat | report, strategy update, 7 new episodes, one PR | Claude scheduled task, `CLAUDE.md` |
+| Sat | report, strategy update, 14 new episodes, one PR | Claude scheduled task, `CLAUDE.md` |
 | Sat | render previews (one parallel job per episode and language) | `render.yml` |
 | Sun | you review and merge (about 10 min) | GitHub app |
-| Daily | render and post one episode per language | `publish.yml` → `state/posted.json` |
+| Twice daily | post one episode per language each time | `publish.yml` → `state/posted.json` |
 
 - One-time setup: [`docs/SETUP.md`](docs/SETUP.md)
 - Episode format and weekly procedure: [`CLAUDE.md`](CLAUDE.md)

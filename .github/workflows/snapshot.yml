@@ -1,9 +1,9 @@
-# Daily, after both posts: subscribers/followers and per-video numbers for YouTube and Instagram -> data/snapshot.json
+# Daily, after the evening posts: subscribers/followers and per-video numbers for YouTube and Instagram -> data/snapshot.json
 # (the dashboard reads this file). A red run means one of the 4 logins needs fixing; the other accounts still update.
 name: snapshot
 on:
   schedule:
-    - cron: '30 23 * * *' # 06:30 WIB, after the 19:17 WIB and 12:23 New York posts
+    - cron: '30 3 * * *' # 10:30 WIB, after the last post of the day (18:53 New York)
   workflow_dispatch:
 permissions:
   contents: write

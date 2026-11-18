@@ -1,9 +1,12 @@
-# Daily: render and post the next episode in each language. 12:17 UTC = 19:17 WIB (ID), 17:23 UTC = 12:23 New York (EN).
+# Twice a day per language: post the next episode. ID at 04:47 and 12:17 UTC (11:47 and 19:17 WIB),
+# EN at 17:23 and 23:53 UTC (12:23 and 18:53 New York). Runs are hours apart so the `publish` queue never drops one.
 name: publish
 on:
   schedule:
+    - cron: '47 4 * * *'
     - cron: '17 12 * * *'
     - cron: '23 17 * * *'
+    - cron: '53 23 * * *'
   workflow_dispatch:
     inputs:
       lang:
@@ -20,7 +23,7 @@ permissions:
   contents: write
 jobs:
   publish:
-    # Posts daily, publicly. To pause the schedule set the repo variable POSTING=off; manual runs always work.
+    # Posts twice daily, publicly. To pause the schedule set the repo variable POSTING=off; manual runs always work.
     if: github.event_name == 'workflow_dispatch' || vars.POSTING != 'off'
     runs-on: ubuntu-latest
     timeout-minutes: 120
@@ -32,7 +35,7 @@ jobs:
       - run: node scripts/publish.ts --lang "$POST_LANG" $DRY $ONLY
         env:
           ONLY: ${{ inputs.only && format('--only {0}', inputs.only) || '' }}
-          POST_LANG: ${{ github.event.schedule == '17 12 * * *' && 'id' || inputs.lang || 'en' }}
+          POST_LANG: ${{ (github.event.schedule == '47 4 * * *' || github.event.schedule == '17 12 * * *') && 'id' || inputs.lang || 'en' }}
           DRY: ${{ inputs.dry_run && '--dry-run' || '' }}
           PRIVACY: ${{ vars.PRIVACY || 'public' }}
           GH_TOKEN: ${{ github.token }} # to download the reviewed render from the videos release

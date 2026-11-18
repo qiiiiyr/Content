@@ -37,8 +37,8 @@ write is for `N`. Posting goes oldest first, so batches simply queue up behind e
    each one short and actionable ("first scene must show the object, not a title card"). If `decision.action` is
    `switch`, set `currentTheme` to `decision.to` and `themeSince` to the Monday of week N+1 (the switch starts the
    week after this batch). Never edit `thresholds` unless the human asked.
-6. **Write 7 episodes in `episodes/N/`**, folders `1-<slug>` … `7-<slug>`, posted in that order, one per day:
-   - 5 on `currentTheme` (`"test": false`) and 2 on `testTheme` (`"test": true`) in slots 3 and 6.
+6. **Write 14 episodes in `episodes/N/`**, folders `1-<slug>` … `14-<slug>`, posted in that order, two per day:
+   - 10 on `currentTheme` (`"test": false`) and 4 on `testTheme` (`"test": true`) in slots 3, 6, 10 and 13.
    - Topic priority: follow-ups of `followups`, then topics suggested by competitor hits (rewritten in our own
      words and visuals, never copied), then `themes.json` ideas. Never repeat a topic already in `episodes/`.
    - Copy the structure of `episodes/2026-W47/1-four-stroke/`: `meta.json` (narration per scene in both languages,
@@ -88,7 +88,7 @@ CI renders and checks every episode in both languages on the pull request, so do
 
 ## Keep the run cheap
 
-Each run should cost well under the first one (about $4). Use at most 8 web searches in total and at most 3 reference images (the stats file already
+Each run writes 14 episodes and should cost about $4-6. Use at most 12 web searches in total and at most 3 reference images (the stats file already
 holds the competitor data). Do not read `graphify-out/` or run graphify. Do not re-read files you already read.
 Write each episode file once; `npm test` is the check, not a second read. Stop after a green `npm test`, the one
 contact-sheet image and the pull request.

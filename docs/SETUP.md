@@ -128,8 +128,8 @@ Meta calls it the "Instagram Graph API". It is not a separate site: you make a M
 1. Settings → General → make `main` the default branch (scheduled workflows only run there).
 2. Settings → Actions → General → Workflow permissions: **Read and write**, and tick "Allow GitHub Actions to create
    and approve pull requests" (needed for the preview comments).
-3. Add the 8 secrets from parts 2 and 4. Posting is **on and public** by default: every day at 19:17 WIB (ID) and
-   12:23 New York time (EN). Two optional repository **variables** (Settings → Secrets and variables → Actions →
+3. Add the 8 secrets from parts 2 and 4. Posting is **on and public** by default: twice a day: 11:47 and 19:17 WIB (ID), and
+   12:23 and 18:53 New York time (EN). Two optional repository **variables** (Settings → Secrets and variables → Actions →
    Variables) change that: `POSTING` = `off` pauses the schedule, `PRIVACY` = `private` uploads YouTube videos as
    private (Instagram has no private mode).
 4. **Check logins.** Actions → **publish** → Run workflow → lang `en`, dry run ticked. The log prints, for each of the
@@ -139,9 +139,9 @@ Meta calls it the "Instagram Graph API". It is not a separate site: you make a M
    Both are public unless `PRIVACY` = `private`. Look at both.
 6. Actions → **collect stats** → Run workflow: writes `data/stats/<week>.json`. Its `unresolvedCompetitors` list shows
    handles the weekly review will fix.
-7. Actions → **snapshot** runs every morning at 06:30 WIB and writes `data/snapshot.json` (followers, views, likes and
+7. Actions → **snapshot** runs every day at 10:30 WIB and writes `data/snapshot.json` (followers, views, likes and
    comments for all 4 accounts). A red run means one login needs fixing; the dashboard shows these numbers.
-8. Done: posting runs daily at 19:17 WIB (ID) and 12:23 New York time (EN), one episode per language, until the queue
+8. Done: posting runs twice a day per language (times in step 3), one episode each time, until the queue
    runs out (the weekly pull request refills it).
 
 ## If something fails
