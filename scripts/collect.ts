@@ -70,7 +70,8 @@ if (!offline) {
 }
 
 const th = strategy.thresholds;
-const hits = findHits(videos, th.hitMultiple, th.hitWindowDays, now);
+// a channel listed under several themes is fetched once per theme; count each video once
+const hits = findHits([...new Map(videos.map((v) => [v.url, v])).values()], th.hitMultiple, th.hitWindowDays, now);
 const decision = decide(episodes, hits, themes.map((t) => t.key), strategy, now);
 const week = isoWeek(now);
 const out = {
@@ -82,7 +83,7 @@ const out = {
 	episodes: episodes.sort((a, b) => b.score - a.score),
 	posts: own,
 	competitorHits: hits.slice(0, 40),
-	unresolvedCompetitors: unresolved,
+	unresolvedCompetitors: [...new Set(unresolved)],
 };
 mkdirSync('data/stats', {recursive: true});
 writeFileSync(`data/stats/${week}.json`, JSON.stringify(out, null, 2) + '\n');

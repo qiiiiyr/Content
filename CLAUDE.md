@@ -17,6 +17,8 @@ write is for `N`. Posting goes oldest first, so batches simply queue up behind e
 2. **Research competitors.** Look at the hit videos' titles and topics. Use web search for what is trending in the
    current theme. Fix every handle in `unresolvedCompetitors` in `themes.json` (find the real handle or remove it).
    Add Instagram competitors (Business/Creator usernames) where `instagram` lists are empty.
+   Keep at least 3 channels per theme that make **3D or animated mechanical explainers** (the look we want to match),
+   checked to exist, since step 3 learns the look from them.
 3. **Raise the look (one upgrade a week).** The goal is for our 3D to match the best competitor content, so study what
    already wins. From `competitorHits`, take the 3 with the highest `engagement` (likes + comments per view, YouTube) or
    `multiple` that are animated or 3D explainers. For each, `curl -sL -o out/ref-N.jpg "<thumb>"` and view the image
