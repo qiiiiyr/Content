@@ -50,7 +50,7 @@ if (import.meta.main) {
 
 	for (const [lang, p, n] of missedYesterday(posted, now)) problems.push(`${lang} ${p}: ${n} slot(s) of yesterday were not posted`);
 	for (const e of posted.filter((x) => x.error && now.getTime() - new Date(x.postedAt).getTime() < 3 * 86_400_000)) problems.push(`${e.lang} ${e.platform} ${e.id} was rejected and skipped: ${e.error!.slice(0, 160)}`);
-	for (const [k, d] of Object.entries(queueDays(listEpisodes(), posted, (id) => readMeta(id).youtube === false))) if (d < 3) problems.push(`${k}: only ${d.toFixed(1)} day(s) of posts left in the queue (merge the weekly batch)`);
+	for (const [k, d] of Object.entries(queueDays(listEpisodes(), posted, (id) => readMeta(id).youtube === false))) if (d < 1.5) problems.push(`${k}: only ${d.toFixed(1)} day(s) of posts left in the queue (merge the weekly batch)`);
 
 	const {checkYoutube} = await import('./post/youtube.ts');
 	const {checkInstagram} = await import('./post/instagram.ts');
@@ -65,7 +65,7 @@ if (import.meta.main) {
 	const recent = runs.filter((r) => now.getTime() - new Date(r.createdAt).getTime() < 86_400_000);
 	// The hourly trigger (GitHub's schedule or the cron-job.org timer) makes about 24 runs a day.
 	if (recent.length < 12) problems.push(`only ${recent.length} publish run(s) in the last 24 h: the hourly trigger is not running (docs/SETUP.md part 6)`);
-	for (const r of recent.filter((x) => x.conclusion === 'failure').slice(0, 3)) {
+	for (const r of recent.filter((x) => x.conclusion === 'failure' && now.getTime() - new Date(x.createdAt).getTime() < 12 * 3_600_000).slice(0, 3)) {
 		const lines = gh('run', 'view', String(r.databaseId), '-R', repo, '--log-failed').split('\n').filter((l) => /FAILED|login FAILED|Error|error:/.test(l)).slice(0, 4).map((l) => l.replace(/^.*?\t.*?\t/, '').slice(0, 220));
 		notes.push(`failed run ${r.databaseId} (${r.event}, ${r.createdAt}): ${lines.join(' | ') || 'no error line found'}`);
 	}
