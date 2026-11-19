@@ -1,12 +1,12 @@
 {
- "at": "2026-11-18T19:00:24.271Z",
+ "at": "2026-11-19T12:00:30.253Z",
  "channels": [
   {
    "lang": "en",
    "platform": "youtube",
    "name": "CutawayEN",
-   "followers": 0,
-   "views": 1032,
+   "followers": 1,
+   "views": 2359,
    "posts": 2
   },
   {
@@ -14,15 +14,15 @@
    "platform": "instagram",
    "name": "@cutawayen",
    "followers": 0,
-   "views": 424,
-   "posts": 2
+   "views": 663,
+   "posts": 3
   },
   {
    "lang": "id",
    "platform": "youtube",
    "name": "CutawayID",
    "followers": 0,
-   "views": 0,
+   "views": 1,
    "posts": 1
   },
   {
@@ -30,7 +30,7 @@
    "platform": "instagram",
    "name": "@cutawayid",
    "followers": 0,
-   "views": 1526,
+   "views": 1544,
    "posts": 3
   }
  ],
@@ -42,8 +42,8 @@
    "platform": "youtube",
    "url": "https://youtu.be/aQAamtKxKX8",
    "postedAt": "2026-11-18T00:24:07.767Z",
-   "views": 1000,
-   "likes": 30,
+   "views": 1178,
+   "likes": 32,
    "comments": 0
   },
   {
@@ -53,8 +53,8 @@
    "platform": "youtube",
    "url": "https://youtu.be/ONY_QuSKRCU",
    "postedAt": "2026-11-18T17:26:25.113Z",
-   "views": 32,
-   "likes": 1,
+   "views": 1181,
+   "likes": 18,
    "comments": 0
   },
   {
@@ -64,10 +64,10 @@
    "platform": "instagram",
    "url": "https://www.instagram.com/reel/Df3Yqu-iBkF/",
    "postedAt": "2026-11-18T02:01:33.201Z",
-   "views": 202,
+   "views": 203,
    "likes": 3,
    "comments": 0,
-   "reach": 189,
+   "reach": 190,
    "saves": 1,
    "shares": 0
   },
@@ -78,10 +78,24 @@
    "platform": "instagram",
    "url": "https://www.instagram.com/reel/Df45SW4CUg5/",
    "postedAt": "2026-11-18T16:05:55.222Z",
-   "views": 222,
-   "likes": 1,
+   "views": 305,
+   "likes": 3,
    "comments": 0,
-   "reach": 194,
+   "reach": 276,
+   "saves": 0,
+   "shares": 0
+  },
+  {
+   "id": "2026-W48/2-spark-plug",
+   "title": "Your engine makes lightning thousands of times a minute",
+   "lang": "en",
+   "platform": "instagram",
+   "url": "https://www.instagram.com/reel/Df5NR4YCceP/",
+   "postedAt": "2026-11-18T19:00:37.504Z",
+   "views": 155,
+   "likes": 2,
+   "comments": 0,
+   "reach": 148,
    "saves": 0,
    "shares": 0
   },
@@ -92,7 +106,7 @@
    "platform": "youtube",
    "url": "https://youtu.be/Cfy8dvfsWCs",
    "postedAt": "2026-11-18T15:26:43.169Z",
-   "views": 0,
+   "views": 1,
    "likes": 0,
    "comments": 0
   },
@@ -117,10 +131,10 @@
    "platform": "instagram",
    "url": "https://www.instagram.com/reel/Df48Jr0hpqG/",
    "postedAt": "2026-11-18T16:30:57.137Z",
-   "views": 148,
-   "likes": 4,
+   "views": 152,
+   "likes": 5,
    "comments": 0,
-   "reach": 127,
+   "reach": 130,
    "saves": 0,
    "shares": 0
   },
@@ -131,10 +145,10 @@
    "platform": "instagram",
    "url": "https://www.instagram.com/reel/Df48styKJDQ/",
    "postedAt": "2026-11-18T16:35:43.386Z",
-   "views": 127,
+   "views": 141,
    "likes": 0,
    "comments": 0,
-   "reach": 117,
+   "reach": 132,
    "saves": 0,
    "shares": 0
   }
@@ -167,6 +181,34 @@
    "platform": "instagram",
    "followers": 0,
    "views": 1526
+  },
+  {
+   "date": "2026-11-19",
+   "lang": "en",
+   "platform": "youtube",
+   "followers": 1,
+   "views": 2359
+  },
+  {
+   "date": "2026-11-19",
+   "lang": "en",
+   "platform": "instagram",
+   "followers": 0,
+   "views": 663
+  },
+  {
+   "date": "2026-11-19",
+   "lang": "id",
+   "platform": "youtube",
+   "followers": 0,
+   "views": 1
+  },
+  {
+   "date": "2026-11-19",
+   "lang": "id",
+   "platform": "instagram",
+   "followers": 0,
+   "views": 1544
   }
  ]
 }
