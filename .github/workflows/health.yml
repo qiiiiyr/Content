@@ -1,0 +1,58 @@
+# Daily system check. Checks yesterday's posts, rejected posts, the queue, the four logins and the hourly trigger; starts a
+# catch-up post when something is due; and keeps ONE open issue titled "System check: problems" while anything is wrong
+# (GitHub emails the owner), closing it when everything is fine. The daily Claude task reads that issue and fixes what it can.
+name: system check
+on:
+  schedule:
+    - cron: '17 6 * * *' # 13:17 WIB
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: write # to start a catch-up post
+  issues: write
+jobs:
+  health:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/health.ts
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN_EN: ${{ secrets.YT_REFRESH_TOKEN_EN }}
+          YT_REFRESH_TOKEN_ID: ${{ secrets.YT_REFRESH_TOKEN_ID }}
+          IG_USER_ID_EN: ${{ secrets.IG_USER_ID_EN }}
+          IG_USER_ID_ID: ${{ secrets.IG_USER_ID_ID }}
+          IG_TOKEN_EN: ${{ secrets.IG_TOKEN_EN }}
+          IG_TOKEN_ID: ${{ secrets.IG_TOKEN_ID }}
+      - name: Catch up, then report
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -u
+          if [ "$(jq '.due | length' out/health.json)" -gt 0 ]; then
+            gh workflow run publish.yml -R "$REPO" --ref main -f due=true && echo "started a catch-up post"
+          fi
+          {
+            echo "### System check $(date -u +%F)"
+            echo; echo "**Problems**"; jq -r '.problems[] | "- " + .' out/health.json; [ "$(jq '.problems | length' out/health.json)" -eq 0 ] && echo "- none"
+            echo; echo "**Notes**"; jq -r '.notes[] | "- " + .' out/health.json; [ "$(jq '.notes | length' out/health.json)" -eq 0 ] && echo "- none"
+          } > out/report.md
+          cat out/report.md >> "$GITHUB_STEP_SUMMARY"
+          title="System check: problems"
+          n=$(gh issue list -R "$REPO" --state open --search "\"$title\" in:title" --json number --jq '.[0].number // empty')
+          if [ "$(jq '.problems | length' out/health.json)" -gt 0 ]; then
+            if [ -n "$n" ]; then gh issue comment "$n" -R "$REPO" --body-file out/report.md
+            else gh issue create -R "$REPO" --title "$title" --body-file out/report.md; fi
+          elif [ -n "$n" ]; then
+            gh issue close "$n" -R "$REPO" --comment "All checks pass again ($(date -u +%F))."
+          fi

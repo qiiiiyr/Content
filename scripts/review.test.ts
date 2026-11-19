@@ -2,6 +2,7 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {decide, findHits, followups, isoWeek, median, parseChecklist, untick, type EpisodeScore, type Strategy} from './review.ts';
 import {duePlatforms, mergePosted, missingSecrets, nextToPost} from './publish.ts';
+import {missedYesterday, queueDays} from './health.ts';
 
 const now = new Date('2026-12-20T00:00:00Z');
 const strategy: Strategy = {
@@ -142,4 +143,16 @@ test('hourly run posts what is due today and catches up missed slots', () => {
 test('missing secrets are named per language and platform', () => {
 	assert.deepEqual(missingSecrets(['youtube', 'instagram'], 'id', {YT_CLIENT_ID: 'x', YT_CLIENT_SECRET: 'x', YT_REFRESH_TOKEN_EN: 'x', IG_USER_ID_ID: 'x'}), ['YT_REFRESH_TOKEN_ID', 'IG_TOKEN_ID']);
 	assert.deepEqual(missingSecrets(['instagram'], 'en', {IG_USER_ID_EN: 'x', IG_TOKEN_EN: 'x'}), []);
+});
+
+test('health: missed slots of yesterday and days left in the queue', () => {
+	const mk = (lang: 'en' | 'id', platform: 'youtube' | 'instagram', postedAt: string, id = 'x') => ({id, lang, platform, mediaId: 'm', postedAt});
+	// id day 2026-11-19 (WIB): youtube once, instagram twice. Only one Instagram post was made.
+	const posted = [mk('id', 'youtube', '2026-11-18T10:00:00Z'), mk('id', 'youtube', '2026-11-19T10:00:00Z'), mk('id', 'instagram', '2026-11-19T04:50:00Z')];
+	assert.deepEqual(missedYesterday(posted, new Date('2026-11-20T03:00:00Z')).filter(([l]) => l === 'id'), [['id', 'instagram', 1]]);
+	// nothing existed before that day: not a miss
+	assert.deepEqual(missedYesterday([mk('id', 'youtube', '2026-11-19T10:00:00Z')], new Date('2026-11-20T03:00:00Z')), []);
+	// 3 episodes, one posted to Instagram in en: 2 left = 1 day
+	assert.equal(queueDays(['a', 'b', 'c'], [mk('en', 'instagram', '2026-11-18T10:00:00Z', 'a')], () => false)['en instagram'], 1);
+	assert.equal(queueDays(['a', 'b', 'c'], [], (id) => id !== 'a')['id youtube'], 1);
 });
