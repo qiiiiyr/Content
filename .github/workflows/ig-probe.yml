@@ -25,6 +25,7 @@ jobs:
           REPO: ${{ github.repository }}
           FILES: ${{ inputs.files }} # passed as data, never pasted into the script
           PROBE_LANG: ${{ inputs.lang }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
           IG_USER_ID_EN: ${{ secrets.IG_USER_ID_EN }}
           IG_TOKEN_EN: ${{ secrets.IG_TOKEN_EN }}
           IG_USER_ID_ID: ${{ secrets.IG_USER_ID_ID }}

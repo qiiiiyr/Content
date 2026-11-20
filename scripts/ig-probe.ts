@@ -32,3 +32,22 @@ for (const file of files) {
 		await new Promise((r) => setTimeout(r, 10_000));
 	}
 }
+
+// Also the other route: Meta fetches the video itself from its public link in the `videos` release (no rupload).
+const repo = process.env.GITHUB_REPOSITORY;
+const first = files[0]?.split('/').pop();
+if (repo && first && !first.startsWith('reencoded')) {
+	const url = `https://github.com/${repo}/releases/download/videos/${first}`;
+	console.log(`== video_url ${url}`);
+	const q = new URLSearchParams({media_type: 'REELS', video_url: url, caption: 'upload test', access_token: token});
+	const container = await tryApi(`${GRAPH}/${user}/media?${q}`, {method: 'POST'});
+	show('container', container);
+	for (let i = 0; container.id && i < 30; i++) {
+		const s = await tryApi(`${GRAPH}/${container.id}?fields=status_code,status&access_token=${token}`);
+		if (i === 29 || s.failed || ['FINISHED', 'ERROR', 'EXPIRED'].includes(s.status_code)) {
+			show('processing', s);
+			break;
+		}
+		await new Promise((r) => setTimeout(r, 10_000));
+	}
+}
