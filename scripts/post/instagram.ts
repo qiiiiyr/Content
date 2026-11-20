@@ -42,23 +42,21 @@ export const instagramCopy = (file: string): string => {
 	return file;
 };
 
-/** Uploads the file directly (resumable), so the video never needs a public URL. */
-export const uploadInstagram = async (file: string, lang: Lang, caption: string): Promise<string> => {
+/** Uploads the file directly (resumable), so the video never needs a public URL. Meta refuses direct uploads to an
+ * account for hours at a time (rupload ProcessingFailedError: @cutawayid, Nov 18-20) while accepting the same video by
+ * link, so with `publicUrl` (the reviewed render in the public `videos` release) it then lets Instagram fetch it instead. */
+export const uploadInstagram = async (file: string, lang: Lang, caption: string, publicUrl?: string): Promise<string> => {
 	const {user, token} = await igUser(lang);
 	const video = instagramCopy(file);
-	const q = new URLSearchParams({media_type: 'REELS', upload_type: 'resumable', share_to_feed: 'true', caption, access_token: token});
-	let container: {id: string; uri: string};
-	for (let attempt = 1; ; attempt++) {
-		container = await api(`${GRAPH}/${user}/media?${q}`, {method: 'POST'});
-		try {
-			await api(container.uri, {method: 'POST', headers: {Authorization: `OAuth ${token}`, offset: '0', file_size: String(statSync(video).size)}, body: readFileSync(video)});
-			break;
-		} catch (e) {
-			// Meta's advice for this error: upload again in a NEW upload session (the old one stays failed).
-			if (attempt >= 2 || !/ProcessingFailedError/.test((e as Error).message)) throw e;
-			console.warn('Instagram refused the upload (ProcessingFailedError): retrying once with a new upload in 60 s');
-			await new Promise((r) => setTimeout(r, 60_000));
-		}
+	const create = (how: Record<string, string>): Promise<{id: string; uri?: string}> =>
+		api(`${GRAPH}/${user}/media?${new URLSearchParams({media_type: 'REELS', share_to_feed: 'true', caption, access_token: token, ...how})}`, {method: 'POST'});
+	let container = await create({upload_type: 'resumable'});
+	try {
+		await api(container.uri!, {method: 'POST', headers: {Authorization: `OAuth ${token}`, offset: '0', file_size: String(statSync(video).size)}, body: readFileSync(video)});
+	} catch (e) {
+		if (!publicUrl || !/ProcessingFailedError/.test((e as Error).message)) throw e;
+		console.warn('Instagram refused the direct upload (ProcessingFailedError): letting Instagram fetch the video from its public link instead');
+		container = await create({video_url: publicUrl});
 	}
 	for (let i = 0; i < 60; i++) {
 		const {status_code, status} = await api(`${GRAPH}/${container.id}?fields=status_code,status&access_token=${token}`);

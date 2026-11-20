@@ -4,9 +4,9 @@ import {competitorYoutube} from './stats/youtube.ts';
 import {checkMeta, sceneCount} from './check.ts';
 import {readMeta} from './lib.ts';
 import {youtubeClient} from './post/youtube.ts';
-import {igUser, instagramCopy} from './post/instagram.ts';
+import {igUser, instagramCopy, uploadInstagram} from './post/instagram.ts';
 import {execFileSync} from 'node:child_process';
-import {mkdtempSync, readFileSync} from 'node:fs';
+import {mkdtempSync, readFileSync, writeFileSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {isAuthError} from './publish.ts';
@@ -101,4 +101,34 @@ test('the Instagram copy meets the Reels spec: audio at most 128 kbps, no edit l
 	const rate = Number(execFileSync('ffprobe', ['-v', 'error', '-select_streams', 'a', '-show_entries', 'stream=bit_rate', '-of', 'csv=p=0', out]).toString());
 	assert.ok(rate <= 130_000, `audio ${rate} bps`);
 	assert.ok(!readFileSync(out).includes('elst'));
+});
+
+test('Instagram: a refused direct upload falls back to Instagram fetching the public link', async () => {
+	const dir = mkdtempSync(join(tmpdir(), 'igu-'));
+	const file = join(dir, 'x.mp4');
+	writeFileSync(file, 'not a video'); // ffmpeg fails on it, so the original is sent: fine for this test
+	const calls: string[] = [];
+	const real = globalThis.fetch;
+	const env = {...process.env};
+	Object.assign(process.env, {IG_USER_ID_ID: '17841400000000000', IG_TOKEN_ID: 'tok'});
+	globalThis.fetch = (async (url: string, init?: RequestInit) => {
+		calls.push(`${init?.method ?? 'GET'} ${url}`);
+		const json = (body: unknown, status = 200) => new Response(JSON.stringify(body), {status});
+		if (url.includes('fields=instagram_business_account')) return json({error: {message: 'nonexisting field (instagram_business_account)'}}, 400);
+		if (url.includes('rupload')) return json({debug_info: {retriable: false, type: 'ProcessingFailedError', message: 'Request processing failed'}}, 400);
+		if (url.includes('/media?') && url.includes('upload_type=resumable')) return json({id: 'c1', uri: 'https://rupload.facebook.com/ig-api-upload/v27.0/c1'});
+		if (url.includes('/media?') && url.includes('video_url=')) return json({id: 'c2'});
+		if (url.includes('/c2?fields=status_code')) return json({status_code: 'FINISHED', status: 'Finished'});
+		if (url.includes('media_publish?creation_id=c2')) return json({id: 'posted-1'});
+		return json({error: {message: `unexpected ${url}`}}, 500);
+	}) as typeof fetch;
+	try {
+		assert.equal(await uploadInstagram(file, 'id', 'caption', 'https://github.com/o/r/releases/download/videos/x.mp4'), 'posted-1');
+		assert.ok(calls.some((c) => c.includes('video_url=https%3A%2F%2Fgithub.com%2Fo%2Fr%2Freleases%2Fdownload%2Fvideos%2Fx.mp4')));
+		// without a public link the refusal is passed on (the episode stays queued)
+		await assert.rejects(uploadInstagram(file, 'id', 'caption'), /ProcessingFailedError/);
+	} finally {
+		globalThis.fetch = real;
+		process.env = env;
+	}
 });

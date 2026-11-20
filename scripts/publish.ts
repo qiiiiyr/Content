@@ -143,7 +143,7 @@ if (import.meta.main && process.argv[2] !== '--merge-into') {
 		for (const platform of next.platforms) {
 			const postedAt = new Date().toISOString();
 			try {
-				const mediaId = platform === 'youtube' ? await uploadYoutube(file, lang, title, text, meta.hashtags) : await uploadInstagram(file, lang, `${title.replace(/\s*#shorts/i, '')}\n\n${text}`);
+				const mediaId = platform === 'youtube' ? await uploadYoutube(file, lang, title, text, meta.hashtags) : await uploadInstagram(file, lang, `${title.replace(/\s*#shorts/i, '')}\n\n${text}`, got ? `https://github.com/${repo}/releases/download/videos/${basename(saved)}` : undefined);
 				posted.push({id: next.id, lang, platform, mediaId, postedAt});
 				console.log(`posted ${platform}: ${mediaId}`);
 			} catch (e) {
