@@ -86,17 +86,22 @@ if (import.meta.main && process.argv[2] !== '--merge-into') {
 		console.log(`${lang}: nothing due right now`);
 		process.exit(0);
 	}
-	// Each platform keeps its own place in the queue: YouTube posts once a day, Instagram twice, so they drift apart.
-	const next = nextToPost(listEpisodes(), posted, lang, (id, p) => due.includes(p) && (!only || p === only) && !(p === 'youtube' && readMeta(id).youtube === false));
-	if (!next || !next.platforms.length) {
+	// Each platform keeps its own place in the queue (YouTube once a day, Instagram twice, so they drift apart), and one run
+	// posts every due platform's next episode: a platform must not wait for another run because YouTube took this one.
+	const byEpisode = new Map<string, Platform[]>();
+	for (const p of due) {
+		if (only && p !== only) continue;
+		const n = nextToPost(listEpisodes(), posted, lang, (id, q) => q === p && !(p === 'youtube' && readMeta(id).youtube === false));
+		if (n) byEpisode.set(n.id, [...(byEpisode.get(n.id) ?? []), p]);
+	}
+	const jobs = [...byEpisode].map(([id, platforms]) => ({id, platforms}));
+	if (!jobs.length) {
 		console.error(`nothing left to post in ${lang}: the queue is empty, merge next week's batch`);
 		process.exit(1); // a red run makes GitHub email the owner instead of the channel going quiet
 	}
-	const meta = readMeta(next.id);
-	const title = meta.title[lang];
-	const text = description(meta, lang);
-	console.log(`${dry ? '[dry run] ' : ''}${lang}: ${next.id} -> ${next.platforms.join(', ')}\n  title: ${title}\n${text.replace(/^/gm, '  | ')}`);
 	if (dry) {
+		const meta = readMeta(jobs[0].id);
+		console.log(`[dry run] ${lang}: ${jobs.map((j) => `${j.id} -> ${j.platforms.join(', ')}`).join('; ')}\n  title: ${meta.title[lang]}\n${description(meta, lang).replace(/^/gm, '  | ')}`);
 		// The dry run also proves the YouTube and Instagram logins work, for both accounts, so setup mistakes show before a real post.
 		const {checkYoutube} = await import('./post/youtube.ts');
 		const {checkInstagram} = await import('./post/instagram.ts');
@@ -104,7 +109,7 @@ if (import.meta.main && process.argv[2] !== '--merge-into') {
 		process.exit(ok.every(Boolean) ? 0 : 1);
 	}
 
-	const missing = missingSecrets(next.platforms, lang, process.env);
+	const missing = missingSecrets([...new Set(jobs.flatMap((j) => j.platforms))], lang, process.env);
 	if (missing.length) {
 		console.error(`missing secrets: ${missing.join(', ')} (see docs/SETUP.md). Nothing rendered or recorded.`);
 		process.exit(1);
@@ -112,39 +117,45 @@ if (import.meta.main && process.argv[2] !== '--merge-into') {
 	const {build, videoFile} = await import('./build.ts');
 	const {uploadYoutube, checkYoutube} = await import('./post/youtube.ts');
 	const {uploadInstagram, checkInstagram} = await import('./post/instagram.ts');
-	// Log in before the 30-minute render. A platform whose login fails is skipped (its post stays queued) and the run
-	// ends red so you hear about it; the other platform still posts on schedule.
-	const loggedIn: Platform[] = [];
-	for (const platform of next.platforms) {
-		if (platform === 'youtube' ? await checkYoutube(lang) : await checkInstagram(lang)) loggedIn.push(platform);
-		else console.error(`${platform} login failed (see above): skipped, the post stays queued.`);
-	}
-	if (!loggedIn.length) process.exit(1);
-	const skipped = loggedIn.length < next.platforms.length;
-	next.platforms = loggedIn;
-	// The weekly preview job saved the exact video the human reviewed in the `videos` release: post that one. Render only
-	// if it is missing (seconds instead of a 30-40 minute render, and what was approved is what goes out).
-	const saved = videoFile(next.id, lang);
-	const repo = process.env.GITHUB_REPOSITORY;
-	const got = repo && spawnSync('gh', ['release', 'download', 'videos', '-R', repo, '-p', basename(saved), '-D', 'out', '--clobber'], {stdio: 'inherit'}).status === 0 && existsSync(saved);
-	console.log(got ? `using the reviewed render ${basename(saved)} from the videos release` : 'no reviewed render saved for this episode: rendering now');
-	const file = got ? saved : build(next.id, lang);
-	let failed = false;
-	for (const platform of next.platforms) {
-		const postedAt = new Date().toISOString();
-		try {
-			const mediaId = platform === 'youtube' ? await uploadYoutube(file, lang, title, text, meta.hashtags) : await uploadInstagram(file, lang, `${title.replace(/\s*#shorts/i, '')}\n\n${text}`);
-			posted.push({id: next.id, lang, platform, mediaId, postedAt});
-			console.log(`posted ${platform}: ${mediaId}`);
-		} catch (e) {
-			failed = true;
-			console.error(`FAILED ${platform}: ${(e as Error).message}`);
-			// A login failure is a setup problem, not this video's: leave the episode queued so it posts once fixed.
-			if (isAuthError((e as Error).message)) continue;
-			// Recorded so one rejected video cannot block the queue; the red run tells the owner.
-			posted.push({id: next.id, lang, platform, mediaId: '', postedAt, error: (e as Error).message.slice(0, 500)});
+	let exitCode = 0;
+	for (const next of jobs) {
+		const meta = readMeta(next.id);
+		const title = meta.title[lang];
+		const text = description(meta, lang);
+		console.log(`${lang}: ${next.id} -> ${next.platforms.join(', ')}\n  title: ${title}\n${text.replace(/^/gm, '  | ')}`);
+		// Log in before the 30-minute render. A platform whose login fails is skipped (its post stays queued) and the run
+		// ends red so you hear about it; the other platform still posts on schedule.
+		const loggedIn: Platform[] = [];
+		for (const platform of next.platforms) {
+			if (platform === 'youtube' ? await checkYoutube(lang) : await checkInstagram(lang)) loggedIn.push(platform);
+			else console.error(`${platform} login failed (see above): skipped, the post stays queued.`);
 		}
-		writeFileSync(STATE, JSON.stringify(posted, null, 2) + '\n'); // saved per platform so a later failure never causes a double post
+		if (loggedIn.length < next.platforms.length) exitCode = 1;
+		if (!loggedIn.length) continue;
+		next.platforms = loggedIn;
+		// The weekly preview job saved the exact video the human reviewed in the `videos` release: post that one. Render only
+		// if it is missing (seconds instead of a 30-40 minute render, and what was approved is what goes out).
+		const saved = videoFile(next.id, lang);
+		const repo = process.env.GITHUB_REPOSITORY;
+		const got = repo && spawnSync('gh', ['release', 'download', 'videos', '-R', repo, '-p', basename(saved), '-D', 'out', '--clobber'], {stdio: 'inherit'}).status === 0 && existsSync(saved);
+		console.log(got ? `using the reviewed render ${basename(saved)} from the videos release` : 'no reviewed render saved for this episode: rendering now');
+		const file = got ? saved : build(next.id, lang);
+		for (const platform of next.platforms) {
+			const postedAt = new Date().toISOString();
+			try {
+				const mediaId = platform === 'youtube' ? await uploadYoutube(file, lang, title, text, meta.hashtags) : await uploadInstagram(file, lang, `${title.replace(/\s*#shorts/i, '')}\n\n${text}`);
+				posted.push({id: next.id, lang, platform, mediaId, postedAt});
+				console.log(`posted ${platform}: ${mediaId}`);
+			} catch (e) {
+				exitCode = 1;
+				console.error(`FAILED ${platform}: ${(e as Error).message}`);
+				// A login failure is a setup problem, not this video's: leave the episode queued so it posts once fixed.
+				if (isAuthError((e as Error).message)) continue;
+				// Recorded so one rejected video cannot block the queue; the red run tells the owner.
+				posted.push({id: next.id, lang, platform, mediaId: '', postedAt, error: (e as Error).message.slice(0, 500)});
+			}
+			writeFileSync(STATE, JSON.stringify(posted, null, 2) + '\n'); // saved per platform so a later failure never causes a double post
+		}
 	}
-	if (failed || skipped) process.exit(1);
+	if (exitCode) process.exit(1);
 }
