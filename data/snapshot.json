@@ -1,21 +1,21 @@
 {
- "at": "2026-11-19T12:00:30.253Z",
+ "at": "2026-11-20T12:02:11.575Z",
  "channels": [
   {
    "lang": "en",
    "platform": "youtube",
    "name": "CutawayEN",
    "followers": 1,
-   "views": 2359,
-   "posts": 2
+   "views": 2766,
+   "posts": 3
   },
   {
    "lang": "en",
    "platform": "instagram",
    "name": "@cutawayen",
    "followers": 0,
-   "views": 663,
-   "posts": 3
+   "views": 1024,
+   "posts": 5
   },
   {
    "lang": "id",
@@ -23,15 +23,15 @@
    "name": "CutawayID",
    "followers": 0,
    "views": 1,
-   "posts": 1
+   "posts": 2
   },
   {
    "lang": "id",
    "platform": "instagram",
    "name": "@cutawayid",
    "followers": 0,
-   "views": 1544,
-   "posts": 3
+   "views": 1681,
+   "posts": 4
   }
  ],
  "posts": [
@@ -42,8 +42,8 @@
    "platform": "youtube",
    "url": "https://youtu.be/aQAamtKxKX8",
    "postedAt": "2026-11-18T00:24:07.767Z",
-   "views": 1178,
-   "likes": 32,
+   "views": 1256,
+   "likes": 34,
    "comments": 0
   },
   {
@@ -53,8 +53,19 @@
    "platform": "youtube",
    "url": "https://youtu.be/ONY_QuSKRCU",
    "postedAt": "2026-11-18T17:26:25.113Z",
-   "views": 1181,
+   "views": 1225,
    "likes": 18,
+   "comments": 0
+  },
+  {
+   "id": "2026-W48/2-spark-plug",
+   "title": "Your engine makes lightning thousands of times a minute",
+   "lang": "en",
+   "platform": "youtube",
+   "url": "https://youtu.be/8x9RM7Cztyk",
+   "postedAt": "2026-11-19T22:25:20.377Z",
+   "views": 285,
+   "likes": 4,
    "comments": 0
   },
   {
@@ -78,10 +89,10 @@
    "platform": "instagram",
    "url": "https://www.instagram.com/reel/Df45SW4CUg5/",
    "postedAt": "2026-11-18T16:05:55.222Z",
-   "views": 305,
-   "likes": 3,
+   "views": 356,
+   "likes": 6,
    "comments": 0,
-   "reach": 276,
+   "reach": 319,
    "saves": 0,
    "shares": 0
   },
@@ -100,6 +111,34 @@
    "shares": 0
   },
   {
+   "id": "2026-W48/3-clutch",
+   "title": "Pressing the clutch doesn't connect anything",
+   "lang": "en",
+   "platform": "instagram",
+   "url": "https://www.instagram.com/reel/Df8ZtTQir0z/",
+   "postedAt": "2026-11-20T00:46:54.365Z",
+   "views": 172,
+   "likes": 1,
+   "comments": 0,
+   "reach": 155,
+   "saves": 0,
+   "shares": 0
+  },
+  {
+   "id": "2026-W48/4-flywheel",
+   "title": "Your engine only pushes 1 stroke in 4. So why is it smooth?",
+   "lang": "en",
+   "platform": "instagram",
+   "url": "https://www.instagram.com/reel/Df8t8KvjznZ/",
+   "postedAt": "2026-11-20T03:43:42.754Z",
+   "views": 138,
+   "likes": 1,
+   "comments": 0,
+   "reach": 128,
+   "saves": 0,
+   "shares": 0
+  },
+  {
    "id": "2026-W47/1-four-stroke",
    "title": "Mesinmu meledak 50 kali per detik",
    "lang": "id",
@@ -107,6 +146,17 @@
    "url": "https://youtu.be/Cfy8dvfsWCs",
    "postedAt": "2026-11-18T15:26:43.169Z",
    "views": 1,
+   "likes": 0,
+   "comments": 0
+  },
+  {
+   "id": "2026-W48/1-turbo",
+   "title": "Part ini berputar 100.000 kali per menit",
+   "lang": "id",
+   "platform": "youtube",
+   "url": "https://youtu.be/BYWAFnOiKKI",
+   "postedAt": "2026-11-19T13:50:48.970Z",
+   "views": 0,
    "likes": 0,
    "comments": 0
   },
@@ -134,7 +184,7 @@
    "views": 152,
    "likes": 5,
    "comments": 0,
-   "reach": 130,
+   "reach": 131,
    "saves": 0,
    "shares": 0
   },
@@ -149,6 +199,20 @@
    "likes": 0,
    "comments": 0,
    "reach": 132,
+   "saves": 0,
+   "shares": 0
+  },
+  {
+   "id": "2026-W48/3-clutch",
+   "title": "Injak kopling itu bukan menyambung, tapi melepas",
+   "lang": "id",
+   "platform": "instagram",
+   "url": "https://www.instagram.com/reel/Df8aWrjPYQJ/",
+   "postedAt": "2026-11-20T00:52:36.152Z",
+   "views": 137,
+   "likes": 1,
+   "comments": 0,
+   "reach": 131,
    "saves": 0,
    "shares": 0
   }
@@ -209,6 +273,34 @@
    "platform": "instagram",
    "followers": 0,
    "views": 1544
+  },
+  {
+   "date": "2026-11-20",
+   "lang": "en",
+   "platform": "youtube",
+   "followers": 1,
+   "views": 2766
+  },
+  {
+   "date": "2026-11-20",
+   "lang": "en",
+   "platform": "instagram",
+   "followers": 0,
+   "views": 1024
+  },
+  {
+   "date": "2026-11-20",
+   "lang": "id",
+   "platform": "youtube",
+   "followers": 0,
+   "views": 1
+  },
+  {
+   "date": "2026-11-20",
+   "lang": "id",
+   "platform": "instagram",
+   "followers": 0,
+   "views": 1681
   }
  ]
 }
