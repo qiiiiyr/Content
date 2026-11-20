@@ -4,7 +4,11 @@ import {competitorYoutube} from './stats/youtube.ts';
 import {checkMeta, sceneCount} from './check.ts';
 import {readMeta} from './lib.ts';
 import {youtubeClient} from './post/youtube.ts';
-import {igUser} from './post/instagram.ts';
+import {igUser, instagramCopy} from './post/instagram.ts';
+import {execFileSync} from 'node:child_process';
+import {mkdtempSync, readFileSync} from 'node:fs';
+import {tmpdir} from 'node:os';
+import {join} from 'node:path';
 import {isAuthError} from './publish.ts';
 import {api} from './http.ts';
 
@@ -85,4 +89,16 @@ test('Instagram: a saved Facebook Page ID is resolved to the linked Instagram ac
 	} finally {
 		globalThis.fetch = real;
 	}
+});
+
+test('the Instagram copy meets the Reels spec: audio at most 128 kbps, no edit lists', () => {
+	const dir = mkdtempSync(join(tmpdir(), 'ig-'));
+	const src = join(dir, 'x.mp4');
+	// A 2-second clip with 320 kbps audio, like our renders.
+	execFileSync('ffmpeg', ['-v', 'error', '-f', 'lavfi', '-i', 'testsrc=size=720x1280:rate=30:duration=2', '-f', 'lavfi', '-i', 'sine=duration=2', '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '320k', '-shortest', src]);
+	const out = instagramCopy(src);
+	assert.equal(out, join(dir, 'x.ig.mp4'));
+	const rate = Number(execFileSync('ffprobe', ['-v', 'error', '-select_streams', 'a', '-show_entries', 'stream=bit_rate', '-of', 'csv=p=0', out]).toString());
+	assert.ok(rate <= 130_000, `audio ${rate} bps`);
+	assert.ok(!readFileSync(out).includes('elst'));
 });

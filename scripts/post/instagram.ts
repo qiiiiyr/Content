@@ -1,3 +1,4 @@
+import {spawnSync} from 'node:child_process';
 import {readFileSync, statSync} from 'node:fs';
 import {api, env} from '../http.ts';
 import type {Lang} from '../../src/types.ts';
@@ -30,12 +31,35 @@ export const igUser = (lang: Lang): Promise<{user: string; token: string; fromPa
 	return resolved.get(key)!;
 };
 
+/** Instagram's Reels spec allows AAC audio of at most 128 kbps and no edit lists; our renders carry 317 kbps audio and
+ * edit lists, which Meta refused some of the time (rupload ProcessingFailedError). This copy fixes both and leaves the
+ * video untouched (about 2 seconds). If ffmpeg fails, the original is uploaded as before. */
+export const instagramCopy = (file: string): string => {
+	const out = file.replace(/\.mp4$/, '.ig.mp4');
+	const r = spawnSync('ffmpeg', ['-v', 'error', '-y', '-i', file, '-map', '0:v:0', '-map', '0:a:0', '-c:v', 'copy', '-c:a', 'aac', '-b:a', '128k', '-ar', '48000', '-ac', '2', '-use_editlist', '0', '-movflags', '+faststart', out], {stdio: 'inherit'});
+	if (r.status === 0) return out;
+	console.warn('could not make the Instagram-spec copy: uploading the original');
+	return file;
+};
+
 /** Uploads the file directly (resumable), so the video never needs a public URL. */
 export const uploadInstagram = async (file: string, lang: Lang, caption: string): Promise<string> => {
 	const {user, token} = await igUser(lang);
+	const video = instagramCopy(file);
 	const q = new URLSearchParams({media_type: 'REELS', upload_type: 'resumable', share_to_feed: 'true', caption, access_token: token});
-	const container = await api(`${GRAPH}/${user}/media?${q}`, {method: 'POST'});
-	await api(container.uri, {method: 'POST', headers: {Authorization: `OAuth ${token}`, offset: '0', file_size: String(statSync(file).size)}, body: readFileSync(file)});
+	let container: {id: string; uri: string};
+	for (let attempt = 1; ; attempt++) {
+		container = await api(`${GRAPH}/${user}/media?${q}`, {method: 'POST'});
+		try {
+			await api(container.uri, {method: 'POST', headers: {Authorization: `OAuth ${token}`, offset: '0', file_size: String(statSync(video).size)}, body: readFileSync(video)});
+			break;
+		} catch (e) {
+			// Meta's advice for this error: upload again in a NEW upload session (the old one stays failed).
+			if (attempt >= 2 || !/ProcessingFailedError/.test((e as Error).message)) throw e;
+			console.warn('Instagram refused the upload (ProcessingFailedError): retrying once with a new upload in 60 s');
+			await new Promise((r) => setTimeout(r, 60_000));
+		}
+	}
 	for (let i = 0; i < 60; i++) {
 		const {status_code, status} = await api(`${GRAPH}/${container.id}?fields=status_code,status&access_token=${token}`);
 		if (status_code === 'FINISHED') return (await api(`${GRAPH}/${user}/media_publish?creation_id=${container.id}&access_token=${token}`, {method: 'POST'})).id;
