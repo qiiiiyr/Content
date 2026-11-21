@@ -1,0 +1,55 @@
+{
+  "theme": "engines-inside",
+  "test": false,
+  "youtube": false,
+  "title": {
+    "en": "A fuel injector opens for a few thousandths of a second #shorts",
+    "id": "Injektor bensin terbuka cuma beberapa per seribu detik #shorts"
+  },
+  "description": {
+    "en": "How fuel injection replaced the carburetor: sensors, a computer, and a precisely timed spray.",
+    "id": "Cara injeksi bahan bakar menggantikan karburator: sensor, komputer, dan semprotan yang waktunya presisi."
+  },
+  "hashtags": [
+    "fuelinjection",
+    "engine",
+    "cars",
+    "howitworks",
+    "mechanics"
+  ],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Fuel_injection",
+    "https://en.wikipedia.org/wiki/Carburetor",
+    "https://en.wikipedia.org/wiki/Air%E2%80%93fuel_ratio"
+  ],
+  "scenes": [
+    {
+      "en": "A fuel injector opens for just *a few thousandths* of a second.",
+      "id": "Injektor bensin terbuka cuma *beberapa per seribu* detik."
+    },
+    {
+      "en": "Old engines used a *carburetor*: air rushing past sucks fuel in, with no brain at all.",
+      "id": "Mesin lama pakai *karburator*: udara yang lewat menyedot bensin, tanpa otak sama sekali."
+    },
+    {
+      "en": "Now a computer reads *air flow*, temperature and throttle, many times a second.",
+      "id": "Sekarang komputer membaca *aliran udara*, suhu, dan bukaan gas, berkali-kali per detik."
+    },
+    {
+      "en": "It decides exactly how much fuel is needed, then *times the spray* with the intake valve.",
+      "id": "Komputer menentukan takaran bensin yang pas, lalu *mengatur waktu semprotan* sesuai katup isap."
+    },
+    {
+      "en": "Port injection sprays into the intake port. *Direct injection* sprays straight into the cylinder.",
+      "id": "Injeksi port menyemprot ke saluran isap. *Injeksi langsung* menyemprot tepat ke dalam silinder."
+    },
+    {
+      "en": "The target is the right mix: about *14.7 parts air to 1 part fuel* for petrol.",
+      "id": "Targetnya campuran yang pas: sekitar *14,7 bagian udara untuk 1 bagian bensin*."
+    },
+    {
+      "en": "Too rich wastes fuel, too lean runs hot. Follow for more.",
+      "id": "Terlalu kaya boros bensin, terlalu miskin bikin mesin panas. Follow untuk video lainnya."
+    }
+  ]
+}
