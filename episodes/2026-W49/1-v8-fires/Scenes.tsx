@@ -25,7 +25,7 @@ const V8 = ({cam, offs = EVEN, turns = 2, children}: {cam: CamKey[]; offs?: numb
 };
 
 const Hook = () => (
-	<V8 turns={3} cam={[{t: 0, pos: [0, 6, 21], look: [0, 1.8, -1.5]}, {t: 1, pos: [3, 5.5, 18], look: [0, 1.8, -1.5]}]}>
+	<V8 turns={3} cam={[{t: 0, pos: [0, 6, 21], look: [0, 0.0, -1.5]}, {t: 1, pos: [3, 5.5, 18], look: [0, 0.0, -1.5]}]}>
 		<Readout label="POWER STROKES" from={0} to={4} unit="per crank turn" at={[0.05, 0.5]} />
 	</V8>
 );
@@ -33,19 +33,19 @@ const Hook = () => (
 const One = () => {
 	const {p, sec} = useScene();
 	return (
-		<Stage cam={[{t: 0, pos: [4, 6, 10], look: [0, 3.6, 0]}, {t: 1, pos: [-2, 4.5, 11], look: [0, 3.6, 0]}]}>
+		<Stage cam={[{t: 0, pos: [4, 6, 15], look: [0, 3.4, 0]}, {t: 1, pos: [-2, 4.5, 15], look: [0, 3.6, 0]}]}>
 			<Engine s={cycleState(p * 720, sec)} />
 		</Stage>
 	);
 };
 
-const Eight = () => <V8 cam={[{t: 0, pos: [-8, 7, 26], look: [0.6, 1.8, -1.5]}, {t: 1, pos: [0, 5, 23], look: [0.6, 1.8, -1.5]}]} />;
-const Overlap = () => <V8 turns={3} cam={[{t: 0, pos: [0, 3, 25], look: [0.6, 2.4, -1.5]}, {t: 1, pos: [6, 8, 24], look: [0.6, 1.8, -1.5]}]} />;
-const Uneven = () => <V8 offs={UNEVEN} turns={3} cam={[{t: 0, pos: [6, 5, 24], look: [0.6, 3, -1.5]}, {t: 1, pos: [-3, 6, 24], look: [0.6, 3, -1.5]}]} />;
-const Flat = () => <V8 turns={3} cam={[{t: 0, pos: [-4, 6, 25], look: [0.6, 1.8, -1.5]}, {t: 1, pos: [4, 4.5, 21], look: [0.6, 2.5, -1.5]}]} />;
+const Eight = () => <V8 cam={[{t: 0, pos: [-8, 7, 26], look: [0.6, 0.0, -1.5]}, {t: 1, pos: [0, 5, 23], look: [0.6, 0.0, -1.5]}]} />;
+const Overlap = () => <V8 turns={3} cam={[{t: 0, pos: [0, 3, 25], look: [0.6, 0.6, -1.5]}, {t: 1, pos: [6, 8, 24], look: [0.6, 0.0, -1.5]}]} />;
+const Uneven = () => <V8 offs={UNEVEN} turns={3} cam={[{t: 0, pos: [6, 5, 24], look: [0.6, 1.2, -1.5]}, {t: 1, pos: [-3, 6, 24], look: [0.6, 1.2, -1.5]}]} />;
+const Flat = () => <V8 turns={3} cam={[{t: 0, pos: [-4, 6, 25], look: [0.6, 0.0, -1.5]}, {t: 1, pos: [4, 4.5, 21], look: [0.6, 0.7, -1.5]}]} />;
 
 const Finale = () => (
-	<V8 cam={[{t: 0, pos: [0, 5, 30], look: [0.6, 1.2, -1.5]}, {t: 1, pos: [0, 5.5, 36], look: [0.6, 1.2, -1.5]}]}>
+	<V8 cam={[{t: 0, pos: [0, 5, 30], look: [0.6, -0.6, -1.5]}, {t: 1, pos: [0, 5.5, 36], look: [0.6, -0.6, -1.5]}]}>
 		<PaperTag at={0.4} lines={{en: ['CUTAWAY', 'ENGINE LAB', 'No. 008'], id: ['BONGKAR PASANG', 'LAB MESIN', 'No. 008']}} />
 	</V8>
 );
