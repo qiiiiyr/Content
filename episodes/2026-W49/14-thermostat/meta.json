@@ -1,0 +1,55 @@
+{
+  "theme": "engines-inside",
+  "test": false,
+  "youtube": false,
+  "title": {
+    "en": "Your engine wants to be hot #shorts",
+    "id": "Mesinmu justru ingin panas #shorts"
+  },
+  "description": {
+    "en": "How an engine thermostat works: a wax pellet that opens the coolant flow at operating temperature.",
+    "id": "Cara kerja termostat mesin: pelet lilin yang membuka aliran coolant saat suhu kerja tercapai."
+  },
+  "hashtags": [
+    "thermostat",
+    "cooling",
+    "engine",
+    "cars",
+    "howitworks"
+  ],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Engine_cooling",
+    "https://en.wikipedia.org/wiki/Thermostat",
+    "https://en.wikipedia.org/wiki/Radiator_(engine_cooling)"
+  ],
+  "scenes": [
+    {
+      "en": "Your engine *wants to be hot*, but not too hot.",
+      "id": "Mesinmu *ingin panas*, tapi jangan kepanasan."
+    },
+    {
+      "en": "Burning fuel makes more heat than metal can survive, so coolant *carries it away*.",
+      "id": "Bensin yang terbakar menghasilkan panas melebihi daya tahan logam, jadi coolant *membawanya pergi*."
+    },
+    {
+      "en": "A pump pushes coolant through channels in the engine, then through a *radiator*.",
+      "id": "Pompa mendorong coolant lewat saluran di mesin, lalu lewat *radiator*."
+    },
+    {
+      "en": "But a cold engine wears faster and wastes fuel, so it *needs to warm up first*.",
+      "id": "Tapi mesin dingin lebih cepat aus dan boros, jadi ia *harus hangat dulu*."
+    },
+    {
+      "en": "The thermostat holds coolant inside the engine until it reaches around *90 degrees Celsius*.",
+      "id": "Termostat menahan coolant di dalam mesin sampai suhunya sekitar *90 derajat Celsius*."
+    },
+    {
+      "en": "Inside is a *wax pellet* that melts and expands, pushing the valve open.",
+      "id": "Di dalamnya ada *pelet lilin* yang meleleh dan memuai, mendorong katup terbuka."
+    },
+    {
+      "en": "In its simplest form: no electronics, just wax. Follow for more.",
+      "id": "Dalam bentuk paling sederhana: tanpa elektronik, cuma lilin. Follow untuk video lainnya."
+    }
+  ]
+}

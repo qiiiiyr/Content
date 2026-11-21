@@ -1,0 +1,54 @@
+{
+  "theme": "grip-and-stopping",
+  "test": true,
+  "title": {
+    "en": "Your ABS pumps the brakes 15 times a second #shorts",
+    "id": "ABS-mu memompa rem 15 kali per detik #shorts"
+  },
+  "description": {
+    "en": "How ABS works: wheel speed sensors, a valve, and pulsing brake pressure so you can still steer.",
+    "id": "Cara kerja ABS: sensor kecepatan roda, katup, dan tekanan rem yang berdenyut supaya kamu tetap bisa membelokkan mobil."
+  },
+  "hashtags": [
+    "abs",
+    "brakes",
+    "cars",
+    "howitworks",
+    "safety"
+  ],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Anti-lock_braking_system",
+    "https://www.britannica.com/technology/antilock-braking-system",
+    "https://en.wikipedia.org/wiki/Wheel_speed_sensor"
+  ],
+  "scenes": [
+    {
+      "en": "Slam the brakes, and your ABS releases them *up to 15 times a second*.",
+      "id": "Injak rem mendadak, dan ABS-mu melepasnya *sampai 15 kali per detik*."
+    },
+    {
+      "en": "Brake too hard and a wheel *locks*: it stops turning and just slides.",
+      "id": "Rem terlalu keras dan roda *terkunci*: berhenti berputar dan cuma meluncur."
+    },
+    {
+      "en": "A sliding tyre grips *less* than a rolling one, and you can't steer with it.",
+      "id": "Ban yang meluncur cengkeramannya *lebih kecil* daripada ban yang berputar, dan kamu nggak bisa membelokkannya."
+    },
+    {
+      "en": "A sensor on each wheel counts its spin. If one slows *too fast*, the computer notices.",
+      "id": "Sensor di tiap roda menghitung putarannya. Kalau satu roda melambat *terlalu cepat*, komputer tahu."
+    },
+    {
+      "en": "It briefly *releases* that wheel's brake pressure with a valve, then clamps again.",
+      "id": "Komputer sesaat *melepas* tekanan rem roda itu lewat katup, lalu menjepit lagi."
+    },
+    {
+      "en": "That pulsing is the *buzz in your pedal*. It keeps the wheel rolling at the edge of grip.",
+      "id": "Denyut itu adalah *getaran di pedal*. Rodanya jadi tetap berputar di batas cengkeraman."
+    },
+    {
+      "en": "The point isn't a shorter stop. It's *steering* while you brake. Send this to a new driver.",
+      "id": "Tujuannya bukan berhenti lebih pendek. Tapi tetap bisa *membelok* sambil mengerem. Kirim ini ke pengemudi baru."
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "theme": "engines-inside",
+  "test": false,
+  "youtube": false,
+  "title": {
+    "en": "A tiny gear starts your whole engine #shorts",
+    "id": "Gigi kecil ini menghidupkan seluruh mesinmu #shorts"
+  },
+  "description": {
+    "en": "How a starter motor turns an engine over: pinion, ring gear, solenoid and one-way clutch.",
+    "id": "Cara starter memutar mesin: pinyon, ring gear, solenoid, dan kopling satu arah."
+  },
+  "hashtags": [
+    "starter",
+    "engine",
+    "cars",
+    "howitworks",
+    "mechanics"
+  ],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Starter_(engine)",
+    "https://en.wikipedia.org/wiki/Overrunning_clutch",
+    "https://en.wikipedia.org/wiki/Bendix_drive"
+  ],
+  "scenes": [
+    {
+      "en": "Your starter spins a whole engine at *a few hundred rpm*, then lets go in a blink.",
+      "id": "Starter memutar seluruh mesin dengan *beberapa ratus rpm*, lalu melepasnya dalam sekejap."
+    },
+    {
+      "en": "An engine can't start itself. It must first be *turned over* to suck, squeeze and fire.",
+      "id": "Mesin nggak bisa menyala sendiri. Ia harus *diputar dulu* untuk menghisap, menekan, dan menyala."
+    },
+    {
+      "en": "A small *pinion gear* slides out and meshes with the big ring gear on the flywheel.",
+      "id": "Sebuah *gigi pinyon* kecil meluncur keluar dan mengait ring gear besar di roda gila."
+    },
+    {
+      "en": "The big ring gear gives *leverage*: a small fast motor turns a heavy engine.",
+      "id": "Ring gear besar memberi *daya ungkit*: motor kecil yang cepat memutar mesin yang berat."
+    },
+    {
+      "en": "The moment the engine fires, it spins *far faster* than the starter ever could.",
+      "id": "Begitu mesin menyala, putarannya *jauh lebih cepat* dari yang sanggup diikuti starter."
+    },
+    {
+      "en": "So the pinion has a *one-way clutch*, and a spring pulls it back out.",
+      "id": "Karena itu pinyon punya *kopling satu arah*, dan pegas menariknya keluar lagi."
+    },
+    {
+      "en": "A tiny gear, a very big job. Follow for more.",
+      "id": "Gigi kecil, tugas yang sangat besar. Follow untuk video lainnya."
+    }
+  ]
+}
