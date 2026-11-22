@@ -1,37 +1,37 @@
 {
- "at": "2026-11-21T11:37:18.800Z",
+ "at": "2026-11-22T11:51:08.033Z",
  "channels": [
   {
    "lang": "en",
    "platform": "youtube",
    "name": "CutawayEN",
-   "followers": 5,
-   "views": 4141,
-   "posts": 4
+   "followers": 6,
+   "views": 5702,
+   "posts": 5
   },
   {
    "lang": "en",
    "platform": "instagram",
    "name": "@cutawayen",
    "followers": 0,
-   "views": 1287,
-   "posts": 7
+   "views": 1428,
+   "posts": 8
   },
   {
    "lang": "id",
    "platform": "youtube",
    "name": "CutawayID",
    "followers": 0,
-   "views": 5,
-   "posts": 3
+   "views": 7,
+   "posts": 4
   },
   {
    "lang": "id",
    "platform": "instagram",
    "name": "@cutawayid",
    "followers": 0,
-   "views": 1812,
-   "posts": 5
+   "views": 2171,
+   "posts": 8
   }
  ],
  "posts": [
@@ -42,7 +42,7 @@
    "platform": "youtube",
    "url": "https://youtu.be/aQAamtKxKX8",
    "postedAt": "2026-11-18T00:24:07.767Z",
-   "views": 1269,
+   "views": 1277,
    "likes": 34,
    "comments": 0
   },
@@ -53,8 +53,8 @@
    "platform": "youtube",
    "url": "https://youtu.be/ONY_QuSKRCU",
    "postedAt": "2026-11-18T17:26:25.113Z",
-   "views": 1245,
-   "likes": 18,
+   "views": 1255,
+   "likes": 19,
    "comments": 0
   },
   {
@@ -64,8 +64,8 @@
    "platform": "youtube",
    "url": "https://youtu.be/8x9RM7Cztyk",
    "postedAt": "2026-11-19T22:25:20.377Z",
-   "views": 444,
-   "likes": 8,
+   "views": 663,
+   "likes": 11,
    "comments": 0
   },
   {
@@ -75,8 +75,19 @@
    "platform": "youtube",
    "url": "https://youtu.be/UmumOXnQ0BE",
    "postedAt": "2026-11-20T17:30:29.608Z",
-   "views": 1183,
+   "views": 1222,
    "likes": 14,
+   "comments": 0
+  },
+  {
+   "id": "2026-W48/4-flywheel",
+   "title": "Your engine only pushes 1 stroke in 4. So why is it smooth?",
+   "lang": "en",
+   "platform": "youtube",
+   "url": "https://youtu.be/OaUr5bipHlA",
+   "postedAt": "2026-11-21T19:44:43.985Z",
+   "views": 1285,
+   "likes": 17,
    "comments": 0
   },
   {
@@ -170,11 +181,25 @@
    "platform": "instagram",
    "url": "https://www.instagram.com/reel/Df-u0e1kyy0/",
    "postedAt": "2026-11-20T22:29:52.428Z",
-   "views": 125,
+   "views": 129,
    "likes": 0,
    "comments": 0,
-   "reach": 116,
+   "reach": 117,
    "saves": 0,
+   "shares": 0
+  },
+  {
+   "id": "2026-W48/7-two-stroke",
+   "title": "This engine fires every turn. Yours fires every other",
+   "lang": "en",
+   "platform": "instagram",
+   "url": "https://www.instagram.com/reel/DgBAuZigvV8/",
+   "postedAt": "2026-11-21T19:44:47.645Z",
+   "views": 137,
+   "likes": 0,
+   "comments": 0,
+   "reach": 123,
+   "saves": 1,
    "shares": 0
   },
   {
@@ -206,7 +231,18 @@
    "platform": "youtube",
    "url": "https://youtu.be/CPc4ZgnSVm8",
    "postedAt": "2026-11-20T12:24:32.236Z",
-   "views": 2,
+   "views": 3,
+   "likes": 0,
+   "comments": 0
+  },
+  {
+   "id": "2026-W48/3-clutch",
+   "title": "Injak kopling itu bukan menyambung, tapi melepas",
+   "lang": "id",
+   "platform": "youtube",
+   "url": "https://youtu.be/U3cJvy7Mlvw",
+   "postedAt": "2026-11-21T14:40:07.365Z",
+   "views": 1,
    "likes": 0,
    "comments": 0
   },
@@ -277,6 +313,48 @@
    "likes": 0,
    "comments": 0,
    "reach": 123,
+   "saves": 0,
+   "shares": 0
+  },
+  {
+   "id": "2026-W48/5-diesel",
+   "title": "Mesin diesel nggak punya busi. Terus apinya dari mana?",
+   "lang": "id",
+   "platform": "instagram",
+   "url": "https://www.instagram.com/reel/DgAJnNaI4nF/",
+   "postedAt": "2026-11-21T11:43:10.476Z",
+   "views": 118,
+   "likes": 1,
+   "comments": 0,
+   "reach": 107,
+   "saves": 1,
+   "shares": 0
+  },
+  {
+   "id": "2026-W48/6-differential",
+   "title": "Di tiap tikungan, roda mobilmu berputar beda kecepatan",
+   "lang": "id",
+   "platform": "instagram",
+   "url": "https://www.instagram.com/reel/DgAd8ckol0s/",
+   "postedAt": "2026-11-21T14:40:12.826Z",
+   "views": 108,
+   "likes": 2,
+   "comments": 0,
+   "reach": 104,
+   "saves": 0,
+   "shares": 0
+  },
+  {
+   "id": "2026-W48/7-two-stroke",
+   "title": "Mesin ini meledak tiap putaran. Punyamu cuma tiap dua",
+   "lang": "id",
+   "platform": "instagram",
+   "url": "https://www.instagram.com/reel/DgCQ9cRIJqQ/",
+   "postedAt": "2026-11-22T07:25:54.307Z",
+   "views": 133,
+   "likes": 2,
+   "comments": 0,
+   "reach": 116,
    "saves": 0,
    "shares": 0
   }
@@ -393,6 +471,34 @@
    "platform": "instagram",
    "followers": 0,
    "views": 1812
+  },
+  {
+   "date": "2026-11-22",
+   "lang": "en",
+   "platform": "youtube",
+   "followers": 6,
+   "views": 5702
+  },
+  {
+   "date": "2026-11-22",
+   "lang": "en",
+   "platform": "instagram",
+   "followers": 0,
+   "views": 1428
+  },
+  {
+   "date": "2026-11-22",
+   "lang": "id",
+   "platform": "youtube",
+   "followers": 0,
+   "views": 7
+  },
+  {
+   "date": "2026-11-22",
+   "lang": "id",
+   "platform": "instagram",
+   "followers": 0,
+   "views": 2171
   }
  ]
 }
