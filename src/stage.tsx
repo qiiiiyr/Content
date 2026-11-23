@@ -1,7 +1,9 @@
 // 3D miniature-diorama kit: a warm workshop, textured wall and bench, brass and steel parts lit by a studio
 // environment, props, a slow macro camera. Episodes compose <Stage> with parts from here.
 // Units are arbitrary; the engine is about 7 tall.
-import {useMemo, type ReactNode} from 'react';
+import {useContext, useMemo, type ReactNode} from 'react';
+import {LookContext} from './kit';
+import type {Look as LookName} from './types';
 import {ThreeCanvas} from '@remotion/three';
 import {useFrame, useThree} from '@react-three/fiber';
 import {Easing, interpolate, useCurrentFrame, useVideoConfig} from 'remotion';
@@ -156,16 +158,28 @@ const blueprintTexture = () =>
 		c.stroke();
 	});
 
-/** The set: wall, bench, lights, props, camera. Children sit on the bench at y=0. */
+/** The set: background, floor, lights and camera for the episode's look (docs/styles.md). Children sit on the floor at y=0. */
 export const Stage = ({cam, children}: {cam: CamKey[]; children: ReactNode}) => {
+	const look = useContext(LookContext);
+	return (
+		<ThreeCanvas width={1080} height={1920} shadows camera={{fov: 32, near: 0.1, far: 200}} style={{background: BG[look]}}>
+			<Camera keys={cam} />
+			<Look />
+			{look === 'golden' ? <GoldenSet /> : look === 'editorial' ? <EditorialSet /> : look === 'blueprint' ? <BlueprintSet /> : <WorkshopSet />}
+			{children}
+		</ThreeCanvas>
+	);
+};
+
+const BG: Record<LookName, string> = {workshop: '#cdbfa4', golden: '#2a160c', editorial: '#05070a', blueprint: '#071a33'};
+
+const WorkshopSet = () => {
 	const wood = useMemo(woodTexture, []);
 	const wall = useMemo(wallTexture, []);
 	const plan = useMemo(blueprintTexture, []);
 	const wrench = useMemo(() => new RoundedBoxGeometry(3.4, 0.26, 0.14, 3, 0.05), []);
 	return (
-		<ThreeCanvas width={1080} height={1920} shadows camera={{fov: 32, near: 0.1, far: 200}} style={{background: '#cdbfa4'}}>
-			<Camera keys={cam} />
-			<Look />
+		<>
 			<color attach="background" args={['#cdbfa4']} />
 			<fog attach="fog" args={['#cdbfa4', 30, 70]} />
 			<ambientLight intensity={0.35} />
@@ -215,8 +229,166 @@ export const Stage = ({cam, children}: {cam: CamKey[]; children: ReactNode}) => 
 					<meshStandardMaterial {...mat.brass} />
 				</mesh>
 			))}
-			{children}
-		</ThreeCanvas>
+		</>
+	);
+};
+
+const gradientTexture = (stops: [number, string][], h = 512) =>
+	canvasTexture(4, h, (c) => {
+		const g = c.createLinearGradient(0, 0, 0, h);
+		for (const [at, col] of stops) g.addColorStop(at, col);
+		c.fillStyle = g;
+		c.fillRect(0, 0, 4, h);
+	});
+
+const skyTexture = () =>
+	canvasTexture(1024, 512, (c) => {
+		const g = c.createLinearGradient(0, 0, 0, 512);
+		g.addColorStop(0, '#3a1d12');
+		g.addColorStop(0.45, '#c8642a');
+		g.addColorStop(0.78, '#f6a24a');
+		g.addColorStop(1, '#ffd796');
+		c.fillStyle = g;
+		c.fillRect(0, 0, 1024, 512);
+		const sun = c.createRadialGradient(380, 430, 4, 380, 430, 260);
+		sun.addColorStop(0, 'rgba(255,240,200,.95)');
+		sun.addColorStop(0.15, 'rgba(255,200,120,.55)');
+		sun.addColorStop(1, 'rgba(255,170,90,0)');
+		c.fillStyle = sun;
+		c.fillRect(0, 0, 1024, 512);
+		const r = rnd(11);
+		for (let i = 0; i < 14; i++) {
+			c.fillStyle = `rgba(255,${190 + r() * 40},${120 + r() * 50},${0.05 + r() * 0.08})`;
+			c.fillRect(0, 120 + r() * 260, 1024, 2 + r() * 10); // thin cloud bands
+		}
+	});
+
+const hillsTexture = () =>
+	canvasTexture(1024, 256, (c) => {
+		const r = rnd(5);
+		for (const [y0, col] of [[150, '#5a2c16'], [185, '#2b140b']] as [number, string][]) {
+			c.fillStyle = col;
+			c.beginPath();
+			c.moveTo(0, 256);
+			for (let x = 0; x <= 1024; x += 32) c.lineTo(x, y0 - Math.sin(x / 140 + y0) * 26 - r() * 18);
+			c.lineTo(1024, 256);
+			c.fill();
+		}
+	});
+
+const asphaltTexture = () =>
+	canvasTexture(512, 512, (c) => {
+		const r = rnd(9);
+		c.fillStyle = '#2a1c15';
+		c.fillRect(0, 0, 512, 512);
+		for (let i = 0; i < 7000; i++) {
+			c.fillStyle = `rgba(${r() > 0.5 ? '255,190,140' : '0,0,0'},${0.03 + r() * 0.07})`;
+			c.fillRect(r() * 512, r() * 512, 1 + r() * 2, 1 + r() * 2);
+		}
+	}, [12, 12]);
+
+const gridTexture = () =>
+	canvasTexture(512, 512, (c) => {
+		c.fillStyle = '#071a33';
+		c.fillRect(0, 0, 512, 512);
+		c.strokeStyle = 'rgba(80,170,255,.16)';
+		c.lineWidth = 1;
+		for (let i = 0; i <= 512; i += 32) (c.beginPath(), c.moveTo(i, 0), c.lineTo(i, 512), c.stroke(), c.beginPath(), c.moveTo(0, i), c.lineTo(512, i), c.stroke());
+		c.strokeStyle = 'rgba(110,200,255,.38)';
+		c.lineWidth = 2;
+		for (let i = 0; i <= 512; i += 128) (c.beginPath(), c.moveTo(i, 0), c.lineTo(i, 512), c.stroke(), c.beginPath(), c.moveTo(0, i), c.lineTo(512, i), c.stroke());
+	}, [6, 6]);
+
+/** Thin rings on the floor under the part, one turning: the HUD lines of the golden look. */
+const FloorRing = ({color, r = 3.4}: {color: string; r?: number}) => {
+	const {sec} = useScene();
+	return (
+		<group position={[0, 0.03, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+			<mesh>
+				<ringGeometry args={[r, r + 0.05, 96]} />
+				<meshBasicMaterial color={color} toneMapped={false} transparent opacity={0.85} />
+			</mesh>
+			<mesh rotation={[0, 0, sec * 0.6]}>
+				<ringGeometry args={[r + 0.35, r + 0.42, 96, 1, 0, Math.PI * 0.55]} />
+				<meshBasicMaterial color={color} toneMapped={false} transparent opacity={0.9} />
+			</mesh>
+		</group>
+	);
+};
+
+const GoldenSet = () => {
+	const sky = useMemo(skyTexture, []);
+	const hills = useMemo(hillsTexture, []);
+	const ground = useMemo(asphaltTexture, []);
+	return (
+		<>
+			<color attach="background" args={['#2a160c']} />
+			<fog attach="fog" args={['#b8642f', 28, 95]} />
+			<mesh position={[0, 18, -60]}>
+				<planeGeometry args={[220, 80]} />
+				<meshBasicMaterial map={sky} fog={false} toneMapped={false} />
+			</mesh>
+			<mesh position={[0, 4, -45]}>
+				<planeGeometry args={[200, 24]} />
+				<meshBasicMaterial map={hills} transparent fog={false} />
+			</mesh>
+			<mesh position={[0, 0, -10]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
+				<planeGeometry args={[200, 120]} />
+				<meshStandardMaterial map={ground} roughness={0.9} />
+			</mesh>
+			<ambientLight intensity={0.25} />
+			<hemisphereLight args={['#ffb070', '#20120a', 0.55]} />
+			{/* low sun behind and to the left: the parts get glowing edges */}
+			<directionalLight position={[-9, 5, -14]} intensity={4.2} color="#ffae55" castShadow shadow-mapSize={[1024, 1024]} shadow-bias={-0.0004} shadow-normalBias={0.03} shadow-camera-left={-14} shadow-camera-right={14} shadow-camera-top={14} shadow-camera-bottom={-6} />
+			<pointLight position={[6, 7, 10]} intensity={28} color="#ffd2a0" />
+			<pointLight position={[-6, 3, 8]} intensity={10} color="#7fb6ff" />
+			<FloorRing color="#5ee1ff" />
+		</>
+	);
+};
+
+const EditorialSet = () => {
+	const back = useMemo(() => gradientTexture([[0, '#05070a'], [0.55, '#18202b'], [1, '#05070a']]), []);
+	return (
+		<>
+			<color attach="background" args={['#05070a']} />
+			<fog attach="fog" args={['#05070a', 26, 70]} />
+			<mesh position={[0, 10, -22]}>
+				<planeGeometry args={[90, 50]} />
+				<meshBasicMaterial map={back} fog={false} />
+			</mesh>
+			<mesh position={[0, 0, 0]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
+				<planeGeometry args={[120, 120]} />
+				<meshStandardMaterial color="#020304" metalness={0.35} roughness={0.38} />
+			</mesh>
+			<ambientLight intensity={0.12} />
+			<spotLight position={[4, 18, 8]} angle={0.32} penumbra={0.9} intensity={360} color="#eef3ff" castShadow shadow-mapSize={[1024, 1024]} shadow-bias={-0.0004} />
+			<pointLight position={[-7, 6, -6]} intensity={60} color="#7aa2ff" />
+			<pointLight position={[8, 3, 4]} intensity={18} color="#ffb070" />
+		</>
+	);
+};
+
+const BlueprintSet = () => {
+	const grid = useMemo(gridTexture, []);
+	return (
+		<>
+			<color attach="background" args={['#071a33']} />
+			<fog attach="fog" args={['#071a33', 24, 70]} />
+			<mesh position={[0, 12, -14]}>
+				<planeGeometry args={[80, 40]} />
+				<meshBasicMaterial map={grid} fog={false} />
+			</mesh>
+			<mesh position={[0, 0, 0]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
+				<planeGeometry args={[120, 120]} />
+				<meshStandardMaterial map={grid} roughness={1} />
+			</mesh>
+			<ambientLight intensity={0.35} />
+			<hemisphereLight args={['#cfe9ff', '#071a33', 0.7]} />
+			<directionalLight position={[6, 14, 10]} intensity={2.2} color="#e6f4ff" castShadow shadow-mapSize={[1024, 1024]} shadow-bias={-0.0004} shadow-normalBias={0.03} shadow-camera-left={-14} shadow-camera-right={14} shadow-camera-top={14} shadow-camera-bottom={-6} />
+			<pointLight position={[-7, 5, 6]} intensity={40} color="#4fc3ff" />
+			<FloorRing color="#7fd6ff" r={4} />
+		</>
 	);
 };
 
