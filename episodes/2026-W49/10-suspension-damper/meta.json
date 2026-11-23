@@ -1,0 +1,54 @@
+{
+  "theme": "grip-and-stopping",
+  "test": true,
+  "title": {
+    "en": "Without this, your car would bounce forever #shorts",
+    "id": "Tanpa ini, mobilmu bakal memantul terus #shorts"
+  },
+  "description": {
+    "en": "Springs and dampers: why a spring alone bounces, and how a shock absorber turns motion into heat.",
+    "id": "Pegas dan peredam: kenapa pegas saja memantul terus, dan bagaimana shockbreaker mengubah gerak jadi panas."
+  },
+  "hashtags": [
+    "suspension",
+    "shockabsorber",
+    "cars",
+    "howitworks",
+    "mechanics"
+  ],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Shock_absorber",
+    "https://en.wikipedia.org/wiki/Suspension_(vehicle)",
+    "https://en.wikipedia.org/wiki/Damping"
+  ],
+  "scenes": [
+    {
+      "en": "A spring alone would make your car *bounce forever*.",
+      "id": "Pegas saja bakal bikin mobilmu *memantul terus*."
+    },
+    {
+      "en": "Hit a bump, and the spring *compresses*, soaking up the blow so the body doesn't slam.",
+      "id": "Kena lubang, pegas *menekan*, menyerap benturan supaya bodi nggak terhantam."
+    },
+    {
+      "en": "Then it springs back, overshoots, and keeps *oscillating*, again and again, long after the bump.",
+      "id": "Lalu pegas memantul balik, kebablasan, dan terus *berayun*, berulang-ulang, lama setelah lubangnya lewat."
+    },
+    {
+      "en": "That's the *damper's* job, also called a shock absorber.",
+      "id": "Itu tugas *peredam*, yang juga disebut shockbreaker."
+    },
+    {
+      "en": "Inside, a piston forces oil through *tiny holes*. The friction turns motion into *heat*.",
+      "id": "Di dalamnya, piston memaksa oli lewat *lubang-lubang kecil*. Gesekannya mengubah gerak jadi *panas*."
+    },
+    {
+      "en": "Now the car settles in about *one bounce*, not ten, and the tyres stay pressed on the road.",
+      "id": "Sekarang mobil tenang dalam sekitar *satu pantulan*, bukan sepuluh, dan ban tetap menempel di jalan."
+    },
+    {
+      "en": "Springs hold the car up. Dampers keep it calm. Send this to someone with a bouncy old car.",
+      "id": "Pegas menopang mobil. Peredam menenangkannya. Kirim ini ke temanmu yang mobil tuanya suka memantul."
+    }
+  ]
+}

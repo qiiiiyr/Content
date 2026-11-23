@@ -1,0 +1,55 @@
+{
+  "theme": "grip-and-stopping",
+  "test": true,
+  "youtube": false,
+  "title": {
+    "en": "Brake too long and your brakes stop working #shorts",
+    "id": "Ngerem kelamaan, remmu berhenti bekerja #shorts"
+  },
+  "description": {
+    "en": "Brake fade: overheated pads, boiling brake fluid, and how engine braking keeps brakes cool.",
+    "id": "Rem blong karena panas: kampas kepanasan, minyak rem mendidih, dan bagaimana engine brake menjaga rem tetap dingin."
+  },
+  "hashtags": [
+    "brakefade",
+    "brakes",
+    "cars",
+    "safety",
+    "howitworks"
+  ],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Brake_fade",
+    "https://en.wikipedia.org/wiki/Brake_fluid",
+    "https://en.wikipedia.org/wiki/Engine_braking"
+  ],
+  "scenes": [
+    {
+      "en": "Brake too hard, for too long, and your brakes *stop working*.",
+      "id": "Ngerem terlalu keras dan terlalu lama, dan remmu *berhenti bekerja*."
+    },
+    {
+      "en": "All that braking turns motion into heat, and the disc and pads *soak it up*.",
+      "id": "Semua pengereman itu mengubah gerak jadi panas, dan cakram serta kampas *menyerapnya*."
+    },
+    {
+      "en": "Too hot, and the pad material starts to *break down*, losing its grip.",
+      "id": "Kalau terlalu panas, bahan kampas mulai *rusak* dan kehilangan cengkeramannya."
+    },
+    {
+      "en": "Hotter still, and brake fluid can *boil*. Bubbles squash, so the pedal goes *soft*.",
+      "id": "Lebih panas lagi, minyak rem bisa *mendidih*. Gelembung bisa dimampatkan, jadi pedal terasa *empuk*."
+    },
+    {
+      "en": "That's why long mountain descents are *dangerous* if you only use the brakes.",
+      "id": "Makanya turunan gunung yang panjang *berbahaya* kalau cuma mengandalkan rem."
+    },
+    {
+      "en": "Shift to a *lower gear* and let the engine share the load, so the brakes stay cool.",
+      "id": "Pindah ke *gigi lebih rendah* dan biarkan mesin ikut menahan, supaya rem tetap dingin."
+    },
+    {
+      "en": "Cool brakes are safe brakes. Follow for more.",
+      "id": "Rem yang dingin adalah rem yang aman. Follow untuk video lainnya."
+    }
+  ]
+}

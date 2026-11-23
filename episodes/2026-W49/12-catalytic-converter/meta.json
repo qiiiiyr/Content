@@ -1,0 +1,54 @@
+{
+  "theme": "engines-inside",
+  "test": false,
+  "title": {
+    "en": "Your exhaust pipe hides precious metals #shorts",
+    "id": "Knalpotmu menyembunyikan logam mulia #shorts"
+  },
+  "description": {
+    "en": "The three-way catalytic converter: platinum, palladium and rhodium cleaning exhaust gas.",
+    "id": "Katalitik konverter tiga arah: platina, paladium, dan rodium yang membersihkan gas buang."
+  },
+  "hashtags": [
+    "catalyticconverter",
+    "exhaust",
+    "cars",
+    "howitworks",
+    "emissions"
+  ],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Catalytic_converter",
+    "https://www.britannica.com/technology/catalytic-converter",
+    "https://en.wikipedia.org/wiki/Three-way_catalyst"
+  ],
+  "scenes": [
+    {
+      "en": "Your exhaust pipe hides *platinum, palladium and rhodium*.",
+      "id": "Knalpotmu menyimpan *platina, paladium, dan rodium*."
+    },
+    {
+      "en": "Exhaust leaves the engine full of nasty stuff: *carbon monoxide*, unburnt fuel and nitrogen oxides.",
+      "id": "Gas buang keluar dari mesin penuh zat jahat: *karbon monoksida*, bensin yang belum terbakar, dan nitrogen oksida."
+    },
+    {
+      "en": "It flows through a ceramic *honeycomb* coated with those metals.",
+      "id": "Gas mengalir lewat *sarang lebah* keramik yang dilapisi logam-logam itu."
+    },
+    {
+      "en": "The honeycomb gives the gas a huge *surface* to touch the metal.",
+      "id": "Sarang lebah memberi gas *permukaan* yang sangat luas untuk menyentuh logamnya."
+    },
+    {
+      "en": "Rhodium splits nitrogen oxides into harmless *nitrogen*. The others turn CO and fuel into CO2 and water.",
+      "id": "Rodium memecah nitrogen oksida jadi *nitrogen* yang tak berbahaya. Yang lain mengubah CO dan bensin jadi CO2 dan air."
+    },
+    {
+      "en": "It only works when *hot*, so short cold trips are the dirtiest.",
+      "id": "Ia cuma bekerja saat *panas*, jadi perjalanan pendek dengan mesin dingin yang paling kotor."
+    },
+    {
+      "en": "That's also why thieves steal them. Follow for more.",
+      "id": "Itu juga alasan pencuri mengincarnya. Follow untuk video lainnya."
+    }
+  ]
+}

@@ -910,3 +910,229 @@ export const SparkPlug = ({spark = 0, gap = 0.28, position = [0, 0, 0]}: {spark?
 		{spark > 0.05 && <pointLight position={[0, -gap / 2, 0.4]} color="#bfe0ff" intensity={spark * 30} distance={5} />}
 	</group>
 );
+
+// ---- look upgrade (W49): live readout + honest time tag, drawn over the 3D --------------------------------------
+/** A big number that counts with the scene (rpm, bar, °C) with its unit and an optional "SLOW MOTION" tag. Sits at the top, above the captions. */
+export const Readout = ({label, from, to, unit, at = [0, 0.8], tag, top = 150, decimals = 0}: {label: string; from: number; to: number; unit: string; at?: [number, number]; tag?: string; top?: number; decimals?: number}) => {
+	const {p, sec} = useScene();
+	const v = interpolate(p, at, [from, to], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.out(Easing.cubic)});
+	const mono = '"Courier New", monospace';
+	const shadow = '0 3px 14px rgba(40,20,5,.7)';
+	return (
+		<div style={{position: 'absolute', top, left: 0, width: 1080, textAlign: 'center', fontFamily: mono, color: '#fff3d6', textShadow: shadow}}>
+			<div style={{fontSize: 34, letterSpacing: 6, opacity: 0.9}}>{label}</div>
+			<div style={{fontSize: 150, fontWeight: 800, lineHeight: 1.05}}>{v.toLocaleString('en-US', {maximumFractionDigits: decimals, minimumFractionDigits: decimals})}</div>
+			<div style={{fontSize: 40, letterSpacing: 4}}>{unit}</div>
+			{tag && <div style={{display: 'inline-block', marginTop: 14, padding: '6px 18px', background: '#b3342a', color: '#fff', fontSize: 32, fontWeight: 700, letterSpacing: 3, opacity: 0.75 + 0.25 * Math.sin(sec * 5)}}>{tag}</div>}
+		</div>
+	);
+};
+
+// ---- brakes, suspension, rotary engine, catalytic converter ----------------------------------------------------
+/** Brake disc with a caliper, axle along z. `squeeze` 0..1 clamps the pads, `heat` 0..1 turns the disc red hot, `angle` spins it. */
+export const BrakeDisc = ({squeeze, heat = 0, angle = 0, position = [0, 3, 0]}: {squeeze: number; heat?: number; angle?: number; position?: V3}) => {
+	const gap = 0.45 * (1 - squeeze);
+	const disc = {color: '#9aa1ab', metalness: 0.9, roughness: 0.4, emissive: '#ff4a10', emissiveIntensity: heat * 2.2};
+	return (
+		<group position={position}>
+			<group rotation={[0, 0, angle]}>
+				<mesh rotation={[Math.PI / 2, 0, 0]} castShadow receiveShadow>
+					<cylinderGeometry args={[2.3, 2.3, 0.22, 64]} />
+					<meshStandardMaterial {...disc} />
+				</mesh>
+				<mesh rotation={[Math.PI / 2, 0, 0]} castShadow>
+					<cylinderGeometry args={[0.85, 0.85, 0.7, 32]} />
+					<meshStandardMaterial {...mat.dark} />
+				</mesh>
+				{Array.from({length: 12}, (_, i) => (
+					<mesh key={i} position={[Math.cos((i / 12) * TAU) * 1.6, Math.sin((i / 12) * TAU) * 1.6, 0]} rotation={[Math.PI / 2, 0, 0]}>
+						<cylinderGeometry args={[0.12, 0.12, 0.24, 14]} />
+						<meshStandardMaterial color="#1b1d21" roughness={1} />
+					</mesh>
+				))}
+				{Array.from({length: 5}, (_, i) => (
+					<mesh key={i} position={[Math.cos((i / 5) * TAU) * 0.55, Math.sin((i / 5) * TAU) * 0.55, 0.38]} rotation={[Math.PI / 2, 0, 0]}>
+						<cylinderGeometry args={[0.09, 0.09, 0.1, 6]} />
+						<meshStandardMaterial {...mat.steel} />
+					</mesh>
+				))}
+			</group>
+			<mesh position={[0, 0, 0.5]} rotation={[Math.PI / 2, 0, 0]}>
+				<cylinderGeometry args={[0.18, 0.18, 1.6, 16]} />
+				<meshStandardMaterial {...mat.steel} />
+			</mesh>
+			{/* caliper over the top edge: pads either side, red housing, hydraulic piston */}
+			{[1, -1].map((s) => (
+				<mesh key={s} position={[0, 1.75, s * (0.11 + gap / 2 + 0.17)]} castShadow>
+					<boxGeometry args={[1.5, 1.0, 0.24]} />
+					<meshStandardMaterial color="#3a2a22" roughness={0.9} />
+				</mesh>
+			))}
+			<mesh position={[0, 2.55, 0]} castShadow>
+				<boxGeometry args={[1.9, 0.5, 1.6]} />
+				<meshPhysicalMaterial {...mat.red} />
+			</mesh>
+			{[1, -1].map((s) => (
+				<mesh key={s} position={[0, 1.75, s * (0.11 + gap + 0.5)]} castShadow>
+					<boxGeometry args={[1.9, 1.5, 0.3]} />
+					<meshPhysicalMaterial {...mat.red} transparent opacity={0.55} depthWrite={false} />
+				</mesh>
+			))}
+			{heat > 0.05 && <pointLight position={[0, 0, 1.2]} color="#ff6a2a" intensity={heat * 45} distance={8} />}
+		</group>
+	);
+};
+
+/** Suspension strut: coil spring, glass tube with oil, piston and rod. `comp` 0..1 compresses it; `heat` 0..1 warms the oil. */
+export const Damper = ({comp, heat = 0, position = [0, 0, 0]}: {comp: number; heat?: number; position?: V3}) => {
+	const spring = useMemo(() => new THREE.TubeGeometry(new Helix(1.05, 3.2, 8), 160, 0.07, 8, false), []);
+	const pistonY = 3.4 - comp * 1.3;
+	return (
+		<group position={position}>
+			<mesh position={[0, 0.1, 0]} receiveShadow castShadow>
+				<boxGeometry args={[3, 0.2, 2.2]} />
+				<meshStandardMaterial {...mat.dark} />
+			</mesh>
+			<mesh position={[0, 2.2, 0]} renderOrder={2}>
+				<cylinderGeometry args={[0.75, 0.75, 4, 40, 1, true]} />
+				<meshPhysicalMaterial color="#d6ecf0" transparent opacity={0.2} side={THREE.DoubleSide} roughness={0.05} clearcoat={1} depthWrite={false} />
+			</mesh>
+			<mesh position={[0, 1.2 + (pistonY - 0.2) / 2 - 0.1, 0]} renderOrder={1}>
+				<cylinderGeometry args={[0.68, 0.68, pistonY - 1.0, 32]} />
+				<meshStandardMaterial color="#e3a02b" transparent opacity={0.5} emissive="#ff6a1a" emissiveIntensity={heat * 1.5} depthWrite={false} />
+			</mesh>
+			<mesh position={[0, pistonY, 0]} castShadow>
+				<cylinderGeometry args={[0.66, 0.66, 0.2, 32]} />
+				<meshStandardMaterial {...mat.brass} />
+			</mesh>
+			{[0, 1, 2].map((i) => (
+				<mesh key={i} position={[Math.cos((i / 3) * TAU) * 0.33, pistonY, Math.sin((i / 3) * TAU) * 0.33]}>
+					<cylinderGeometry args={[0.07, 0.07, 0.22, 10]} />
+					<meshStandardMaterial color="#1b1d21" />
+				</mesh>
+			))}
+			<Rod from={[0, pistonY, 0]} to={[0, 5.9 - comp * 1.3, 0]} r={0.14} />
+			<mesh position={[0, 5.9 - comp * 1.3, 0]} castShadow>
+				<boxGeometry args={[2.6, 0.2, 2.0]} />
+				<meshStandardMaterial {...mat.dark} />
+			</mesh>
+			<mesh geometry={spring} position={[0, 0.2 + comp * 0.001, 0]} scale={[1, (5.7 - comp * 1.3) / 3.2 / 1.0, 1]} castShadow>
+				<meshStandardMaterial {...mat.steel} />
+			</mesh>
+			{heat > 0.05 && <pointLight position={[0, 1.6, 1.2]} color="#ff8a3c" intensity={heat * 20} distance={5} />}
+		</group>
+	);
+};
+
+/**
+ * Wankel rotary engine, flat to the camera (axis along z). `theta` = output shaft angle in radians; the rotor turns at a third of that.
+ * `flame` 0..1 lights the combustion chamber at the top.
+ */
+const WR = 2.6;
+const WE = 0.43;
+export const Wankel = ({theta, flame = 0, position = [0, 4, 0]}: {theta: number; flame?: number; position?: V3}) => {
+	const housing = useMemo(() => {
+		const pts = Array.from({length: 120}, (_, i) => {
+			const f = (i / 120) * TAU;
+			return new THREE.Vector3(WR * Math.cos(f) + WE * Math.cos(3 * f), WR * Math.sin(f) + WE * Math.sin(3 * f), 0);
+		});
+		const outline = new THREE.CatmullRomCurve3(pts, true);
+		return {rim: new THREE.TubeGeometry(outline, 200, 0.09, 8, true), glass: new THREE.ShapeGeometry(new THREE.Shape(pts.map((p) => new THREE.Vector2(p.x, p.y))), 4)};
+	}, []);
+	const rotor = useMemo(() => {
+		const s = new THREE.Shape();
+		const v = (k: number) => new THREE.Vector2(Math.cos((k * TAU) / 3) * WR, Math.sin((k * TAU) / 3) * WR);
+		s.moveTo(v(0).x, v(0).y);
+		for (let k = 0; k < 3; k++) {
+			const a = ((k + 0.5) * TAU) / 3;
+			s.quadraticCurveTo(Math.cos(a) * WR * 0.78, Math.sin(a) * WR * 0.78, v(k + 1).x, v(k + 1).y);
+		}
+		return new THREE.ExtrudeGeometry(s, {depth: 0.8, bevelEnabled: true, bevelSize: 0.05, bevelThickness: 0.05, bevelSegments: 2});
+	}, []);
+	const ex = WE * Math.cos(theta);
+	const ey = WE * Math.sin(theta);
+	return (
+		<group position={position}>
+			<mesh geometry={housing.glass} position={[0, 0, -0.5]} renderOrder={0}>
+				<meshStandardMaterial color="#2c3138" roughness={0.8} />
+			</mesh>
+			<mesh geometry={housing.rim} position={[0, 0, 0.45]} castShadow>
+				<meshStandardMaterial {...mat.brass} />
+			</mesh>
+			<group position={[ex, ey, -0.4]} rotation={[0, 0, theta / 3]}>
+				<mesh geometry={rotor} castShadow receiveShadow>
+					<meshStandardMaterial {...mat.steel} />
+				</mesh>
+				<mesh position={[0, 0, 0.4]} rotation={[Math.PI / 2, 0, 0]}>
+					<cylinderGeometry args={[0.7, 0.7, 0.9, 32]} />
+					<meshStandardMaterial {...mat.dark} />
+				</mesh>
+				{[0, 1, 2].map((k) => (
+					<mesh key={k} position={[Math.cos((k * TAU) / 3) * WR, Math.sin((k * TAU) / 3) * WR, 0.4]}>
+						<sphereGeometry args={[0.16, 12, 12]} />
+						<meshPhysicalMaterial {...mat.red} />
+					</mesh>
+				))}
+			</group>
+			{/* eccentric shaft: the small crank the rotor pushes around */}
+			<mesh position={[0, 0, 0.1]} rotation={[Math.PI / 2, 0, 0]}>
+				<cylinderGeometry args={[0.16, 0.16, 1.6, 16]} />
+				<meshStandardMaterial {...mat.steel} />
+			</mesh>
+			<mesh position={[ex, ey, 0.5]} rotation={[Math.PI / 2, 0, 0]}>
+				<cylinderGeometry args={[0.2, 0.2, 0.5, 16]} />
+				<meshPhysicalMaterial {...mat.red} />
+			</mesh>
+			{/* spark plug at the top and the flame */}
+			<mesh position={[0, WR + 0.5, 0.2]} castShadow>
+				<cylinderGeometry args={[0.16, 0.2, 0.9, 16]} />
+				<meshPhysicalMaterial {...mat.ceramic} />
+			</mesh>
+			<mesh position={[0.5, WR - 0.5, 0.3]} scale={0.2 + flame * 1.3}>
+				<sphereGeometry args={[0.5, 20, 20]} />
+				<meshStandardMaterial color="#ff9a3c" emissive="#ff7a1a" emissiveIntensity={flame * 3} transparent opacity={flame} depthWrite={false} />
+			</mesh>
+			{flame > 0.05 && <pointLight position={[0.5, WR - 0.5, 1.2]} color="#ff9a3c" intensity={flame * 60} distance={9} />}
+		</group>
+	);
+};
+
+/** Catalytic converter, flow along x: glass shell around a honeycomb of brass-coated channels. `heat` 0..1 makes the honeycomb glow. */
+export const Catalyst = ({heat = 0, position = [0, 3, 0]}: {heat?: number; position?: V3}) => {
+	const cells = useMemo(() => {
+		const out: [number, number][] = [];
+		for (let i = -3; i <= 3; i++) for (let j = -3; j <= 3; j++) {
+			const x = i * 0.3 + (j % 2) * 0.15;
+			const y = j * 0.26;
+			if (Math.hypot(x, y) < 0.95) out.push([x, y]);
+		}
+		return out;
+	}, []);
+	return (
+		<group position={position}>
+			<mesh rotation={[0, 0, Math.PI / 2]} renderOrder={2}>
+				<cylinderGeometry args={[1.15, 1.15, 3, 40, 1, true]} />
+				<meshPhysicalMaterial color="#d6ecf0" transparent opacity={0.16} side={THREE.DoubleSide} roughness={0.05} clearcoat={1} depthWrite={false} />
+			</mesh>
+			{cells.map(([y, z], i) => (
+				<mesh key={i} position={[0, y, z]} rotation={[0, 0, Math.PI / 2]}>
+					<cylinderGeometry args={[0.12, 0.12, 2.4, 6]} />
+					<meshStandardMaterial {...mat.brass} emissive="#ff5a1a" emissiveIntensity={heat * 1.6} />
+				</mesh>
+			))}
+			{[-1.5, 1.5].map((x) => (
+				<mesh key={x} position={[x, 0, 0]} rotation={[0, 0, Math.PI / 2]} castShadow>
+					<torusGeometry args={[1.18, 0.08, 10, 40]} />
+					<meshStandardMaterial {...mat.steel} />
+				</mesh>
+			))}
+			{[-1, 1].map((s) => (
+				<mesh key={s} position={[s * 2.3, 0, 0]} rotation={[0, 0, Math.PI / 2]} castShadow>
+					<cylinderGeometry args={[0.45, 0.45, 1.6, 24]} />
+					<meshStandardMaterial {...mat.dark} />
+				</mesh>
+			))}
+			{heat > 0.05 && <pointLight position={[0, 0, 1.3]} color="#ff7a2a" intensity={heat * 25} distance={6} />}
+		</group>
+	);
+};

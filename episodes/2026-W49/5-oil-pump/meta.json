@@ -1,0 +1,55 @@
+{
+  "theme": "engines-inside",
+  "test": false,
+  "youtube": false,
+  "title": {
+    "en": "A film thinner than a hair keeps your engine alive #shorts",
+    "id": "Lapisan oli setipis rambut menjaga mesinmu tetap hidup #shorts"
+  },
+  "description": {
+    "en": "How an engine oil pump works: two meshing gears push oil to every bearing.",
+    "id": "Cara kerja pompa oli mesin: dua gigi yang saling mengait mendorong oli ke setiap bantalan."
+  },
+  "hashtags": [
+    "oil",
+    "engine",
+    "cars",
+    "howitworks",
+    "maintenance"
+  ],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Gear_pump",
+    "https://en.wikipedia.org/wiki/Oil_pump_(internal_combustion_engine)",
+    "https://en.wikipedia.org/wiki/Hydrodynamic_lubrication"
+  ],
+  "scenes": [
+    {
+      "en": "Metal never touches metal in your engine. A film of oil *thinner than a hair* keeps them apart.",
+      "id": "Logam nggak pernah menyentuh logam di dalam mesinmu. Lapisan oli *lebih tipis dari rambut* memisahkannya."
+    },
+    {
+      "en": "That oil has to keep moving, so a *pump* pushes it everywhere.",
+      "id": "Oli itu harus terus mengalir, jadi sebuah *pompa* mendorongnya ke mana-mana."
+    },
+    {
+      "en": "The simplest pump is *two gears* meshing inside a tight housing.",
+      "id": "Pompa paling sederhana adalah *dua gigi* yang saling mengait di dalam rumah yang rapat."
+    },
+    {
+      "en": "Oil gets trapped between the teeth and the wall, and *carried around* the outside.",
+      "id": "Oli terjebak di antara gigi dan dinding, lalu *terbawa berputar* di sisi luar."
+    },
+    {
+      "en": "Where the teeth meet, oil can't go back, so it's *forced out* under pressure.",
+      "id": "Di tempat gigi bertemu, oli nggak bisa balik, jadi *terdorong keluar* dengan tekanan."
+    },
+    {
+      "en": "It runs through channels to the bearings, crank and cam, then *drips back* to the pan.",
+      "id": "Oli mengalir lewat saluran ke bantalan, poros engkol, dan noken as, lalu *menetes balik* ke karter."
+    },
+    {
+      "en": "Lose that pressure and an engine can be wrecked fast. Send this to someone who skips oil changes.",
+      "id": "Kalau tekanan itu hilang, mesin bisa rusak cepat. Kirim ini ke temanmu yang suka telat ganti oli."
+    }
+  ]
+}

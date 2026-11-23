@@ -1,0 +1,55 @@
+{
+  "theme": "engines-inside",
+  "test": false,
+  "youtube": false,
+  "title": {
+    "en": "Your engine breathes differently when you rev it #shorts",
+    "id": "Mesinmu bernapas beda saat digas tinggi #shorts"
+  },
+  "description": {
+    "en": "Camshaft lobes, valve lift and timing: why VTEC and VVT-i exist.",
+    "id": "Lobe noken as, angkat katup, dan waktu buka katup: kenapa ada VTEC dan VVT-i."
+  },
+  "hashtags": [
+    "vtec",
+    "camshaft",
+    "engine",
+    "cars",
+    "howitworks"
+  ],
+  "sources": [
+    "https://en.wikipedia.org/wiki/VTEC",
+    "https://en.wikipedia.org/wiki/Variable_valve_timing",
+    "https://en.wikipedia.org/wiki/Camshaft"
+  ],
+  "scenes": [
+    {
+      "en": "Your engine *changes how it breathes* when you rev it.",
+      "id": "Mesinmu *mengubah cara bernapasnya* saat kamu menggasnya."
+    },
+    {
+      "en": "A camshaft lobe pushes each valve open. The *lobe shape* sets how far and how long.",
+      "id": "Lobe noken as mendorong tiap katup terbuka. *Bentuk lobe* menentukan seberapa lebar dan lama."
+    },
+    {
+      "en": "At low rpm, a gentle lobe is best: smooth, quiet and *efficient*.",
+      "id": "Di rpm rendah, lobe yang lembut paling pas: halus, senyap, dan *irit*."
+    },
+    {
+      "en": "At high rpm, the engine wants a *bigger gulp* of air: a taller, longer lift.",
+      "id": "Di rpm tinggi, mesin butuh *tegukan udara lebih besar*: angkatan lebih tinggi dan lebih lama."
+    },
+    {
+      "en": "One cam can't be best at both, so Honda's VTEC *switches* to a second, wilder lobe.",
+      "id": "Satu noken as nggak bisa jago di keduanya, jadi VTEC Honda *berpindah* ke lobe kedua yang lebih liar."
+    },
+    {
+      "en": "Others, like Toyota's VVT-i, *shift the timing* of the cam instead.",
+      "id": "Yang lain, seperti VVT-i Toyota, malah *menggeser waktu* noken as."
+    },
+    {
+      "en": "One engine, two personalities. Follow for more.",
+      "id": "Satu mesin, dua kepribadian. Follow untuk video lainnya."
+    }
+  ]
+}
