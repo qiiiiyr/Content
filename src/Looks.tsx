@@ -7,7 +7,7 @@ import '@fontsource/source-serif-4/600-italic.css';
 import {useContext} from 'react';
 import * as THREE from 'three';
 import {AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig} from 'remotion';
-import {LookContext} from './kit';
+import {LOOK_ACCENT, LookContext} from './kit';
 import {camAt, useScene, type CamKey} from './stage';
 import type {Lang, Look} from './types';
 
@@ -156,7 +156,7 @@ export const Callout = ({cam, at, label, from = 0.1, to = 0.9, side: preferred}:
 	if (pt.behind) return null;
 	// the label goes toward the side with room unless the scene asks for one
 	const side = preferred ?? (pt.x > 540 ? 'left' : 'right');
-	const color = ACCENT_2D[look];
+	const color = LOOK_ACCENT[look];
 	const dx = (side === 'right' ? 1 : -1) * 150 * k;
 	const ex = pt.x + dx;
 	const ey = Math.max(300, Math.min(pt.y - 90 * k, 1080)); // below the top graphics, above the caption band
@@ -174,7 +174,6 @@ export const Callout = ({cam, at, label, from = 0.1, to = 0.9, side: preferred}:
 	);
 };
 
-const ACCENT_2D: Record<Look, string> = {workshop: '#ffb347', golden: '#5ee1ff', editorial: '#ff4d5e', blueprint: '#5ee1ff'};
 
 export {ramp} from './motion';
 
@@ -184,7 +183,7 @@ export const TimeTag = ({show, lang}: {show: boolean; lang: Lang}) => {
 	if (!show) return null;
 	const text = lang === 'id' ? 'GERAK LAMBAT' : 'SLOW MOTION';
 	return (
-		<div style={{position: 'absolute', right: 64, top: look === 'golden' ? 178 : 124, fontFamily: MONO, fontWeight: 700, fontSize: 26, letterSpacing: '.18em', color: '#fff', background: look === 'editorial' ? '#c1121f' : 'rgba(0,0,0,.55)', border: look === 'editorial' ? undefined : `2px solid ${ACCENT_2D[look]}`, padding: '6px 12px'}}>
+		<div style={{position: 'absolute', right: 64, top: look === 'golden' ? 178 : 124, fontFamily: MONO, fontWeight: 700, fontSize: 26, letterSpacing: '.18em', color: '#fff', background: look === 'editorial' ? '#c1121f' : 'rgba(0,0,0,.55)', border: look === 'editorial' ? undefined : `2px solid ${LOOK_ACCENT[look]}`, padding: '6px 12px'}}>
 			{text}
 		</div>
 	);

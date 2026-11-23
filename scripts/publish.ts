@@ -22,10 +22,11 @@ export const missingSecrets = (platforms: Platform[], lang: Lang, vars: Record<s
 
 /** Errors from logging in (bad or expired secrets), as opposed to the platform rejecting the video. Instagram refusing the
  * upload itself before any processing (rupload ProcessingFailedError) also counts: it points at the account (a block after a
- * security check), and recording it would use up one episode per attempt. */
+ * security check), and recording it would use up one episode per attempt. So does a YouTube quota error: the allowance
+ * resets the next day. */
 // Meta labels almost every error OAuthException, so go by its code: token (190, 102), permission (10, 200-299) and
 // rate limit (4, 17, 32, 613) are setup or temporary problems, as is a network failure; anything else is the video's fault.
-export const isAuthError = (msg: string): boolean => /oauth2\.googleapis\.com\/token|"code":\s*(190|102|10|4|17|32|613|2\d\d)\b|missing secret|network error|fetch failed|rupload\.facebook\.com.*ProcessingFailedError/.test(msg);
+export const isAuthError = (msg: string): boolean => /oauth2\.googleapis\.com\/token|"code":\s*(190|102|10|4|17|32|613|2\d\d)\b|missing secret|network error|fetch failed|rupload\.facebook\.com.*ProcessingFailedError|quotaExceeded|rateLimitExceeded/.test(msg);
 
 /** When each platform posts, per language, as UTC "HH:MM": Instagram twice a day, YouTube once. */
 export const SLOTS: Record<Lang, Record<Platform, string[]>> = {

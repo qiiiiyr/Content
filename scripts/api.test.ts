@@ -4,7 +4,7 @@ import {competitorYoutube} from './stats/youtube.ts';
 import {checkMeta, sceneCount} from './check.ts';
 import {readMeta} from './lib.ts';
 import {youtubeClient} from './post/youtube.ts';
-import {igUser, instagramCopy, uploadInstagram} from './post/instagram.ts';
+import {igUser, instagramCopy, publish, uploadInstagram} from './post/instagram.ts';
 import {execFileSync} from 'node:child_process';
 import {mkdtempSync, readFileSync, writeFileSync} from 'node:fs';
 import {tmpdir} from 'node:os';
@@ -48,7 +48,8 @@ test('YouTube client secrets: common paste mistakes are repaired', () => {
 	const json = JSON.stringify({web: {client_id: ID, client_secret: 'GOCSPX-j'}});
 	assert.deepEqual([youtubeClient(json, 'x').id, youtubeClient(json, 'x').secret], [ID, 'GOCSPX-j']); // whole JSON file
 	assert.ok(isAuthError('POST https://oauth2.googleapis.com/token -> 401: {"error": "invalid_client"}'));
-	assert.ok(!isAuthError('YouTube upload init -> 400: quotaExceeded'));
+	assert.ok(isAuthError('YouTube upload init -> 403: {"error":{"errors":[{"reason":"quotaExceeded"}]}}')); // resets daily: stay queued
+	assert.ok(!isAuthError('YouTube upload init -> 400: invalidTitle'));
 	assert.ok(isAuthError('GET https://graph.facebook.com/v23.0/1 -> 400: {"error":{"type":"OAuthException","code":190}}'));
 	assert.ok(isAuthError('POST https://rupload.facebook.com/ig-api-upload/v27.0/1 -> 400: {"debug_info":{"type":"ProcessingFailedError"}}'));
 	assert.ok(!isAuthError('POST https://graph.facebook.com/v23.0/1/media -> 400: {"error":{"message":"aspect ratio","type":"OAuthException","code":36003}}'));
@@ -130,5 +131,29 @@ test('Instagram: a refused direct upload falls back to Instagram fetching the pu
 	} finally {
 		globalThis.fetch = real;
 		process.env = env;
+	}
+});
+
+test('Instagram publish is sent once; a lost answer after it went out still finds the live post', async () => {
+	const real = globalThis.fetch;
+	let publishCalls = 0;
+	let status = 'PUBLISHED';
+	globalThis.fetch = (async (url: string) => {
+		const json = (body: unknown, code = 200) => new Response(JSON.stringify(body), {status: code});
+		if (url.includes('media_publish')) {
+			publishCalls++;
+			throw new TypeError('fetch failed'); // the connection drops before the answer arrives
+		}
+		if (url.includes('fields=status_code')) return json({status_code: status});
+		if (url.includes('/media?fields=id&limit=1')) return json({data: [{id: 'live-1'}]});
+		return json({error: {message: 'unexpected'}}, 500);
+	}) as typeof fetch;
+	try {
+		assert.equal(await publish('u1', 'tok', 'c9'), 'live-1');
+		assert.equal(publishCalls, 1); // never sent twice
+		status = 'FINISHED'; // not published: the failure stands, so the episode stays queued (network error)
+		await assert.rejects(publish('u1', 'tok', 'c9'), /network error/);
+	} finally {
+		globalThis.fetch = real;
 	}
 });

@@ -42,6 +42,18 @@ export const instagramCopy = (file: string): string => {
 	return file;
 };
 
+/** Publishes an uploaded Reel, sent once: if the answer is lost after Instagram published it, sending again would make a
+ * duplicate or record a live post as failed. On any failure, the container's own status says whether it went out. */
+export const publish = async (user: string, token: string, container: string): Promise<string> => {
+	try {
+		return (await api(`${GRAPH}/${user}/media_publish?creation_id=${container}&access_token=${token}`, {method: 'POST'}, 1)).id;
+	} catch (e) {
+		const {status_code} = await api(`${GRAPH}/${container}?fields=status_code&access_token=${token}`).catch(() => ({status_code: ''}));
+		if (status_code !== 'PUBLISHED') throw e;
+		return (await api(`${GRAPH}/${user}/media?fields=id&limit=1&access_token=${token}`)).data[0].id;
+	}
+};
+
 /** Uploads the file directly (resumable), so the video never needs a public URL. Meta refuses direct uploads to an
  * account for hours at a time (rupload ProcessingFailedError: @cutawayid, Nov 18-20) while accepting the same video by
  * link, so with `publicUrl` (the reviewed render in the public `videos` release) it then lets Instagram fetch it instead. */
@@ -60,7 +72,7 @@ export const uploadInstagram = async (file: string, lang: Lang, caption: string,
 	}
 	for (let i = 0; i < 60; i++) {
 		const {status_code, status} = await api(`${GRAPH}/${container.id}?fields=status_code,status&access_token=${token}`);
-		if (status_code === 'FINISHED') return (await api(`${GRAPH}/${user}/media_publish?creation_id=${container.id}&access_token=${token}`, {method: 'POST'})).id;
+		if (status_code === 'FINISHED') return publish(user, token, container.id);
 		if (status_code === 'ERROR' || status_code === 'EXPIRED') throw new Error(`Instagram processing failed: ${status}`);
 		await new Promise((r) => setTimeout(r, 10_000));
 	}

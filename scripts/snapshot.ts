@@ -33,7 +33,9 @@ export const instagramNumbers = async (lang: Lang, mediaIds: string[]) => {
 	const a = await api(`${GRAPH}/${user}?fields=username,followers_count,media_count&access_token=${token}`);
 	const media = new Map<string, {likes: number; comments: number; url: string; views: number; reach: number; saves: number; shares: number}>();
 	for (const id of mediaIds) {
-		const m = await api(`${GRAPH}/${id}?fields=like_count,comments_count,permalink&access_token=${token}`);
+		// a Reel deleted by you or by Meta answers with an error: skip it, never the whole account
+		const m = await safe(`instagram media ${id}`, () => api(`${GRAPH}/${id}?fields=like_count,comments_count,permalink&access_token=${token}`));
+		if (!m) continue;
 		const s = await safe(`instagram insights ${id}`, () => ownInstagram(lang, id));
 		media.set(id, {likes: m.like_count ?? 0, comments: m.comments_count ?? 0, url: m.permalink ?? '', views: s?.views ?? 0, reach: s?.reach ?? 0, saves: s?.saved ?? 0, shares: s?.shares ?? 0});
 	}
@@ -66,7 +68,8 @@ for (const lang of LANGS) {
 	if (ig) {
 		channels.push({lang, platform: 'instagram', ...ig.channel});
 		for (const p of mine('instagram')) {
-			const m = ig.media.get(p.mediaId)!;
+			const m = ig.media.get(p.mediaId);
+			if (!m) continue;
 			posts.push({id: p.id, title: title(p), lang, platform: 'instagram', url: m.url, postedAt: p.postedAt, views: m.views, likes: m.likes, comments: m.comments, reach: m.reach, saves: m.saves, shares: m.shares});
 		}
 	}
