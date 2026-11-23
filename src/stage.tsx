@@ -964,3 +964,47 @@ export const Catalyst = ({heat = 0, position = [0, 3, 0]}: {heat?: number; posit
 		</group>
 	);
 };
+
+// ---- look upgrade (W50): callouts pinned to 3D parts ------------------------------------------------------------
+/** A dot on a part, a leader line and a mono label that always faces the camera, so the narrated part is named in frame.
+ * `at` is the part (parent space), `offset` where the label floats, `show` the scene progress where it fades in. */
+export const Callout = ({at, offset = [2.2, 1.6, 0], text, show = 0.15, size = 1}: {at: V3; offset?: V3; text: string; show?: number; size?: number}) => {
+	const {p} = useScene();
+	const k = interpolate(p, [show, show + 0.1], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
+	const tex = useMemo(() => {
+		const c = document.createElement('canvas');
+		c.width = 640;
+		c.height = 128;
+		const g = c.getContext('2d')!;
+		g.fillStyle = 'rgba(30,20,10,.82)';
+		g.fillRect(0, 0, 640, 128);
+		g.strokeStyle = '#f0c46a';
+		g.lineWidth = 6;
+		g.strokeRect(3, 3, 634, 122);
+		g.fillStyle = '#fff3d6';
+		g.font = '700 56px "Courier New", monospace';
+		g.textAlign = 'center';
+		g.textBaseline = 'middle';
+		g.fillText(text, 320, 66, 600);
+		const t = new THREE.CanvasTexture(c);
+		t.colorSpace = THREE.SRGBColorSpace;
+		return t;
+	}, [text]);
+	const line = useMemo(() => new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(...at), new THREE.Vector3(at[0] + offset[0], at[1] + offset[1], at[2] + offset[2])]), [at, offset]);
+	const end: V3 = [at[0] + offset[0], at[1] + offset[1], at[2] + offset[2]];
+	if (k <= 0) return null;
+	return (
+		<group>
+			<mesh position={at} renderOrder={10}>
+				<sphereGeometry args={[0.13 * size, 12, 12]} />
+				<meshBasicMaterial color="#f0c46a" depthTest={false} transparent opacity={k} toneMapped={false} />
+			</mesh>
+			<lineSegments geometry={line} renderOrder={10}>
+				<lineBasicMaterial color="#f0c46a" depthTest={false} transparent opacity={k} toneMapped={false} />
+			</lineSegments>
+			<sprite position={end} scale={[3.4 * size, 0.68 * size, 1]} renderOrder={11}>
+				<spriteMaterial map={tex} depthTest={false} transparent opacity={k} toneMapped={false} />
+			</sprite>
+		</group>
+	);
+};

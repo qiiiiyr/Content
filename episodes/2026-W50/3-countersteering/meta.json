@@ -1,0 +1,54 @@
+{
+  "theme": "grip-and-stopping",
+  "test": true,
+  "title": {
+    "en": "To turn right, you steer left first #shorts",
+    "id": "Mau belok kanan, kamu setir ke kiri dulu #shorts"
+  },
+  "description": {
+    "en": "Countersteering: why a quick push on the right bar leans a motorcycle right.",
+    "id": "Countersteering: kenapa dorongan cepat di stang kanan membuat motor miring ke kanan."
+  },
+  "hashtags": [
+    "motorcycle",
+    "countersteering",
+    "riding",
+    "howitworks",
+    "safety"
+  ],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Countersteering",
+    "https://www.harley-davidson.com/us/en/content/expert-advice/motorcycle-countersteering-cornering",
+    "https://www.bennetts.co.uk/bikesocial/news-and-views/advice/biking-tips/better-riding-counter-steering"
+  ],
+  "scenes": [
+    {
+      "en": "To turn a motorcycle right, you first steer *left*.",
+      "id": "Untuk belok kanan dengan motor, kamu setir ke *kiri* dulu."
+    },
+    {
+      "en": "Riders do it without thinking: a quick push on the *right* bar, forward.",
+      "id": "Pengendara melakukannya tanpa sadar: dorongan singkat di stang *kanan*, ke depan."
+    },
+    {
+      "en": "The front wheel swings *left*, out from under the bike.",
+      "id": "Roda depan berayun ke *kiri*, keluar dari bawah motor."
+    },
+    {
+      "en": "The wheels slide out left, so the bike falls over to the *right*.",
+      "id": "Roda geser keluar ke kiri, jadi motor jatuh ke *kanan*."
+    },
+    {
+      "en": "That fall is the *lean*. A bike turns because it leans, not because you turn the bar.",
+      "id": "Jatuh itu adalah *miringnya*. Motor belok karena miring, bukan karena stangnya diputar."
+    },
+    {
+      "en": "Once the lean is set, ease off the push and the bike holds its *line*.",
+      "id": "Begitu miringnya pas, lepaskan dorongan itu dan motor menjaga *jalurnya* sendiri."
+    },
+    {
+      "en": "Push right, go right. Send this to a rider who never noticed.",
+      "id": "Dorong kanan, belok kanan. Kirim ini ke pengendara yang belum sadar."
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "theme": "engines-inside",
+  "test": false,
+  "title": {
+    "en": "Old engines mixed fuel with no computer #shorts",
+    "id": "Mesin lawas mencampur bensin tanpa komputer #shorts"
+  },
+  "description": {
+    "en": "How a carburetor uses air speed and low pressure to pull fuel into an engine.",
+    "id": "Cara karburator memakai kecepatan udara dan tekanan rendah untuk menyedot bensin ke mesin."
+  },
+  "hashtags": [
+    "carburetor",
+    "engine",
+    "oldschool",
+    "howitworks",
+    "physics"
+  ],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Carburetor",
+    "https://www.britannica.com/technology/carburetor",
+    "https://www.curbsideclassic.com/blog/tech/cc-tech-the-operation-and-tuning-of-a-holley-carburetor-a-modern-twist-on-old-tech/"
+  ],
+  "scenes": [
+    {
+      "en": "An old carburetor mixes fuel with *no computer* and no sensors.",
+      "id": "Karburator lawas mencampur bensin tanpa *komputer* dan tanpa sensor."
+    },
+    {
+      "en": "Every intake stroke pulls air through a narrow neck called a *venturi*.",
+      "id": "Tiap langkah isap menarik udara lewat leher sempit bernama *venturi*."
+    },
+    {
+      "en": "In the narrow part the air speeds up, and its pressure *drops*.",
+      "id": "Di bagian sempit, udara jadi lebih cepat dan tekanannya *turun*."
+    },
+    {
+      "en": "Outside air pressure then pushes fuel up from a small bowl, through a tiny *jet*.",
+      "id": "Tekanan udara luar lalu mendorong bensin naik dari mangkuk kecil lewat *jet* mungil."
+    },
+    {
+      "en": "More air means more suction, so *more fuel* follows by itself.",
+      "id": "Udara lebih banyak berarti hisapan lebih kuat, jadi *bensin lebih banyak* ikut sendiri."
+    },
+    {
+      "en": "The ideal petrol mix is about *14.7 to 1*, air to fuel, by weight.",
+      "id": "Campuran bensin yang ideal sekitar *14,7 banding 1*, udara banding bensin, menurut berat."
+    },
+    {
+      "en": "No chip, just physics. Send this to someone who loves old engines.",
+      "id": "Tanpa chip, cuma fisika. Kirim ini ke temanmu yang suka mesin lawas."
+    }
+  ]
+}

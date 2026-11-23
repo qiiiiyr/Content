@@ -1,0 +1,54 @@
+{
+  "theme": "grip-and-stopping",
+  "test": true,
+  "title": {
+    "en": "Your engine can brake your car by itself #shorts",
+    "id": "Mesinmu bisa mengerem mobil sendirian #shorts"
+  },
+  "description": {
+    "en": "Engine braking: why lifting off the throttle slows a petrol car.",
+    "id": "Engine brake: kenapa melepas gas memperlambat mobil bensin."
+  },
+  "hashtags": [
+    "enginebraking",
+    "cars",
+    "driving",
+    "howitworks",
+    "petrol"
+  ],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Engine_braking",
+    "https://www.britannica.com/technology/internal-combustion-engine",
+    "https://en.wikipedia.org/wiki/Throttle"
+  ],
+  "scenes": [
+    {
+      "en": "Lift your foot off the gas and your car starts *braking* by itself.",
+      "id": "Angkat kakimu dari gas dan mobilmu mulai *mengerem* sendiri."
+    },
+    {
+      "en": "Your wheels are still turning the engine, through the *gearbox*.",
+      "id": "Rodamu masih memutar mesin lewat *gearbox*."
+    },
+    {
+      "en": "But the *throttle* is now almost closed, so air barely gets in.",
+      "id": "Tapi *throttle* hampir tertutup, jadi udara hampir tidak bisa masuk ke mesin."
+    },
+    {
+      "en": "Each piston must pull against that *vacuum* on its way down.",
+      "id": "Tiap piston harus menarik melawan *vakum* itu saat turun."
+    },
+    {
+      "en": "Pulling against a vacuum takes *work*, and that work comes from your wheels.",
+      "id": "Menarik melawan vakum butuh *tenaga*, dan tenaga itu diambil dari rodamu."
+    },
+    {
+      "en": "A lower gear spins the engine faster, so it brakes *harder*.",
+      "id": "Gigi lebih rendah memutar mesin lebih cepat, jadi remnya *lebih kuat*."
+    },
+    {
+      "en": "Free braking, no brake pads. Send this to a downhill driver.",
+      "id": "Rem gratis, tanpa kampas rem. Kirim ini ke temanmu yang sering lewat turunan."
+    }
+  ]
+}

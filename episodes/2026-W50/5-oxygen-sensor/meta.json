@@ -1,0 +1,54 @@
+{
+  "theme": "engines-inside",
+  "test": false,
+  "title": {
+    "en": "A sensor in your exhaust tastes the burn #shorts",
+    "id": "Sensor di knalpotmu mencicipi hasil pembakaran #shorts"
+  },
+  "description": {
+    "en": "The oxygen sensor reads the exhaust so the computer can keep the air-fuel mix near 14.7 to 1.",
+    "id": "Sensor oksigen membaca gas buang agar komputer menjaga campuran udara-bensin sekitar 14,7 banding 1."
+  },
+  "hashtags": [
+    "oxygensensor",
+    "lambda",
+    "engine",
+    "cars",
+    "howitworks"
+  ],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Oxygen_sensor",
+    "https://en.wikipedia.org/wiki/Air%E2%80%93fuel_ratio",
+    "https://www.britannica.com/technology/fuel-injection"
+  ],
+  "scenes": [
+    {
+      "en": "Your exhaust pipe has a sensor that *tastes* the burn.",
+      "id": "Di knalpot mobilmu ada sensor yang *mencicipi* hasil pembakaran."
+    },
+    {
+      "en": "It measures the leftover *oxygen* in the exhaust gas.",
+      "id": "Ia mengukur sisa *oksigen* yang tidak ikut terbakar di gas buang."
+    },
+    {
+      "en": "Too little oxygen means the mix was too *rich*, too much fuel.",
+      "id": "Oksigen terlalu sedikit berarti campurannya terlalu *kaya*, bensin kebanyakan."
+    },
+    {
+      "en": "Too much oxygen means the mix was too *lean*, too little fuel.",
+      "id": "Oksigen terlalu banyak berarti campurannya terlalu *miskin*, bensin kurang."
+    },
+    {
+      "en": "The sensor sends a voltage, and the engine computer *reads* it.",
+      "id": "Sensor mengirim sinyal tegangan, dan komputer mesin *membacanya* setiap saat."
+    },
+    {
+      "en": "It trims the fuel again and again, aiming near *14.7 to 1*.",
+      "id": "Komputer mengatur semprotan bensin terus-menerus, mengincar sekitar *14,7 banding 1*."
+    },
+    {
+      "en": "A tiny tasting job that cleans your exhaust. Send this to a car owner.",
+      "id": "Tugas mencicipi kecil yang membuat knalpotmu lebih bersih. Kirim ini ke pemilik mobil."
+    }
+  ]
+}

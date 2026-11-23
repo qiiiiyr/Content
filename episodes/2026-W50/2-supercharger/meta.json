@@ -1,0 +1,54 @@
+{
+  "theme": "engines-inside",
+  "test": false,
+  "title": {
+    "en": "This engine is pumped up by its own crank #shorts",
+    "id": "Mesin ini ditiup oleh poros engkolnya sendiri #shorts"
+  },
+  "description": {
+    "en": "A supercharger is an air pump driven straight from the crankshaft. How it differs from a turbo.",
+    "id": "Supercharger adalah pompa udara yang digerakkan langsung dari poros engkol. Bedanya dengan turbo."
+  },
+  "hashtags": [
+    "supercharger",
+    "engine",
+    "cars",
+    "howitworks",
+    "turbo"
+  ],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Supercharger",
+    "https://www.britannica.com/technology/supercharger",
+    "https://en.wikipedia.org/wiki/Turbocharger"
+  ],
+  "scenes": [
+    {
+      "en": "This engine is *forced* to breathe, by a pump bolted to its own crank.",
+      "id": "Mesin ini *dipaksa* bernapas, oleh pompa yang dipasang ke poros engkolnya sendiri."
+    },
+    {
+      "en": "A normal engine just sucks air in. Its pistons can only pull in so *much*.",
+      "id": "Mesin biasa cuma menghirup udara. Pistonnya cuma bisa menarik sebanyak *itu*."
+    },
+    {
+      "en": "A supercharger is an air pump, driven by a *belt* from the crankshaft.",
+      "id": "Supercharger adalah pompa udara yang diputar *sabuk* dari poros engkol."
+    },
+    {
+      "en": "It packs more air into each cylinder, so the engine can burn *more fuel* per cycle.",
+      "id": "Ia memadatkan lebih banyak udara ke tiap silinder, jadi mesin bisa membakar *lebih banyak bensin* tiap siklus."
+    },
+    {
+      "en": "Because the crank turns it, boost arrives *instantly*, with no waiting.",
+      "id": "Karena diputar poros engkol, tenaga tambahan datang *seketika*, tanpa menunggu."
+    },
+    {
+      "en": "The catch: that pump takes *engine power* to spin.",
+      "id": "Masalahnya: pompa itu butuh *tenaga mesin* untuk berputar."
+    },
+    {
+      "en": "A turbo spins on exhaust instead. Send this to your turbo fan.",
+      "id": "Turbo diputar gas buang. Kirim ini ke temanmu yang suka turbo."
+    }
+  ]
+}

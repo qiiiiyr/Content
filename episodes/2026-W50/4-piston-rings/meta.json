@@ -1,0 +1,54 @@
+{
+  "theme": "engines-inside",
+  "test": false,
+  "title": {
+    "en": "The tiny rings that keep a cylinder sealed #shorts",
+    "id": "Cincin kecil yang menjaga silinder tetap rapat #shorts"
+  },
+  "description": {
+    "en": "Piston rings seal combustion pressure and scrape oil off the cylinder wall.",
+    "id": "Cincin piston menahan tekanan pembakaran dan mengerok oli dari dinding silinder."
+  },
+  "hashtags": [
+    "pistonrings",
+    "engine",
+    "cars",
+    "howitworks",
+    "oil"
+  ],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Piston_ring",
+    "https://www.vehicleservicepros.com/service-repair/article/53084370/pistons-rings",
+    "https://www.britannica.com/technology/piston-ring"
+  ],
+  "scenes": [
+    {
+      "en": "A piston never actually *touches* the cylinder wall.",
+      "id": "Piston sebenarnya tidak pernah *menyentuh* dinding silinder."
+    },
+    {
+      "en": "There is a small gap. Without help, the hot burning gas would *leak* past it and escape.",
+      "id": "Ada celah kecil. Tanpa bantuan, gas pembakaran akan *bocor* lewat situ."
+    },
+    {
+      "en": "So the piston wears springy metal *rings* in grooves around its side.",
+      "id": "Jadi piston memakai *cincin* logam yang lentur di alur sekelilingnya."
+    },
+    {
+      "en": "Most car pistons carry three rings. The top two are *compression* rings.",
+      "id": "Kebanyakan piston mobil punya tiga: dua cincin *kompresi* di atas."
+    },
+    {
+      "en": "They press outward and seal the *combustion* pressure above.",
+      "id": "Mereka menekan ke luar dan menahan tekanan *pembakaran* di atasnya."
+    },
+    {
+      "en": "The bottom one is the *oil* ring. It scrapes extra oil back down.",
+      "id": "Yang paling bawah adalah cincin *oli*. Ia mengerok oli berlebih ke bawah."
+    },
+    {
+      "en": "Three thin rings, one sealed engine. Send this to your mechanic friend.",
+      "id": "Tiga cincin tipis, satu mesin yang rapat. Kirim ini ke temanmu yang mekanik."
+    }
+  ]
+}
