@@ -19,3 +19,18 @@ references in `docs/look.md`, never their artwork. Sample: one episode rendered 
 - One accent colour per look (cyan, red, cyan). Every word must read on a phone at arm's length.
 - A graphic shows information (progress, the key number, the step), never decoration.
 - Render time stays within about 10% of `workshop`.
+
+## Animation language (every look)
+
+Learned from the references and the competitor study (`docs/competitors.md`). Example: `episodes/2026-W47/1-four-stroke/Scenes.tsx`.
+
+| Tool | What it does | How |
+|---|---|---|
+| Shots | 2-3 shots per scene, so the picture changes every 1-2 s | camera keys with `cut: true` start a new shot |
+| Cold open | frame 1 already moving: the part flies together, or starts mid-action | `<Engine explode={…}>` (1 = apart, 0 = built), animate with `p` |
+| X-ray focus | the part being named glows in the look's accent, the rest turns see-through | `focus={['intake']}` on a part; tag groups with `userData={{part: …}}` in new parts |
+| Pinned label | a dot on the part, a leader line, its name; follows the camera and moving parts | `<Callout cam={cam} at={[x, y, z]} label="…" />`, `at` can be a function of `p` |
+| Slow motion | the key moment (spark, gear mesh, lock-up) runs slow and says so | `const r = ramp(p, from, to)` drives the mechanism; `<TimeTag show={r.slow} />` |
+
+Rules: one focus and one label at a time; a label names what the narration names at that moment; slow motion
+once per episode, on the moment the episode is about.

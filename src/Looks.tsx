@@ -4,7 +4,11 @@ import '@fontsource/jetbrains-mono/500.css';
 import '@fontsource/jetbrains-mono/700.css';
 import '@fontsource/source-serif-4/600.css';
 import '@fontsource/source-serif-4/600-italic.css';
+import {useContext} from 'react';
+import * as THREE from 'three';
 import {AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig} from 'remotion';
+import {LookContext} from './kit';
+import {camAt, useScene, type CamKey} from './stage';
 import type {Lang, Look} from './types';
 
 export const MONO = '"JetBrains Mono", monospace';
@@ -121,5 +125,67 @@ const Blueprint = ({i, k}: {i: number; k: string}) => {
 				{draw >= 1 && <line x1={W - 1} y1={8} x2={W - 1} y2={32} stroke="#5ee1ff" strokeWidth={2} />}
 			</svg>
 		</AbsoluteFill>
+	);
+};
+
+// ---- animation language (docs/styles.md): labels pinned to 3D parts, slow motion with an honest time tag ----------
+
+const projector = new THREE.PerspectiveCamera(32, 1080 / 1920, 0.1, 200); // same lens as <Stage>
+
+/** Where a 3D point lands on the 1080x1920 frame, for a scene filmed with these camera keys. */
+export const toScreen = (cam: CamKey[], at: [number, number, number], p: number, sec: number) => {
+	const {pos, look} = camAt(cam, p, sec);
+	projector.position.set(...pos);
+	projector.lookAt(...look);
+	projector.updateMatrixWorld();
+	const v = new THREE.Vector3(...at).project(projector);
+	return {x: ((v.x + 1) / 2) * 1080, y: ((1 - v.y) / 2) * 1920, behind: v.z > 1};
+};
+
+/** A label pinned to a point on a part: a dot on the part, a leader line, the name. Shown between from and to (0..1 of the
+ * scene). Give the same camera keys as the scene's <Stage>. `at` may follow a moving part: (p) => [x, y, z]. */
+export const Callout = ({cam, at, label, from = 0.1, to = 0.9, side: preferred}: {cam: CamKey[]; at: [number, number, number] | ((p: number) => [number, number, number]); label: string; from?: number; to?: number; side?: 'left' | 'right'}) => {
+	const look = useContext(LookContext);
+	const {p, sec} = useScene();
+	const fps = useVideoConfig().fps;
+	const frame = useCurrentFrame();
+	const {durationInFrames} = useVideoConfig();
+	if (p < from || p > to) return null;
+	const k = spring({frame: frame - from * durationInFrames, fps, config: {damping: 16, stiffness: 160}});
+	const pt = toScreen(cam, typeof at === 'function' ? at(p) : at, p, sec);
+	if (pt.behind) return null;
+	// the label goes toward the side with room unless the scene asks for one
+	const side = preferred ?? (pt.x > 540 ? 'left' : 'right');
+	const color = ACCENT_2D[look];
+	const dx = (side === 'right' ? 1 : -1) * 150 * k;
+	const ex = pt.x + dx;
+	const ey = Math.max(300, Math.min(pt.y - 90 * k, 1080)); // below the top graphics, above the caption band
+	return (
+		<AbsoluteFill style={{pointerEvents: 'none'}}>
+			<svg width={1080} height={1920} style={{position: 'absolute'}}>
+				<circle cx={pt.x} cy={pt.y} r={9} fill="none" stroke={color} strokeWidth={3} />
+				<circle cx={pt.x} cy={pt.y} r={3.5} fill={color} />
+				<polyline points={`${pt.x},${pt.y} ${pt.x + dx * 0.4},${ey} ${ex},${ey}`} fill="none" stroke={color} strokeWidth={2.5} />
+			</svg>
+			<div style={{position: 'absolute', top: ey - 46, left: side === 'right' ? ex + 8 : undefined, right: side === 'left' ? 1080 - ex + 8 : undefined, opacity: k, fontFamily: look === 'editorial' ? SERIF : MONO, fontStyle: look === 'editorial' ? 'italic' : undefined, fontWeight: 700, fontSize: look === 'editorial' ? 44 : 34, letterSpacing: look === 'editorial' ? 0 : '.04em', color: '#fff', textShadow: '0 2px 10px rgba(0,0,0,.8)', whiteSpace: 'nowrap', background: look === 'workshop' ? 'rgba(27,27,27,.75)' : undefined, padding: look === 'workshop' ? '2px 12px' : undefined, borderRadius: 6}}>
+				{look === 'editorial' || look === 'workshop' ? label : label.toUpperCase()}
+			</div>
+		</AbsoluteFill>
+	);
+};
+
+const ACCENT_2D: Record<Look, string> = {workshop: '#ffb347', golden: '#5ee1ff', editorial: '#ff4d5e', blueprint: '#5ee1ff'};
+
+export {ramp} from './motion';
+
+/** "SLOW MOTION" while a ramp is slow: says why the shot slows down. Placed under the look's top graphics. */
+export const TimeTag = ({show, lang}: {show: boolean; lang: Lang}) => {
+	const look = useContext(LookContext);
+	if (!show) return null;
+	const text = lang === 'id' ? 'GERAK LAMBAT' : 'SLOW MOTION';
+	return (
+		<div style={{position: 'absolute', right: 64, top: look === 'golden' ? 178 : 124, fontFamily: MONO, fontWeight: 700, fontSize: 26, letterSpacing: '.18em', color: '#fff', background: look === 'editorial' ? '#c1121f' : 'rgba(0,0,0,.55)', border: look === 'editorial' ? undefined : `2px solid ${ACCENT_2D[look]}`, padding: '6px 12px'}}>
+			{text}
+		</div>
 	);
 };

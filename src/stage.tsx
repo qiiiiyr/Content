@@ -1,7 +1,7 @@
 // 3D miniature-diorama kit: a warm workshop, textured wall and bench, brass and steel parts lit by a studio
 // environment, props, a slow macro camera. Episodes compose <Stage> with parts from here.
 // Units are arbitrary; the engine is about 7 tall.
-import {useContext, useMemo, type ReactNode} from 'react';
+import {createContext, useContext, useMemo, useRef, type ReactNode} from 'react';
 import {LookContext} from './kit';
 import type {Look as LookName} from './types';
 import {ThreeCanvas} from '@remotion/three';
@@ -12,7 +12,7 @@ import {RoomEnvironment} from 'three/examples/jsm/environments/RoomEnvironment.j
 import {RoundedBoxGeometry} from 'three/examples/jsm/geometries/RoundedBoxGeometry.js';
 
 type V3 = [number, number, number];
-export type CamKey = {t: number; pos: V3; look: V3}; // t = 0..1 progress through the scene, so the move always fits the narration
+export type CamKey = {t: number; pos: V3; look: V3; cut?: boolean}; // t = 0..1 progress through the scene, so the move always fits the narration
 
 export const mat = {
 	brass: {color: '#d9ad4f', metalness: 0.95, roughness: 0.28},
@@ -31,17 +31,26 @@ export const useScene = () => {
 	return {p: Math.min(1, frame / Math.max(1, durationInFrames - 1)), sec: frame / fps};
 };
 
+/** Camera position and target at scene progress p. A key with `cut: true` starts a new shot: the camera jumps there
+ * instead of moving, so one scene can hold 2-3 shots. Also used by Callout to pin labels to 3D points. */
+export const camAt = (keys: CamKey[], p: number, sec: number): {pos: V3; look: V3} => {
+	const start = keys.reduce((s, k, i) => (k.cut && k.t <= p ? i : s), 0);
+	const end = keys.findIndex((k, i) => i > start && k.cut);
+	const shot = keys.slice(start, end < 0 ? undefined : end);
+	const ts = shot.map((k) => k.t);
+	const at = (pick: (k: CamKey) => V3) =>
+		[0, 1, 2].map((i) => (shot.length < 2 ? pick(shot[0])[i] : interpolate(p, ts, shot.map((k) => pick(k)[i]), {easing: ease, extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}))) as V3;
+	const pos = at((k) => k.pos);
+	// a little handheld drift keeps the shot alive
+	return {pos: [pos[0] + Math.sin(sec * 0.7) * 0.07, pos[1] + Math.sin(sec * 0.9 + 1) * 0.05, pos[2]], look: at((k) => k.look)};
+};
+
 const Camera = ({keys}: {keys: CamKey[]}) => {
 	const cam = useThree((s) => s.camera);
 	const {p, sec} = useScene();
-	const ts = keys.map((k) => k.t);
-	const at = (pick: (k: CamKey) => V3) =>
-		[0, 1, 2].map((i) => interpolate(p, ts, keys.map((k) => pick(k)[i]), {easing: ease, extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}));
-	const [px, py, pz] = at((k) => k.pos);
-	const [lx, ly, lz] = at((k) => k.look);
-	// a little handheld drift keeps the shot alive
-	cam.position.set(px + Math.sin(sec * 0.7) * 0.07, py + Math.sin(sec * 0.9 + 1) * 0.05, pz);
-	cam.lookAt(lx, ly, lz);
+	const {pos, look} = camAt(keys, p, sec);
+	cam.position.set(...pos);
+	cam.lookAt(...look);
 	return null;
 };
 
@@ -166,7 +175,7 @@ export const Stage = ({cam, children}: {cam: CamKey[]; children: ReactNode}) => 
 			<Camera keys={cam} />
 			<Look />
 			{look === 'golden' ? <GoldenSet /> : look === 'editorial' ? <EditorialSet /> : look === 'blueprint' ? <BlueprintSet /> : <WorkshopSet />}
-			{children}
+			<AccentContext.Provider value={ACCENT[look]}>{children}</AccentContext.Provider>
 		</ThreeCanvas>
 	);
 };
@@ -392,6 +401,40 @@ const BlueprintSet = () => {
 	);
 };
 
+/** The look's accent colour, for parts in focus. Provided inside the 3D canvas, where the episode's context can't reach. */
+const AccentContext = createContext('#ffb347');
+const ACCENT: Record<LookName, string> = {workshop: '#ffb347', golden: '#5ee1ff', editorial: '#ff4d5e', blueprint: '#5ee1ff'};
+
+/** X-ray focus: meshes in the named parts (nearest userData.part above them) glow in the accent colour and pulse;
+ * every other solid part turns see-through. Glass and gas (no part) stay as they are. Returns the ref for the root. */
+export const useFocus = (focus?: string[]) => {
+	const root = useRef<THREE.Group>(null);
+	const accent = useContext(AccentContext);
+	const {sec} = useScene();
+	useFrame(() => {
+		if (!focus || !root.current) return;
+		root.current.traverse((o) => {
+			const mesh = o as THREE.Mesh;
+			if (!mesh.isMesh) return;
+			let part: string | undefined;
+			for (let a: THREE.Object3D | null = o; a && a !== root.current && !part; a = a.parent) part = a.userData.part;
+			if (!part) return;
+			const m = mesh.material as THREE.MeshStandardMaterial;
+			if (focus.includes(part)) {
+				m.emissive?.set(accent);
+				m.emissiveIntensity = 0.22 + 0.12 * Math.sin(sec * 6);
+			} else if (!m.userData.ghost) {
+				m.userData.ghost = true;
+				m.transparent = true;
+				m.opacity = 0.13;
+				m.depthWrite = false;
+				m.needsUpdate = true;
+			}
+		});
+	});
+	return root;
+};
+
 // ---- engine cutaway -------------------------------------------------------------------------------------------
 const R = 0.9; // crank radius
 const L = 2.6; // rod length
@@ -458,7 +501,14 @@ const Valve = ({x, open, color, spring}: {x: number; open: number; color: string
 const pistonProfile = [new THREE.Vector2(0, -0.3), new THREE.Vector2(0.92, -0.3), new THREE.Vector2(0.94, -0.25), new THREE.Vector2(0.94, 0.3), new THREE.Vector2(0.86, 0.3), new THREE.Vector2(0, 0.22)];
 
 /** One cylinder, cut away: glass wall, piston, rod, crank, two valves with springs, spark plug and the gas inside. */
-export const Engine = ({s, x = 0, scale = 1, valves = true, injector = false}: {s: EngineState; x?: number; scale?: number; valves?: boolean; injector?: boolean}) => {
+/**
+ * explode: 0..1 pulls the engine apart (head up, piston and crank down) to show the inside; animate it with p.
+ * focus: parts to show glowing in the look's accent while the rest turns see-through, e.g. ['intake'] while the
+ * narration names the intake valve. Parts: crank, piston, head, intake, exhaust, spark, base.
+ */
+export const Engine = ({s, x = 0, scale = 1, valves = true, injector = false, explode = 0, focus}: {s: EngineState; x?: number; scale?: number; valves?: boolean; injector?: boolean; explode?: number; focus?: string[]}) => {
+	const root = useFocus(focus);
+	const e = explode;
 	const springGeo = useMemo(() => new THREE.TubeGeometry(new Helix(0.17, 0.7, 7), 120, 0.03, 8, false), []);
 	const base = useMemo(() => new RoundedBoxGeometry(4.6, 0.4, 3.2, 3, 0.1), []);
 	const head = useMemo(() => new RoundedBoxGeometry(2.3, 0.5, 2.3, 3, 0.12), []);
@@ -469,7 +519,9 @@ export const Engine = ({s, x = 0, scale = 1, valves = true, injector = false}: {
 	const gasH = Math.max(0.05, HEAD - crown);
 	const glow = s.gasGlow ?? 0;
 	return (
-		<group position={[x, 1.2, 0]} scale={scale}>
+		<group ref={root} position={[x, 1.2, 0]} scale={scale}>
+			<group position={[0, -1.7 * e, 0.6 * e]}>
+			<group userData={{part: 'crank'}}>
 			{/* crankcase, crank web with counterweight, journal */}
 			<mesh position={[0, 0, -0.3]} rotation={[Math.PI / 2, 0, 0]} castShadow receiveShadow>
 				<cylinderGeometry args={[1.4, 1.4, 0.25, 48]} />
@@ -493,6 +545,8 @@ export const Engine = ({s, x = 0, scale = 1, valves = true, injector = false}: {
 				<cylinderGeometry args={[0.18, 0.18, 0.5, 24]} />
 				<meshStandardMaterial {...mat.steel} />
 			</mesh>
+			</group>
+			<group userData={{part: 'piston'}}>
 			{/* connecting rod and piston */}
 			<Rod from={[pin[0], pin[1], 0.1]} to={[0, py, 0.1]} r={0.13} />
 			<mesh position={[0, py, 0]} castShadow receiveShadow>
@@ -509,6 +563,8 @@ export const Engine = ({s, x = 0, scale = 1, valves = true, injector = false}: {
 				<cylinderGeometry args={[0.14, 0.14, 1.7, 20]} />
 				<meshStandardMaterial {...mat.brass} />
 			</mesh>
+			</group>
+			</group>
 			{/* glass cylinder wall with brass collars */}
 			<mesh position={[0, (HEAD + 1.0) / 2, 0]} renderOrder={2}>
 				<cylinderGeometry args={[1.0, 1.0, HEAD - 1.0, 56, 1, true]} />
@@ -523,9 +579,11 @@ export const Engine = ({s, x = 0, scale = 1, valves = true, injector = false}: {
 			{/* gas, lit from inside by the fire */}
 			<mesh position={[0, crown + gasH / 2, 0]} renderOrder={1}>
 				<cylinderGeometry args={[0.9, 0.9, gasH, 40]} />
-				<meshStandardMaterial color={s.gas ?? '#7fd6e0'} transparent depthWrite={false} opacity={0.42 + 0.4 * glow} emissive={s.gas ?? '#7fd6e0'} emissiveIntensity={glow * 2.8} />
+				<meshStandardMaterial color={s.gas ?? '#7fd6e0'} transparent depthWrite={false} opacity={(0.42 + 0.4 * glow) * (1 - e)} emissive={s.gas ?? '#7fd6e0'} emissiveIntensity={glow * 2.8} />
 			</mesh>
 			{glow > 0.02 && <pointLight position={[0, HEAD - 0.7, 0.4]} color="#ff9a3c" intensity={glow * 60} distance={9} />}
+			<group position={[0, 2.3 * e, 0]}>
+			<group userData={{part: 'head'}}>
 			{/* head with cooling fins and bolts */}
 			<mesh position={[0, HEAD + 0.3, 0]} geometry={head} castShadow receiveShadow>
 				<meshStandardMaterial {...mat.dark} />
@@ -542,8 +600,10 @@ export const Engine = ({s, x = 0, scale = 1, valves = true, injector = false}: {
 					<meshStandardMaterial {...mat.steel} />
 				</mesh>
 			))}
-			{valves && <Valve x={-0.45} open={s.intake ?? 0} color="#4fd1c5" spring={springGeo} />}
-			{valves && <Valve x={0.45} open={s.exhaust ?? 0} color="#9ca3af" spring={springGeo} />}
+			</group>
+			<group userData={{part: 'intake'}}>{valves && <Valve x={-0.45} open={s.intake ?? 0} color="#4fd1c5" spring={springGeo} />}</group>
+			<group userData={{part: 'exhaust'}}>{valves && <Valve x={0.45} open={s.exhaust ?? 0} color="#9ca3af" spring={springGeo} />}</group>
+			<group userData={{part: 'spark'}}>
 			{/* spark plug, or a dark steel fuel injector (diesel) so the picture never contradicts "no spark plug" */}
 			<mesh position={[0, HEAD + 1.05, 0.5]} castShadow>
 				<cylinderGeometry args={injector ? [0.13, 0.09, 0.9, 20] : [0.1, 0.12, 0.9, 20]} />
@@ -562,9 +622,11 @@ export const Engine = ({s, x = 0, scale = 1, valves = true, injector = false}: {
 				<meshStandardMaterial color="#fff6c8" emissive="#ffe27a" emissiveIntensity={(s.spark ?? 0) * 8} />
 			</mesh>
 			{(s.spark ?? 0) > 0.05 && <pointLight position={[0, HEAD - 0.3, 0.6]} color="#fff2b0" intensity={(s.spark ?? 0) * 40} distance={7} />}
+			</group>
+			</group>
 			{s.flow && <Flow {...s.flow} />}
 			{/* base plate */}
-			<mesh position={[0, -1.6, 0]} geometry={base} receiveShadow castShadow>
+			<mesh userData={{part: 'base'}} position={[0, -1.6 - 2.4 * e, 0]} geometry={base} receiveShadow castShadow>
 				<meshStandardMaterial {...mat.dark} />
 			</mesh>
 		</group>
