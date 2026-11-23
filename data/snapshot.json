@@ -1,37 +1,37 @@
 {
- "at": "2026-11-22T11:51:08.033Z",
+ "at": "2026-11-23T13:30:38.553Z",
  "channels": [
   {
    "lang": "en",
    "platform": "youtube",
    "name": "CutawayEN",
-   "followers": 6,
-   "views": 5702,
-   "posts": 5
+   "followers": 7,
+   "views": 7091,
+   "posts": 6
   },
   {
    "lang": "en",
    "platform": "instagram",
    "name": "@cutawayen",
    "followers": 0,
-   "views": 1428,
-   "posts": 8
+   "views": 1722,
+   "posts": 10
   },
   {
    "lang": "id",
    "platform": "youtube",
    "name": "CutawayID",
-   "followers": 0,
-   "views": 7,
-   "posts": 4
+   "followers": 2,
+   "views": 263,
+   "posts": 6
   },
   {
    "lang": "id",
    "platform": "instagram",
    "name": "@cutawayid",
    "followers": 0,
-   "views": 2171,
-   "posts": 8
+   "views": 2305,
+   "posts": 10
   }
  ],
  "posts": [
@@ -42,7 +42,7 @@
    "platform": "youtube",
    "url": "https://youtu.be/aQAamtKxKX8",
    "postedAt": "2026-11-18T00:24:07.767Z",
-   "views": 1277,
+   "views": 1279,
    "likes": 34,
    "comments": 0
   },
@@ -53,8 +53,8 @@
    "platform": "youtube",
    "url": "https://youtu.be/ONY_QuSKRCU",
    "postedAt": "2026-11-18T17:26:25.113Z",
-   "views": 1255,
-   "likes": 19,
+   "views": 1263,
+   "likes": 18,
    "comments": 0
   },
   {
@@ -64,7 +64,7 @@
    "platform": "youtube",
    "url": "https://youtu.be/8x9RM7Cztyk",
    "postedAt": "2026-11-19T22:25:20.377Z",
-   "views": 663,
+   "views": 666,
    "likes": 11,
    "comments": 0
   },
@@ -75,8 +75,8 @@
    "platform": "youtube",
    "url": "https://youtu.be/UmumOXnQ0BE",
    "postedAt": "2026-11-20T17:30:29.608Z",
-   "views": 1222,
-   "likes": 14,
+   "views": 1283,
+   "likes": 17,
    "comments": 0
   },
   {
@@ -86,8 +86,19 @@
    "platform": "youtube",
    "url": "https://youtu.be/OaUr5bipHlA",
    "postedAt": "2026-11-21T19:44:43.985Z",
-   "views": 1285,
-   "likes": 17,
+   "views": 1308,
+   "likes": 18,
+   "comments": 0
+  },
+  {
+   "id": "2026-W48/5-diesel",
+   "title": "A diesel has no spark plugs. So what lights it?",
+   "lang": "en",
+   "platform": "youtube",
+   "url": "https://youtu.be/pA16gKO4vCA",
+   "postedAt": "2026-11-22T21:15:15.330Z",
+   "views": 1292,
+   "likes": 24,
    "comments": 0
   },
   {
@@ -203,6 +214,34 @@
    "shares": 0
   },
   {
+   "id": "2026-W49/1-v8-fires",
+   "title": "A V8 fires four times every turn",
+   "lang": "en",
+   "platform": "instagram",
+   "url": "https://www.instagram.com/reel/DgEEjI_jr47/",
+   "postedAt": "2026-11-23T00:15:58.160Z",
+   "views": 138,
+   "likes": 1,
+   "comments": 0,
+   "reach": 117,
+   "saves": 0,
+   "shares": 0
+  },
+  {
+   "id": "2026-W49/2-injector",
+   "title": "A fuel injector opens for a few thousandths of a second",
+   "lang": "en",
+   "platform": "instagram",
+   "url": "https://www.instagram.com/reel/DgEQMLnFaIc/",
+   "postedAt": "2026-11-23T01:57:41.302Z",
+   "views": 156,
+   "likes": 1,
+   "comments": 0,
+   "reach": 129,
+   "saves": 0,
+   "shares": 0
+  },
+  {
    "id": "2026-W47/1-four-stroke",
    "title": "Mesinmu meledak 50 kali per detik",
    "lang": "id",
@@ -242,7 +281,29 @@
    "platform": "youtube",
    "url": "https://youtu.be/U3cJvy7Mlvw",
    "postedAt": "2026-11-21T14:40:07.365Z",
-   "views": 1,
+   "views": 132,
+   "likes": 1,
+   "comments": 0
+  },
+  {
+   "id": "2026-W48/4-flywheel",
+   "title": "Mesinmu cuma mendorong 1 dari 4 langkah. Kok bisa halus?",
+   "lang": "id",
+   "platform": "youtube",
+   "url": "https://youtu.be/nGP-bFscOZY",
+   "postedAt": "2026-11-22T14:36:28.716Z",
+   "views": 125,
+   "likes": 1,
+   "comments": 0
+  },
+  {
+   "id": "2026-W48/5-diesel",
+   "title": "Mesin diesel nggak punya busi. Terus apinya dari mana?",
+   "lang": "id",
+   "platform": "youtube",
+   "url": "https://youtu.be/vLJZM9Pw8Fw",
+   "postedAt": "2026-11-23T13:17:41.526Z",
+   "views": 0,
    "likes": 0,
    "comments": 0
   },
@@ -326,7 +387,7 @@
    "views": 118,
    "likes": 1,
    "comments": 0,
-   "reach": 107,
+   "reach": 108,
    "saves": 1,
    "shares": 0
   },
@@ -351,10 +412,38 @@
    "platform": "instagram",
    "url": "https://www.instagram.com/reel/DgCQ9cRIJqQ/",
    "postedAt": "2026-11-22T07:25:54.307Z",
-   "views": 133,
+   "views": 135,
    "likes": 2,
    "comments": 0,
-   "reach": 116,
+   "reach": 117,
+   "saves": 0,
+   "shares": 0
+  },
+  {
+   "id": "2026-W49/1-v8-fires",
+   "title": "V8 meledak empat kali tiap putaran",
+   "lang": "id",
+   "platform": "instagram",
+   "url": "https://www.instagram.com/reel/DgEmeYZq0k6/",
+   "postedAt": "2026-11-23T05:12:23.068Z",
+   "views": 132,
+   "likes": 4,
+   "comments": 0,
+   "reach": 125,
+   "saves": 0,
+   "shares": 0
+  },
+  {
+   "id": "2026-W49/2-injector",
+   "title": "Injektor bensin terbuka cuma beberapa per seribu detik",
+   "lang": "id",
+   "platform": "instagram",
+   "url": "https://www.instagram.com/reel/DgFeFVrOYRg/",
+   "postedAt": "2026-11-23T13:17:45.185Z",
+   "views": 0,
+   "likes": 0,
+   "comments": 0,
+   "reach": 0,
    "saves": 0,
    "shares": 0
   }
@@ -499,6 +588,34 @@
    "platform": "instagram",
    "followers": 0,
    "views": 2171
+  },
+  {
+   "date": "2026-11-23",
+   "lang": "en",
+   "platform": "youtube",
+   "followers": 7,
+   "views": 7091
+  },
+  {
+   "date": "2026-11-23",
+   "lang": "en",
+   "platform": "instagram",
+   "followers": 0,
+   "views": 1722
+  },
+  {
+   "date": "2026-11-23",
+   "lang": "id",
+   "platform": "youtube",
+   "followers": 2,
+   "views": 263
+  },
+  {
+   "date": "2026-11-23",
+   "lang": "id",
+   "platform": "instagram",
+   "followers": 0,
+   "views": 2305
   }
  ]
 }
