@@ -41,7 +41,9 @@ write is for `N`. Posting goes oldest first, so batches simply queue up behind e
    better, take the top open backlog item, and tick it there when it ships.
 4. **Write `reports/W.md`**: a short table of last week's episodes (views, avg % watched where present), the top
    3 competitor hits and what made them work (topic, hook, title pattern), the decision and its reason, and 3-6
-   concrete adjustments for next week. Plain language, under 400 words.
+   concrete adjustments for next week. Plain language, under 400 words. Start it with the goal line: last 7 days'
+   combined views of all four accounts (from `data/snapshot.json` history) against `strategy.goal.weeklyViews`
+   (20,000), and which account lags most. Every adjustment must say how it moves that number.
 5. **Update `strategy.json`**: set `testTheme` to `decision.nextTestTheme`. Keep `lessons` to the 10 most useful,
    each one short and actionable ("first scene must show the object, not a title card"). If `decision.action` is
    `switch`, set `currentTheme` to `decision.to` and `themeSince` to the Monday of week N+1 (the switch starts the
@@ -52,9 +54,18 @@ write is for `N`. Posting goes oldest first, so batches simply queue up behind e
      7 with the weakest hooks, keeping 2 test episodes on YouTube. `npm test` fails if a week sends more than 7 to YouTube.
    - Topic priority: follow-ups of `followups`, then topics suggested by competitor hits (rewritten in our own
      words and visuals, never copied), then `themes.json` ideas. Never repeat a topic already in `episodes/`.
+   - **Every topic is anchored on a real, named product** with a surprising capability, and the mechanism is the
+     payoff (see `docs/competitors.md`): "Honda scooters switch off their engine at every red light 🤯". The
+     Indonesian narration and title use bikes and cars Indonesians own (Beat, Vario, Scoopy, NMAX, Avanza, Xpander)
+     where the feature exists on them; otherwise keep the product and say why it matters in Indonesia. Product facts
+     need 2 sources, the maker's own first; if a fact can't be sourced, pick another product.
+   - Titles: brand + surprising capability + one emoji, under 70 characters before ` #shorts`, never "how X works".
+   - Closing line: 7 episodes end on a question that splits people (comments), 7 on a send line; alternate them.
+   - The look is set per language in `strategy.json` `looks` (the build applies it); do not set `look` in `meta.json`.
    - Copy the structure of `episodes/2026-W47/1-four-stroke/`: `meta.json` (narration per scene in both languages,
      titles ending in ` #shorts`, description, 4-6 hashtags, at least 2 sources) and `Scenes.tsx` (one component
-     per scene, built from `src/stage.tsx`).
+     per scene, built from `src/stage.tsx`). For the new animation language copy
+     `episodes/2026-W47/1-four-stroke/` (cuts, focus, callouts, slow motion) and read `docs/styles.md`.
 7. **Verify, then open the pull request** (see below). `npm test` must pass.
 
 ## Episode rules
@@ -67,7 +78,10 @@ write is for `N`. Posting goes oldest first, so batches simply queue up behind e
   people actually say (router, chip, Bluetooth).
 - **Visuals:** a 3D miniature diorama, built from `src/stage.tsx` (React Three Fiber): a warm workshop wall and bench, brass
   and dark-metal parts, glass cutaways, a slow macro camera. One scene = one camera move (`cam` keys, `t` is 0..1 of the
-  scene) around the mechanism doing the thing being narrated. Animate with `useScene().p` (0..1 through the scene), never
+  scene) around the mechanism doing the thing being narrated, cut into 2-3 shots (`cut: true` keys) so the picture
+  changes every 1-2 s. Use the animation language in `docs/styles.md`: X-ray `focus` and a `<Callout>` on the part the
+  narration names, one `ramp()` slow-motion moment with `<TimeTag>`, a cold open with `explode` or mid-action. Tag the
+  parts of any new model with `userData={{part: …}}` so focus works on it. Animate with `useScene().p` (0..1 through the scene), never
   with fixed seconds: scene length follows the narration. Show cause and effect (what moves, what burns, what flows), keep
   the subject in the upper two thirds (captions sit at y=1130-1390 of 1920, platform UI below) and keep the framing
   portrait (about 0.32 x distance wide at the subject). Build new parts (gearbox, brake disc, wheel, battery cell) in

@@ -13,15 +13,23 @@
     "minAgeDays": 7
   },
   "lessons": [
-    "Open on a number or a contradiction in the first 2 seconds, never on a name or title card.",
-    "First scene shows the moving part, not the empty bench.",
-    "Vary the hero object each week; don't put the same cylinder in every episode.",
-    "Say only claims that two sources agree on; use ranges ('15 to 20 times') when sources differ.",
-    "End on one short line that sums it up, then one send or follow line (alternate them).",
-    "Reels viewers decide in about 1.5 s: frame 1 shows the part moving AND a live <Readout> number counting up (a big number that changes is the cheapest hook); no slow push-in from an empty shot.",
-    "Instagram reach to non-followers follows sends per reach (ours: 0 sends on 1,061 reach): give one surprising, shareable fact and end with a send line ('Send this to someone who rides a two-stroke').",
+    "Topic = a hidden feature of a real, named product people know, with the mechanism as the payoff (scroll.engineer's named-product posts reach up to 187x its median). English: famous global cars and bikes. Indonesian: what Indonesians ride (Beat, Vario, Scoopy, NMAX, Avanza, Xpander, Innova). Every claim about the product needs 2 sources, the maker's own first.",
+    "Title = brand + surprising capability + one emoji (👀 🤯 😳), under 70 characters, never 'how X works' ('Honda scooters switch off their engine at every red light 🤯').",
+    "Frame 1 is already moving: a cold open mid-action or the part flying together (<Engine explode>), with the hook's key number or words on screen; never a slow push-in on an empty shot.",
+    "Animation language (docs/styles.md): 2-3 shots per scene (cut: true), X-ray focus and a <Callout> on the part the narration names, one slow-motion moment with <TimeTag> on the moment the episode is about.",
+    "Comments are our missing signal (about 0 per post; scroll.engineer gets 5-12 per 1,000 likes): end half the batch on a question that splits people ('Would you trust your scooter to restart every time?'), the other half on a send line.",
     "Make the last line and frame lead back into the first so the Short loops: rewatches add watch time on both platforms.",
-    "Proven hook (our best so far: 1,000 YouTube views and 1,251 Instagram views): 'Your <thing you own> <violent verb> <extreme number> times a second' ('Your engine explodes 50 times a second'). Give each episode its own object, verb and number, and use this frame in at most 4 of the 14 episodes so the batch does not look templated.",
-    "Average watched is only 47-58%, so half the viewers leave before the last scene: answer the hook's question by scene 4, and keep scenes 5-7 for the catch and the send line."
-  ]
+    "Proven hook (our best so far: 1,000 YouTube views and 1,251 Instagram views): 'Your <thing you own> <violent verb> <extreme number> times a second'. Use this frame in at most 4 of the 14 episodes, each with its own object, verb and number.",
+    "Average watched is only 47-58%: answer the hook's question by scene 4, and keep scenes 5-7 for the catch and the closing line.",
+    "Say only claims that two sources agree on; use ranges ('15 to 20 times') when sources differ.",
+    "English and Indonesian use different looks (strategy.json looks) so the two channels never upload the same picture: Indonesian YouTube got 7 views on 4 posts, likely treated as reused content."
+  ],
+  "goal": {
+    "weeklyViews": 20000,
+    "note": "combined views of all four accounts (both YouTube channels, both Instagram accounts) in one week, from data/snapshot.json"
+  },
+  "looks": {
+    "en": "golden",
+    "id": "blueprint"
+  }
 }

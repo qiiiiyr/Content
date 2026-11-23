@@ -1,7 +1,7 @@
 // Usage: node scripts/build.ts <episode id> [en|id ...]  ->  out/<week>__<slug>.<lang>.mp4
 import {execFileSync} from 'node:child_process';
 import {mkdirSync, readFileSync, writeFileSync} from 'node:fs';
-import {LANGS, readMeta} from './lib.ts';
+import {LANGS, readJson, readMeta} from './lib.ts';
 import {LOOKS, type Lang, type Look, type RenderProps} from '../src/types.ts';
 
 const VOICES: Record<Lang, {voice: string; rate: string}> = {
@@ -29,7 +29,8 @@ export const build = (id: string, lang: Lang, look?: Look): string => {
 	const props: RenderProps = {
 		id,
 		lang,
-		look: look ?? meta.look ?? 'workshop',
+		// a different look per language (strategy.json looks) so the two channels never upload the same picture
+		look: look ?? meta.look ?? readJson<{looks?: Partial<Record<Lang, Look>>}>('strategy.json', {}).looks?.[lang] ?? 'workshop',
 		scenes: items.map((it, i) => ({
 			audio: `${base}/${i}.mp3`,
 			words: JSON.parse(readFileSync(`${it.out}.json`, 'utf8')),
