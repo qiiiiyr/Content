@@ -4,6 +4,7 @@ import {decide, findHits, followups, isoWeek, median, parseChecklist, untick, ty
 import {duePlatforms, mergePosted, missingSecrets, nextToPost} from './publish.ts';
 import {missedYesterday, queueDays} from './health.ts';
 import {ramp} from '../src/motion.ts';
+import {voiceFor} from './build.ts';
 
 const now = new Date('2026-12-20T00:00:00Z');
 const strategy: Strategy = {
@@ -165,4 +166,11 @@ test('slow-motion ramp: slow inside the window, still ends on time, never goes b
 	assert.ok(qs.every((x, i) => i === 0 || x.q >= qs[i - 1].q));
 	assert.ok(qs[50].slow && !qs[20].slow && !qs[80].slow);
 	assert.ok(qs[60].q - qs[50].q < qs[30].q - qs[20].q); // slower inside than outside
+});
+
+test('narrator: English alternates Andrew and Ava by slot, Indonesian is Ardi', () => {
+	assert.match(voiceFor('2026-W50/1-honda-idle-stop', 'en').voice, /Andrew/);
+	assert.match(voiceFor('2026-W50/2-x', 'en').voice, /Ava/);
+	assert.match(voiceFor('2026-W50/13-x', 'en').voice, /Andrew/);
+	assert.match(voiceFor('2026-W50/2-x', 'id').voice, /Ardi/);
 });

@@ -4,9 +4,12 @@ import {mkdirSync, readFileSync, writeFileSync} from 'node:fs';
 import {LANGS, readJson, readMeta} from './lib.ts';
 import {LOOKS, type Lang, type Look, type RenderProps} from '../src/types.ts';
 
-const VOICES: Record<Lang, {voice: string; rate: string}> = {
-	en: {voice: 'en-US-BrianMultilingualNeural', rate: '+4%'},
-	id: {voice: 'id-ID-ArdiNeural', rate: '+3%'},
+/** The narrator: English alternates Andrew (odd slots) and Ava (even slots) by the episode's folder number, so the
+ * channel has two voices in turn; Indonesian is always Ardi. Picked by the owner from samples on 2026-11-23. */
+export const voiceFor = (id: string, lang: Lang): {voice: string; rate: string} => {
+	if (lang === 'id') return {voice: 'id-ID-ArdiNeural', rate: '+10%'};
+	const slot = Number(id.split('/')[1]?.split('-')[0]) || 1;
+	return slot % 2 ? {voice: 'en-US-AndrewMultilingualNeural', rate: '+10%'} : {voice: 'en-US-AvaMultilingualNeural', rate: '+8%'};
 };
 const FPS = 30;
 const PAUSE = 0.35; // seconds of breathing room after each scene's narration
@@ -24,7 +27,7 @@ export const build = (id: string, lang: Lang, look?: Look): string => {
 	const meta = readMeta(id);
 	const base = `tts/${id}/${lang}`;
 	const items = meta.scenes.map((s, i) => ({text: s[lang].replaceAll('*', ''), out: `public/${base}/${i}`}));
-	execFileSync('python3', ['scripts/tts.py'], {input: JSON.stringify({...VOICES[lang], items}), stdio: ['pipe', 'inherit', 'inherit']});
+	execFileSync('python3', ['scripts/tts.py'], {input: JSON.stringify({...voiceFor(id, lang), items}), stdio: ['pipe', 'inherit', 'inherit']});
 
 	const props: RenderProps = {
 		id,
