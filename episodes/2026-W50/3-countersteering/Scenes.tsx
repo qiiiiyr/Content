@@ -25,7 +25,7 @@ const IN: [number, number, number] = [-0.45, 5.5, 0.3];
 const EX: [number, number, number] = [0.45, 5.5, 0.3];
 const Tag = ({n}: {n: string}) => <PaperTag at={0.4} lines={{en: ['CUTAWAY', 'ENGINE LAB', `No. ${n}`], id: ['BONGKAR PASANG', 'LAB MESIN', `No. ${n}`]}} />;
 
-const Bike = ({cam, steer = 0, lean = 0, children}: {cam: CamKey[]; steer?: number; lean?: number; children?: ReactNode}) => {
+const Bike = ({cam, steer = 0, lean = 0, children, over}: {cam: CamKey[]; steer?: number; lean?: number; children?: ReactNode; over?: ReactNode}) => {
 	const {sec} = useScene();
 	return (
 		<>
@@ -37,18 +37,19 @@ const Bike = ({cam, steer = 0, lean = 0, children}: {cam: CamKey[]; steer?: numb
 						<mesh position={[0, 2.8, 0]} castShadow><boxGeometry args={[3, 0.14, 0.14]} /><meshStandardMaterial {...mat.dark} /></mesh>
 					</group>
 				</group>
+				{children}
 			</Stage>
-			{children}
+			{over}
 		</>
 	);
 };
-const BC1: CamKey[] = [{t: 0, pos: [0, 4.5, 15], look: [0, 2.8, 0]}, {t: 1, pos: [3, 4.5, 13], look: [0, 2.8, 0]}];
-const BC2: CamKey[] = [{t: 0, pos: [0, 12, 8], look: [0, 1.5, 0]}, {t: 1, pos: [2, 12, 7], look: [0, 1.5, 0]}];
-const BC3: CamKey[] = [{t: 0, pos: [-4, 4, 12], look: [0, 2.4, 0]}, {t: 1, pos: [4, 4, 12], look: [0, 2.4, 0]}];
+const BC1: CamKey[] = [{t: 0, pos: [0, 4.5, 20], look: [0, 2.0, 0]}, {t: 1, pos: [3, 4.5, 18], look: [0, 2.0, 0]}];
+const BC2: CamKey[] = [{t: 0, pos: [0, 17, 10], look: [0, 1.5, 0]}, {t: 1, pos: [2, 17, 9], look: [0, 1.5, 0]}];
+const BC3: CamKey[] = [{t: 0, pos: [-4, 4, 19], look: [0, 2.0, 0]}, {t: 1, pos: [4, 4, 19], look: [0, 2.0, 0]}];
 const Hook = () => <Bike cam={BC1} steer={0.0} />;
 const Push = () => {
 	const {p} = useScene();
-	return <Bike cam={BC1} steer={0.15 * Math.sin(p * Math.PI)}><Callout at={[1.4, 4.9, 0]} offset={[1.2, 1.2, 0]} text="PUSH RIGHT BAR" /></Bike>;
+	return <Bike cam={BC1} steer={0.15 * Math.sin(p * Math.PI)}><Callout at={[1.4, 4.9, 0]} offset={[0.4, 1.3, 0]} text="PUSH RIGHT BAR" /></Bike>;
 };
 const Left = () => {
 	const {p} = useScene();
@@ -58,7 +59,7 @@ const Fall = () => {
 	const {p} = useScene();
 	return <Bike cam={BC1} steer={0.3 * (1 - p)} lean={0.5 * p}><Callout at={[0, 0.2, 0]} offset={[2.2, 1, 0]} text="FALLS RIGHT" /></Bike>;
 };
-const Lean = () => <Bike cam={BC3} steer={0.05} lean={0.45}><Readout label="LEAN" from={0} to={45} unit="degrees (example)" at={[0, 0.7]} /></Bike>;
+const Lean = () => <Bike cam={BC3} steer={0.05} lean={0.45} over={<Readout label="LEAN" from={0} to={45} unit="degrees (example)" at={[0, 0.7]} />} />;
 const Hold = () => <Bike cam={BC3} steer={0.03} lean={0.45} />;
-const Finale = () => <Bike cam={BC1} lean={0.3}><Tag n="024" /></Bike>;
+const Finale = () => <Bike cam={BC1} lean={0.3} over={<Tag n="024" />} />;
 export default [Hook, Push, Left, Fall, Lean, Hold, Finale];

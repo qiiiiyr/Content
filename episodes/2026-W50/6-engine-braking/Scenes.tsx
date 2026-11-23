@@ -26,10 +26,10 @@ const EX: [number, number, number] = [0.45, 5.5, 0.3];
 const Tag = ({n}: {n: string}) => <PaperTag at={0.4} lines={{en: ['CUTAWAY', 'ENGINE LAB', `No. ${n}`], id: ['BONGKAR PASANG', 'LAB MESIN', `No. ${n}`]}} />;
 
 const Hook = () => <Eng cam={C1} turns={2} over={<Readout label="THROTTLE" from={100} to={0} unit="% open" at={[0.05, 0.6]} />} />;
-const Link = () => <Eng cam={C5} turns={2}><Callout at={[0, 1.2, 0.2]} offset={[2.6, 0.6, 0.5]} text="WHEELS TURN ENGINE" size={1.15} /></Eng>;
-const Closed = () => <Eng cam={C2} turns={1}><Callout at={IN} offset={[-2.4, 1.8, 0]} text="THROTTLE CLOSED" size={1.1} /></Eng>;
-const Vacuum = () => <Eng cam={C3} turns={2}><Callout at={[0, 3.2, 0.3]} offset={[2.4, 1.6, 0]} text="PISTON PULLS VACUUM" size={1.2} /></Eng>;
-const Work = () => <Eng cam={C4} turns={2}><Callout at={[0, 1.2, 0.2]} offset={[2.6, 0.6, 0.5]} text="WORK = SLOWING" size={1.1} /></Eng>;
+const Link = () => <Eng cam={C5} turns={2}><Callout at={[0, 1.2, 0.2]} offset={[1.0, 0.6, 0.5]} text="WHEELS TURN ENGINE" /></Eng>;
+const Closed = () => <Eng cam={C2} turns={1}><Callout at={IN} offset={[-0.55, 1.8, 0]} text="THROTTLE CLOSED" /></Eng>;
+const Vacuum = () => <Eng cam={C3} turns={2}><Callout at={[0, 3.2, 0.3]} offset={[1.0, 1.6, 0]} text="PISTON PULLS VACUUM" /></Eng>;
+const Work = () => <Eng cam={C4} turns={2}><Callout at={[0, 1.2, 0.2]} offset={[1.0, 0.6, 0.5]} text="WORK = SLOWING" /></Eng>;
 const Gear = () => <Eng cam={C3} turns={5} over={<Readout label="LOWER GEAR" from={2000} to={4000} unit="rpm (example)" at={[0.05, 0.8]} />} />;
 const Finale = () => <Eng cam={CEND} turns={2} over={<Tag n="027" />} />;
 export default [Hook, Link, Closed, Vacuum, Work, Gear, Finale];

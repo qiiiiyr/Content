@@ -1002,7 +1002,7 @@ export const Callout = ({at, offset = [2.2, 1.6, 0], text, show = 0.15, size = 1
 			<lineSegments geometry={line} renderOrder={10}>
 				<lineBasicMaterial color="#f0c46a" depthTest={false} transparent opacity={k} toneMapped={false} />
 			</lineSegments>
-			<sprite position={end} scale={[3.4 * size, 0.68 * size, 1]} renderOrder={11}>
+			<sprite position={end} scale={[2.2 * size, 0.44 * size, 1]} renderOrder={11}>
 				<spriteMaterial map={tex} depthTest={false} transparent opacity={k} toneMapped={false} />
 			</sprite>
 		</group>

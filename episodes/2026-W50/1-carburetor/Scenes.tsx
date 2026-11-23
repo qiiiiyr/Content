@@ -28,9 +28,9 @@ const Tag = ({n}: {n: string}) => <PaperTag at={0.4} lines={{en: ['CUTAWAY', 'EN
 const Hook = () => (
 	<Eng cam={C1} turns={2} over={<Readout label="AIR : FUEL" from={0} to={14.7} unit="to 1 by weight" decimals={1} at={[0.05, 0.7]} />} />
 );
-const Intake = () => <Eng cam={C2} turns={1}><Callout at={IN} offset={[-2.2, 1.8, 0]} text="INTAKE AIR" /></Eng>;
-const Narrow = () => <Eng cam={C4} turns={1}><Callout at={IN} offset={[-2.2, 1.8, 0]} text="FAST = LOW PRESSURE" size={1.15} /></Eng>;
-const Jet = () => <Eng cam={C2} turns={1}><Callout at={IN} offset={[-2.4, 1.6, 0]} text="FUEL JET" /></Eng>;
+const Intake = () => <Eng cam={C2} turns={1}><Callout at={IN} offset={[-0.55, 1.8, 0]} text="INTAKE AIR" /></Eng>;
+const Narrow = () => <Eng cam={C4} turns={1}><Callout at={IN} offset={[-0.55, 1.8, 0]} text="FAST = LOW PRESSURE" /></Eng>;
+const Jet = () => <Eng cam={C2} turns={1}><Callout at={IN} offset={[-0.55, 1.6, 0]} text="FUEL JET" /></Eng>;
 const More = () => <Eng cam={C3} turns={3} />;
 const Ratio = () => <Eng cam={C1} turns={2} over={<Readout label="IDEAL PETROL MIX" from={0} to={14.7} unit="air : 1 fuel" decimals={1} at={[0, 0.5]} />} />;
 const Finale = () => <Eng cam={CEND} turns={2} over={<Tag n="022" />} />;

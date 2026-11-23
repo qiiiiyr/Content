@@ -28,14 +28,14 @@ const Tag = ({n}: {n: string}) => <PaperTag at={0.4} lines={{en: ['CUTAWAY', 'EN
 const Hook = () => (
 	<Eng cam={C1} turns={3} over={<Readout label="PUMP SPEED = CRANK SPEED x" from={0} to={2} unit="belt ratio (example)" at={[0.05, 0.6]} />} />
 );
-const Plain = () => <Eng cam={C2} turns={1}><Callout at={IN} offset={[-2.2, 1.8, 0]} text="AIR IN" /></Eng>;
+const Plain = () => <Eng cam={C2} turns={1}><Callout at={IN} offset={[-0.55, 1.8, 0]} text="AIR IN" /></Eng>;
 const Belt = () => (
 	<Eng cam={C5} turns={2}>
-		<Callout at={[0, 1.2, 0.2]} offset={[2.6, -0.2, 0.5]} text="CRANKSHAFT" />
+		<Callout at={[0, 1.2, 0.2]} offset={[1.0, -0.2, 0.5]} text="CRANKSHAFT" />
 	</Eng>
 );
-const Pack = () => <Eng cam={C4} turns={2}><Callout at={IN} offset={[-2.2, 1.8, 0]} text="MORE AIR IN" /></Eng>;
+const Pack = () => <Eng cam={C4} turns={2}><Callout at={IN} offset={[-0.55, 1.8, 0]} text="MORE AIR IN" /></Eng>;
 const Instant = () => <Eng cam={C3} turns={4} />;
-const Cost = () => <Eng cam={C1} turns={2}><Callout at={[0, 1.2, 0.2]} offset={[2.6, 1.4, 0.5]} text="PUMP TAKES POWER" size={1.1} /></Eng>;
+const Cost = () => <Eng cam={C1} turns={2}><Callout at={[0, 1.2, 0.2]} offset={[1.0, 1.4, 0.5]} text="PUMP TAKES POWER" /></Eng>;
 const Finale = () => <Eng cam={CEND} turns={2} over={<Tag n="023" />} />;
 export default [Hook, Plain, Belt, Pack, Instant, Cost, Finale];

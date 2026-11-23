@@ -28,10 +28,10 @@ const Tag = ({n}: {n: string}) => <PaperTag at={0.4} lines={{en: ['CUTAWAY', 'EN
 const Hook = () => (
 	<Eng cam={C5} turns={2} over={<Readout label="RINGS ON A TYPICAL PISTON" from={0} to={3} unit="rings" at={[0.05, 0.6]} />} />
 );
-const Gap = () => <Eng cam={C5} turns={1}><Callout at={[0.9, 2.6, 0.3]} offset={[1.8, 1.8, 0]} text="TINY GAP" /></Eng>;
-const Rings = () => <Eng cam={C5} turns={1}><Callout at={[0.9, 2.2, 0.3]} offset={[1.9, 1.6, 0]} text="PISTON RINGS" /></Eng>;
-const Two = () => <Eng cam={C2} turns={2}><Callout at={[0.9, 2.9, 0.3]} offset={[1.9, 1.5, 0]} text="2 COMPRESSION" /></Eng>;
-const Seal = () => <Eng cam={C3} turns={3}><Callout at={[0, 4.8, 0.3]} offset={[2.2, 1.4, 0]} text="PRESSURE SEALED" /></Eng>;
-const Oil = () => <Eng cam={C5} turns={2}><Callout at={[0.9, 1.9, 0.3]} offset={[1.9, -0.2, 0]} text="OIL RING" /></Eng>;
+const Gap = () => <Eng cam={C5} turns={1}><Callout at={[0.9, 2.6, 0.3]} offset={[0.1, 1.8, 0]} text="TINY GAP" /></Eng>;
+const Rings = () => <Eng cam={C5} turns={1}><Callout at={[0.9, 2.2, 0.3]} offset={[0.1, 1.6, 0]} text="PISTON RINGS" /></Eng>;
+const Two = () => <Eng cam={C2} turns={2}><Callout at={[0.9, 2.9, 0.3]} offset={[0.1, 1.5, 0]} text="2 COMPRESSION" /></Eng>;
+const Seal = () => <Eng cam={C3} turns={3}><Callout at={[0, 4.8, 0.3]} offset={[1.0, 1.4, 0]} text="PRESSURE SEALED" /></Eng>;
+const Oil = () => <Eng cam={C5} turns={2}><Callout at={[0.9, 1.9, 0.3]} offset={[0.1, -0.2, 0]} text="OIL RING" /></Eng>;
 const Finale = () => <Eng cam={CEND} turns={2} over={<Tag n="025" />} />;
 export default [Hook, Gap, Rings, Two, Seal, Oil, Finale];

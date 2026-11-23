@@ -27,13 +27,13 @@ const Tag = ({n}: {n: string}) => <PaperTag at={0.4} lines={{en: ['CUTAWAY', 'EN
 
 const Hook = () => (
 	<Eng cam={C1} turns={2} over={<Readout label="TARGET MIX" from={0} to={14.7} unit="air : 1 fuel" decimals={1} at={[0.05, 0.7]} />}>
-		<Callout at={EX} offset={[2.4, 1.8, 0]} text="O2 SENSOR" />
+		<Callout at={EX} offset={[0.55, 1.8, 0]} text="O2 SENSOR" />
 	</Eng>
 );
-const Measure = () => <Eng cam={C2} turns={2}><Callout at={EX} offset={[2.4, 1.8, 0]} text="LEFTOVER OXYGEN" size={1.1} /></Eng>;
-const Rich = () => <Eng cam={C4} turns={2}><Callout at={EX} offset={[2.4, 1.8, 0]} text="LOW O2 = RICH" /></Eng>;
-const Lean = () => <Eng cam={C4} turns={2}><Callout at={EX} offset={[2.4, 1.8, 0]} text="HIGH O2 = LEAN" /></Eng>;
-const Volt = () => <Eng cam={C3} turns={3}><Callout at={EX} offset={[2.4, 1.8, 0]} text="VOLTAGE SIGNAL" size={1.1} /></Eng>;
+const Measure = () => <Eng cam={C2} turns={2}><Callout at={EX} offset={[0.55, 1.8, 0]} text="LEFTOVER OXYGEN" /></Eng>;
+const Rich = () => <Eng cam={C4} turns={2}><Callout at={EX} offset={[0.55, 1.8, 0]} text="LOW O2 = RICH" /></Eng>;
+const Lean = () => <Eng cam={C4} turns={2}><Callout at={EX} offset={[0.55, 1.8, 0]} text="HIGH O2 = LEAN" /></Eng>;
+const Volt = () => <Eng cam={C3} turns={3}><Callout at={EX} offset={[0.55, 1.8, 0]} text="VOLTAGE SIGNAL" /></Eng>;
 const Trim = () => <Eng cam={C1} turns={3} over={<Readout label="AIR : FUEL" from={13.5} to={14.7} unit="to 1" decimals={1} at={[0, 0.8]} />} />;
 const Finale = () => <Eng cam={CEND} turns={2} over={<Tag n="026" />} />;
 export default [Hook, Measure, Rich, Lean, Volt, Trim, Finale];
