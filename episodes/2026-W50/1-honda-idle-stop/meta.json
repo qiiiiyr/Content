@@ -1,0 +1,49 @@
+{
+  "theme": "engines-inside",
+  "test": false,
+  "title": {
+    "en": "Honda scooters switch off their engine at every red light 🤯 #shorts",
+    "id": "Skutik Honda matiin mesinnya sendiri di lampu merah 🤯 #shorts"
+  },
+  "description": {
+    "en": "Honda's Idling Stop System shuts the engine off after three seconds at a stop and restarts it the moment you open the throttle. The trick: the ACG starter, a generator on the crankshaft that also works as the starter motor, with no gears.",
+    "id": "Idling Stop System Honda mematikan mesin setelah tiga detik berhenti dan menyalakannya lagi begitu gas diputar. Kuncinya ACG starter: generator di poros engkol yang sekaligus jadi motor starter, tanpa gigi."
+  },
+  "hashtags": ["honda", "scooter", "idlingstop", "engineering", "howitworks"],
+  "sources": [
+    "https://global.honda/en/technical-review/papers/10002414/",
+    "https://global.honda/en/tech/Idling_Stop_System/",
+    "https://oto.detik.com/motor/d-7372437/idling-stop-bikin-hemat-bensin-kenali-fungsi-dan-cara-kerjanya",
+    "https://www.viva.co.id/otomotif/motor/848015-menilik-kecanggihan-starter-motor-matik-honda"
+  ],
+  "scenes": [
+    {
+      "en": "Honda scooters switch their own engine off at *every red light*.",
+      "id": "Skutik Honda bisa matiin mesinnya sendiri di *setiap lampu merah*."
+    },
+    {
+      "en": "Stop for *three seconds* with the throttle closed, and the engine just quits. No fuel burned, no noise.",
+      "id": "Berhenti *tiga detik* dengan gas tertutup, mesinnya langsung mati. Nggak ada bensin terbuang, nggak berisik."
+    },
+    {
+      "en": "Twist the throttle and it's running again before you move. The secret is one part doing *two jobs*.",
+      "id": "Begitu gas kamu putar, mesin sudah hidup lagi sebelum motor jalan. Rahasianya satu komponen dengan *dua tugas*."
+    },
+    {
+      "en": "On the end of the crankshaft sits a ring of magnets around copper coils. That's the *generator* that charges your battery.",
+      "id": "Di ujung poros engkol ada cincin magnet yang mengelilingi kumparan tembaga. Itu *generator* yang ngecas aki kamu."
+    },
+    {
+      "en": "Honda's *ACG starter* sends battery power the other way, so the generator becomes a motor and spins the crankshaft itself.",
+      "id": "*ACG starter* Honda mengalirkan listrik aki ke arah sebaliknya, jadi generatornya berubah jadi motor dan memutar poros engkol sendiri."
+    },
+    {
+      "en": "No starter gears means *no grinding*. The restart is almost silent, so it can happen at every single light.",
+      "id": "Tanpa gigi starter, *nggak ada suara kasar*. Hidupnya hampir tanpa suara, jadi bisa terjadi di setiap lampu merah."
+    },
+    {
+      "en": "So, would you trust your scooter to restart *every single time*?",
+      "id": "Jadi, kamu percaya nggak motormu bakal nyala lagi *setiap kali*?"
+    }
+  ]
+}
