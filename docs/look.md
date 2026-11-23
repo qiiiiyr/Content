@@ -11,7 +11,7 @@ GitHub servers, Instagram works).
 
 ## Backlog (the weekly look upgrade takes the top open item unless a competitor hit shows something better)
 
-- [ ] **Callouts:** a reusable leader line + label pinned to a 3D part (project the part's position to screen each
+- [x] **Callouts (W50, `Callout` in `src/stage.tsx`):** a reusable leader line + label pinned to a 3D part (project the part's position to screen each
   frame), so the narrated part is named in the frame ("Intake valve", "Spark: 25,000 V").
 - [ ] **Time tags:** a small tag component, "SLOW MOTION 1/200×" or "TIME FROZEN", whenever the animation runs slower
   than reality (combustion, sparks, gear meshing). Honest and it says why the shot is slow.

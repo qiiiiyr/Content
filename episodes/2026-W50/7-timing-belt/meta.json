@@ -1,0 +1,54 @@
+{
+  "theme": "engines-inside",
+  "test": false,
+  "title": {
+    "en": "One snapped rubber belt can wreck an engine #shorts",
+    "id": "Satu sabuk karet putus bisa merusak mesin #shorts"
+  },
+  "description": {
+    "en": "Why a broken timing belt can ruin an interference engine: pistons and valves collide.",
+    "id": "Kenapa timing belt putus bisa merusak mesin interference: piston dan klep bertabrakan."
+  },
+  "hashtags": [
+    "timingbelt",
+    "engine",
+    "cars",
+    "maintenance",
+    "howitworks"
+  ],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Timing_belt_(camshaft)",
+    "https://en.wikipedia.org/wiki/Interference_engine",
+    "https://www.britannica.com/technology/camshaft"
+  ],
+  "scenes": [
+    {
+      "en": "One snapped rubber belt can *destroy* an engine.",
+      "id": "Satu sabuk karet yang putus bisa *menghancurkan* mesin."
+    },
+    {
+      "en": "It is the *timing belt*. It links the crank to the camshaft.",
+      "id": "Itu *timing belt*. Ia menghubungkan poros engkol ke noken as, supaya keduanya berputar serempak."
+    },
+    {
+      "en": "The camshaft opens each valve at *exactly* the right moment.",
+      "id": "Noken as membuka tiap klep di waktu yang *tepat*."
+    },
+    {
+      "en": "In many engines the open valves and the piston share the *same space*.",
+      "id": "Di banyak mesin, klep yang terbuka dan piston memakai *ruang yang sama*."
+    },
+    {
+      "en": "They only avoid each other because the belt keeps them in *step*.",
+      "id": "Mereka tidak bertabrakan hanya karena sabuk itu menjaganya tetap *serempak*."
+    },
+    {
+      "en": "If the belt breaks, the valves freeze open and the piston *hits* them.",
+      "id": "Kalau sabuk putus, klep terhenti terbuka dan piston *menghantamnya*."
+    },
+    {
+      "en": "Replace it on schedule. Send this to a friend with an old car.",
+      "id": "Ganti sesuai jadwal servis. Kirim ini ke temanmu yang punya mobil tua."
+    }
+  ]
+}
