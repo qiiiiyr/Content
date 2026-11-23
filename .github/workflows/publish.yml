@@ -45,7 +45,9 @@ jobs:
           SCHEDULE: ${{ github.event.schedule || (inputs.due && 'due') || '' }}
         run: |
           if [ -z "$SCHEDULE" ]; then echo "any=true" >> "$GITHUB_OUTPUT"; exit 0; fi
-          echo "any=$(node --input-type=module -e "import {duePlatforms} from './scripts/publish.ts'; import {readJson} from './scripts/lib.ts'; const p = readJson('state/posted.json', []); console.log(['id', 'en'].some((l) => duePlatforms(p, l, new Date()).length))")" >> "$GITHUB_OUTPUT"
+          # assigned first so a broken script fails this step (red run) instead of silently skipping every post
+          any=$(node --input-type=module -e "import {duePlatforms} from './scripts/publish.ts'; import {readJson} from './scripts/lib.ts'; const p = readJson('state/posted.json', []); console.log(['id', 'en'].some((l) => duePlatforms(p, l, new Date()).length))")
+          echo "any=$any" >> "$GITHUB_OUTPUT"
       - if: steps.due.outputs.any == 'true'
         uses: ./.github/actions/setup
       - if: steps.due.outputs.any == 'true'
