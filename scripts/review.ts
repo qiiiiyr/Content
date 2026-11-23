@@ -97,7 +97,6 @@ export const followups = (episodes: EpisodeScore[], multiple: number): EpisodeSc
 	return mature.filter((e) => m > 0 && e.score >= multiple * m).sort((a, b) => b.score - a.score);
 };
 
-/** Reads the weekly pull request's checklist: unticked episodes and an unticked theme switch are rejected. */
 /** The pull request body with the rejected episodes (and the theme switch, if rejected) unticked: what the dashboard review sends. */
 export const untick = (body: string, rejected: string[], switchRejected: boolean): string =>
 	body
@@ -111,6 +110,7 @@ export const untick = (body: string, rejected: string[], switchRejected: boolean
 		})
 		.join('\n');
 
+/** Reads the weekly pull request's checklist: unticked episodes and an unticked theme switch are rejected. */
 export const parseChecklist = (body: string): {rejected: string[]; switchRejected: boolean} => {
 	const lines = body.split('\n').map((l) => l.match(/^\s*[-*]\s*\[( |x|X)\]\s*(.+)$/)).filter((m) => m !== null);
 	const unticked = lines.filter((m) => m[1] === ' ').map((m) => m[2].trim());

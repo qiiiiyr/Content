@@ -19,7 +19,7 @@ export const competitorInstagram = async (username: string, theme: string, lang:
 	const fields = `business_discovery.username(${username}){media.limit(50){caption,like_count,comments_count,timestamp,permalink,thumbnail_url,media_url}}`;
 	try {
 		const res = await api(`${GRAPH}/${user}?fields=${encodeURIComponent(fields)}&access_token=${token}`);
-		return (res.business_discovery?.media?.data ?? []).map((m: any) => ({theme, platform: 'instagram', lang, account: username, title: (m.caption ?? '').split('\n')[0].slice(0, 120), url: m.permalink, views: m.like_count ?? 0, publishedAt: m.timestamp, likes: m.like_count ?? 0, comments: m.comments_count ?? 0, thumb: m.thumbnail_url ?? m.media_url}));
+		return (res.business_discovery?.media?.data ?? []).map((m: any) => ({theme, platform: 'instagram', lang, account: username, title: [...(m.caption ?? '').split('\n')[0]].slice(0, 120).join('') /* whole characters: never half an emoji */, url: m.permalink, views: m.like_count ?? 0, publishedAt: m.timestamp, likes: m.like_count ?? 0, comments: m.comments_count ?? 0, thumb: m.thumbnail_url ?? m.media_url}));
 	} catch (e) {
 		console.warn(`instagram @${username}: ${(e as Error).message.slice(0, 200)}`);
 		return null;

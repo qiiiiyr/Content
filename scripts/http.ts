@@ -1,5 +1,6 @@
 /** fetch that throws with the response body on a non-2xx status, and parses JSON. */
-export const api = async (url: string, init?: RequestInit): Promise<any> => {
+/** retries: send again after a network error, only safe for requests that change nothing or can't apply twice. */
+export const api = async (url: string, init?: RequestInit, retries = 3): Promise<any> => {
 	let res: Response;
 	// A connection kept open during a 30-minute render is often dead by the next request ("fetch failed"): retry on a new one.
 	for (let attempt = 1; ; attempt++) {
@@ -8,7 +9,7 @@ export const api = async (url: string, init?: RequestInit): Promise<any> => {
 			break;
 		} catch (e) {
 			const why = `${(e as Error).message}${(e as {cause?: Error}).cause ? ` (${(e as {cause?: Error}).cause!.message})` : ''}`;
-			if (attempt === 3) throw new Error(`${init?.method ?? 'GET'} ${url.split('?')[0]} -> network error: ${why}`);
+			if (attempt >= retries) throw new Error(`${init?.method ?? 'GET'} ${url.split('?')[0]} -> network error: ${why}`);
 			console.warn(`network error, retrying: ${why}`);
 			await new Promise((r) => setTimeout(r, 3000 * attempt));
 		}

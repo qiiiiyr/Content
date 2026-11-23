@@ -2,11 +2,9 @@ import {AbsoluteFill, Series, staticFile} from 'remotion';
 import {Audio} from '@remotion/media';
 import {Captions} from './Captions';
 import {Overlay} from './Looks';
-import {LangContext, LookContext, colors} from './kit';
+import {LOOK_BG, LangContext, LookContext, colors} from './kit';
 import {getEpisode} from './episodes';
 import type {RenderProps} from './types';
-
-const BG = {workshop: '#cbbfa6', golden: '#2a160c', editorial: '#05070a', blueprint: '#071a33'};
 
 export const Episode = ({id, lang, look: chosen, scenes}: RenderProps) => {
 	const {Scenes, meta} = getEpisode(id);
@@ -14,7 +12,7 @@ export const Episode = ({id, lang, look: chosen, scenes}: RenderProps) => {
 	return (
 		<LangContext.Provider value={lang}>
 			<LookContext.Provider value={look}>
-				<AbsoluteFill style={{background: BG[look], fontFamily: 'Inter, sans-serif', color: colors.text}}>
+				<AbsoluteFill style={{background: LOOK_BG[look], fontFamily: 'Inter, sans-serif', color: colors.text}}>
 					<Series>
 						{Scenes.map((Scene, i) => (
 							<Series.Sequence key={i} name={`Scene ${i + 1}`} durationInFrames={scenes[i]?.frames ?? 150}>

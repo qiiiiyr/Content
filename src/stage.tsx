@@ -2,7 +2,7 @@
 // environment, props, a slow macro camera. Episodes compose <Stage> with parts from here.
 // Units are arbitrary; the engine is about 7 tall.
 import {createContext, useContext, useMemo, useRef, type ReactNode} from 'react';
-import {LookContext} from './kit';
+import {LOOK_ACCENT, LOOK_BG, LookContext} from './kit';
 import type {Look as LookName} from './types';
 import {ThreeCanvas} from '@remotion/three';
 import {useFrame, useThree} from '@react-three/fiber';
@@ -171,16 +171,15 @@ const blueprintTexture = () =>
 export const Stage = ({cam, children}: {cam: CamKey[]; children: ReactNode}) => {
 	const look = useContext(LookContext);
 	return (
-		<ThreeCanvas width={1080} height={1920} shadows camera={{fov: 32, near: 0.1, far: 200}} style={{background: BG[look]}}>
+		<ThreeCanvas width={1080} height={1920} shadows camera={{fov: 32, near: 0.1, far: 200}} style={{background: LOOK_BG[look]}}>
 			<Camera keys={cam} />
 			<Look />
 			{look === 'golden' ? <GoldenSet /> : look === 'editorial' ? <EditorialSet /> : look === 'blueprint' ? <BlueprintSet /> : <WorkshopSet />}
-			<AccentContext.Provider value={ACCENT[look]}>{children}</AccentContext.Provider>
+			<AccentContext.Provider value={LOOK_ACCENT[look]}>{children}</AccentContext.Provider>
 		</ThreeCanvas>
 	);
 };
 
-const BG: Record<LookName, string> = {workshop: '#cdbfa4', golden: '#2a160c', editorial: '#05070a', blueprint: '#071a33'};
 
 const WorkshopSet = () => {
 	const wood = useMemo(woodTexture, []);
@@ -403,7 +402,6 @@ const BlueprintSet = () => {
 
 /** The look's accent colour, for parts in focus. Provided inside the 3D canvas, where the episode's context can't reach. */
 const AccentContext = createContext('#ffb347');
-const ACCENT: Record<LookName, string> = {workshop: '#ffb347', golden: '#5ee1ff', editorial: '#ff4d5e', blueprint: '#5ee1ff'};
 
 /** X-ray focus: meshes in the named parts (nearest userData.part above them) glow in the accent colour and pulse;
  * every other solid part turns see-through. Glass and gas (no part) stay as they are. Returns the ref for the root. */
@@ -412,7 +410,7 @@ export const useFocus = (focus?: string[]) => {
 	const accent = useContext(AccentContext);
 	const {sec} = useScene();
 	useFrame(() => {
-		if (!focus || !root.current) return;
+		if (!root.current) return;
 		root.current.traverse((o) => {
 			const mesh = o as THREE.Mesh;
 			if (!mesh.isMesh) return;
@@ -420,15 +418,18 @@ export const useFocus = (focus?: string[]) => {
 			for (let a: THREE.Object3D | null = o; a && a !== root.current && !part; a = a.parent) part = a.userData.part;
 			if (!part) return;
 			const m = mesh.material as THREE.MeshStandardMaterial;
-			if (focus.includes(part)) {
-				m.emissive?.set(accent);
-				m.emissiveIntensity = 0.22 + 0.12 * Math.sin(sec * 6);
-			} else if (!m.userData.ghost) {
-				m.userData.ghost = true;
-				m.transparent = true;
-				m.opacity = 0.13;
-				m.depthWrite = false;
-				m.needsUpdate = true;
+			// Remember the material as built, so focus can move to another part (or end) and every frame is drawn the same
+			// way whatever was drawn before it: frames render out of order across browser tabs.
+			const orig = (m.userData.orig ??= {opacity: m.opacity, transparent: m.transparent, depthWrite: m.depthWrite, emissive: m.emissive?.getHex(), glow: m.emissiveIntensity});
+			const ghost = !!focus && !focus.includes(part);
+			const lit = !!focus && focus.includes(part);
+			if (m.transparent !== (ghost || orig.transparent)) m.needsUpdate = true;
+			m.transparent = ghost || orig.transparent;
+			m.opacity = ghost ? 0.13 : orig.opacity;
+			m.depthWrite = ghost ? false : orig.depthWrite;
+			if (m.emissive) {
+				m.emissive.set(lit ? accent : orig.emissive);
+				m.emissiveIntensity = lit ? 0.22 + 0.12 * Math.sin(sec * 6) : orig.glow;
 			}
 		});
 	});
@@ -977,8 +978,11 @@ export const SparkPlug = ({spark = 0, gap = 0.28, position = [0, 0, 0]}: {spark?
 /** A big number that counts with the scene (rpm, bar, °C) with its unit and an optional "SLOW MOTION" tag. Sits at the top, above the captions. */
 export const Readout = ({label, from, to, unit, at = [0, 0.8], tag, top = 150, decimals = 0}: {label: string; from: number; to: number; unit: string; at?: [number, number]; tag?: string; top?: number; decimals?: number}) => {
 	const {p, sec} = useScene();
+	const look = useContext(LookContext);
 	const v = interpolate(p, at, [from, to], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.out(Easing.cubic)});
-	const mono = '"Courier New", monospace';
+	// the new looks keep y 110-300 for their own graphics (gauge, tag, title, measuring line): sit below them
+	if (look !== 'workshop') top = Math.max(top, 330);
+	const mono = look === 'workshop' ? '"Courier New", monospace' : '"JetBrains Mono", monospace';
 	const shadow = '0 3px 14px rgba(40,20,5,.7)';
 	return (
 		<div style={{position: 'absolute', top, left: 0, width: 1080, textAlign: 'center', fontFamily: mono, color: '#fff3d6', textShadow: shadow}}>
