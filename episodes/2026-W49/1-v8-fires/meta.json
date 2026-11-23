@@ -1,0 +1,54 @@
+{
+  "theme": "engines-inside",
+  "test": false,
+  "title": {
+    "en": "A V8 fires four times every turn #shorts",
+    "id": "V8 meledak empat kali tiap putaran #shorts"
+  },
+  "description": {
+    "en": "Why a V8 fires four times per crank turn, and why a cross-plane V8 burbles while a flat-plane one screams.",
+    "id": "Kenapa V8 menyala empat kali tiap putaran poros engkol, dan kenapa V8 cross-plane bergemuruh sedangkan flat-plane melengking."
+  },
+  "hashtags": [
+    "v8",
+    "engine",
+    "cars",
+    "howitworks",
+    "sound"
+  ],
+  "sources": [
+    "https://en.wikipedia.org/wiki/V8_engine",
+    "https://en.wikipedia.org/wiki/Firing_order",
+    "https://en.wikipedia.org/wiki/Crossplane"
+  ],
+  "scenes": [
+    {
+      "en": "A V8 fires *four times* every single turn of its crank.",
+      "id": "V8 meledak *empat kali* di setiap putaran poros engkolnya."
+    },
+    {
+      "en": "Each cylinder fires only once every *two turns*: intake, squeeze, bang, exhaust.",
+      "id": "Tiap silinder cuma menyala sekali setiap *dua putaran*: isap, kompresi, ledak, buang."
+    },
+    {
+      "en": "Eight cylinders share that cycle, so one fires every *90 degrees* of crank.",
+      "id": "Delapan silinder berbagi siklus itu, jadi ada satu yang menyala tiap *90 derajat* putaran."
+    },
+    {
+      "en": "Their pushes overlap, so the crank gets a nearly *continuous* shove.",
+      "id": "Dorongannya saling tumpang tindih, jadi poros dapat dorongan yang hampir *tanpa putus*."
+    },
+    {
+      "en": "On a classic cross-plane V8, each side's exhaust pulses come *unevenly*. That's the burble.",
+      "id": "Di V8 cross-plane klasik, gas buang tiap sisi keluar dengan jeda *tidak rata*. Itulah suara bergemuruhnya."
+    },
+    {
+      "en": "A flat-plane crank, like Ferrari uses, spaces them evenly. That's why it *screams* instead.",
+      "id": "Poros flat-plane, seperti di Ferrari, menyebarnya rata. Makanya suaranya *melengking*."
+    },
+    {
+      "en": "Same eight cylinders, different order, different song. Send this to your V8 friend.",
+      "id": "Delapan silinder yang sama, urutan beda, suara beda. Kirim ini ke temanmu yang suka V8."
+    }
+  ]
+}

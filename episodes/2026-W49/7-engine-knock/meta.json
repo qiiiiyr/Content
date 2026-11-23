@@ -1,0 +1,55 @@
+{
+  "theme": "engines-inside",
+  "test": false,
+  "youtube": false,
+  "title": {
+    "en": "Sometimes fuel explodes before the spark #shorts",
+    "id": "Kadang bensin meledak sebelum busi menyala #shorts"
+  },
+  "description": {
+    "en": "Engine knock: end-gas autoignition, shock waves, and what octane really means.",
+    "id": "Mesin ngelitik: campuran sisa menyala sendiri, gelombang kejut, dan arti sebenarnya oktan."
+  },
+  "hashtags": [
+    "engineknock",
+    "octane",
+    "engine",
+    "cars",
+    "howitworks"
+  ],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Engine_knocking",
+    "https://en.wikipedia.org/wiki/Octane_rating",
+    "https://www.britannica.com/technology/knocking"
+  ],
+  "scenes": [
+    {
+      "en": "Sometimes fuel *explodes by itself*, before your spark finishes the job.",
+      "id": "Kadang bensin *meledak sendiri*, sebelum percikan busi menyelesaikan tugasnya."
+    },
+    {
+      "en": "The spark should start one flame that sweeps across the cylinder *evenly*.",
+      "id": "Percikan busi seharusnya memulai satu api yang menyapu silinder dengan *merata*."
+    },
+    {
+      "en": "But that flame squeezes the unburnt mix ahead of it, *heating it up*.",
+      "id": "Tapi api itu menekan campuran yang belum terbakar di depannya, dan *memanaskannya*."
+    },
+    {
+      "en": "If that leftover mix gets hot enough, it *ignites on its own*, crashing into the first flame.",
+      "id": "Kalau sisa campuran itu cukup panas, ia *menyala sendiri*, lalu bertabrakan dengan api pertama."
+    },
+    {
+      "en": "That shock wave hammers the piston: the *knock* you hear.",
+      "id": "Gelombang kejut itu menghantam piston: *ketukan* yang kamu dengar."
+    },
+    {
+      "en": "Higher octane fuel resists this, so high-compression engines *need it*.",
+      "id": "Bensin oktan tinggi tahan terhadap itu, jadi mesin berkompresi tinggi *membutuhkannya*."
+    },
+    {
+      "en": "Octane isn't power. It's *patience*. Send this to someone who pays for premium.",
+      "id": "Oktan bukan tenaga. Tapi *kesabaran*. Kirim ini ke temanmu yang selalu isi bensin premium."
+    }
+  ]
+}

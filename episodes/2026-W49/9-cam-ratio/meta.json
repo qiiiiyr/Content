@@ -1,0 +1,54 @@
+{
+  "theme": "engines-inside",
+  "test": false,
+  "title": {
+    "en": "Your engine's most important ratio is 2 to 1 #shorts",
+    "id": "Rasio terpenting mesinmu adalah 2 banding 1 #shorts"
+  },
+  "description": {
+    "en": "Why the camshaft turns at half crank speed: the 2:1 timing gear ratio of a four-stroke engine.",
+    "id": "Kenapa noken as berputar setengah kecepatan poros engkol: rasio gigi timing 2:1 pada mesin empat tak."
+  },
+  "hashtags": [
+    "camshaft",
+    "timing",
+    "engine",
+    "cars",
+    "howitworks"
+  ],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Camshaft",
+    "https://en.wikipedia.org/wiki/Four-stroke_engine",
+    "https://en.wikipedia.org/wiki/Timing_belt_(camshaft)"
+  ],
+  "scenes": [
+    {
+      "en": "Your engine's most important gear ratio is exactly *2 to 1*.",
+      "id": "Rasio gigi terpenting di mesinmu persis *2 banding 1*."
+    },
+    {
+      "en": "The crankshaft turns *twice* for one full four-stroke cycle.",
+      "id": "Poros engkol berputar *dua kali* untuk satu siklus empat tak penuh."
+    },
+    {
+      "en": "But each valve only needs to open *once* in that cycle.",
+      "id": "Tapi tiap katup cuma perlu terbuka *sekali* dalam siklus itu."
+    },
+    {
+      "en": "So the camshaft turns at *half* the crank's speed.",
+      "id": "Jadi noken as berputar dengan *setengah* kecepatan poros engkol."
+    },
+    {
+      "en": "That's why the cam gear has *twice as many teeth* as the crank gear.",
+      "id": "Makanya gigi noken as punya *dua kali lipat jumlah gigi* dibanding gigi poros engkol."
+    },
+    {
+      "en": "A chain or belt keeps them locked. If it *skips a tooth*, valves open at the wrong time.",
+      "id": "Rantai atau sabuk menjaganya tetap terkunci. Kalau *meloncat satu gigi*, katup terbuka di waktu yang salah."
+    },
+    {
+      "en": "Two to one: the heartbeat of the timing. Follow for more.",
+      "id": "Dua banding satu: detak jantung sistem timing. Follow untuk video lainnya."
+    }
+  ]
+}

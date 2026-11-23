@@ -1,0 +1,54 @@
+{
+  "theme": "grip-and-stopping",
+  "test": true,
+  "title": {
+    "en": "Your brakes don't stop your car. They turn it into heat #shorts",
+    "id": "Remmu bukan menghentikan mobil. Dia mengubahnya jadi panas #shorts"
+  },
+  "description": {
+    "en": "How a disc brake works: disc, caliper, pads, hydraulic fluid, and where all the energy goes.",
+    "id": "Cara kerja rem cakram: cakram, kaliper, kampas, minyak rem, dan ke mana perginya semua energi."
+  },
+  "hashtags": [
+    "brakes",
+    "discbrake",
+    "cars",
+    "howitworks",
+    "mechanics"
+  ],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Disc_brake",
+    "https://en.wikipedia.org/wiki/Hydraulic_brake",
+    "https://en.wikipedia.org/wiki/Brake_pad"
+  ],
+  "scenes": [
+    {
+      "en": "Your brakes don't stop the car. They turn *speed into heat*.",
+      "id": "Remmu bukan menghentikan mobil. Dia mengubah *kecepatan jadi panas*."
+    },
+    {
+      "en": "A steel disc spins with the wheel. A *caliper* straddles it, holding two pads.",
+      "id": "Cakram baja berputar bersama roda. *Kaliper* mengapitnya sambil memegang dua kampas."
+    },
+    {
+      "en": "Press the pedal, and fluid pushes a piston that *clamps the pads* on the disc.",
+      "id": "Injak pedal, minyak rem mendorong piston yang *menjepit kampas* ke cakram."
+    },
+    {
+      "en": "Liquid barely compresses, so your push arrives instantly, and bigger pistons *multiply the force*.",
+      "id": "Cairan nyaris tak bisa dimampatkan, jadi tekananmu sampai seketika, dan piston lebih besar *melipatgandakan gaya*."
+    },
+    {
+      "en": "Friction slows the disc, and the motion becomes *heat*. Race brakes can glow red.",
+      "id": "Gesekan memperlambat cakram, dan geraknya berubah jadi *panas*. Rem balap bisa sampai menyala merah."
+    },
+    {
+      "en": "Holes and vanes let air *carry that heat away*.",
+      "id": "Lubang dan sirip membiarkan udara *membawa panas itu pergi*."
+    },
+    {
+      "en": "Too much heat, though, and brakes fade. Follow for more.",
+      "id": "Tapi kalau terlalu panas, rem bisa blong. Follow untuk video lainnya."
+    }
+  ]
+}

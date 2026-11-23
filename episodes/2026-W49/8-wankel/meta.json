@@ -1,0 +1,54 @@
+{
+  "theme": "engines-inside",
+  "test": false,
+  "title": {
+    "en": "This engine has no pistons #shorts",
+    "id": "Mesin ini nggak punya piston #shorts"
+  },
+  "description": {
+    "en": "The Wankel rotary engine: a triangular rotor, three chambers, four strokes without pistons.",
+    "id": "Mesin rotari Wankel: rotor segitiga, tiga ruang, empat langkah tanpa piston."
+  },
+  "hashtags": [
+    "wankel",
+    "rotary",
+    "engine",
+    "mazda",
+    "howitworks"
+  ],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Wankel_engine",
+    "https://www.britannica.com/technology/Wankel-engine",
+    "https://en.wikipedia.org/wiki/Mazda_RX-8"
+  ],
+  "scenes": [
+    {
+      "en": "This engine has *no pistons*.",
+      "id": "Mesin ini *nggak punya piston*."
+    },
+    {
+      "en": "A triangular *rotor* spins inside a peanut-shaped housing.",
+      "id": "Sebuah *rotor* segitiga berputar di dalam rumah berbentuk kacang."
+    },
+    {
+      "en": "Its three tips always touch the wall, making *three sealed chambers*.",
+      "id": "Tiga ujungnya selalu menempel di dinding, membentuk *tiga ruang tertutup*."
+    },
+    {
+      "en": "As the rotor turns, each chamber grows and shrinks: *intake*, compression, power, exhaust.",
+      "id": "Saat rotor berputar, tiap ruang membesar lalu mengecil: *isap*, kompresi, tenaga, buang."
+    },
+    {
+      "en": "The same four strokes, but everything *spins smoothly*. No pistons stopping and starting.",
+      "id": "Empat langkah yang sama, tapi semuanya *berputar halus*. Nggak ada piston yang berhenti lalu jalan lagi."
+    },
+    {
+      "en": "The catch: sealing those tips is hard, so these engines wear and *drink fuel and oil*.",
+      "id": "Masalahnya: menyekat ujung-ujung itu sulit, jadi mesin ini cepat aus dan *boros bensin dan oli*."
+    },
+    {
+      "en": "Mazda kept it alive for decades, from the Cosmo to the RX-8. Follow for more.",
+      "id": "Mazda mempertahankannya puluhan tahun, dari Cosmo sampai RX-8. Follow untuk video lainnya."
+    }
+  ]
+}

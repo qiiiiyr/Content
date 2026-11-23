@@ -1,7 +1,7 @@
 {
   "currentTheme": "engines-inside",
   "themeSince": "2026-11-16",
-  "testTheme": "drivetrain",
+  "testTheme": "grip-and-stopping",
   "thresholds": {
     "minWeeksOnTheme": 4,
     "minTestEpisodes": 4,
@@ -18,9 +18,10 @@
     "Vary the hero object each week; don't put the same cylinder in every episode.",
     "Say only claims that two sources agree on; use ranges ('15 to 20 times') when sources differ.",
     "End on one short line that sums it up, then one send or follow line (alternate them).",
-    "Reels viewers decide in about 1.5 s: frame 1 already shows the part moving with the key number in the caption; no slow push-in from an empty shot.",
+    "Reels viewers decide in about 1.5 s: frame 1 shows the part moving AND a live <Readout> number counting up (a big number that changes is the cheapest hook); no slow push-in from an empty shot.",
     "Instagram reach to non-followers follows sends per reach (ours: 0 sends on 1,061 reach): give one surprising, shareable fact and end with a send line ('Send this to someone who rides a two-stroke').",
     "Make the last line and frame lead back into the first so the Short loops: rewatches add watch time on both platforms.",
-    "Proven hook (our best so far: 1,000 YouTube views and 1,251 Instagram views): 'Your <thing you own> <violent verb> <extreme number> times a second' ('Your engine explodes 50 times a second'). Give each episode its own object, verb and number, and use this frame in at most 4 of the 14 episodes so the batch does not look templated."
+    "Proven hook (our best so far: 1,000 YouTube views and 1,251 Instagram views): 'Your <thing you own> <violent verb> <extreme number> times a second' ('Your engine explodes 50 times a second'). Give each episode its own object, verb and number, and use this frame in at most 4 of the 14 episodes so the batch does not look templated.",
+    "Average watched is only 47-58%, so half the viewers leave before the last scene: answer the hook's question by scene 4, and keep scenes 5-7 for the catch and the send line."
   ]
 }
