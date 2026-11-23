@@ -1,90 +1,38 @@
 """Voiceover: reads {"voice", "rate", "items": [{"text", "out"}]} as JSON on stdin and writes
 <out>.mp3 plus <out>.json word timings [{"t": seconds, "w": word}] for each item.
 
-To sound less like one flat read-out, each scene is spoken sentence by sentence: the hook is a little faster and
-higher, questions rise, the last sentence settles lower and slower, and each sentence is followed by a short pause that
-fits its punctuation. Then the pieces are joined and the word timings are shifted to match.
-shortcut: uses Microsoft Edge's free online voices (unofficial, may break); swap this file for a paid TTS once it earns."""
-import asyncio, json, os, re, subprocess, sys, tempfile
+Each scene is spoken in one request, so the voice keeps its own natural flow and intonation across sentences (cutting
+it into sentences and gluing them back made it sound stiff). The voice and speed come from scripts/build.ts voiceFor.
+shortcut: uses Microsoft Edge's free online voices (unofficial, may break); swap this file for a paid TTS (ElevenLabs
+returns word timings too) once the channels earn."""
+import asyncio, json, os, sys
 import edge_tts
 
-PAUSE = {".": 0.22, "!": 0.22, "?": 0.3, ":": 0.14, ",": 0.08}  # seconds after a chunk, by its last character
 
-
-def pct(base, delta):
-    return f"{int(base.rstrip('%')) + delta:+d}%"
-
-
-def chunks(text):
-    """Sentences, with long ones also cut at colons and commas so each piece is one breath."""
-    out = []
-    for s in re.split(r"(?<=[.!?])\s+", text.strip()):
-        if len(s.split()) <= 12:
-            out.append(s)
-        else:
-            out += [p for p in re.split(r"(?<=[,:])\s+", s) if p]
-    return out
-
-
-def prosody(i, n, text, base_rate):
-    """(rate, pitch) for chunk i of n."""
-    rate, pitch = base_rate, 0
-    if i == 0:
-        rate, pitch = pct(base_rate, 4), 3
-    elif i == n - 1:
-        rate, pitch = pct(base_rate, -4), -3
-    else:
-        pitch = 1 if i % 2 else -1
-    if text.endswith("?"):
-        pitch += 4
-    return rate, f"{pitch or 1:+d}Hz"  # a literal +0Hz is rejected by the service
-
-
-async def speak_chunk(text, voice, rate, pitch, out):
-    for attempt in range(4):
-        try:
-            c = edge_tts.Communicate(text, voice, rate=rate, pitch=pitch, boundary="WordBoundary", proxy=os.environ.get("HTTPS_PROXY"))
-            words = []
-            with open(out, "wb") as f:
-                async for ch in c.stream():
-                    if ch["type"] == "audio":
-                        f.write(ch["data"])
-                    elif ch["type"] == "WordBoundary":
-                        words.append({"t": ch["offset"] / 1e7, "w": ch["text"]})
-            return words
-        except Exception as e:  # the free service drops connections now and then
-            if attempt == 3:
-                raise
-            print(f"tts retry {attempt + 1}: {e}", file=sys.stderr)
-            await asyncio.sleep(2 * (attempt + 1))
-
-
-def seconds(path):
-    return float(subprocess.check_output(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", path]).decode())
+def to_words(events):
+    """Word timings from the service's WordBoundary events (offsets in 100-nanosecond units)."""
+    return [{"t": round(e["offset"] / 1e7, 3), "w": e["text"]} for e in events if e["type"] == "WordBoundary"]
 
 
 async def speak(text, voice, rate, out):
-    parts = chunks(text)
-    words, t, listing = [], 0.0, []
-    with tempfile.TemporaryDirectory() as tmp:
-        for i, part in enumerate(parts):
-            r, p = prosody(i, len(parts), part, rate)
-            f = f"{tmp}/c{i}.mp3"
-            for w in await speak_chunk(part, voice, r, p, f):
-                words.append({"t": round(t + w["t"], 3), "w": w["w"]})
-            listing.append(f)
-            t += seconds(f)
-            gap = PAUSE.get(part[-1], 0.1) if i < len(parts) - 1 else 0
-            if gap:
-                s = f"{tmp}/s{i}.mp3"
-                subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "lavfi", "-i", "anullsrc=r=24000:cl=mono", "-t", str(gap), "-c:a", "libmp3lame", s], check=True)
-                listing.append(s)
-                t += gap
-        with open(f"{tmp}/list.txt", "w") as f:
-            f.write("".join(f"file '{p}'\n" for p in listing))
-        subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "concat", "-safe", "0", "-i", f"{tmp}/list.txt", "-c:a", "libmp3lame", "-b:a", "96k", "-ar", "24000", out + ".mp3"], check=True)
+    for attempt in range(5):
+        try:
+            c = edge_tts.Communicate(text, voice, rate=rate, boundary="WordBoundary", proxy=os.environ.get("HTTPS_PROXY"))
+            events = []
+            with open(out + ".mp3", "wb") as f:
+                async for ch in c.stream():
+                    if ch["type"] == "audio":
+                        f.write(ch["data"])
+                    else:
+                        events.append(ch)
+            break
+        except Exception as e:  # the free service drops connections now and then
+            if attempt == 4:
+                raise
+            print(f"tts retry {attempt + 1}: {e}", file=sys.stderr)
+            await asyncio.sleep(3 * (attempt + 1))
     with open(out + ".json", "w") as f:
-        json.dump(words, f, ensure_ascii=False)
+        json.dump(to_words(events), f, ensure_ascii=False)
 
 
 async def main():
@@ -95,14 +43,9 @@ async def main():
 
 
 def self_check():
-    """Offline check of the splitting and delivery rules (run by npm test)."""
-    assert chunks("At six thousand rpm. Is it fast?") == ["At six thousand rpm.", "Is it fast?"]
-    long = "One two three four five six seven, eight nine ten eleven twelve thirteen."
-    assert chunks(long) == ["One two three four five six seven,", "eight nine ten eleven twelve thirteen."]
-    assert prosody(0, 3, "Hook.", "+4%") == ("+8%", "+3Hz")  # hook: faster, higher
-    assert prosody(2, 3, "End.", "+4%") == ("+0%", "-3Hz")  # last: slower, lower
-    assert prosody(1, 3, "Why?", "+4%")[1] == "+5Hz"  # questions rise
-    assert prosody(1, 3, "Mid.", "+0%")[1] in ("+1Hz", "-1Hz") and "+0Hz" not in {prosody(i, 3, "x?", "+0%")[1] for i in range(3)}
+    """Offline check of the word-timing conversion (run by npm test)."""
+    events = [{"type": "WordBoundary", "offset": 1_250_000, "text": "Honda"}, {"type": "SentenceBoundary", "offset": 0, "text": "x"}, {"type": "WordBoundary", "offset": 7_000_000, "text": "scooters"}]
+    assert to_words(events) == [{"t": 0.125, "w": "Honda"}, {"t": 0.7, "w": "scooters"}]
     print("tts self-check OK")
 
 
