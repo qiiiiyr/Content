@@ -3,6 +3,7 @@
 // Units are arbitrary; the engine is about 7 tall.
 import {createContext, useContext, useMemo, useRef, type ReactNode} from 'react';
 import {LOOK_ACCENT, LOOK_BG, LookContext} from './kit';
+import {applyFocus} from './focus';
 import type {Look as LookName} from './types';
 import {ThreeCanvas} from '@remotion/three';
 import {useFrame, useThree} from '@react-three/fiber';
@@ -409,30 +410,7 @@ export const useFocus = (focus?: string[]) => {
 	const root = useRef<THREE.Group>(null);
 	const accent = useContext(AccentContext);
 	const {sec} = useScene();
-	useFrame(() => {
-		if (!root.current) return;
-		root.current.traverse((o) => {
-			const mesh = o as THREE.Mesh;
-			if (!mesh.isMesh) return;
-			let part: string | undefined;
-			for (let a: THREE.Object3D | null = o; a && a !== root.current && !part; a = a.parent) part = a.userData.part;
-			if (!part) return;
-			const m = mesh.material as THREE.MeshStandardMaterial;
-			// Remember the material as built, so focus can move to another part (or end) and every frame is drawn the same
-			// way whatever was drawn before it: frames render out of order across browser tabs.
-			const orig = (m.userData.orig ??= {opacity: m.opacity, transparent: m.transparent, depthWrite: m.depthWrite, emissive: m.emissive?.getHex(), glow: m.emissiveIntensity});
-			const ghost = !!focus && !focus.includes(part);
-			const lit = !!focus && focus.includes(part);
-			if (m.transparent !== (ghost || orig.transparent)) m.needsUpdate = true;
-			m.transparent = ghost || orig.transparent;
-			m.opacity = ghost ? 0.13 : orig.opacity;
-			m.depthWrite = ghost ? false : orig.depthWrite;
-			if (m.emissive) {
-				m.emissive.set(lit ? accent : orig.emissive);
-				m.emissiveIntensity = lit ? 0.22 + 0.12 * Math.sin(sec * 6) : orig.glow;
-			}
-		});
-	});
+	useFrame(() => root.current && applyFocus(root.current, focus, accent, 0.22 + 0.12 * Math.sin(sec * 6)));
 	return root;
 };
 
