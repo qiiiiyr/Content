@@ -33,14 +33,14 @@ const ACG = ({deg, power = 0, focus}: {deg: number; power?: number; focus?: stri
 			<group userData={{part: 'acg'}} rotation={[Math.PI / 2, 0, 0]}>
 				<group rotation={[0, (-deg * Math.PI) / 180, 0]}>
 					<mesh castShadow>
-						<cylinderGeometry args={[1.3, 1.3, 0.34, 48, 1, true]} />
+						<cylinderGeometry args={[0.95, 0.95, 0.3, 48, 1, true]} />
 						<meshStandardMaterial color="#4b525d" metalness={0.8} roughness={0.4} side={2} />
 					</mesh>
 					{Array.from({length: 12}, (_, i) => {
 						const a = (i / 12) * Math.PI * 2;
 						return (
-							<mesh key={i} position={[Math.cos(a) * 1.17, 0, Math.sin(a) * 1.17]} rotation={[0, -a, 0]}>
-								<boxGeometry args={[0.16, 0.3, 0.5]} />
+							<mesh key={i} position={[Math.cos(a) * 0.85, 0, Math.sin(a) * 0.85]} rotation={[0, -a, 0]}>
+								<boxGeometry args={[0.12, 0.26, 0.36]} />
 								<meshStandardMaterial color={i % 2 ? '#b9c0ca' : '#c0392b'} metalness={0.6} roughness={0.35} />
 							</mesh>
 						);
@@ -49,8 +49,8 @@ const ACG = ({deg, power = 0, focus}: {deg: number; power?: number; focus?: stri
 				{Array.from({length: 12}, (_, i) => {
 					const a = ((i + 0.5) / 12) * Math.PI * 2;
 					return (
-						<mesh key={i} position={[Math.cos(a) * 0.72, 0, Math.sin(a) * 0.72]} rotation={[0, -a, Math.PI / 2]}>
-							<cylinderGeometry args={[0.15, 0.15, 0.5, 16]} />
+						<mesh key={i} position={[Math.cos(a) * 0.52, 0, Math.sin(a) * 0.52]} rotation={[0, -a, Math.PI / 2]}>
+							<cylinderGeometry args={[0.1, 0.1, 0.36, 16]} />
 							<meshStandardMaterial color="#b87333" metalness={0.9} roughness={0.3} emissive="#ff8a3c" emissiveIntensity={power * 1.6} />
 						</mesh>
 					);
@@ -65,20 +65,20 @@ const Light = ({green = 2}: {green?: number}) => {
 	const {p} = useScene();
 	const go = p >= green;
 	return (
-		<group position={[-4.4, 0, -1.2]}>
-			<mesh position={[0, 3.2, 0]} castShadow>
-				<cylinderGeometry args={[0.12, 0.12, 6.4, 12]} />
+		<group position={[-3.1, 0, -0.6]}>
+			<mesh position={[0, 2.2, 0]} castShadow>
+				<cylinderGeometry args={[0.12, 0.12, 4.4, 12]} />
 				<meshStandardMaterial color="#3a3f47" metalness={0.6} roughness={0.5} />
 			</mesh>
-			<mesh position={[0, 7.2, 0]} castShadow>
+			<mesh position={[0, 5.2, 0]} castShadow>
 				<boxGeometry args={[0.9, 2.4, 0.7]} />
 				<meshStandardMaterial color="#1b1e23" roughness={0.6} />
 			</mesh>
 			{(
 				[
-					['#ff3b30', 7.95, !go],
-					['#ffcc00', 7.2, false],
-					['#34c759', 6.45, go],
+					['#ff3b30', 5.95, !go],
+					['#ffcc00', 5.2, false],
+					['#34c759', 4.45, go],
 				] as [string, number, boolean][]
 			).map(([c, y, on]) => (
 				<mesh key={c} position={[0, y, 0.36]}>
@@ -160,10 +160,10 @@ const Generator = ({lang}: SceneProps) => {
 	const {p, sec} = useScene();
 	const deg = p * 1600;
 	const cam: CamKey[] = [
-		{t: 0, pos: [2.5, 2.2, 6.5], look: [0, 1.2, 0.9]},
-		{t: 0.5, pos: [1.6, 1.9, 5.6], look: [0, 1.2, 0.9]},
-		{t: 0.55, pos: [-3, 2.8, 5.2], look: [0, 1.2, 0.9], cut: true},
-		{t: 1, pos: [-2.2, 2.4, 4.8], look: [0, 1.2, 0.9]},
+		{t: 0, pos: [3.5, 3.2, 10], look: [0, 2, 0.6]},
+		{t: 0.5, pos: [2.6, 2.8, 9], look: [0, 1.8, 0.6]},
+		{t: 0.55, pos: [-3.5, 3, 8.5], look: [0, 1.6, 0.6], cut: true},
+		{t: 1, pos: [-2.8, 2.7, 7.8], look: [0, 1.5, 0.6]},
 	];
 	return (
 		<>
@@ -171,8 +171,8 @@ const Generator = ({lang}: SceneProps) => {
 				<Engine s={cycleState(deg, sec)} focus={['none']} />
 				<ACG deg={deg} focus={['acg']} />
 			</Stage>
-			<Callout cam={cam} at={[1.17, 1.2, 0.95]} label={lang === 'id' ? 'Magnet' : 'Magnets'} from={0.12} to={0.5} />
-			<Callout cam={cam} at={[-0.72, 1.2, 1.1]} label={lang === 'id' ? 'Kumparan tembaga' : 'Copper coils'} from={0.58} to={0.95} />
+			<Callout cam={cam} at={[0.85, 1.2, 0.95]} label={lang === 'id' ? 'Magnet' : 'Magnets'} from={0.12} to={0.5} />
+			<Callout cam={cam} at={[-0.52, 1.2, 1.05]} label={lang === 'id' ? 'Kumparan tembaga' : 'Copper coils'} from={0.58} to={0.95} />
 		</>
 	);
 };
@@ -183,10 +183,10 @@ const Starter = ({lang}: SceneProps) => {
 	const deg = start(r.q, 0.1, 0.7, 1800);
 	const power = interpolate(r.q, [0.08, 0.15, 0.65, 0.75], [0, 1, 1, 0], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
 	const cam: CamKey[] = [
-		{t: 0, pos: [4.5, 3.6, 8], look: [1.2, 1.4, 0.9]},
-		{t: 0.5, pos: [3.8, 3, 7], look: [1, 1.3, 0.9]},
-		{t: 0.55, pos: [0.5, 2, 5], look: [0, 1.2, 0.9], cut: true},
-		{t: 1, pos: [0.3, 1.8, 4.4], look: [0, 1.2, 0.9]},
+		{t: 0, pos: [5, 4, 11], look: [1.2, 1.8, 0.8]},
+		{t: 0.5, pos: [4.2, 3.5, 10], look: [1, 1.6, 0.8]},
+		{t: 0.55, pos: [1, 2.6, 8], look: [0.2, 1.5, 0.8], cut: true},
+		{t: 1, pos: [0.8, 2.4, 7.2], look: [0.2, 1.4, 0.8]},
 	];
 	return (
 		<>
@@ -204,7 +204,7 @@ const Starter = ({lang}: SceneProps) => {
 				</mesh>
 				{power > 0.05 && <Stream path={[[3.0, 1.3, 1.6], [2.2, 1.8, 1.5], [1.1, 1.5, 1.1], [0.6, 1.25, 1.0]]} t={sec} color="#ffb347" n={14} size={0.09} speed={1.4} opacity={power} />}
 			</Stage>
-			<Callout cam={cam} at={[0.72, 1.2, 1.1]} label={lang === 'id' ? 'ACG starter' : 'ACG starter'} from={0.12} to={0.95} />
+			<Callout cam={cam} at={[0.52, 1.2, 1.05]} label={lang === 'id' ? 'ACG starter' : 'ACG starter'} from={0.12} to={0.95} />
 			<TimeTag show={r.slow} lang={lang} />
 		</>
 	);
@@ -216,8 +216,8 @@ const Silent = ({lang}: SceneProps) => {
 	const cam: CamKey[] = [
 		{t: 0, pos: [-3, 5.5, 17], look: [-1.6, 4, 0]},
 		{t: 0.5, pos: [-2, 5, 15], look: [-1.4, 4, 0]},
-		{t: 0.55, pos: [3.2, 2.6, 6.5], look: [0, 1.4, 0.8], cut: true},
-		{t: 1, pos: [2.6, 2.4, 6], look: [0, 1.3, 0.8]},
+		{t: 0.55, pos: [3.4, 3, 9], look: [0, 1.8, 0.6], cut: true},
+		{t: 1, pos: [2.8, 2.8, 8.2], look: [0, 1.7, 0.6]},
 	];
 	return (
 		<>
@@ -226,7 +226,7 @@ const Silent = ({lang}: SceneProps) => {
 				<ACG deg={deg} power={p > 0.35 && p < 0.6 ? 1 : 0} />
 				<Light green={0.3} />
 			</Stage>
-			<Callout cam={cam} at={[0.9, 1.2, 1.1]} label={lang === 'id' ? 'Tanpa gigi' : 'No gears'} from={0.6} to={0.95} />
+			<Callout cam={cam} at={[0.7, 1.2, 1.05]} label={lang === 'id' ? 'Tanpa gigi' : 'No gears'} from={0.6} to={0.95} />
 		</>
 	);
 };
