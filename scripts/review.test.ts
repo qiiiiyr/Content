@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {decide, findHits, followups, isoWeek, median, parseChecklist, untick, type EpisodeScore, type Strategy} from './review.ts';
 import {duePlatforms, mergePosted, missingSecrets, nextToPost} from './publish.ts';
 import {missedYesterday, queueDays} from './health.ts';
+import {ramp} from '../src/motion.ts';
 
 const now = new Date('2026-12-20T00:00:00Z');
 const strategy: Strategy = {
@@ -155,4 +156,13 @@ test('health: missed slots of yesterday and days left in the queue', () => {
 	// 3 episodes, one posted to Instagram in en: 2 left = 1 day
 	assert.equal(queueDays(['a', 'b', 'c'], [mk('en', 'instagram', '2026-11-18T10:00:00Z', 'a')], () => false)['en instagram'], 1);
 	assert.equal(queueDays(['a', 'b', 'c'], [], (id) => id !== 'a')['id youtube'], 1);
+});
+
+test('slow-motion ramp: slow inside the window, still ends on time, never goes backwards', () => {
+	const qs = Array.from({length: 101}, (_, i) => ramp(i / 100, 0.4, 0.7, 0.25));
+	assert.equal(qs[0].q, 0);
+	assert.ok(Math.abs(qs[100].q - 1) < 1e-9);
+	assert.ok(qs.every((x, i) => i === 0 || x.q >= qs[i - 1].q));
+	assert.ok(qs[50].slow && !qs[20].slow && !qs[80].slow);
+	assert.ok(qs[60].q - qs[50].q < qs[30].q - qs[20].q); // slower inside than outside
 });
