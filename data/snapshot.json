@@ -1,37 +1,37 @@
 {
- "at": "2026-11-23T13:30:38.553Z",
+ "at": "2026-11-24T14:09:11.429Z",
  "channels": [
   {
    "lang": "en",
    "platform": "youtube",
    "name": "CutawayEN",
    "followers": 7,
-   "views": 7091,
-   "posts": 6
+   "views": 7747,
+   "posts": 7
   },
   {
    "lang": "en",
    "platform": "instagram",
    "name": "@cutawayen",
    "followers": 0,
-   "views": 1722,
-   "posts": 10
+   "views": 1990,
+   "posts": 12
   },
   {
    "lang": "id",
    "platform": "youtube",
    "name": "CutawayID",
-   "followers": 2,
-   "views": 263,
-   "posts": 6
+   "followers": 4,
+   "views": 3984,
+   "posts": 7
   },
   {
    "lang": "id",
    "platform": "instagram",
    "name": "@cutawayid",
    "followers": 0,
-   "views": 2305,
-   "posts": 10
+   "views": 2674,
+   "posts": 12
   }
  ],
  "posts": [
@@ -64,7 +64,7 @@
    "platform": "youtube",
    "url": "https://youtu.be/8x9RM7Cztyk",
    "postedAt": "2026-11-19T22:25:20.377Z",
-   "views": 666,
+   "views": 667,
    "likes": 11,
    "comments": 0
   },
@@ -75,7 +75,7 @@
    "platform": "youtube",
    "url": "https://youtu.be/UmumOXnQ0BE",
    "postedAt": "2026-11-20T17:30:29.608Z",
-   "views": 1283,
+   "views": 1355,
    "likes": 17,
    "comments": 0
   },
@@ -86,7 +86,7 @@
    "platform": "youtube",
    "url": "https://youtu.be/OaUr5bipHlA",
    "postedAt": "2026-11-21T19:44:43.985Z",
-   "views": 1308,
+   "views": 1312,
    "likes": 18,
    "comments": 0
   },
@@ -97,8 +97,19 @@
    "platform": "youtube",
    "url": "https://youtu.be/pA16gKO4vCA",
    "postedAt": "2026-11-22T21:15:15.330Z",
-   "views": 1292,
-   "likes": 24,
+   "views": 1353,
+   "likes": 27,
+   "comments": 0
+  },
+  {
+   "id": "2026-W48/6-differential",
+   "title": "Your wheels spin at different speeds in every corner",
+   "lang": "en",
+   "platform": "youtube",
+   "url": "https://youtu.be/XLX9pB5eSyU",
+   "postedAt": "2026-11-23T18:09:19.685Z",
+   "views": 518,
+   "likes": 7,
    "comments": 0
   },
   {
@@ -108,10 +119,10 @@
    "platform": "instagram",
    "url": "https://www.instagram.com/reel/Df3Yqu-iBkF/",
    "postedAt": "2026-11-18T02:01:33.201Z",
-   "views": 203,
+   "views": 204,
    "likes": 3,
    "comments": 0,
-   "reach": 190,
+   "reach": 191,
    "saves": 1,
    "shares": 0
   },
@@ -209,7 +220,7 @@
    "views": 137,
    "likes": 0,
    "comments": 0,
-   "reach": 123,
+   "reach": 124,
    "saves": 1,
    "shares": 0
   },
@@ -220,10 +231,10 @@
    "platform": "instagram",
    "url": "https://www.instagram.com/reel/DgEEjI_jr47/",
    "postedAt": "2026-11-23T00:15:58.160Z",
-   "views": 138,
+   "views": 140,
    "likes": 1,
    "comments": 0,
-   "reach": 117,
+   "reach": 118,
    "saves": 0,
    "shares": 0
   },
@@ -242,13 +253,41 @@
    "shares": 0
   },
   {
+   "id": "2026-W49/3-disc-brake",
+   "title": "Your brakes don't stop your car. They turn it into heat",
+   "lang": "en",
+   "platform": "instagram",
+   "url": "https://www.instagram.com/reel/DgF_ZJHG80G/",
+   "postedAt": "2026-11-23T18:09:24.070Z",
+   "views": 135,
+   "likes": 1,
+   "comments": 0,
+   "reach": 119,
+   "saves": 0,
+   "shares": 0
+  },
+  {
+   "id": "2026-W49/4-valve-timing",
+   "title": "Your engine breathes differently when you rev it",
+   "lang": "en",
+   "platform": "instagram",
+   "url": "https://www.instagram.com/reel/DgGh-91mHw7/",
+   "postedAt": "2026-11-23T23:11:39.363Z",
+   "views": 130,
+   "likes": 0,
+   "comments": 0,
+   "reach": 116,
+   "saves": 0,
+   "shares": 0
+  },
+  {
    "id": "2026-W47/1-four-stroke",
    "title": "Mesinmu meledak 50 kali per detik",
    "lang": "id",
    "platform": "youtube",
    "url": "https://youtu.be/Cfy8dvfsWCs",
    "postedAt": "2026-11-18T15:26:43.169Z",
-   "views": 1,
+   "views": 2,
    "likes": 0,
    "comments": 0
   },
@@ -259,7 +298,7 @@
    "platform": "youtube",
    "url": "https://youtu.be/BYWAFnOiKKI",
    "postedAt": "2026-11-19T13:50:48.970Z",
-   "views": 2,
+   "views": 3,
    "likes": 0,
    "comments": 0
   },
@@ -270,7 +309,7 @@
    "platform": "youtube",
    "url": "https://youtu.be/CPc4ZgnSVm8",
    "postedAt": "2026-11-20T12:24:32.236Z",
-   "views": 3,
+   "views": 4,
    "likes": 0,
    "comments": 0
   },
@@ -281,8 +320,8 @@
    "platform": "youtube",
    "url": "https://youtu.be/U3cJvy7Mlvw",
    "postedAt": "2026-11-21T14:40:07.365Z",
-   "views": 132,
-   "likes": 1,
+   "views": 1219,
+   "likes": 9,
    "comments": 0
   },
   {
@@ -292,8 +331,8 @@
    "platform": "youtube",
    "url": "https://youtu.be/nGP-bFscOZY",
    "postedAt": "2026-11-22T14:36:28.716Z",
-   "views": 125,
-   "likes": 1,
+   "views": 1324,
+   "likes": 12,
    "comments": 0
   },
   {
@@ -303,6 +342,17 @@
    "platform": "youtube",
    "url": "https://youtu.be/vLJZM9Pw8Fw",
    "postedAt": "2026-11-23T13:17:41.526Z",
+   "views": 1432,
+   "likes": 14,
+   "comments": 0
+  },
+  {
+   "id": "2026-W48/6-differential",
+   "title": "Di tiap tikungan, roda mobilmu berputar beda kecepatan",
+   "lang": "id",
+   "platform": "youtube",
+   "url": "https://youtu.be/gQkbLdyj7lk",
+   "postedAt": "2026-11-24T13:20:46.793Z",
    "views": 0,
    "likes": 0,
    "comments": 0
@@ -440,10 +490,38 @@
    "platform": "instagram",
    "url": "https://www.instagram.com/reel/DgFeFVrOYRg/",
    "postedAt": "2026-11-23T13:17:45.185Z",
-   "views": 0,
+   "views": 135,
+   "likes": 3,
+   "comments": 0,
+   "reach": 124,
+   "saves": 0,
+   "shares": 0
+  },
+  {
+   "id": "2026-W49/3-disc-brake",
+   "title": "Remmu bukan menghentikan mobil. Dia mengubahnya jadi panas",
+   "lang": "id",
+   "platform": "instagram",
+   "url": "https://www.instagram.com/reel/DgHLNJuCtO0/",
+   "postedAt": "2026-11-24T05:11:48.580Z",
+   "views": 120,
    "likes": 0,
    "comments": 0,
-   "reach": 0,
+   "reach": 113,
+   "saves": 1,
+   "shares": 0
+  },
+  {
+   "id": "2026-W49/4-valve-timing",
+   "title": "Mesinmu bernapas beda saat digas tinggi",
+   "lang": "id",
+   "platform": "instagram",
+   "url": "https://www.instagram.com/reel/DgIDKwjBxm2/",
+   "postedAt": "2026-11-24T13:20:51.734Z",
+   "views": 114,
+   "likes": 0,
+   "comments": 0,
+   "reach": 17,
    "saves": 0,
    "shares": 0
   }
@@ -616,6 +694,34 @@
    "platform": "instagram",
    "followers": 0,
    "views": 2305
+  },
+  {
+   "date": "2026-11-24",
+   "lang": "en",
+   "platform": "youtube",
+   "followers": 7,
+   "views": 7747
+  },
+  {
+   "date": "2026-11-24",
+   "lang": "en",
+   "platform": "instagram",
+   "followers": 0,
+   "views": 1990
+  },
+  {
+   "date": "2026-11-24",
+   "lang": "id",
+   "platform": "youtube",
+   "followers": 4,
+   "views": 3984
+  },
+  {
+   "date": "2026-11-24",
+   "lang": "id",
+   "platform": "instagram",
+   "followers": 0,
+   "views": 2674
   }
  ]
 }
