@@ -716,6 +716,58 @@ export const Wheel = ({r = 1.3, angle = 0, position = [0, 0, 0], rotation = [0, 
 	</group>
 );
 
+/** A generic step-through scooter (no maker's styling or logo), front toward +x, wheels on the floor, about 9 long and
+ * 5.5 tall. The engine sits in the rear under the seat: pass it as children (an <Engine scale={0.22}> fits). With xray the
+ * rear side panel is glass so the engine shows. wheel: wheel turn in radians. Body parts are tagged 'scooter' for focus. */
+export const Scooter = ({position = [0, 0, 0], rotation = [0, 0, 0], wheel = 0, xray = false, children}: {position?: V3; rotation?: V3; wheel?: number; xray?: boolean; children?: ReactNode}) => {
+	const shell = useMemo(() => new RoundedBoxGeometry(4.2, 1.9, 1.8, 4, 0.45), []);
+	const seat = useMemo(() => new RoundedBoxGeometry(3.4, 0.45, 1.3, 4, 0.2), []);
+	const shield = useMemo(() => new RoundedBoxGeometry(0.6, 3.2, 1.7, 4, 0.25), []);
+	const body = {color: '#e8e2d6', metalness: 0.2, roughness: 0.35, clearcoat: 1, clearcoatRoughness: 0.2};
+	return (
+		<group position={position} rotation={rotation}>
+			<Wheel r={1.1} angle={-wheel} position={[3.3, 1.1, 0]} />
+			<Wheel r={1.1} angle={-wheel} position={[-3.2, 1.1, 0]} />
+			<group userData={{part: 'scooter'}}>
+				<mesh position={[0.2, 1.5, 0]} castShadow receiveShadow>
+					<boxGeometry args={[3.6, 0.35, 1.6]} />
+					<meshPhysicalMaterial {...body} />
+				</mesh>
+				<mesh geometry={shield} position={[2.35, 3.05, 0]} rotation={[0, 0, -0.25]} castShadow>
+					<meshPhysicalMaterial {...body} />
+				</mesh>
+				<Rod from={[3.3, 1.1, 0]} to={[2.75, 4.7, 0]} r={0.11} material={mat.dark} />
+				<mesh position={[2.7, 4.8, 0]} rotation={[Math.PI / 2, 0, 0]} castShadow>
+					<cylinderGeometry args={[0.08, 0.08, 2.4, 12]} />
+					<meshStandardMaterial {...mat.dark} />
+				</mesh>
+				<mesh position={[3.05, 4.35, 0]}>
+					<sphereGeometry args={[0.28, 20, 20]} />
+					<meshStandardMaterial color="#fff6dc" emissive="#fff1c4" emissiveIntensity={1.2} />
+				</mesh>
+				<mesh geometry={shell} position={[-1.9, 2.75, 0]} castShadow={!xray}>
+					{xray ? <meshPhysicalMaterial color="#d6ecf0" transparent opacity={0.18} roughness={0.05} clearcoat={1} depthWrite={false} /> : <meshPhysicalMaterial {...body} />}
+				</mesh>
+				<mesh geometry={seat} position={[-1.5, 3.9, 0]} castShadow>
+					<meshStandardMaterial color="#1f2124" roughness={0.7} />
+				</mesh>
+				<mesh position={[-4.05, 3.0, 0]}>
+					<boxGeometry args={[0.12, 0.3, 0.9]} />
+					<meshStandardMaterial color="#c0392b" emissive="#ff3b30" emissiveIntensity={1.5} />
+				</mesh>
+				<mesh position={[-2.7, 1.25, 0.55]} castShadow>
+					<boxGeometry args={[1.6, 0.3, 0.25]} />
+					<meshStandardMaterial {...mat.dark} />
+				</mesh>
+			</group>
+			{/* the engine unit sits in the rear, under the seat */}
+			<group position={[-2.0, 1.55, 0]} scale={0.22}>
+				{children}
+			</group>
+		</group>
+	);
+};
+
 /** Beads flowing along a polyline: air, fuel or exhaust. t = seconds, so the flow keeps moving whatever the scene length. */
 export const Stream = ({path, t, n = 16, color = '#9fe8f0', size = 0.1, speed = 0.8, opacity = 0.95, glow = 1}: {path: V3[]; t: number; n?: number; color?: string; size?: number; speed?: number; opacity?: number; glow?: number}) => {
 	const seg = path.length - 1;

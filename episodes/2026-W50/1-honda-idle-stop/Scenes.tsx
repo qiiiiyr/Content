@@ -1,5 +1,5 @@
 import {interpolate} from 'remotion';
-import {Engine, Stage, Stream, cycleState, useFocus, useScene, type CamKey} from '../../../src/stage';
+import {Engine, Scooter, Stage, Stream, cycleState, useFocus, useScene, type CamKey} from '../../../src/stage';
 import {Callout, TimeTag, ramp} from '../../../src/Looks';
 import {PaperTag} from '../../../src/Tag';
 import type {SceneProps} from '../../../src/types';
@@ -92,22 +92,30 @@ const Light = ({green = 2}: {green?: number}) => {
 
 const Hook = ({lang}: SceneProps) => {
 	const {p, sec} = useScene();
-	const deg = coast(p, 0.45, 0.85, 2600);
-	const explode = Math.max(0, 1 - p / 0.3) ** 2; // cold open: the engine flies together already running
+	const deg = coast(p, 0.2, 0.5, 2600); // running at the light, then it stops by itself
 	const cam: CamKey[] = [
-		{t: 0, pos: [-2, 6, 24], look: [-1.5, 4, 0]},
-		{t: 0.5, pos: [-1, 5.5, 18], look: [-1.2, 4, 0]},
-		{t: 0.55, pos: [3.5, 5, 10], look: [0, 3.4, 0], cut: true},
+		{t: 0, pos: [5, 4.5, 34], look: [1, 1.2, 1.5]},
+		{t: 0.55, pos: [4.2, 4.2, 30], look: [1, 1.2, 1.5]},
+		{t: 0.6, pos: [3.5, 5, 10], look: [0, 3.4, 0], cut: true},
 		{t: 1, pos: [3, 4.6, 9], look: [0, 3.2, 0]},
 	];
+	const wide = p < 0.6;
 	return (
 		<>
 			<Stage cam={cam}>
-				<Engine s={cycleState(deg, sec)} explode={explode} />
-				<ACG deg={deg} />
+				{wide ? (
+					<Scooter position={[1.4, 0, 1.6]} rotation={[0, -0.75, 0]} xray>
+						<Engine s={cycleState(deg, sec)} valves={false} />
+					</Scooter>
+				) : (
+					<>
+						<Engine s={cycleState(deg, sec)} />
+						<ACG deg={deg} />
+					</>
+				)}
 				<Light />
 			</Stage>
-			<Callout cam={cam} at={[0, 2.8, 0.6]} label={lang === 'id' ? 'Mesin: mati' : 'Engine: off'} from={0.88} to={1} />
+			<Callout cam={cam} at={[0, 2.8, 0.6]} label={lang === 'id' ? 'Mesin: mati' : 'Engine: off'} from={0.66} to={1} />
 		</>
 	);
 };
@@ -234,11 +242,13 @@ const Silent = ({lang}: SceneProps) => {
 const Finale = () => {
 	const {p, sec} = useScene();
 	const deg = p * 1400 + STOP;
+	const go = Math.max(0, p - 0.15) ** 2 * 18; // green: it rides off
 	return (
 		<>
-			<Stage cam={[{t: 0, pos: [-1, 5, 16], look: [-1, 3.6, 0]}, {t: 1, pos: [-1, 5.4, 22], look: [-1, 3.4, 0]}]}>
-				<Engine s={cycleState(deg, sec)} />
-				<ACG deg={deg} />
+			<Stage cam={[{t: 0, pos: [4, 4.5, 33], look: [1.5, 1.2, 1.5]}, {t: 1, pos: [5, 5, 36], look: [3, 1.4, 2]}]}>
+				<Scooter position={[1.4 + go * 0.73, 0, 1.6 + go * 0.68]} rotation={[0, -0.75, 0]} wheel={go / 1.1} xray>
+					<Engine s={cycleState(deg, sec)} valves={false} />
+				</Scooter>
 				<Light green={0} />
 			</Stage>
 			<PaperTag at={0.5} lines={{en: ['CUTAWAY', 'ENGINE LAB', 'No. 022'], id: ['BONGKAR PASANG', 'LAB MESIN', 'No. 022']}} />
