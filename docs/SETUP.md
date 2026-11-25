@@ -128,8 +128,8 @@ Meta calls it the "Instagram Graph API". It is not a separate site: you make a M
 1. Settings → General → make `main` the default branch (scheduled workflows only run there).
 2. Settings → Actions → General → Workflow permissions: **Read and write**, and tick "Allow GitHub Actions to create
    and approve pull requests" (needed for the preview comments).
-3. Add the 8 secrets from parts 2 and 4. Posting is **on and public** by default: per language, YouTube once a day and Instagram twice:
-   ID YouTube 19:17 WIB, Instagram 11:47 and 19:19 WIB; EN YouTube 12:23 New York, Instagram 12:25 and 17:25 New York.
+3. Add the 8 secrets from parts 2 and 4. Posting is **on and public** by default: per language, YouTube twice a day and Instagram twice:
+   ID YouTube 11:45 and 19:17 WIB, Instagram 11:47 and 19:19 WIB; EN YouTube 12:23 and 17:23 New York, Instagram 12:25 and 17:25 New York.
    An hourly run posts whatever is due, so a slot goes out within the hour after its time, and missed slots catch up. Two optional repository **variables** (Settings → Secrets and variables → Actions →
    Variables) change that: `POSTING` = `off` pauses the schedule, `PRIVACY` = `private` uploads YouTube videos as
    private (Instagram has no private mode).

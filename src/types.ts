@@ -11,7 +11,7 @@ export type Meta = {
 	hashtags: string[];
 	sources: string[];
 	look?: Look; // visual style, default workshop (docs/styles.md)
-	youtube?: boolean; // false = Instagram only: Instagram posts all 14 a week, YouTube 7
+	youtube?: boolean; // false = Instagram only; by default both platforms post every episode
 	scenes: Text[]; // narration, one entry per scene, same order as Scenes.tsx
 };
 
