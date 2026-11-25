@@ -30,8 +30,8 @@ export const isAuthError = (msg: string): boolean => /oauth2\.googleapis\.com\/t
 
 /** When each platform posts, per language, as UTC "HH:MM": Instagram twice a day, YouTube once. */
 export const SLOTS: Record<Lang, Record<Platform, string[]>> = {
-	id: {instagram: ['04:47', '12:19'], youtube: ['12:17']}, // 11:47 and 19:19 WIB; YouTube 19:17 WIB
-	en: {youtube: ['17:23'], instagram: ['17:25', '22:25']}, // 12:23 New York; Instagram 12:25 and 17:25 New York (UTC-5)
+	id: {instagram: ['04:47', '12:19'], youtube: ['04:45', '12:17']}, // 11:47 and 19:19 WIB; YouTube 11:45 and 19:17 WIB
+	en: {youtube: ['17:23', '22:23'], instagram: ['17:25', '22:25']}, // 12:23 and 17:23 New York; Instagram 12:25 and 17:25 New York (UTC-5)
 };
 
 /** Hours from UTC to the audience's clock: posts are counted per audience day, so a slot caught up late (after midnight
@@ -87,7 +87,7 @@ if (import.meta.main && process.argv[2] !== '--merge-into') {
 		console.log(`${lang}: nothing due right now`);
 		process.exit(0);
 	}
-	// Each platform keeps its own place in the queue (YouTube once a day, Instagram twice, so they drift apart), and one run
+	// Each platform keeps its own place in the queue (so they can drift apart after a failure), and one run
 	// posts every due platform's next episode: a platform must not wait for another run because YouTube took this one.
 	const byEpisode = new Map<string, Platform[]>();
 	for (const p of due) {

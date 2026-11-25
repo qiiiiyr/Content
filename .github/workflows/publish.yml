@@ -1,5 +1,5 @@
-# Each language posts to YouTube once a day and to Instagram twice a day, at the times in SLOTS (scripts/publish.ts):
-#   ID: Instagram 11:47 and 19:19 WIB, YouTube 19:17 WIB. EN: YouTube 12:23, Instagram 12:25 and 17:25 New York.
+# Each language posts to YouTube and to Instagram twice a day, at the times in SLOTS (scripts/publish.ts):
+#   ID: Instagram 11:47 and 19:19 WIB, YouTube 11:45 and 19:17 WIB. EN: YouTube 12:23 and 17:23, Instagram 12:25 and 17:25 New York.
 # GitHub starts scheduled runs late or drops them, so this runs every hour and posts whatever is due today (catching up
 # missed slots). A slot is posted at the first hourly run after its time.
 name: publish

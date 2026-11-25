@@ -129,17 +129,17 @@ test('saving posts merges with what another run saved meanwhile', () => {
 test('hourly run posts what is due today and catches up missed slots', () => {
 	const ig = (postedAt: string) => ({id: 'w/1', lang: 'id' as const, platform: 'instagram' as const, mediaId: 'x', postedAt});
 	assert.deepEqual(duePlatforms([], 'id', new Date('2026-11-19T04:00:00Z')), []);
-	assert.deepEqual(duePlatforms([], 'id', new Date('2026-11-19T05:41:00Z')), ['instagram']);
-	assert.deepEqual(duePlatforms([ig('2026-11-19T05:41:10Z')], 'id', new Date('2026-11-19T06:41:00Z')), []);
-	// both slots passed, one post made: Instagram still owes one; YouTube owes its one
+	assert.deepEqual(duePlatforms([], 'id', new Date('2026-11-19T05:41:00Z')), ['youtube', 'instagram']);
+	assert.deepEqual(duePlatforms([ig('2026-11-19T05:41:10Z')], 'id', new Date('2026-11-19T06:41:00Z')), ['youtube']);
+	// both slots passed, one Instagram post made: Instagram still owes one; YouTube owes both
 	assert.deepEqual(duePlatforms([ig('2026-11-19T05:41:10Z')], 'id', new Date('2026-11-19T12:41:00Z')), ['youtube', 'instagram']);
 	// yesterday's posts do not count for today
-	assert.deepEqual(duePlatforms([ig('2026-11-18T12:41:00Z')], 'id', new Date('2026-11-19T05:41:00Z')), ['instagram']);
+	assert.deepEqual(duePlatforms([ig('2026-11-18T12:41:00Z')], 'id', new Date('2026-11-19T05:41:00Z')), ['youtube', 'instagram']);
 	// days are the audience's: a New York slot caught up at 00:24 UTC still belongs to the day before
 	const en = (platform: 'youtube' | 'instagram', postedAt: string) => ({id: 'x', lang: 'en' as const, platform, mediaId: 'm', postedAt});
 	assert.deepEqual(duePlatforms([en('youtube', '2026-11-19T00:24:00Z')], 'en', new Date('2026-11-19T17:30:00Z')), ['youtube', 'instagram']);
-	assert.deepEqual(duePlatforms([en('youtube', '2026-11-19T17:30:00Z'), en('instagram', '2026-11-19T17:31:00Z')], 'en', new Date('2026-11-19T23:41:00Z')), ['instagram']);
-	assert.deepEqual(duePlatforms([en('youtube', '2026-11-19T17:30:00Z')], 'en', new Date('2026-11-20T03:41:00Z')), ['instagram']); // 22:41 New York, still the 19th
+	assert.deepEqual(duePlatforms([en('youtube', '2026-11-19T17:30:00Z'), en('youtube', '2026-11-19T22:30:00Z'), en('instagram', '2026-11-19T17:31:00Z')], 'en', new Date('2026-11-19T23:41:00Z')), ['instagram']);
+	assert.deepEqual(duePlatforms([en('youtube', '2026-11-19T17:30:00Z'), en('youtube', '2026-11-19T22:30:00Z')], 'en', new Date('2026-11-20T03:41:00Z')), ['instagram']); // 22:41 New York, still the 19th
 });
 
 test('missing secrets are named per language and platform', () => {
@@ -149,14 +149,14 @@ test('missing secrets are named per language and platform', () => {
 
 test('health: missed slots of yesterday and days left in the queue', () => {
 	const mk = (lang: 'en' | 'id', platform: 'youtube' | 'instagram', postedAt: string, id = 'x') => ({id, lang, platform, mediaId: 'm', postedAt});
-	// id day 2026-11-19 (WIB): youtube once, instagram twice. Only one Instagram post was made.
-	const posted = [mk('id', 'youtube', '2026-11-18T10:00:00Z'), mk('id', 'youtube', '2026-11-19T10:00:00Z'), mk('id', 'instagram', '2026-11-19T04:50:00Z')];
+	// id day 2026-11-19 (WIB): youtube and instagram twice. Only one Instagram post was made.
+	const posted = [mk('id', 'youtube', '2026-11-18T10:00:00Z'), mk('id', 'youtube', '2026-11-19T04:45:00Z'), mk('id', 'youtube', '2026-11-19T10:00:00Z'), mk('id', 'instagram', '2026-11-19T04:50:00Z')];
 	assert.deepEqual(missedYesterday(posted, new Date('2026-11-20T03:00:00Z')).filter(([l]) => l === 'id'), [['id', 'instagram', 1]]);
 	// nothing existed before that day: not a miss
 	assert.deepEqual(missedYesterday([mk('id', 'youtube', '2026-11-19T10:00:00Z')], new Date('2026-11-20T03:00:00Z')), []);
 	// 3 episodes, one posted to Instagram in en: 2 left = 1 day
 	assert.equal(queueDays(['a', 'b', 'c'], [mk('en', 'instagram', '2026-11-18T10:00:00Z', 'a')], () => false)['en instagram'], 1);
-	assert.equal(queueDays(['a', 'b', 'c'], [], (id) => id !== 'a')['id youtube'], 1);
+	assert.equal(queueDays(['a', 'b', 'c'], [], (id) => id !== 'a')['id youtube'], 0.5);
 });
 
 test('slow-motion ramp: slow inside the window, still ends on time, never goes backwards', () => {

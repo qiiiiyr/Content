@@ -50,8 +50,7 @@ write is for `N`. Posting goes oldest first, so batches simply queue up behind e
    week after this batch). Never edit `thresholds` unless the human asked.
 6. **Write 14 episodes in `episodes/N/`**, folders `1-<slug>` … `14-<slug>`, posted in that order:
    - 10 on `currentTheme` (`"test": false`) and 4 on `testTheme` (`"test": true`) in slots 3, 6, 10 and 13.
-   - Instagram posts all 14 (twice a day), YouTube only 7 (once a day): set `"youtube": false` in `meta.json` on the
-     7 with the weakest hooks, keeping 2 test episodes on YouTube. `npm test` fails if a week sends more than 7 to YouTube.
+   - Instagram and YouTube both post all 14 (twice a day each); leave `"youtube"` out of `meta.json`.
    - Topic priority: follow-ups of `followups`, then topics suggested by competitor hits (rewritten in our own
      words and visuals, never copied), then `themes.json` ideas. Never repeat a topic already in `episodes/`.
    - **Every topic is anchored on a real, named product** with a surprising capability, and the mechanism is the
