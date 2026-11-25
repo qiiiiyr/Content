@@ -1,37 +1,37 @@
 {
- "at": "2026-11-24T14:09:11.429Z",
+ "at": "2026-11-25T13:22:52.033Z",
  "channels": [
   {
    "lang": "en",
    "platform": "youtube",
    "name": "CutawayEN",
-   "followers": 7,
-   "views": 7747,
-   "posts": 7
+   "followers": 8,
+   "views": 9217,
+   "posts": 8
   },
   {
    "lang": "en",
    "platform": "instagram",
    "name": "@cutawayen",
    "followers": 0,
-   "views": 1990,
-   "posts": 12
+   "views": 2249,
+   "posts": 14
   },
   {
    "lang": "id",
    "platform": "youtube",
    "name": "CutawayID",
    "followers": 4,
-   "views": 3984,
-   "posts": 7
+   "views": 5112,
+   "posts": 8
   },
   {
    "lang": "id",
    "platform": "instagram",
    "name": "@cutawayid",
    "followers": 0,
-   "views": 2674,
-   "posts": 12
+   "views": 2826,
+   "posts": 14
   }
  ],
  "posts": [
@@ -75,7 +75,7 @@
    "platform": "youtube",
    "url": "https://youtu.be/UmumOXnQ0BE",
    "postedAt": "2026-11-20T17:30:29.608Z",
-   "views": 1355,
+   "views": 1365,
    "likes": 17,
    "comments": 0
   },
@@ -86,7 +86,7 @@
    "platform": "youtube",
    "url": "https://youtu.be/OaUr5bipHlA",
    "postedAt": "2026-11-21T19:44:43.985Z",
-   "views": 1312,
+   "views": 1313,
    "likes": 18,
    "comments": 0
   },
@@ -97,7 +97,7 @@
    "platform": "youtube",
    "url": "https://youtu.be/pA16gKO4vCA",
    "postedAt": "2026-11-22T21:15:15.330Z",
-   "views": 1353,
+   "views": 1387,
    "likes": 27,
    "comments": 0
   },
@@ -108,8 +108,19 @@
    "platform": "youtube",
    "url": "https://youtu.be/XLX9pB5eSyU",
    "postedAt": "2026-11-23T18:09:19.685Z",
-   "views": 518,
-   "likes": 7,
+   "views": 668,
+   "likes": 11,
+   "comments": 0
+  },
+  {
+   "id": "2026-W48/7-two-stroke",
+   "title": "This engine fires every turn. Yours fires every other",
+   "lang": "en",
+   "platform": "youtube",
+   "url": "https://youtu.be/xyZSwPgc8q8",
+   "postedAt": "2026-11-24T17:46:16.420Z",
+   "views": 1275,
+   "likes": 16,
    "comments": 0
   },
   {
@@ -119,10 +130,10 @@
    "platform": "instagram",
    "url": "https://www.instagram.com/reel/Df3Yqu-iBkF/",
    "postedAt": "2026-11-18T02:01:33.201Z",
-   "views": 204,
+   "views": 205,
    "likes": 3,
    "comments": 0,
-   "reach": 191,
+   "reach": 192,
    "saves": 1,
    "shares": 0
   },
@@ -281,6 +292,34 @@
    "shares": 0
   },
   {
+   "id": "2026-W49/5-oil-pump",
+   "title": "A film thinner than a hair keeps your engine alive",
+   "lang": "en",
+   "platform": "instagram",
+   "url": "https://www.instagram.com/reel/DgIhjyUkpte/",
+   "postedAt": "2026-11-24T17:46:25.603Z",
+   "views": 129,
+   "likes": 0,
+   "comments": 0,
+   "reach": 121,
+   "saves": 0,
+   "shares": 0
+  },
+  {
+   "id": "2026-W49/6-abs",
+   "title": "Your ABS pumps the brakes 15 times a second",
+   "lang": "en",
+   "platform": "instagram",
+   "url": "https://www.instagram.com/reel/DgJGzPnEgDl/",
+   "postedAt": "2026-11-24T23:11:50.912Z",
+   "views": 129,
+   "likes": 0,
+   "comments": 0,
+   "reach": 125,
+   "saves": 0,
+   "shares": 0
+  },
+  {
    "id": "2026-W47/1-four-stroke",
    "title": "Mesinmu meledak 50 kali per detik",
    "lang": "id",
@@ -320,7 +359,7 @@
    "platform": "youtube",
    "url": "https://youtu.be/U3cJvy7Mlvw",
    "postedAt": "2026-11-21T14:40:07.365Z",
-   "views": 1219,
+   "views": 1218,
    "likes": 9,
    "comments": 0
   },
@@ -331,7 +370,7 @@
    "platform": "youtube",
    "url": "https://youtu.be/nGP-bFscOZY",
    "postedAt": "2026-11-22T14:36:28.716Z",
-   "views": 1324,
+   "views": 1326,
    "likes": 12,
    "comments": 0
   },
@@ -342,8 +381,8 @@
    "platform": "youtube",
    "url": "https://youtu.be/vLJZM9Pw8Fw",
    "postedAt": "2026-11-23T13:17:41.526Z",
-   "views": 1432,
-   "likes": 14,
+   "views": 1479,
+   "likes": 15,
    "comments": 0
   },
   {
@@ -353,6 +392,17 @@
    "platform": "youtube",
    "url": "https://youtu.be/gQkbLdyj7lk",
    "postedAt": "2026-11-24T13:20:46.793Z",
+   "views": 1080,
+   "likes": 10,
+   "comments": 0
+  },
+  {
+   "id": "2026-W48/7-two-stroke",
+   "title": "Mesin ini meledak tiap putaran. Punyamu cuma tiap dua",
+   "lang": "id",
+   "platform": "youtube",
+   "url": "https://youtu.be/cnQEtLNVzvs",
+   "postedAt": "2026-11-25T13:11:50.227Z",
    "views": 0,
    "likes": 0,
    "comments": 0
@@ -518,10 +568,38 @@
    "platform": "instagram",
    "url": "https://www.instagram.com/reel/DgIDKwjBxm2/",
    "postedAt": "2026-11-24T13:20:51.734Z",
-   "views": 114,
+   "views": 140,
    "likes": 0,
    "comments": 0,
-   "reach": 17,
+   "reach": 116,
+   "saves": 0,
+   "shares": 0
+  },
+  {
+   "id": "2026-W49/5-oil-pump",
+   "title": "Lapisan oli setipis rambut menjaga mesinmu tetap hidup",
+   "lang": "id",
+   "platform": "instagram",
+   "url": "https://www.instagram.com/reel/DgJwBdgSl9M/",
+   "postedAt": "2026-11-25T05:12:02.119Z",
+   "views": 126,
+   "likes": 0,
+   "comments": 0,
+   "reach": 106,
+   "saves": 1,
+   "shares": 0
+  },
+  {
+   "id": "2026-W49/6-abs",
+   "title": "ABS-mu memompa rem 15 kali per detik",
+   "lang": "id",
+   "platform": "instagram",
+   "url": "https://www.instagram.com/reel/DgKnAV1ABOt/",
+   "postedAt": "2026-11-25T13:11:54.728Z",
+   "views": 0,
+   "likes": 0,
+   "comments": 0,
+   "reach": 0,
    "saves": 0,
    "shares": 0
   }
@@ -722,6 +800,34 @@
    "platform": "instagram",
    "followers": 0,
    "views": 2674
+  },
+  {
+   "date": "2026-11-25",
+   "lang": "en",
+   "platform": "youtube",
+   "followers": 8,
+   "views": 9217
+  },
+  {
+   "date": "2026-11-25",
+   "lang": "en",
+   "platform": "instagram",
+   "followers": 0,
+   "views": 2249
+  },
+  {
+   "date": "2026-11-25",
+   "lang": "id",
+   "platform": "youtube",
+   "followers": 4,
+   "views": 5112
+  },
+  {
+   "date": "2026-11-25",
+   "lang": "id",
+   "platform": "instagram",
+   "followers": 0,
+   "views": 2826
   }
  ]
 }
