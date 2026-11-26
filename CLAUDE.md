@@ -15,7 +15,8 @@ write is for `N`. Posting goes oldest first, so batches simply queue up behind e
    `hitsByTheme`, `episodes`, and `unresolvedCompetitors`. If it is missing or older than 3 days, say so in the
    report and continue with web research only.
    **Then learn what lifts our views.** Read `data/snapshot.json` (daily: views, likes, comments per post; Instagram
-   reach, saves, shares) next to `avgViewPct` in the stats file. Find our weakest signal: low % watched or views
+   reach, saves, shares) next to `avgViewPct` (YouTube) and `ig_reels_avg_watch_time` (Instagram, ms) in the stats file.
+   Compare only posts older than 2 days (younger ones are still climbing). Find our weakest signal: low % watched or views
    that stop early = hook and pacing; low likes or saves per view = payoff; low reach = topic, title, cover. Use 2-3 of
    your web searches on current, specific advice for that signal on Shorts and Reels (prefer YouTube's and Instagram's
    own creator channels and data-backed studies over listicles). Compare our best and worst post: what differs in the
@@ -71,7 +72,8 @@ write is for `N`. Posting goes oldest first, so batches simply queue up behind e
 
 - **Facts:** check every claim with web search; cite at least 2 sources, prefer primary ones (standards bodies,
   manufacturers, universities) over blogs. If unsure, leave the claim out. A wrong fact is worse than a weak video.
-- **Narration:** 6-8 scenes, 90-150 English words in total (`npm run check` enforces the range). Scene 1 is a hook
+- **Narration:** 6-8 scenes, 90-150 English words in total (`npm run check` enforces the range), and under 58 seconds
+  spoken in both languages: Indonesian runs about 20% longer, so write it tighter (our 56 s video was watched least: 35%). Scene 1 is a hook
   that works in under 2 seconds: a surprising fact or question, never "In this video". Last scene ends with a short
   follow line. Indonesian must sound natural and casual (use "kamu"), not a literal translation; keep tech terms
   people actually say (router, chip, Bluetooth).

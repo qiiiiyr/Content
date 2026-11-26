@@ -3,10 +3,10 @@ import {GRAPH, igAccount, igUser} from '../post/instagram.ts';
 import type {Lang} from '../../src/types.ts';
 import type {CompetitorVideo} from '../review.ts';
 
-/** views, reach, saves and shares for one of our Reels. */
+/** views, reach, saves, shares and average watch time (ms) for one of our Reels. */
 export const ownInstagram = async (lang: Lang, mediaId: string): Promise<Record<string, number>> => {
 	const {token} = igAccount(lang);
-	const {data} = await api(`${GRAPH}/${mediaId}/insights?metric=views,reach,saved,shares&access_token=${token}`);
+	const {data} = await api(`${GRAPH}/${mediaId}/insights?metric=views,reach,saved,shares,ig_reels_avg_watch_time&access_token=${token}`);
 	return Object.fromEntries(data.map((d: any) => [d.name, d.values?.[0]?.value ?? d.total_value?.value ?? 0]));
 };
 
