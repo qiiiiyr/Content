@@ -1,37 +1,37 @@
 {
- "at": "2026-11-25T13:22:52.033Z",
+ "at": "2026-11-26T13:01:14.072Z",
  "channels": [
   {
    "lang": "en",
    "platform": "youtube",
    "name": "CutawayEN",
-   "followers": 8,
-   "views": 9217,
-   "posts": 8
+   "followers": 10,
+   "views": 11194,
+   "posts": 10
   },
   {
    "lang": "en",
    "platform": "instagram",
    "name": "@cutawayen",
    "followers": 0,
-   "views": 2249,
-   "posts": 14
+   "views": 2534,
+   "posts": 16
   },
   {
    "lang": "id",
    "platform": "youtube",
    "name": "CutawayID",
-   "followers": 4,
-   "views": 5112,
-   "posts": 8
+   "followers": 5,
+   "views": 7337,
+   "posts": 10
   },
   {
    "lang": "id",
    "platform": "instagram",
    "name": "@cutawayid",
    "followers": 0,
-   "views": 2826,
-   "posts": 14
+   "views": 3084,
+   "posts": 15
   }
  ],
  "posts": [
@@ -75,7 +75,7 @@
    "platform": "youtube",
    "url": "https://youtu.be/UmumOXnQ0BE",
    "postedAt": "2026-11-20T17:30:29.608Z",
-   "views": 1365,
+   "views": 1369,
    "likes": 17,
    "comments": 0
   },
@@ -86,7 +86,7 @@
    "platform": "youtube",
    "url": "https://youtu.be/OaUr5bipHlA",
    "postedAt": "2026-11-21T19:44:43.985Z",
-   "views": 1313,
+   "views": 1314,
    "likes": 18,
    "comments": 0
   },
@@ -97,7 +97,7 @@
    "platform": "youtube",
    "url": "https://youtu.be/pA16gKO4vCA",
    "postedAt": "2026-11-22T21:15:15.330Z",
-   "views": 1387,
+   "views": 1400,
    "likes": 27,
    "comments": 0
   },
@@ -108,7 +108,7 @@
    "platform": "youtube",
    "url": "https://youtu.be/XLX9pB5eSyU",
    "postedAt": "2026-11-23T18:09:19.685Z",
-   "views": 668,
+   "views": 719,
    "likes": 11,
    "comments": 0
   },
@@ -119,8 +119,30 @@
    "platform": "youtube",
    "url": "https://youtu.be/xyZSwPgc8q8",
    "postedAt": "2026-11-24T17:46:16.420Z",
-   "views": 1275,
+   "views": 1277,
    "likes": 16,
+   "comments": 0
+  },
+  {
+   "id": "2026-W49/1-v8-fires",
+   "title": "A V8 fires four times every turn",
+   "lang": "en",
+   "platform": "youtube",
+   "url": "https://youtu.be/fq5Cq_El0ZQ",
+   "postedAt": "2026-11-25T18:14:31.937Z",
+   "views": 1249,
+   "likes": 18,
+   "comments": 0
+  },
+  {
+   "id": "2026-W49/2-injector",
+   "title": "A fuel injector opens for a few thousandths of a second",
+   "lang": "en",
+   "platform": "youtube",
+   "url": "https://youtu.be/jlSsE6RVp_Y",
+   "postedAt": "2026-11-25T22:43:07.831Z",
+   "views": 657,
+   "likes": 4,
    "comments": 0
   },
   {
@@ -312,10 +334,38 @@
    "platform": "instagram",
    "url": "https://www.instagram.com/reel/DgJGzPnEgDl/",
    "postedAt": "2026-11-24T23:11:50.912Z",
-   "views": 129,
+   "views": 130,
    "likes": 0,
    "comments": 0,
-   "reach": 125,
+   "reach": 126,
+   "saves": 0,
+   "shares": 0
+  },
+  {
+   "id": "2026-W49/7-engine-knock",
+   "title": "Sometimes fuel explodes before the spark",
+   "lang": "en",
+   "platform": "instagram",
+   "url": "https://www.instagram.com/reel/DgLJlDwRPOJ/",
+   "postedAt": "2026-11-25T18:14:35.958Z",
+   "views": 146,
+   "likes": 1,
+   "comments": 0,
+   "reach": 126,
+   "saves": 0,
+   "shares": 0
+  },
+  {
+   "id": "2026-W49/8-wankel",
+   "title": "This engine has no pistons",
+   "lang": "en",
+   "platform": "instagram",
+   "url": "https://www.instagram.com/reel/DgLoUSFh5RL/",
+   "postedAt": "2026-11-25T22:43:11.011Z",
+   "views": 138,
+   "likes": 2,
+   "comments": 0,
+   "reach": 117,
    "saves": 0,
    "shares": 0
   },
@@ -359,7 +409,7 @@
    "platform": "youtube",
    "url": "https://youtu.be/U3cJvy7Mlvw",
    "postedAt": "2026-11-21T14:40:07.365Z",
-   "views": 1218,
+   "views": 1220,
    "likes": 9,
    "comments": 0
   },
@@ -370,7 +420,7 @@
    "platform": "youtube",
    "url": "https://youtu.be/nGP-bFscOZY",
    "postedAt": "2026-11-22T14:36:28.716Z",
-   "views": 1326,
+   "views": 1327,
    "likes": 12,
    "comments": 0
   },
@@ -381,7 +431,7 @@
    "platform": "youtube",
    "url": "https://youtu.be/vLJZM9Pw8Fw",
    "postedAt": "2026-11-23T13:17:41.526Z",
-   "views": 1479,
+   "views": 1483,
    "likes": 15,
    "comments": 0
   },
@@ -392,7 +442,7 @@
    "platform": "youtube",
    "url": "https://youtu.be/gQkbLdyj7lk",
    "postedAt": "2026-11-24T13:20:46.793Z",
-   "views": 1080,
+   "views": 1174,
    "likes": 10,
    "comments": 0
   },
@@ -403,8 +453,30 @@
    "platform": "youtube",
    "url": "https://youtu.be/cnQEtLNVzvs",
    "postedAt": "2026-11-25T13:11:50.227Z",
-   "views": 0,
-   "likes": 0,
+   "views": 1185,
+   "likes": 10,
+   "comments": 0
+  },
+  {
+   "id": "2026-W49/1-v8-fires",
+   "title": "V8 meledak empat kali tiap putaran",
+   "lang": "id",
+   "platform": "youtube",
+   "url": "https://youtu.be/1AVVoY0_WXU",
+   "postedAt": "2026-11-25T13:27:18.555Z",
+   "views": 580,
+   "likes": 9,
+   "comments": 0
+  },
+  {
+   "id": "2026-W49/2-injector",
+   "title": "Injektor bensin terbuka cuma beberapa per seribu detik",
+   "lang": "id",
+   "platform": "youtube",
+   "url": "https://youtu.be/-JeXo3cn4m4",
+   "postedAt": "2026-11-26T05:12:11.002Z",
+   "views": 359,
+   "likes": 6,
    "comments": 0
   },
   {
@@ -582,10 +654,10 @@
    "platform": "instagram",
    "url": "https://www.instagram.com/reel/DgJwBdgSl9M/",
    "postedAt": "2026-11-25T05:12:02.119Z",
-   "views": 126,
+   "views": 127,
    "likes": 0,
    "comments": 0,
-   "reach": 106,
+   "reach": 107,
    "saves": 1,
    "shares": 0
   },
@@ -596,10 +668,24 @@
    "platform": "instagram",
    "url": "https://www.instagram.com/reel/DgKnAV1ABOt/",
    "postedAt": "2026-11-25T13:11:54.728Z",
-   "views": 0,
-   "likes": 0,
+   "views": 116,
+   "likes": 1,
    "comments": 0,
-   "reach": 0,
+   "reach": 106,
+   "saves": 0,
+   "shares": 0
+  },
+  {
+   "id": "2026-W49/7-engine-knock",
+   "title": "Kadang bensin meledak sebelum busi menyala",
+   "lang": "id",
+   "platform": "instagram",
+   "url": "https://www.instagram.com/reel/DgMU7zPBCr-/",
+   "postedAt": "2026-11-26T05:12:15.007Z",
+   "views": 141,
+   "likes": 1,
+   "comments": 0,
+   "reach": 129,
    "saves": 0,
    "shares": 0
   }
@@ -828,6 +914,34 @@
    "platform": "instagram",
    "followers": 0,
    "views": 2826
+  },
+  {
+   "date": "2026-11-26",
+   "lang": "en",
+   "platform": "youtube",
+   "followers": 10,
+   "views": 11194
+  },
+  {
+   "date": "2026-11-26",
+   "lang": "en",
+   "platform": "instagram",
+   "followers": 0,
+   "views": 2534
+  },
+  {
+   "date": "2026-11-26",
+   "lang": "id",
+   "platform": "youtube",
+   "followers": 5,
+   "views": 7337
+  },
+  {
+   "date": "2026-11-26",
+   "lang": "id",
+   "platform": "instagram",
+   "followers": 0,
+   "views": 3084
   }
  ]
 }
