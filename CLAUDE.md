@@ -83,8 +83,10 @@ write is for `N`. Posting goes oldest first, so batches simply queue up behind e
   parts of any new model with `userData={{part: …}}` so focus works on it. Animate with `useScene().p` (0..1 through the scene), never
   with fixed seconds: scene length follows the narration. Show cause and effect (what moves, what burns, what flows), keep
   the subject in the upper two thirds (captions sit at y=1130-1390 of 1920, platform UI below) and keep the framing
-  portrait (about 0.32 x distance wide at the subject). Build new parts (gearbox, brake disc, wheel, battery cell) in
-  `src/stage.tsx` the first time you need them and reuse them after; `Engine` and `cycleState` show the pattern.
+  portrait (about 0.32 x distance wide at the subject). Show the vehicle, not only the part: open on or cut to the whole
+  bike or car with the part glowing inside it (`<Scooter xray>` with an `<Engine scale={0.22}>` as children), then go in.
+  Reuse the parts in `src/stage.tsx` (Engine, Gear, Wheel, Scooter, Turbo, Clutch, Differential, SparkPlug, BrakeDisc,
+  Damper, Wankel, Catalyst); build a new one there the first time you need it; `Engine` and `cycleState` show the pattern.
   Use `colors`/materials from the kit; no images, emoji or fonts from the internet. Last scene ends on `<PaperTag>`
   (`src/Tag.tsx`), the brand's hanging tag, with the series name and episode number.
 - **Captions:** wrap the 1-3 key words of each scene in `*asterisks*` in `meta.json` (numbers, the term being defined): they
