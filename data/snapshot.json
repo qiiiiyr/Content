@@ -1,37 +1,37 @@
 {
- "at": "2026-11-26T13:01:14.072Z",
+ "at": "2026-11-27T12:59:09.398Z",
  "channels": [
   {
    "lang": "en",
    "platform": "youtube",
    "name": "CutawayEN",
    "followers": 10,
-   "views": 11194,
-   "posts": 10
+   "views": 13586,
+   "posts": 12
   },
   {
    "lang": "en",
    "platform": "instagram",
    "name": "@cutawayen",
-   "followers": 0,
-   "views": 2534,
-   "posts": 16
+   "followers": 2,
+   "views": 3896,
+   "posts": 18
   },
   {
    "lang": "id",
    "platform": "youtube",
    "name": "CutawayID",
-   "followers": 5,
-   "views": 7337,
-   "posts": 10
+   "followers": 6,
+   "views": 11363,
+   "posts": 12
   },
   {
    "lang": "id",
    "platform": "instagram",
    "name": "@cutawayid",
    "followers": 0,
-   "views": 3084,
-   "posts": 15
+   "views": 3387,
+   "posts": 17
   }
  ],
  "posts": [
@@ -75,7 +75,7 @@
    "platform": "youtube",
    "url": "https://youtu.be/UmumOXnQ0BE",
    "postedAt": "2026-11-20T17:30:29.608Z",
-   "views": 1369,
+   "views": 1368,
    "likes": 17,
    "comments": 0
   },
@@ -97,7 +97,7 @@
    "platform": "youtube",
    "url": "https://youtu.be/pA16gKO4vCA",
    "postedAt": "2026-11-22T21:15:15.330Z",
-   "views": 1400,
+   "views": 1401,
    "likes": 27,
    "comments": 0
   },
@@ -108,7 +108,7 @@
    "platform": "youtube",
    "url": "https://youtu.be/XLX9pB5eSyU",
    "postedAt": "2026-11-23T18:09:19.685Z",
-   "views": 719,
+   "views": 722,
    "likes": 11,
    "comments": 0
   },
@@ -119,8 +119,8 @@
    "platform": "youtube",
    "url": "https://youtu.be/xyZSwPgc8q8",
    "postedAt": "2026-11-24T17:46:16.420Z",
-   "views": 1277,
-   "likes": 16,
+   "views": 1283,
+   "likes": 17,
    "comments": 0
   },
   {
@@ -130,7 +130,7 @@
    "platform": "youtube",
    "url": "https://youtu.be/fq5Cq_El0ZQ",
    "postedAt": "2026-11-25T18:14:31.937Z",
-   "views": 1249,
+   "views": 1261,
    "likes": 18,
    "comments": 0
   },
@@ -141,8 +141,30 @@
    "platform": "youtube",
    "url": "https://youtu.be/jlSsE6RVp_Y",
    "postedAt": "2026-11-25T22:43:07.831Z",
-   "views": 657,
-   "likes": 4,
+   "views": 966,
+   "likes": 7,
+   "comments": 0
+  },
+  {
+   "id": "2026-W49/3-disc-brake",
+   "title": "Your brakes don't stop your car. They turn it into heat",
+   "lang": "en",
+   "platform": "youtube",
+   "url": "https://youtu.be/LkvBdKHJpkM",
+   "postedAt": "2026-11-26T18:11:55.025Z",
+   "views": 1219,
+   "likes": 20,
+   "comments": 0
+  },
+  {
+   "id": "2026-W49/4-valve-timing",
+   "title": "Your engine breathes differently when you rev it",
+   "lang": "en",
+   "platform": "youtube",
+   "url": "https://youtu.be/qYB8-n9eqqU",
+   "postedAt": "2026-11-26T23:11:45.114Z",
+   "views": 843,
+   "likes": 17,
    "comments": 0
   },
   {
@@ -152,10 +174,10 @@
    "platform": "instagram",
    "url": "https://www.instagram.com/reel/Df3Yqu-iBkF/",
    "postedAt": "2026-11-18T02:01:33.201Z",
-   "views": 205,
+   "views": 206,
    "likes": 3,
    "comments": 0,
-   "reach": 192,
+   "reach": 193,
    "saves": 1,
    "shares": 0
   },
@@ -180,10 +202,10 @@
    "platform": "instagram",
    "url": "https://www.instagram.com/reel/Df5NR4YCceP/",
    "postedAt": "2026-11-18T19:00:37.504Z",
-   "views": 155,
+   "views": 156,
    "likes": 2,
    "comments": 0,
-   "reach": 148,
+   "reach": 149,
    "saves": 0,
    "shares": 0
   },
@@ -222,10 +244,10 @@
    "platform": "instagram",
    "url": "https://www.instagram.com/reel/Df-MkNfAT2Q/",
    "postedAt": "2026-11-20T17:30:34.033Z",
-   "views": 138,
+   "views": 142,
    "likes": 0,
    "comments": 0,
-   "reach": 116,
+   "reach": 117,
    "saves": 0,
    "shares": 0
   },
@@ -250,10 +272,10 @@
    "platform": "instagram",
    "url": "https://www.instagram.com/reel/DgBAuZigvV8/",
    "postedAt": "2026-11-21T19:44:47.645Z",
-   "views": 137,
+   "views": 138,
    "likes": 0,
    "comments": 0,
-   "reach": 124,
+   "reach": 125,
    "saves": 1,
    "shares": 0
   },
@@ -278,10 +300,10 @@
    "platform": "instagram",
    "url": "https://www.instagram.com/reel/DgEQMLnFaIc/",
    "postedAt": "2026-11-23T01:57:41.302Z",
-   "views": 156,
+   "views": 159,
    "likes": 1,
    "comments": 0,
-   "reach": 129,
+   "reach": 130,
    "saves": 0,
    "shares": 0
   },
@@ -292,10 +314,10 @@
    "platform": "instagram",
    "url": "https://www.instagram.com/reel/DgF_ZJHG80G/",
    "postedAt": "2026-11-23T18:09:24.070Z",
-   "views": 135,
+   "views": 137,
    "likes": 1,
    "comments": 0,
-   "reach": 119,
+   "reach": 120,
    "saves": 0,
    "shares": 0
   },
@@ -320,10 +342,10 @@
    "platform": "instagram",
    "url": "https://www.instagram.com/reel/DgIhjyUkpte/",
    "postedAt": "2026-11-24T17:46:25.603Z",
-   "views": 129,
+   "views": 130,
    "likes": 0,
    "comments": 0,
-   "reach": 121,
+   "reach": 122,
    "saves": 0,
    "shares": 0
   },
@@ -334,10 +356,10 @@
    "platform": "instagram",
    "url": "https://www.instagram.com/reel/DgJGzPnEgDl/",
    "postedAt": "2026-11-24T23:11:50.912Z",
-   "views": 130,
+   "views": 132,
    "likes": 0,
    "comments": 0,
-   "reach": 126,
+   "reach": 127,
    "saves": 0,
    "shares": 0
   },
@@ -348,10 +370,10 @@
    "platform": "instagram",
    "url": "https://www.instagram.com/reel/DgLJlDwRPOJ/",
    "postedAt": "2026-11-25T18:14:35.958Z",
-   "views": 146,
-   "likes": 1,
+   "views": 150,
+   "likes": 2,
    "comments": 0,
-   "reach": 126,
+   "reach": 128,
    "saves": 0,
    "shares": 0
   },
@@ -362,10 +384,38 @@
    "platform": "instagram",
    "url": "https://www.instagram.com/reel/DgLoUSFh5RL/",
    "postedAt": "2026-11-25T22:43:11.011Z",
-   "views": 138,
+   "views": 139,
    "likes": 2,
    "comments": 0,
-   "reach": 117,
+   "reach": 118,
+   "saves": 0,
+   "shares": 0
+  },
+  {
+   "id": "2026-W49/9-cam-ratio",
+   "title": "Your engine's most important ratio is 2 to 1",
+   "lang": "en",
+   "platform": "instagram",
+   "url": "https://www.instagram.com/reel/DgNuEl4x7mS/",
+   "postedAt": "2026-11-26T18:11:58.652Z",
+   "views": 154,
+   "likes": 1,
+   "comments": 0,
+   "reach": 134,
+   "saves": 0,
+   "shares": 0
+  },
+  {
+   "id": "2026-W49/10-suspension-damper",
+   "title": "Without this, your car would bounce forever",
+   "lang": "en",
+   "platform": "instagram",
+   "url": "https://www.instagram.com/reel/DgOQZAZqTPq/",
+   "postedAt": "2026-11-26T23:11:48.610Z",
+   "views": 1188,
+   "likes": 16,
+   "comments": 0,
+   "reach": 1064,
    "saves": 0,
    "shares": 0
   },
@@ -409,7 +459,7 @@
    "platform": "youtube",
    "url": "https://youtu.be/U3cJvy7Mlvw",
    "postedAt": "2026-11-21T14:40:07.365Z",
-   "views": 1220,
+   "views": 1228,
    "likes": 9,
    "comments": 0
   },
@@ -420,7 +470,7 @@
    "platform": "youtube",
    "url": "https://youtu.be/nGP-bFscOZY",
    "postedAt": "2026-11-22T14:36:28.716Z",
-   "views": 1327,
+   "views": 1342,
    "likes": 12,
    "comments": 0
   },
@@ -431,7 +481,7 @@
    "platform": "youtube",
    "url": "https://youtu.be/vLJZM9Pw8Fw",
    "postedAt": "2026-11-23T13:17:41.526Z",
-   "views": 1483,
+   "views": 1490,
    "likes": 15,
    "comments": 0
   },
@@ -442,7 +492,7 @@
    "platform": "youtube",
    "url": "https://youtu.be/gQkbLdyj7lk",
    "postedAt": "2026-11-24T13:20:46.793Z",
-   "views": 1174,
+   "views": 1337,
    "likes": 10,
    "comments": 0
   },
@@ -453,7 +503,7 @@
    "platform": "youtube",
    "url": "https://youtu.be/cnQEtLNVzvs",
    "postedAt": "2026-11-25T13:11:50.227Z",
-   "views": 1185,
+   "views": 1226,
    "likes": 10,
    "comments": 0
   },
@@ -464,8 +514,8 @@
    "platform": "youtube",
    "url": "https://youtu.be/1AVVoY0_WXU",
    "postedAt": "2026-11-25T13:27:18.555Z",
-   "views": 580,
-   "likes": 9,
+   "views": 1313,
+   "likes": 11,
    "comments": 0
   },
   {
@@ -475,8 +525,30 @@
    "platform": "youtube",
    "url": "https://youtu.be/-JeXo3cn4m4",
    "postedAt": "2026-11-26T05:12:11.002Z",
-   "views": 359,
-   "likes": 6,
+   "views": 1306,
+   "likes": 13,
+   "comments": 0
+  },
+  {
+   "id": "2026-W49/3-disc-brake",
+   "title": "Remmu bukan menghentikan mobil. Dia mengubahnya jadi panas",
+   "lang": "id",
+   "platform": "youtube",
+   "url": "https://youtu.be/Fz-gReyMo4k",
+   "postedAt": "2026-11-26T13:11:49.303Z",
+   "views": 1292,
+   "likes": 7,
+   "comments": 0
+  },
+  {
+   "id": "2026-W49/4-valve-timing",
+   "title": "Mesinmu bernapas beda saat digas tinggi",
+   "lang": "id",
+   "platform": "youtube",
+   "url": "https://youtu.be/Ht4yz6Wisuw",
+   "postedAt": "2026-11-27T05:11:34.752Z",
+   "views": 820,
+   "likes": 12,
    "comments": 0
   },
   {
@@ -685,9 +757,37 @@
    "views": 141,
    "likes": 1,
    "comments": 0,
-   "reach": 129,
+   "reach": 130,
    "saves": 0,
    "shares": 0
+  },
+  {
+   "id": "2026-W49/8-wankel",
+   "title": "Mesin ini nggak punya piston",
+   "lang": "id",
+   "platform": "instagram",
+   "url": "https://www.instagram.com/reel/DgNLu3wPYMW/",
+   "postedAt": "2026-11-26T13:11:53.923Z",
+   "views": 175,
+   "likes": 5,
+   "comments": 0,
+   "reach": 142,
+   "saves": 0,
+   "shares": 0
+  },
+  {
+   "id": "2026-W49/9-cam-ratio",
+   "title": "Rasio terpenting mesinmu adalah 2 banding 1",
+   "lang": "id",
+   "platform": "instagram",
+   "url": "https://www.instagram.com/reel/DgO5kVUuHzw/",
+   "postedAt": "2026-11-27T05:11:39.665Z",
+   "views": 128,
+   "likes": 1,
+   "comments": 0,
+   "reach": 108,
+   "saves": 0,
+   "shares": 1
   }
  ],
  "history": [
@@ -942,6 +1042,34 @@
    "platform": "instagram",
    "followers": 0,
    "views": 3084
+  },
+  {
+   "date": "2026-11-27",
+   "lang": "en",
+   "platform": "youtube",
+   "followers": 10,
+   "views": 13586
+  },
+  {
+   "date": "2026-11-27",
+   "lang": "en",
+   "platform": "instagram",
+   "followers": 2,
+   "views": 3896
+  },
+  {
+   "date": "2026-11-27",
+   "lang": "id",
+   "platform": "youtube",
+   "followers": 6,
+   "views": 11363
+  },
+  {
+   "date": "2026-11-27",
+   "lang": "id",
+   "platform": "instagram",
+   "followers": 0,
+   "views": 3387
   }
  ]
 }
