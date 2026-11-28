@@ -1,0 +1,49 @@
+{
+  "theme": "engines-inside",
+  "test": false,
+  "title": {
+    "en": "Yamaha NMAX's cylinder has no iron liner inside 😳 #shorts",
+    "id": "Silinder Yamaha NMAX nggak pakai liner besi 😳 #shorts"
+  },
+  "description": {
+    "en": "The Blue Core 155 engine in the Yamaha NMAX uses Yamaha's DiASil cylinder: an all-aluminium cylinder die-cast from an alloy with about 20% silicon, with no iron or steel sleeve. Without the sleeve it is lighter and sheds heat well. Yamaha developed DiASil in 2002.",
+    "id": "Mesin Blue Core 155 di Yamaha NMAX pakai silinder DiASil: silinder full aluminium hasil die-cast dari paduan dengan sekitar 20% silikon, tanpa liner besi. Tanpa liner, silinder lebih ringan dan panasnya cepat dibuang. Yamaha mengembangkan DiASil sejak 2002."
+  },
+  "hashtags": ["yamaha", "nmax", "bluecore", "diasil", "engineering"],
+  "sources": [
+    "https://global.yamaha-motor.com/business/mc/mc-tech/standard-technology/diasil.html",
+    "https://global.yamaha-motor.com/showroom/bluecore/en/",
+    "https://www.yamaha-motor-india.com/news-to-introduce-diasil.html",
+    "https://kumparan.com/kumparanoto/bedah-teknologi-blue-core-di-mesin-all-new-yamaha-nmax-1wwtkjctGbX"
+  ],
+  "scenes": [
+    {
+      "en": "The cylinder in a Yamaha NMAX has *no iron liner*. The piston runs on aluminium.",
+      "id": "Silinder Yamaha NMAX *nggak pakai liner besi*. Pistonnya langsung jalan di aluminium."
+    },
+    {
+      "en": "Most engines press a *cast-iron sleeve* into an aluminium cylinder, because plain aluminium is too soft to rub against all day.",
+      "id": "Kebanyakan mesin pakai *liner besi cor* di dalam silinder aluminium, karena aluminium biasa terlalu lunak buat terus digesek."
+    },
+    {
+      "en": "Yamaha's *DiASil* cylinder skips it. It's die-cast from aluminium mixed with about *20 percent silicon*.",
+      "id": "Silinder *DiASil* Yamaha nggak pakai itu. Dicetak dari aluminium yang dicampur sekitar *20 persen silikon*."
+    },
+    {
+      "en": "The hard silicon lets the piston rings run *right on the cylinder wall*.",
+      "id": "Silikon yang keras bikin ring piston bisa jalan *langsung di dinding silinder*."
+    },
+    {
+      "en": "No sleeve means a *lighter* cylinder, and with no iron layer in the way, it sheds *heat* well.",
+      "id": "Tanpa liner, silinder jadi *lebih ringan*, dan tanpa lapisan besi, *panasnya* cepat dibuang."
+    },
+    {
+      "en": "It sits inside the NMAX's *Blue Core 155*, and Yamaha first developed it back in *2002*.",
+      "id": "Teknologi ini ada di mesin *Blue Core 155* NMAX, dan Yamaha pertama mengembangkannya tahun *2002*."
+    },
+    {
+      "en": "Send this to someone who *rides an NMAX*.",
+      "id": "Kirim ini ke temanmu yang *pakai NMAX*."
+    }
+  ]
+}

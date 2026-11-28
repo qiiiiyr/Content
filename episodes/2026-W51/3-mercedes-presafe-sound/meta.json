@@ -1,0 +1,49 @@
+{
+  "theme": "car-safety-tech",
+  "test": true,
+  "title": {
+    "en": "Mercedes plays noise into your ears right before a crash 😳 #shorts",
+    "id": "Mercedes sengaja bunyiin suara bising sebelum tabrakan 😳 #shorts"
+  },
+  "description": {
+    "en": "Mercedes-Benz PRE-SAFE Sound: when the car decides a crash is coming, the speakers play a short burst of pink noise at about 80 dB. It triggers the stapedius reflex, a tiny muscle in the middle ear that tightens and damps loud sound, so the ear is braced before the crash noise arrives. The reflex only lasts a few seconds. First on the E-Class for model year 2017.",
+    "id": "PRE-SAFE Sound dari Mercedes-Benz: kalau mobil memutuskan tabrakan nggak bisa dihindari, speaker membunyikan pink noise singkat sekitar 80 dB. Suara itu memicu refleks stapedius, otot kecil di telinga tengah yang mengencang dan meredam suara keras, jadi telinga sudah siap sebelum suara tabrakan datang. Efeknya cuma beberapa detik."
+  },
+  "hashtags": ["mercedes", "presafe", "carsafety", "engineering", "howitworks"],
+  "sources": [
+    "https://moba.i.mercedes-benz.com/baix/cars/213.2_comand_2017/en_GB/page/ID_92430b611ba49a51354ae3653abce20e-a138b367f5180449354ae3655e804ae0-en-GB.html",
+    "https://spectrum.ieee.org/pink-noise-says-prepare-for-impact",
+    "https://newatlas.com/mercedes-benz-pre-safe-sound-pink-noise/46179",
+    "https://hackaday.com/2025/10/06/how-mercedes-benz-hacked-your-hearing"
+  ],
+  "scenes": [
+    {
+      "en": "Right before a crash, some Mercedes cars play *noise* into your ears. On purpose.",
+      "id": "Sesaat sebelum tabrakan, beberapa mobil Mercedes sengaja bunyiin *suara bising* ke telingamu."
+    },
+    {
+      "en": "It's called *PRE-SAFE Sound*. When the car decides a crash can't be avoided, the speakers play a burst of *pink noise*.",
+      "id": "Namanya *PRE-SAFE Sound*. Kalau mobil yakin tabrakan nggak bisa dihindari, speaker membunyikan *pink noise* sebentar."
+    },
+    {
+      "en": "Because crashes are loud. Metal, glass, and airbags going off with a *bang* right next to your head.",
+      "id": "Soalnya tabrakan itu keras banget. Besi, kaca, sampai airbag yang meledak *pas di samping kepala*."
+    },
+    {
+      "en": "But your ear has a built-in shield: a tiny muscle in the middle ear called the *stapedius*.",
+      "id": "Tapi telingamu punya pelindung sendiri: otot kecil di telinga tengah namanya *stapedius*."
+    },
+    {
+      "en": "Loud sound makes it tighten and damp the tiny bones that carry sound inward. Pink noise at about *80 decibels* triggers it without hurting you.",
+      "id": "Suara keras bikin otot ini mengencang dan meredam tulang kecil yang meneruskan suara. Pink noise sekitar *80 desibel* cukup memicunya tanpa menyakiti."
+    },
+    {
+      "en": "So when the crash noise arrives, your ear is *already braced*. The reflex lasts only seconds, so timing is everything.",
+      "id": "Jadi pas suara tabrakan datang, telingamu *sudah siaga*. Refleksnya cuma beberapa detik, jadi waktunya harus pas."
+    },
+    {
+      "en": "Would you want your car doing this: *yes or no*?",
+      "id": "Kamu mau mobilmu begini: *iya atau nggak*?"
+    }
+  ]
+}

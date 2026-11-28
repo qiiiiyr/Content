@@ -1,0 +1,49 @@
+{
+  "theme": "car-safety-tech",
+  "test": true,
+  "title": {
+    "en": "Honda's Gold Wing has an airbag, like a car 🤯 #shorts",
+    "id": "Honda Gold Wing punya airbag kayak mobil 🤯 #shorts"
+  },
+  "description": {
+    "en": "In 2006 the Honda Gold Wing became the first production motorcycle with an airbag. Four crash sensors on the front fork feel the deceleration, an airbag ECU decides whether it is a real frontal crash, and the bag fills in front of the rider. Tether straps anchor it to the frame, because a bike has nothing behind the bag. It doesn't hold the rider on: it slows them as they are thrown forward. The bike in the animation is a generic model.",
+    "id": "Tahun 2006 Honda Gold Wing jadi motor produksi pertama yang punya airbag. Empat sensor tabrakan di garpu depan merasakan perlambatan, ECU airbag memutuskan apakah itu tabrakan depan sungguhan, lalu kantongnya mengembang di depan pengendara. Tali pengikat menahannya ke rangka. Airbag ini nggak menahan pengendara di motor, tapi memperlambat saat terlempar ke depan. Motor di animasi adalah model umum."
+  },
+  "hashtags": ["honda", "goldwing", "airbag", "motorcycle", "engineering"],
+  "sources": [
+    "https://global.honda/en/tech/Motorcycle_Airbag_System/",
+    "https://global.honda/newsroom/news/2005/2050908-eng.html",
+    "https://powersports.honda.ca/en/shopping-tools/technology/airbag-system",
+    "https://www.motorcyclistonline.com/honda-introduces-motorcycle-airbag-on-2006-gold-wing"
+  ],
+  "scenes": [
+    {
+      "en": "This motorcycle has an *airbag*. Honda's *Gold Wing* was the first production bike to get one, in 2006.",
+      "id": "Motor ini punya *airbag*. *Honda Gold Wing* jadi motor produksi pertama yang memakainya, tahun 2006."
+    },
+    {
+      "en": "But a bike has no steering wheel and no seat belt. So where does the bag go, and what does it *hold on to*?",
+      "id": "Tapi motor nggak punya setir bulat dan sabuk pengaman. Jadi airbag-nya di mana, dan *nahan pakai apa*?"
+    },
+    {
+      "en": "It starts in the front fork. *Four crash sensors*, two on each side, feel how fast the bike is slowing down.",
+      "id": "Semuanya mulai dari garpu depan. *Empat sensor tabrakan*, dua di tiap sisi, merasakan seberapa cepat motor melambat."
+    },
+    {
+      "en": "An *airbag ECU* reads them and decides: a pothole, hard braking, or a *real crash*?",
+      "id": "*ECU airbag* membaca sensornya dan memutuskan: cuma lubang, rem mendadak, atau *tabrakan beneran*?"
+    },
+    {
+      "en": "If it's a frontal crash, the bag bursts out of the dash and fills *in front of the rider*.",
+      "id": "Kalau tabrakan dari depan, kantongnya keluar dari dasbor dan mengembang *di depan pengendara*."
+    },
+    {
+      "en": "*Straps tie it to the frame*. It doesn't hold you on the bike. It slows you down as you're thrown forward.",
+      "id": "*Tali mengikatnya ke rangka*. Airbag ini nggak menahanmu di motor, tapi memperlambat saat kamu terlempar ke depan."
+    },
+    {
+      "en": "Would you ride with an airbag: *yes or no*?",
+      "id": "Kamu mau naik motor pakai airbag: *iya atau nggak*?"
+    }
+  ]
+}

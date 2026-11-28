@@ -1,0 +1,49 @@
+{
+  "theme": "engines-inside",
+  "test": false,
+  "title": {
+    "en": "Honda puts the cylinder off-centre in its scooters, on purpose 😳 #shorts",
+    "id": "Silinder skutik Honda sengaja dibikin nggak di tengah 😳 #shorts"
+  },
+  "description": {
+    "en": "In Honda's eSP+ scooter engines (PCX, Vario 160) the cylinder's centreline sits 4 mm to the side of the crankshaft centre. When combustion pushes hardest, the connecting rod stands more upright, so less of the push shoves the piston into the cylinder wall. Less friction, more of the energy reaches the crankshaft. In the animation the offset is exaggerated so you can see it.",
+    "id": "Di mesin eSP+ skutik Honda (PCX, Vario 160), garis tengah silinder digeser 4 mm dari tengah poros engkol. Saat dorongan pembakaran paling kuat, setang piston lebih tegak, jadi piston nggak terlalu menekan dinding silinder. Gesekan berkurang, tenaga lebih banyak sampai ke poros engkol. Di animasi, gesernya dibesarkan biar kelihatan."
+  },
+  "hashtags": ["honda", "pcx", "vario", "esp", "engineering", "howitworks"],
+  "sources": [
+    "https://global.honda/en/tech/Engine_technology_eSP_plus/",
+    "https://global.honda/en/tech/Engine_technology_eSP+/",
+    "https://www.rideapart.com/articles/256853/free-power-offset-cylinders-explained/",
+    "https://www.padgettsmotorcycles.com/2024/11/19"
+  ],
+  "scenes": [
+    {
+      "en": "Honda moved the cylinder in its scooter engines *off-centre*. On purpose.",
+      "id": "Honda sengaja menggeser silinder di mesin skutiknya, *nggak di tengah*."
+    },
+    {
+      "en": "In Honda's *eSP+* engines, like the PCX, the cylinder sits *4 millimetres* to the side of the crankshaft.",
+      "id": "Di mesin *eSP+*, kayak PCX dan Vario 160, silindernya digeser *4 milimeter* dari tengah poros engkol."
+    },
+    {
+      "en": "Here's why. When the fuel burns, the piston gets *slammed down* hard.",
+      "id": "Kenapa? Pas bensin terbakar, piston *dihantam ke bawah* dengan keras."
+    },
+    {
+      "en": "If the rod leans, part of that push shoves the piston *sideways into the wall*. That's friction, and wasted fuel.",
+      "id": "Kalau setangnya miring, sebagian dorongan itu menekan piston *ke dinding silinder*. Itu gesekan, bensin terbuang."
+    },
+    {
+      "en": "Shift the cylinder, and the rod stands *more upright* right when the push is strongest.",
+      "id": "Geser silindernya, setang jadi *lebih tegak* tepat saat dorongannya paling kuat."
+    },
+    {
+      "en": "Less side force, less rubbing, and more of every bang reaches the *crankshaft*.",
+      "id": "Tekanan ke samping berkurang, gesekan berkurang, tenaga lebih banyak sampai ke *poros engkol*."
+    },
+    {
+      "en": "Send this to the friend who thinks *scooter engines are simple*.",
+      "id": "Kirim ini ke temanmu yang bilang *mesin skutik itu sederhana*."
+    }
+  ]
+}

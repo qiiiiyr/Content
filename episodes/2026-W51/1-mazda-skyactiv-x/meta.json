@@ -1,0 +1,48 @@
+{
+  "theme": "engines-inside",
+  "test": false,
+  "title": {
+    "en": "Mazda built a petrol engine that ignites like a diesel 🤯 #shorts",
+    "id": "Mazda bikin mesin bensin yang nyala kayak diesel 🤯 #shorts"
+  },
+  "description": {
+    "en": "Mazda's Skyactiv-X squeezes a lean petrol mix to about 16:1. A small spark flame raises the pressure and the rest of the mix ignites by compression, like a diesel. Mazda calls it SPCCI, Spark Controlled Compression Ignition.",
+    "id": "Skyactiv-X dari Mazda memampatkan campuran bensin yang irit sampai sekitar 16:1. Percikan busi bikin api kecil, tekanannya naik, lalu sisa campurannya menyala sendiri karena kompresi, kayak diesel. Mazda menyebutnya SPCCI."
+  },
+  "hashtags": ["mazda", "skyactivx", "engine", "engineering", "howitworks"],
+  "sources": [
+    "https://www.mazda.com/en/innovation/mazda-stories/engineers/skyactiv-x/",
+    "https://spectrum.ieee.org/transportation/efficiency/mazdas-new-skyactivx-engine-gives-new-life-to-internal-combustion",
+    "https://carmagazine.co.uk/car-news/tech/the-petrol-engine-that-thinks-its-a-diesel-how-mazdas-compression-ignition-skyactiv-x-engine-works"
+  ],
+  "scenes": [
+    {
+      "en": "Mazda built a petrol engine that lights its fuel *like a diesel*.",
+      "id": "Mazda bikin mesin bensin yang nyalain bahan bakarnya *kayak diesel*."
+    },
+    {
+      "en": "A normal petrol engine needs a *spark* to burn the fuel. A diesel needs none: it squeezes air until it's hot enough to *ignite by itself*.",
+      "id": "Mesin bensin biasa butuh *percikan busi*. Diesel nggak: udaranya dipadatkan sampai cukup panas buat *menyala sendiri*."
+    },
+    {
+      "en": "The Skyactiv-X squeezes a *lean* petrol mix to about *16 to 1*, close to diesel territory.",
+      "id": "Skyactiv-X memadatkan campuran bensin yang *irit* sampai sekitar *16 banding 1*, hampir kayak diesel."
+    },
+    {
+      "en": "Then a tiny spark lights a *small flame*. The pressure jumps, and the rest of the mix *ignites at once*.",
+      "id": "Lalu busi bikin *api kecil*. Tekanannya melonjak, dan sisa campurannya *menyala bersamaan*."
+    },
+    {
+      "en": "Mazda calls it *SPCCI*, and claims up to *20 percent* better fuel economy than its regular petrol engine.",
+      "id": "Mazda menyebutnya *SPCCI*, dan mengklaim irit bensin sampai *20 persen* dibanding mesin bensin biasanya."
+    },
+    {
+      "en": "On a cold start or under heavy load, it simply switches back to *normal spark ignition*.",
+      "id": "Pas mesin dingin atau beban berat, mesinnya balik ke *pengapian busi biasa*."
+    },
+    {
+      "en": "Petrol that burns like diesel: *genius*, or *too complicated*?",
+      "id": "Bensin yang nyala kayak diesel: *jenius* atau *kerumitan*?"
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 // 3D miniature-diorama kit: a warm workshop, textured wall and bench, brass and steel parts lit by a studio
 // environment, props, a slow macro camera. Episodes compose <Stage> with parts from here.
 // Units are arbitrary; the engine is about 7 tall.
-import {createContext, useContext, useMemo, useRef, type ReactNode} from 'react';
+import {createContext, useContext, useEffect, useMemo, useRef, type ReactNode} from 'react';
 import {LOOK_ACCENT, LOOK_BG, LookContext} from './kit';
 import {applyFocus} from './focus';
 import type {Look as LookName} from './types';
@@ -1229,6 +1229,89 @@ export const Catalyst = ({heat = 0, position = [0, 3, 0]}: {heat?: number; posit
 				</mesh>
 			))}
 			{heat > 0.05 && <pointLight position={[0, 0, 1.3]} color="#ff7a2a" intensity={heat * 25} distance={6} />}
+		</group>
+	);
+};
+
+// ---- look upgrade (W51): HUD lines drawn on the 3D ----------------------------------------------------------------
+/** A thin glowing line in the look's accent, drawn on the 3D: a force arrow, a flow path, a ring (closed). `grow` 0..1
+ * draws it from its start; `arrow` puts a head on the moving end. Unlit and without shadows, so it costs almost nothing. */
+export const HudLine = ({path, grow = 1, arrow = false, closed = false, r = 0.05}: {path: V3[]; grow?: number; arrow?: boolean; closed?: boolean; r?: number}) => {
+	const accent = useContext(AccentContext);
+	const key = JSON.stringify(path);
+	const curve = useMemo(() => new THREE.CatmullRomCurve3(path.map((v) => new THREE.Vector3(...v)), closed, 'catmullrom', 0), [key, closed]);
+	const geo = useMemo(() => new THREE.TubeGeometry(curve, 96, r, 8, closed), [curve, r, closed]);
+	useEffect(() => () => geo.dispose(), [geo]); // moving lines rebuild every frame: free the old one
+	const g = Math.min(1, Math.max(0, grow));
+	if (g <= 0.001) return null;
+	geo.setDrawRange(0, Math.floor((geo.index?.count ?? 0) * g / 6) * 6);
+	const tip = curve.getPointAt(g);
+	const dir = curve.getTangentAt(g);
+	const q = new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0, 1, 0), dir);
+	return (
+		<group>
+			<mesh geometry={geo} renderOrder={3}>
+				<meshBasicMaterial color={accent} toneMapped={false} transparent opacity={0.95} depthWrite={false} />
+			</mesh>
+			{arrow && (
+				<mesh position={tip} quaternion={q} renderOrder={3}>
+					<coneGeometry args={[r * 3.2, r * 8, 16]} />
+					<meshBasicMaterial color={accent} toneMapped={false} />
+				</mesh>
+			)}
+		</group>
+	);
+};
+
+/** Points on a flat ring (in the xz plane, or xy with `upright`), for a closed <HudLine>: a contact patch, a sensor zone. */
+export const ringPath = (c: V3, r: number, upright = false, n = 24): V3[] =>
+	Array.from({length: n}, (_, i) => {
+		const a = (i / n) * TAU;
+		return upright ? [c[0] + Math.cos(a) * r, c[1] + Math.sin(a) * r, c[2]] : [c[0] + Math.cos(a) * r, c[1], c[2] + Math.sin(a) * r];
+	});
+
+/** A generic hatchback (no maker's styling or logo), front toward +x, wheels on the floor, about 10 long and 4 tall.
+ * The engine bay is at the front: pass it as children (an <Engine scale={0.3}> fits). With xray the body is glass so the
+ * engine and cabin show. wheel: wheel turn in radians. Body parts are tagged 'car' for focus. */
+export const Car = ({position = [0, 0, 0], rotation = [0, 0, 0], wheel = 0, xray = false, color = '#8a2d24', children}: {position?: V3; rotation?: V3; wheel?: number; xray?: boolean; color?: string; children?: ReactNode}) => {
+	const body = useMemo(() => new RoundedBoxGeometry(9.6, 1.7, 4, 4, 0.6), []);
+	const cabin = useMemo(() => new RoundedBoxGeometry(5.2, 1.6, 3.6, 4, 0.55), []);
+	const paint = {color, metalness: 0.4, roughness: 0.3, clearcoat: 1, clearcoatRoughness: 0.15};
+	const glass = <meshPhysicalMaterial color="#d6ecf0" transparent opacity={0.16} roughness={0.05} clearcoat={1} depthWrite={false} />;
+	return (
+		<group position={position} rotation={rotation}>
+			{[3.2, -3.2].flatMap((x) => [1.9, -1.9].map((z) => <Wheel key={`${x}${z}`} r={1.05} angle={-wheel} position={[x, 1.05, z]} />))}
+			<group userData={{part: 'car'}}>
+				<mesh geometry={body} position={[0, 1.95, 0]} castShadow={!xray} receiveShadow>
+					{xray ? glass : <meshPhysicalMaterial {...paint} />}
+				</mesh>
+				<mesh geometry={cabin} position={[-0.6, 3.5, 0]} castShadow={!xray}>
+					{glass}
+				</mesh>
+				{[1.5, -1.5].map((z) => (
+					<mesh key={z} position={[4.78, 2.1, z]}>
+						<boxGeometry args={[0.1, 0.35, 0.8]} />
+						<meshStandardMaterial color="#fff6dc" emissive="#fff1c4" emissiveIntensity={1.2} />
+					</mesh>
+				))}
+				{[1.5, -1.5].map((z) => (
+					<mesh key={z} position={[-4.78, 2.3, z]}>
+						<boxGeometry args={[0.1, 0.3, 0.7]} />
+						<meshStandardMaterial color="#c0392b" emissive="#ff3b30" emissiveIntensity={1.5} />
+					</mesh>
+				))}
+				{/* seats, so the cabin reads as a cabin through the glass */}
+				{[0.9, -0.9].map((z) => (
+					<mesh key={z} position={[-0.9, 2.9, z]} castShadow>
+						<boxGeometry args={[1.1, 1.4, 0.9]} />
+						<meshStandardMaterial color="#1f2124" roughness={0.7} />
+					</mesh>
+				))}
+			</group>
+			{/* the engine sits under the bonnet */}
+			<group position={[3.1, 0.9, 0]} scale={0.3}>
+				{children}
+			</group>
 		</group>
 	);
 };

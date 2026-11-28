@@ -5,7 +5,7 @@
       "name": "How engines work: pistons, valves, fuel and fire",
       "ideas": ["four-stroke engine", "two-stroke vs four-stroke", "why a V8 sounds different", "turbochargers", "fuel injection vs carburetor", "spark plugs", "why engines have flywheels", "VTEC and variable valve timing", "rotary (Wankel) engine", "diesel vs petrol ignition"],
       "competitors": {
-        "youtube": {"en": ["@EngineeringExplained", "@ChrisFix", "@TheStraightPipes"], "id": []},
+        "youtube": {"en": ["@EngineeringExplained", "@ChrisFix", "@TheStraightPipes", "@Animagraffs"], "id": []},
         "instagram": {"en": ["scroll.engineer"], "id": []}
       }
     },
@@ -14,8 +14,8 @@
       "name": "How power reaches the wheels: gearbox, clutch, differential, chain",
       "ideas": ["manual gearbox", "how a clutch works", "automatic transmission torque converter", "CVT", "differential", "motorcycle chain drive vs shaft", "limited-slip differential", "all-wheel drive", "dual-clutch gearbox", "quickshifter"],
       "competitors": {
-        "youtube": {"en": ["@EngineeringExplained", "@RevZilla"], "id": []},
-        "instagram": {"en": [], "id": []}
+        "youtube": {"en": ["@EngineeringExplained", "@RevZilla", "@Animagraffs"], "id": []},
+        "instagram": {"en": ["scroll.engineer"], "id": []}
       }
     },
     {
@@ -23,7 +23,7 @@
       "name": "Brakes, suspension, tires and handling",
       "ideas": ["disc brakes", "ABS", "why motorcycles counter-steer", "how suspension works", "traction control", "tire grip and tread", "why brake fade happens", "engine braking", "launch control", "why bikes lean"],
       "competitors": {
-        "youtube": {"en": ["@EngineeringExplained", "@RevZilla", "@MotoGeo"], "id": []},
+        "youtube": {"en": ["@EngineeringExplained", "@RevZilla", "@MotoGeo", "@Animagraffs"], "id": []},
         "instagram": {"en": ["scroll.engineer"], "id": []}
       }
     },
@@ -32,8 +32,8 @@
       "name": "Electric cars and bikes: batteries, motors, charging",
       "ideas": ["how an EV motor works", "regenerative braking", "lithium battery packs", "fast charging", "why EVs have one gear", "hybrid systems", "battery thermal management", "solid-state batteries", "electric motorcycles"],
       "competitors": {
-        "youtube": {"en": ["@EngineeringExplained", "@Donut"], "id": []},
-        "instagram": {"en": [], "id": []}
+        "youtube": {"en": ["@EngineeringExplained", "@Donut", "@Animagraffs"], "id": []},
+        "instagram": {"en": ["scroll.engineer"], "id": []}
       }
     },
     {
@@ -41,8 +41,8 @@
       "name": "Safety and driver-assist tech in cars and bikes",
       "ideas": ["airbags", "seat belt pretensioners", "crumple zones", "cruise control and adaptive cruise", "blind-spot sensors", "tire pressure sensors", "lane keeping", "immobilizer keys", "keyless entry relay attacks"],
       "competitors": {
-        "youtube": {"en": ["@Donut", "@carwow"], "id": []},
-        "instagram": {"en": [], "id": []}
+        "youtube": {"en": ["@Donut", "@carwow", "@Animagraffs"], "id": []},
+        "instagram": {"en": ["scroll.engineer"], "id": []}
       }
     },
     {
@@ -50,8 +50,8 @@
       "name": "Why vehicles are the way they are: engineering stories",
       "ideas": ["why cars have 4 wheels and bikes 2", "why Formula 1 cars have wings", "the first mass-produced car", "why motorcycles have a kickstand on the left", "why cars drive on different sides", "origin of horsepower", "why tires are black", "how the Vespa changed Italy"],
       "competitors": {
-        "youtube": {"en": ["@Donut", "@TheStraightPipes"], "id": []},
-        "instagram": {"en": [], "id": []}
+        "youtube": {"en": ["@Donut", "@TheStraightPipes", "@Animagraffs"], "id": []},
+        "instagram": {"en": ["scroll.engineer"], "id": []}
       }
     }
   ]
