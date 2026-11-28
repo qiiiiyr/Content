@@ -35,17 +35,33 @@ async def speak(text, voice, rate, out):
         json.dump(to_words(events), f, ensure_ascii=False)
 
 
+def fallback(voice):
+    """The same narrator's older voice: the Multilingual ones answer "No audio was received" for hours at a time."""
+    return voice.replace("MultilingualNeural", "Neural") if "MultilingualNeural" in voice else None
+
+
 async def main():
     job = json.load(sys.stdin)
     for item in job["items"]:
         os.makedirs(os.path.dirname(item["out"]), exist_ok=True)
-        await speak(item["text"], job["voice"], job["rate"], item["out"])
+    try:
+        for item in job["items"]:
+            await speak(item["text"], job["voice"], job["rate"], item["out"])
+    except Exception as e:
+        alt = fallback(job["voice"])
+        if not alt:
+            raise
+        # the whole episode in one voice, never a mix
+        print(f"tts: {job['voice']} kept failing ({e}); using {alt} for every scene", file=sys.stderr)
+        for item in job["items"]:
+            await speak(item["text"], alt, job["rate"], item["out"])
 
 
 def self_check():
     """Offline check of the word-timing conversion (run by npm test)."""
     events = [{"type": "WordBoundary", "offset": 1_250_000, "text": "Honda"}, {"type": "SentenceBoundary", "offset": 0, "text": "x"}, {"type": "WordBoundary", "offset": 7_000_000, "text": "scooters"}]
     assert to_words(events) == [{"t": 0.125, "w": "Honda"}, {"t": 0.7, "w": "scooters"}]
+    assert fallback("en-US-AndrewMultilingualNeural") == "en-US-AndrewNeural" and fallback("id-ID-ArdiNeural") is None
     print("tts self-check OK")
 
 
