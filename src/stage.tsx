@@ -770,17 +770,18 @@ export const Scooter = ({position = [0, 0, 0], rotation = [0, 0, 0], wheel = 0, 
 
 /** A scooter CVT pulley: two steel cone halves on an axle along local z. `r` (0.6..2) is the radius the belt rides at:
  * the halves close up as it climbs. `angle` spins it; `rollers` draws the front pulley's centrifugal rollers at that
- * radius, behind the moving half. Tagged 'pulley' (rollers 'roller') for focus. */
-export const Pulley = ({r, angle = 0, rollers, position = [0, 0, 0]}: {r: number; angle?: number; rollers?: number; position?: V3}) => {
+ * radius, behind the moving half. `xray` makes the +z half glass so the belt and rollers show through it.
+ * Tagged 'pulley' (rollers 'roller') for focus. */
+export const Pulley = ({r, angle = 0, rollers, xray = false, position = [0, 0, 0]}: {r: number; angle?: number; rollers?: number; xray?: boolean; position?: V3}) => {
 	const gap = 0.12 + (2.2 - r) * 0.22;
 	return (
 		<group position={position}>
 			<group rotation={[0, 0, angle]}>
 				<group userData={{part: 'pulley'}}>
 					{[1, -1].map((side) => (
-						<mesh key={side} position={[0, 0, side * (gap / 2 + 0.25)]} rotation={[(-side * Math.PI) / 2, 0, 0]} castShadow receiveShadow>
+						<mesh key={side} position={[0, 0, side * (gap / 2 + 0.25)]} rotation={[(-side * Math.PI) / 2, 0, 0]} castShadow={!(xray && side > 0)} receiveShadow>
 							<cylinderGeometry args={[0.35, 2.2, 0.5, 48]} />
-							<meshStandardMaterial {...mat.steel} />
+							{xray && side > 0 ? <meshPhysicalMaterial color="#d6ecf0" transparent opacity={0.22} roughness={0.05} clearcoat={1} depthWrite={false} /> : <meshStandardMaterial {...mat.steel} />}
 						</mesh>
 					))}
 				</group>
