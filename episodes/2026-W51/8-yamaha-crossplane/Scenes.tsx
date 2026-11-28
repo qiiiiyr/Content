@@ -36,8 +36,8 @@ const Throws = ({deg, offsets, grow}: {deg: number; offsets: number[]; grow: num
 const Hook = ({lang}: SceneProps) => {
 	const {p, sec} = useScene();
 	const cam = pullBack([
-		{t: 0, pos: [6, 5, 14], look: [0, 2.4, 0]},
-		{t: 0.45, pos: [4.8, 4.8, 12.5], look: [0, 2.5, 0]},
+		{t: 0, pos: [7.4, 6, 19], look: [0, 2.4, 0]},
+		{t: 0.45, pos: [6.2, 5.8, 17.5], look: [0, 2.5, 0]},
 		{t: 0.5, pos: [-5.5, 3.6, 9], look: [-1.2, 2.8, 0], cut: true},
 		{t: 1, pos: [-4.8, 3.6, 8.2], look: [-1.2, 2.9, 0]},
 	]);
@@ -55,8 +55,8 @@ const Hook = ({lang}: SceneProps) => {
 const Even = ({lang}: SceneProps) => {
 	const {p, sec} = useScene();
 	const cam = pullBack([
-		{t: 0, pos: [0, 4, 15], look: [0, 2.6, 0]},
-		{t: 0.5, pos: [0.6, 4, 13.8], look: [0, 2.6, 0]},
+		{t: 0, pos: [0, 5, 20], look: [0, 2.6, 0]},
+		{t: 0.5, pos: [0.6, 5, 18.6], look: [0, 2.6, 0]},
 		{t: 0.52, pos: [5.6, 3, 8.6], look: [1.6, 2.4, 0], cut: true},
 		{t: 1, pos: [5, 3, 7.9], look: [1.6, 2.5, 0]},
 	]);
@@ -96,8 +96,8 @@ const Beat = ({lang}: SceneProps) => {
 	const {p, sec} = useScene();
 	const r = ramp(p, 0.25, 0.8, 0.3);
 	const cam = pullBack([
-		{t: 0, pos: [0, 5.2, 14], look: [0, 3, 0]},
-		{t: 0.5, pos: [0.8, 5, 13], look: [0, 3, 0]},
+		{t: 0, pos: [0, 6, 19.5], look: [0, 3, 0]},
+		{t: 0.5, pos: [0.8, 5.8, 18.4], look: [0, 3, 0]},
 		{t: 0.55, pos: [-5, 4.4, 9], look: [-1, 3.4, 0], cut: true},
 		{t: 1, pos: [-4.4, 4.3, 8.3], look: [-1, 3.4, 0]},
 	]);
@@ -118,8 +118,8 @@ const Inertia = ({lang}: SceneProps) => {
 	const cam = pullBack([
 		{t: 0, pos: [5, 3.6, 9.6], look: [1.2, 2.6, 0]},
 		{t: 0.5, pos: [4.3, 3.6, 8.8], look: [1.2, 2.6, 0]},
-		{t: 0.55, pos: [-1, 6.4, 12], look: [0, 2.6, 0], cut: true},
-		{t: 1, pos: [-0.8, 6.2, 11], look: [0, 2.7, 0]},
+		{t: 0.55, pos: [-1, 7.6, 18], look: [0, 2.6, 0], cut: true},
+		{t: 1, pos: [-0.8, 7.4, 17], look: [0, 2.7, 0]},
 	]);
 	return (
 		<>
@@ -157,7 +157,7 @@ const Finale = () => {
 	const {sec} = useScene();
 	return (
 		<>
-			<Stage cam={pullBack([{t: 0, pos: [6, 5, 14], look: [0, 2.4, 0]}, {t: 1, pos: [7.5, 5.5, 16], look: [0, 2.4, 0]}])}>
+			<Stage cam={pullBack([{t: 0, pos: [7.4, 6, 19], look: [0, 2.4, 0]}, {t: 1, pos: [8.6, 6.4, 21], look: [0, 2.4, 0]}])}>
 				<Four deg={sec * 700} sec={sec} offsets={CROSS} />
 			</Stage>
 			<PaperTag at={0.5} lines={{en: ['CUTAWAY', 'ENGINE LAB', 'No. 030'], id: ['BONGKAR PASANG', 'LAB MESIN', 'No. 030']}} />

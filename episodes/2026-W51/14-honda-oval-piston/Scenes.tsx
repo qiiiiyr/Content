@@ -59,8 +59,8 @@ const Hook = ({lang}: SceneProps) => {
 const Rules = ({lang}: SceneProps) => {
 	const {p, sec} = useScene();
 	const cam = pullBack([
-		{t: 0, pos: [0, 5, 15], look: [0, 2.6, 0]},
-		{t: 0.5, pos: [0.6, 4.8, 13.8], look: [0, 2.6, 0]},
+		{t: 0, pos: [0, 5.8, 20], look: [0, 2.6, 0]},
+		{t: 0.5, pos: [0.6, 5.6, 18.6], look: [0, 2.6, 0]},
 		{t: 0.52, pos: [5.6, 3.4, 8.6], look: [1.6, 2.6, 0], cut: true},
 		{t: 1, pos: [5, 3.3, 7.9], look: [1.6, 2.7, 0]},
 	]);
