@@ -49,7 +49,7 @@ write is for `N`. Posting goes oldest first, so batches simply queue up behind e
    each one short and actionable ("first scene must show the object, not a title card"). If `decision.action` is
    `switch`, set `currentTheme` to `decision.to` and `themeSince` to the Monday of week N+1 (the switch starts the
    week after this batch). Never edit `thresholds` unless the human asked.
-6. **Write 14 episodes in `episodes/N/`**, folders `1-<slug>` … `14-<slug>`, posted in that order:
+6. **Write 14 episodes in `episodes/N/`**, never fewer (each platform posts 14 a week; a short batch empties the queue), folders `1-<slug>` … `14-<slug>`, posted in that order:
    - 10 on `currentTheme` (`"test": false`) and 4 on `testTheme` (`"test": true`) in slots 3, 6, 10 and 13.
    - Instagram and YouTube both post all 14 (twice a day each); leave `"youtube"` out of `meta.json`.
    - Topic priority: follow-ups of `followups`, then topics suggested by competitor hits (rewritten in our own
@@ -116,7 +116,7 @@ CI renders and checks every episode in both languages on the pull request, so do
 
 ## Keep the run cheap
 
-Each run writes 14 episodes and should cost about $4-6. Use at most 12 web searches in total and at most 3 reference images (the stats file already
+Each run writes 14 episodes and should cost about $4-6. Use at most 20 web searches in total (about one per product, plus research) and at most 3 reference images (the stats file already
 holds the competitor data). Do not read `graphify-out/` or run graphify. Do not re-read files you already read.
 Write each episode file once; `npm test` is the check, not a second read. Stop after a green `npm test`, the one
 contact-sheet image and the pull request.
