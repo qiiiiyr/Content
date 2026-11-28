@@ -1,0 +1,54 @@
+{
+  "theme": "engines-inside",
+  "test": false,
+  "title": {
+    "en": "Koenigsegg's 600 hp three-cylinder has no camshaft 🤯 #shorts",
+    "id": "Mesin 3 silinder Koenigsegg 600 hp, tanpa noken as 🤯 #shorts"
+  },
+  "description": {
+    "en": "Koenigsegg's 2-litre, three-cylinder Tiny Friendly Giant makes 600 hp without a camshaft. Its Freevalve system opens every valve with its own pneumatic-hydraulic-electric actuator, so the engine computer sets timing, lift and duration valve by valve.",
+    "id": "Mesin Tiny Friendly Giant Koenigsegg, 2 liter tiga silinder, tembus 600 hp tanpa noken as. Sistem Freevalve buka tiap katup pakai aktuator pneumatik-hidraulik-elektrik sendiri, jadi komputer mesin ngatur waktu, angkatan, dan lamanya katup terbuka satu per satu."
+  },
+  "hashtags": [
+    "koenigsegg",
+    "freevalve",
+    "engine",
+    "engineering",
+    "cars"
+  ],
+  "sources": [
+    "https://www.freevalve.com/",
+    "https://www.topgear.com/car-news/future-tech/heres-how-koenigsegg-gemeras-600bhp-camless-engine-works",
+    "https://www.motor1.com/news/402027/koenigsegg-gemera-4-seat-unveiled/"
+  ],
+  "scenes": [
+    {
+      "en": "This engine has *no camshaft*, and it makes *600 horsepower* from three cylinders.",
+      "id": "Mesin ini *nggak punya noken as*, tapi tenaganya *600 hp* dari tiga silinder."
+    },
+    {
+      "en": "Normally a spinning *camshaft* opens every valve, on a fixed schedule set by the shape of its lobes.",
+      "id": "Biasanya *noken as* yang muter buka semua katup, jadwalnya tetap sesuai bentuk tonjolannya."
+    },
+    {
+      "en": "Koenigsegg's *Freevalve* throws that away. Each valve gets its own *actuator*, driven by air, oil and electronics.",
+      "id": "*Freevalve* Koenigsegg buang itu. Tiap katup punya *aktuator* sendiri, digerakkan udara, oli, dan elektronik."
+    },
+    {
+      "en": "The engine computer decides, for every valve, *when* it opens, *how far*, and for *how long*.",
+      "id": "Komputer mesin yang nentuin tiap katup: *kapan* buka, *seberapa lebar*, dan *berapa lama*."
+    },
+    {
+      "en": "It's a *2-litre* twin-turbo, built for the *Gemera*, a four-seat hybrid.",
+      "id": "Mesinnya *2 liter* twin-turbo, buat *Gemera*, mobil hybrid empat kursi."
+    },
+    {
+      "en": "Freevalve says this control can even replace parts like the *throttle body*.",
+      "id": "Kata Freevalve, kontrol ini bahkan bisa gantiin part kayak *throttle body*."
+    },
+    {
+      "en": "No camshaft in an engine: *future*, or *too fragile*?",
+      "id": "Mesin tanpa noken as: *masa depan* atau *gampang rusak*?"
+    }
+  ]
+}

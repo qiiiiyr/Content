@@ -1,7 +1,7 @@
 {
   "currentTheme": "engines-inside",
   "themeSince": "2026-11-16",
-  "testTheme": "grip-and-stopping",
+  "testTheme": "car-safety-tech",
   "thresholds": {
     "minWeeksOnTheme": 4,
     "minTestEpisodes": 4,
@@ -17,11 +17,11 @@
     "Title = brand + surprising capability + one emoji (👀 🤯 😳), under 70 characters, never 'how X works' ('Honda scooters switch off their engine at every red light 🤯').",
     "Frame 1 is already moving: a cold open mid-action or the part flying together (<Engine explode>), with the hook's key number or words on screen; never a slow push-in on an empty shot.",
     "Animation language (docs/styles.md): 2-3 shots per scene (cut: true), X-ray focus and a <Callout> on the part the narration names, one slow-motion moment with <TimeTag> on the moment the episode is about.",
-    "Comments are our missing signal (about 0 per post; scroll.engineer gets 5-12 per 1,000 likes): end half the batch on a question that splits people and is answered in one word ('Beat or Vario?', 'Would you trust it: yes or no?'), the other half on a send line.",
-    "Make the last line and frame lead back into the first so the Short loops: rewatches add watch time on both platforms.",
+    "Shares are our missing signal: 0 shares on 37 Instagram posts, and views stall at about 130. Instagram says sends per reach is one of its strongest signals for reaching non-followers. Send lines name a person ('Send this to someone who rides an NMAX'); question lines are answered in one word ('yes or no?').",
+    "Frame 1 names the product on screen (a Callout with brand and model on the whole vehicle), so the hook reads with the sound off.",
+    "Indonesian Instagram lags most (1,706 views in 7 days against 11,362 on Indonesian YouTube): Indonesian titles lead with the bike or car Indonesians own (NMAX, Vario, PCX, Avanza).",
     "Hook that holds (YouTube % watched): flip what the viewer believes about their own vehicle, then ask ('A diesel has no spark plugs. So what lights it?' 55-84%; 'Pressing the clutch doesn't connect anything' 60-72%). The 'X times a second' number hook held only 37-58%: use it in at most 2 of 14.",
     "Under 58 s in both languages: our longest video (56 s) was watched least (35%). Answer the hook's question by scene 4; keep the last scenes for the catch and the closing line.",
-    "Instagram viewers leave after about 11 s on the same video YouTube viewers watch for 26 s: show the part moving in frame 1 and the first half of the answer by second 10.",
     "English and Indonesian use different looks (strategy.json looks) so the two channels never upload the same picture: Indonesian YouTube got 7 views on 4 posts, likely treated as reused content."
   ],
   "goal": {

@@ -1,0 +1,54 @@
+{
+  "theme": "engines-inside",
+  "test": false,
+  "title": {
+    "en": "Honda's Vario changes gear without having any gears 🤯 #shorts",
+    "id": "Honda Vario ganti gigi tanpa punya gigi sama sekali 🤯 #shorts"
+  },
+  "description": {
+    "en": "A scooter CVT like the Honda Vario's has no gears: a belt runs between two pulleys made of sliding cones. Centrifugal rollers squeeze the front pulley as revs rise, so the belt climbs there and drops at the back, like shifting up.",
+    "id": "CVT skutik kayak Honda Vario nggak punya gigi: V-belt jalan di antara dua puli dari piringan kerucut yang bisa geser. Roller sentrifugal nekan puli depan saat putaran naik, jadi belt naik di depan dan turun di belakang, kayak naik gigi."
+  },
+  "hashtags": [
+    "hondavario",
+    "cvt",
+    "matic",
+    "scooter",
+    "engineering"
+  ],
+  "sources": [
+    "https://www.wahanahonda.com/blog/tips-perawatan-berkala-cvt",
+    "https://www.wahanahonda.com/blog/seperti-apa-tanda-roller-cvt-motor-matic-sudah-aus",
+    "https://www.astra-honda.com/community/news-detail?slug=ini-dampak-negatif-pakai-per-cvt-terlalu-keras"
+  ],
+  "scenes": [
+    {
+      "en": "Your *Vario* changes gear all the time. It doesn't have *any gears*.",
+      "id": "*Vario*-mu ganti gigi terus. Padahal dia *nggak punya gigi*."
+    },
+    {
+      "en": "Instead there's a *belt* between two pulleys, each made of two cones that slide together and apart.",
+      "id": "Gantinya ada *V-belt* di antara dua puli, masing-masing dari dua piringan kerucut yang bisa merapat dan merenggang."
+    },
+    {
+      "en": "In the front pulley sit small *rollers*. As revs rise, they fly *outward*.",
+      "id": "Di puli depan ada *roller* kecil. Makin tinggi putaran, roller *terlempar keluar*."
+    },
+    {
+      "en": "They squeeze the cones together, so the belt rides *higher* in front, like shifting up.",
+      "id": "Roller nekan piringannya merapat, jadi belt naik *lebih tinggi* di depan, kayak naik gigi."
+    },
+    {
+      "en": "At the back, the belt pulls the rear pulley open against a *spring*, so it rides *lower* there.",
+      "id": "Di belakang, belt narik puli belakang membuka melawan *per CVT*, jadi belt turun *lebih rendah*."
+    },
+    {
+      "en": "*Lighter rollers* move out sooner: quicker pull, lower top speed. *Heavier ones*, the opposite.",
+      "id": "*Roller ringan* keluar lebih cepat: tarikan enteng, top speed turun. *Roller berat*, kebalikannya."
+    },
+    {
+      "en": "Light rollers or stock rollers: *which* would you pick?",
+      "id": "Roller ringan atau standar: *kamu pilih mana*?"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "theme": "engines-inside",
+  "test": false,
+  "title": {
+    "en": "Nissan built an engine that changes its own compression 🤯 #shorts",
+    "id": "Nissan bikin mesin yang bisa ganti rasio kompresinya sendiri 🤯 #shorts"
+  },
+  "description": {
+    "en": "Nissan's VC-Turbo moves its pistons' top dead centre with a multi-link and a control shaft turned by an actuator motor, so the compression ratio runs anywhere from 14:1 for efficiency to 8:1 under boost. It was the world's first production variable-compression engine.",
+    "id": "VC-Turbo Nissan menggeser titik mati atas piston pakai multi-link dan poros kontrol yang diputar motor aktuator, jadi rasio kompresinya bisa dari 14:1 biar irit sampai 8:1 pas turbo bekerja. Ini mesin produksi pertama di dunia dengan kompresi variabel."
+  },
+  "hashtags": [
+    "nissan",
+    "vcturbo",
+    "engine",
+    "engineering",
+    "cars"
+  ],
+  "sources": [
+    "https://www.nissan-global.com/EN/INNOVATION/TECHNOLOGY/ARCHIVE/VC_TURBO_ENGINE",
+    "https://saemobilus.sae.org/content/2018-01-0371",
+    "https://www.wardsauto.com/news/archive-wards-infiniti-s-variable-compression-engine-packs-punch/791389/"
+  ],
+  "scenes": [
+    {
+      "en": "Nissan built an engine that changes its *compression* while you drive.",
+      "id": "Nissan bikin mesin yang bisa ganti *rasio kompresi* sambil jalan."
+    },
+    {
+      "en": "Squeezing the mix harder burns fuel more *efficiently*, but with a turbo it can *knock*.",
+      "id": "Campuran yang dipadatkan lebih keras bakarnya lebih *efisien*, tapi pakai turbo bisa *ngelitik*."
+    },
+    {
+      "en": "So the *VC-Turbo* moves its pistons' top position with a *multi-link* instead of a plain rod.",
+      "id": "Jadi *VC-Turbo* geser posisi atas pistonnya pakai *multi-link*, bukan stang piston biasa."
+    },
+    {
+      "en": "An *actuator motor* turns a control shaft, and every piston rises higher or stops lower.",
+      "id": "*Motor aktuator* muter poros kontrol, dan semua piston naik lebih tinggi atau berhenti lebih rendah."
+    },
+    {
+      "en": "Cruising, it runs *14 to 1* for efficiency. Under boost, as low as *8 to 1* for power.",
+      "id": "Pas santai, *14 banding 1* biar irit. Pas turbo bekerja, sampai *8 banding 1* biar bertenaga."
+    },
+    {
+      "en": "It first went on sale in the Infiniti *QX50*: a *world first*.",
+      "id": "Pertama dijual di Infiniti *QX50*: *pertama di dunia*."
+    },
+    {
+      "en": "An engine that reshapes itself: *genius*, or *headache*?",
+      "id": "Mesin yang bisa ubah dirinya sendiri: *jenius* atau *bikin pusing*?"
+    }
+  ]
+}

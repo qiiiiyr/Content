@@ -1,0 +1,54 @@
+{
+  "theme": "engines-inside",
+  "test": false,
+  "title": {
+    "en": "Honda built a bike engine with oval pistons 🤯 #shorts",
+    "id": "Honda pernah bikin mesin motor dengan piston lonjong 🤯 #shorts"
+  },
+  "description": {
+    "en": "To match two-stroke power under a four-cylinder limit, Honda's 1979 NR500 Grand Prix racer used oval pistons, each with eight valves and two connecting rods. In 1992 Honda sold the NR, the first production bike with oval pistons.",
+    "id": "Biar tenaganya nyamain dua tak di aturan empat silinder, motor balap Grand Prix Honda NR500 tahun 1979 pakai piston lonjong, masing-masing delapan katup dan dua stang piston. Tahun 1992 Honda jual NR, motor produksi pertama dengan piston lonjong."
+  },
+  "hashtags": [
+    "honda",
+    "nr500",
+    "ovalpiston",
+    "motorcycle",
+    "engineering"
+  ],
+  "sources": [
+    "https://global.honda/en/heritage/episodes/1979pistonengine.html",
+    "https://global.honda/en/RACERS/NR500_2_03/03.html",
+    "https://global.honda/jp/news/1992/2920406.html"
+  ],
+  "scenes": [
+    {
+      "en": "Honda once built a racing motorcycle engine with *oval pistons*.",
+      "id": "Honda pernah bikin mesin motor dengan *piston lonjong*."
+    },
+    {
+      "en": "In *1979*, Grand Prix rules allowed four cylinders, and the two-stroke bikes were winning.",
+      "id": "Tahun *1979*, aturan Grand Prix cuma boleh empat silinder, dan motor dua tak lagi menang terus."
+    },
+    {
+      "en": "To breathe like a two-stroke, Honda's four-stroke needed far more *valves* than a round piston has room for.",
+      "id": "Biar napasnya kayak dua tak, mesin empat tak Honda butuh *katup* jauh lebih banyak dari muatnya piston bulat."
+    },
+    {
+      "en": "So the *NR500* got oval pistons, each one with *eight valves* and *two connecting rods*.",
+      "id": "Jadi *NR500* dapat piston lonjong, tiap silinder *delapan katup* dan *dua stang piston*."
+    },
+    {
+      "en": "Honda says it revved as high as *22,000 rpm*.",
+      "id": "Kata Honda, mesinnya muter sampai sekitar *22.000 rpm*."
+    },
+    {
+      "en": "In *1992*, Honda even sold one: the *NR*, the first production bike with oval pistons.",
+      "id": "Tahun *1992*, Honda malah jual versi jalan raya: *NR*, motor produksi pertama dengan piston lonjong."
+    },
+    {
+      "en": "Send this to someone who thinks pistons must be *round*.",
+      "id": "Kirim ini ke temanmu yang yakin piston harus *bulat*."
+    }
+  ]
+}

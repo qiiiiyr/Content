@@ -11,13 +11,13 @@ GitHub servers, Instagram works).
 
 ## Backlog (the weekly look upgrade takes the top open item unless a competitor hit shows something better)
 
-- [ ] **Callouts:** a reusable leader line + label pinned to a 3D part (project the part's position to screen each
+- [x] **Callouts (shipped as `Callout` in `src/Looks.tsx`):** a reusable leader line + label pinned to a 3D part (project the part's position to screen each
   frame), so the narrated part is named in the frame ("Intake valve", "Spark: 25,000 V").
-- [ ] **Time tags:** a small tag component, "SLOW MOTION 1/200×" or "TIME FROZEN", whenever the animation runs slower
+- [x] **Time tags (shipped as `TimeTag` in `src/Looks.tsx`):** a small tag component, "SLOW MOTION 1/200×" or "TIME FROZEN", whenever the animation runs slower
   than reality (combustion, sparks, gear meshing). Honest and it says why the shot is slow.
 - [x] **Live readouts (W49, `Readout` in `src/stage.tsx`, with an optional red "SLOW MOTION" style tag):** a number that counts with the animation (rpm, bar, °C, km/h) next to the part, big, with a
   small unit line under it.
-- [ ] **HUD lines:** thin glowing lines on the 3D: contact-patch ring, force arrows, flow paths, in one accent colour.
+- [x] **HUD lines (W51, `HudLine` + `ringPath` in `src/stage.tsx`):** thin glowing lines on the 3D: contact-patch ring, force arrows, flow paths, in one accent colour.
 - [ ] **Grade and depth:** stronger warm grade, darker foreground, a vignette, background haze; keep it fast (no extra
   render passes beyond about 10% time).
 - [ ] **Out of the workshop:** for grip, braking and speed topics, a full-bleed road or track scene with the vehicle

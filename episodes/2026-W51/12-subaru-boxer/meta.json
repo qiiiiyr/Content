@@ -1,0 +1,54 @@
+{
+  "theme": "engines-inside",
+  "test": false,
+  "title": {
+    "en": "Subaru's pistons punch toward each other, on purpose 😳 #shorts",
+    "id": "Piston Subaru saling tinju berhadapan, sengaja 😳 #shorts"
+  },
+  "description": {
+    "en": "Subaru's boxer engine lays its cylinders flat in two opposed banks. Opposite pistons move in and out together, so their shaking cancels and Subaru needs no balance shaft, and the flat engine sits low, lowering the centre of gravity.",
+    "id": "Mesin boxer Subaru merebahkan silindernya jadi dua baris berhadapan. Piston yang berhadapan gerak keluar masuk bareng, jadi getarannya saling batal dan Subaru nggak butuh balancer, dan mesinnya duduk rendah, nurunin titik berat mobil."
+  },
+  "hashtags": [
+    "subaru",
+    "boxerengine",
+    "engine",
+    "engineering",
+    "cars"
+  ],
+  "sources": [
+    "https://www.subaru.com/vehicle-info/articles/what-is-boxer-engine.html",
+    "https://www.subaru-global.com/ebrochure/Outback/2017my/ZAEN/technology-engine-specs",
+    "https://media.subaru.com/pdf.do?id=580"
+  ],
+  "scenes": [
+    {
+      "en": "Subaru's pistons don't go up and down. They *punch sideways*, toward each other.",
+      "id": "Piston Subaru nggak naik turun. Mereka *ninju ke samping*, saling berhadapan."
+    },
+    {
+      "en": "It's a *boxer* engine: the cylinders lie flat, in two banks facing each other across the crank.",
+      "id": "Ini mesin *boxer*: silindernya rebahan, dua baris saling berhadapan di seberang kruk as."
+    },
+    {
+      "en": "Opposite pistons move *in and out together*, like a boxer's fists.",
+      "id": "Piston yang berhadapan gerak *keluar masuk bareng*, kayak dua kepalan petinju."
+    },
+    {
+      "en": "Each bank's shake *cancels* the other's, so Subaru needs *no balance shaft*.",
+      "id": "Getaran satu sisi *ngebatalin* sisi lainnya, jadi Subaru *nggak butuh balancer*."
+    },
+    {
+      "en": "Lying flat, the engine sits *lower* in the car, which lowers the *centre of gravity*.",
+      "id": "Karena rebahan, mesinnya duduk *lebih rendah*, jadi *titik berat* mobilnya turun."
+    },
+    {
+      "en": "Subaru says that low, flat engine gives the whole car a better sense of *balance* in corners.",
+      "id": "Kata Subaru, mesin yang rendah dan rata bikin mobilnya lebih *seimbang* di tikungan."
+    },
+    {
+      "en": "Send this to someone who *drives a Subaru*.",
+      "id": "Kirim ini ke temanmu yang *nyetir Subaru*."
+    }
+  ]
+}
