@@ -1,0 +1,54 @@
+{
+  "theme": "car-safety-tech",
+  "test": true,
+  "title": {
+    "en": "KTM's ABS knows how far you're leaning 😳 #shorts",
+    "id": "ABS KTM tahu seberapa miring motormu 😳 #shorts"
+  },
+  "description": {
+    "en": "Bosch's Motorcycle Stability Control, which KTM first fitted to the 1190 Adventure, adds a lean sensor to ABS. It reads lean, pitch and wheel speeds more than 100 times a second and eases brake pressure when the bike is leaned over.",
+    "id": "Motorcycle Stability Control dari Bosch, yang pertama dipasang KTM di 1190 Adventure, nambah sensor kemiringan ke ABS. Dia baca kemiringan, angguk, dan putaran roda lebih dari 100 kali per detik, lalu ngurangin tekanan rem waktu motor miring."
+  },
+  "hashtags": [
+    "ktm",
+    "bosch",
+    "abs",
+    "motorcycle",
+    "safety"
+  ],
+  "sources": [
+    "https://blog.ktm.com/msc-three-letters-for-a-technological-revolution/",
+    "https://www.bosch.com/research/research-fields/automation/research-on-automated-driving/motorcycle-stability-control-added-safety-to-the-ride/",
+    "https://blog.ktm.com/motorcycle-stability-control-feeling-msc-at-work/"
+  ],
+  "scenes": [
+    {
+      "en": "KTM's ABS knows how far your bike is *leaning*, and brakes differently because of it.",
+      "id": "ABS KTM tahu seberapa *miring* motormu, dan ngerem beda karenanya."
+    },
+    {
+      "en": "Normal ABS only stops the wheel *locking*. It doesn't know about *lean*.",
+      "id": "ABS biasa cuma nyegah roda *ngunci*. Dia nggak tahu soal *kemiringan*."
+    },
+    {
+      "en": "Bosch's *MSC* adds a lean sensor. It reads lean, pitch and wheel speeds more than *100 times a second*.",
+      "id": "*MSC* dari Bosch nambah sensor miring. Dia baca kemiringan, angguk, dan putaran roda lebih dari *100 kali per detik*."
+    },
+    {
+      "en": "Leaned over, a tyre has less grip left for braking, so MSC *eases the pressure* to keep it gripping.",
+      "id": "Pas miring, sisa grip ban buat ngerem lebih sedikit, jadi MSC *ngurangin tekanan* biar ban tetap nempel."
+    },
+    {
+      "en": "It first arrived on the KTM *1190 Adventure*.",
+      "id": "Pertama muncul di KTM *1190 Adventure*."
+    },
+    {
+      "en": "But it can't change physics: if there's no grip left, there's *no grip left*.",
+      "id": "Tapi fisika nggak bisa diakalin: kalau grip habis, ya *habis*."
+    },
+    {
+      "en": "Cornering ABS on your next bike: *must-have*, or *gimmick*?",
+      "id": "ABS tikungan di motor berikutnya: *wajib* atau *gimik*?"
+    }
+  ]
+}

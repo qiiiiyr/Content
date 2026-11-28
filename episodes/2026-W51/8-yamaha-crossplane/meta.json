@@ -1,0 +1,54 @@
+{
+  "theme": "engines-inside",
+  "test": false,
+  "title": {
+    "en": "Yamaha's R1 fires its cylinders unevenly, on purpose 😳 #shorts",
+    "id": "Mesin Yamaha R1 sengaja meledak dengan irama nggak rata 😳 #shorts"
+  },
+  "description": {
+    "en": "The Yamaha YZF-R1's crossplane crankshaft puts its throws 90 degrees apart, so the four cylinders fire at 270-180-90-180 degree gaps. Yamaha says it cancels the crank-speed swings from piston inertia, for linear torque and rear traction.",
+    "id": "Kruk as crossplane Yamaha YZF-R1 memasang pen-nya beda 90 derajat, jadi empat silindernya meledak dengan jarak 270-180-90-180 derajat. Kata Yamaha, ini membatalkan goyangan putaran dari inersia piston, biar torsinya linear dan traksinya kuat."
+  },
+  "hashtags": [
+    "yamaha",
+    "r1",
+    "crossplane",
+    "motorcycle",
+    "engineering"
+  ],
+  "sources": [
+    "https://www.yamaha-motor.eu/gb/en/motorcycles/supersport/pdp/r1-race/",
+    "https://global.yamaha-motor.com/news/2008/0909/yzf-r1.html",
+    "https://en.wikipedia.org/wiki/Crossplane"
+  ],
+  "scenes": [
+    {
+      "en": "Yamaha's *R1* fires its four cylinders *unevenly*. On purpose.",
+      "id": "Yamaha *R1* meledakkan empat silindernya *nggak rata*. Sengaja."
+    },
+    {
+      "en": "Most four-cylinder sport bikes fire at even gaps: one bang every *180 degrees* of crank rotation.",
+      "id": "Motor empat silinder biasanya meledak dengan jarak rata: tiap *180 derajat* putaran kruk as."
+    },
+    {
+      "en": "The R1's *crossplane* crank sets its throws a quarter turn apart, at *90 degrees*.",
+      "id": "Kruk as *crossplane* R1 masang tiap pen-nya beda seperempat putaran, *90 derajat*."
+    },
+    {
+      "en": "So the bangs come at *270, 180, 90, 180* degrees: an uneven beat.",
+      "id": "Jadi ledakannya datang tiap *270, 180, 90, 180* derajat: iramanya nggak rata."
+    },
+    {
+      "en": "Why? Yamaha says it cancels the crank's speed swings from the *pistons' inertia*, so the torque you feel is *cleaner*.",
+      "id": "Kenapa? Kata Yamaha, ini ngebatalin goyangan putaran dari *inersia piston*, jadi torsinya terasa *lebih bersih*."
+    },
+    {
+      "en": "Yamaha says the result is *linear torque* and strong *rear-wheel traction* out of corners.",
+      "id": "Hasilnya, kata Yamaha: *torsi linear* dan *traksi ban belakang* yang kuat keluar tikungan."
+    },
+    {
+      "en": "Send this to someone who *rides a Yamaha*.",
+      "id": "Kirim ini ke temanmu yang *naik Yamaha*."
+    }
+  ]
+}

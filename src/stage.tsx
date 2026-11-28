@@ -768,6 +768,37 @@ export const Scooter = ({position = [0, 0, 0], rotation = [0, 0, 0], wheel = 0, 
 	);
 };
 
+/** A scooter CVT pulley: two steel cone halves on an axle along local z. `r` (0.6..2) is the radius the belt rides at:
+ * the halves close up as it climbs. `angle` spins it; `rollers` draws the front pulley's centrifugal rollers at that
+ * radius, behind the moving half. Tagged 'pulley' (rollers 'roller') for focus. */
+export const Pulley = ({r, angle = 0, rollers, position = [0, 0, 0]}: {r: number; angle?: number; rollers?: number; position?: V3}) => {
+	const gap = 0.12 + (2.2 - r) * 0.22;
+	return (
+		<group position={position}>
+			<group rotation={[0, 0, angle]}>
+				<group userData={{part: 'pulley'}}>
+					{[1, -1].map((side) => (
+						<mesh key={side} position={[0, 0, side * (gap / 2 + 0.25)]} rotation={[(-side * Math.PI) / 2, 0, 0]} castShadow receiveShadow>
+							<cylinderGeometry args={[0.35, 2.2, 0.5, 48]} />
+							<meshStandardMaterial {...mat.steel} />
+						</mesh>
+					))}
+				</group>
+				{rollers !== undefined && (
+					<group userData={{part: 'roller'}}>
+						{Array.from({length: 6}, (_, i) => (
+							<mesh key={i} position={[Math.cos((i / 6) * TAU) * rollers, Math.sin((i / 6) * TAU) * rollers, gap / 2 + 0.75]} rotation={[0, 0, (i / 6) * TAU]} castShadow>
+								<cylinderGeometry args={[0.22, 0.22, 0.3, 20]} />
+								<meshStandardMaterial {...mat.brass} />
+							</mesh>
+						))}
+					</group>
+				)}
+			</group>
+		</group>
+	);
+};
+
 /** Beads flowing along a polyline: air, fuel or exhaust. t = seconds, so the flow keeps moving whatever the scene length. */
 export const Stream = ({path, t, n = 16, color = '#9fe8f0', size = 0.1, speed = 0.8, opacity = 0.95, glow = 1}: {path: V3[]; t: number; n?: number; color?: string; size?: number; speed?: number; opacity?: number; glow?: number}) => {
 	const seg = path.length - 1;

@@ -1,0 +1,54 @@
+{
+  "theme": "engines-inside",
+  "test": false,
+  "title": {
+    "en": "Ducati pulls its engine valves shut instead of trusting a spring 😳 #shorts",
+    "id": "Katup mesin Ducati ditarik sampai nutup, bukan cuma pakai per 😳 #shorts"
+  },
+  "description": {
+    "en": "Ducati's Desmodromic valvetrain closes each valve with a second cam lobe and a closing rocker, so the valve follows a steep cam profile at high revs. The trade-off: valve clearances are checked and set by hand.",
+    "id": "Sistem Desmodromic Ducati menutup tiap katup pakai tonjolan noken as kedua dan pelatuk penutup, jadi katup tetap ngikutin profil noken as yang curam di putaran tinggi. Kekurangannya: celah katup dicek dan disetel manual."
+  },
+  "hashtags": [
+    "ducati",
+    "desmodromic",
+    "engine",
+    "motorcycle",
+    "engineering"
+  ],
+  "sources": [
+    "https://mediahouse.ducati.com/ducati-1199-panigale-superquadro-power-house-revealed",
+    "https://shop.ducati.com/be/en/closing-rocker-arm-1199-f18-key-ring.html",
+    "https://en.wikipedia.org/wiki/Desmodromic_valve"
+  ],
+  "scenes": [
+    {
+      "en": "Most engines trust a *spring* to close their valves. *Ducati* doesn't.",
+      "id": "Kebanyakan mesin ngandelin *per* buat nutup katup. *Ducati* nggak."
+    },
+    {
+      "en": "In a normal engine, a cam pushes the valve *open*, and a spring snaps it *shut* again.",
+      "id": "Di mesin biasa, noken as dorong katup *terbuka*, lalu per balikin katupnya *nutup*."
+    },
+    {
+      "en": "At high revs, with big valves, a spring can't follow the cam's *steep closing* curve fast enough.",
+      "id": "Di putaran tinggi dengan katup besar, per nggak sanggup ngikutin lekuk noken as yang *nutupnya curam*."
+    },
+    {
+      "en": "So Ducati adds a second lobe and a *closing rocker*. It grabs the valve and pulls it *shut*.",
+      "id": "Jadi Ducati nambah tonjolan kedua dan *pelatuk penutup*. Katupnya ditarik sampai *nutup*."
+    },
+    {
+      "en": "Opening and closing are both *forced* by the cam. Ducati calls it *Desmodromic*.",
+      "id": "Buka dan tutup sama-sama *dipaksa* noken as. Ducati namain ini *Desmodromic*."
+    },
+    {
+      "en": "The catch: the *valve clearances* have to be checked and adjusted by hand.",
+      "id": "Kekurangannya: *celah katup* harus dicek dan disetel manual."
+    },
+    {
+      "en": "Send this to someone who *rides a Ducati*.",
+      "id": "Kirim ini ke temanmu yang *naik Ducati*."
+    }
+  ]
+}

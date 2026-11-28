@@ -1,0 +1,54 @@
+{
+  "theme": "car-safety-tech",
+  "test": true,
+  "title": {
+    "en": "Volvo seat belts yank you back the instant a crash starts 😳 #shorts",
+    "id": "Sabuk pengaman Volvo narik badanmu begitu tabrakan mulai 😳 #shorts"
+  },
+  "description": {
+    "en": "When a Volvo's crash sensor fires, the belt pretensioner pulls the belt tight against your body, so there is no slack when you are thrown forward. Volvo invented the three-point belt in 1959, and says a belt that took a big crash load must be replaced.",
+    "id": "Begitu sensor tabrakan Volvo aktif, pretensioner narik sabuk kencang ke badanmu, jadi nggak ada kendor waktu badan terlempar ke depan. Volvo menemukan sabuk tiga titik tahun 1959, dan bilang sabuk yang kena beban tabrakan besar harus diganti."
+  },
+  "hashtags": [
+    "volvo",
+    "seatbelt",
+    "carsafety",
+    "cars",
+    "engineering"
+  ],
+  "sources": [
+    "https://www.volvocars.com/en-ca/support/car/xc90/15w46/article/761881e20c684b09c0a80151112288a8/",
+    "https://www.media.volvocars.com/uk/en-gb/media/pressreleases/20505",
+    "https://image-ppubs.uspto.gov/dirsearch-public/print/downloadPdf/6213511"
+  ],
+  "scenes": [
+    {
+      "en": "The moment a Volvo *crashes*, its seat belt *pulls you back*.",
+      "id": "Begitu Volvo *tabrakan*, sabuk pengamannya *narik badanmu* ke belakang."
+    },
+    {
+      "en": "A crash sensor sends a signal, and the belt *pretensioner* fires.",
+      "id": "Sensor tabrakan kirim sinyal, dan *pretensioner* sabuknya aktif."
+    },
+    {
+      "en": "Inside, a small *gas charge* drives a piston or a spool that winds in the *slack*.",
+      "id": "Di dalamnya, *muatan gas* kecil dorong piston atau gulungan yang narik sabuk yang *kendor*."
+    },
+    {
+      "en": "It pulls the belt tight against your body, so there's *no slack* when you're thrown forward.",
+      "id": "Sabuknya kencang nempel di badan, jadi *nggak ada kendor* waktu badanmu terlempar ke depan."
+    },
+    {
+      "en": "Volvo invented the *three-point* belt in *1959*, and gave the design away for everyone to use.",
+      "id": "Volvo yang nemuin sabuk *tiga titik* tahun *1959*, dan desainnya dibagi gratis buat semua."
+    },
+    {
+      "en": "After a big crash, Volvo says the whole *belt* must be *replaced*.",
+      "id": "Setelah tabrakan besar, kata Volvo, *sabuknya* harus *diganti*."
+    },
+    {
+      "en": "Send this to the friend who never *buckles up*.",
+      "id": "Kirim ini ke temanmu yang suka *nggak pakai sabuk*."
+    }
+  ]
+}
