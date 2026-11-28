@@ -1,37 +1,37 @@
 {
- "at": "2026-11-27T12:59:09.398Z",
+ "at": "2026-11-28T12:12:02.677Z",
  "channels": [
   {
    "lang": "en",
    "platform": "youtube",
    "name": "CutawayEN",
-   "followers": 10,
-   "views": 13586,
-   "posts": 12
+   "followers": 11,
+   "views": 15370,
+   "posts": 14
   },
   {
    "lang": "en",
    "platform": "instagram",
    "name": "@cutawayen",
-   "followers": 2,
-   "views": 3896,
-   "posts": 18
+   "followers": 1,
+   "views": 4160,
+   "posts": 20
   },
   {
    "lang": "id",
    "platform": "youtube",
    "name": "CutawayID",
    "followers": 6,
-   "views": 11363,
-   "posts": 12
+   "views": 14529,
+   "posts": 14
   },
   {
    "lang": "id",
    "platform": "instagram",
    "name": "@cutawayid",
    "followers": 0,
-   "views": 3387,
-   "posts": 17
+   "views": 3663,
+   "posts": 19
   }
  ],
  "posts": [
@@ -119,7 +119,7 @@
    "platform": "youtube",
    "url": "https://youtu.be/xyZSwPgc8q8",
    "postedAt": "2026-11-24T17:46:16.420Z",
-   "views": 1283,
+   "views": 1298,
    "likes": 17,
    "comments": 0
   },
@@ -130,7 +130,7 @@
    "platform": "youtube",
    "url": "https://youtu.be/fq5Cq_El0ZQ",
    "postedAt": "2026-11-25T18:14:31.937Z",
-   "views": 1261,
+   "views": 1267,
    "likes": 18,
    "comments": 0
   },
@@ -141,8 +141,8 @@
    "platform": "youtube",
    "url": "https://youtu.be/jlSsE6RVp_Y",
    "postedAt": "2026-11-25T22:43:07.831Z",
-   "views": 966,
-   "likes": 7,
+   "views": 1050,
+   "likes": 8,
    "comments": 0
   },
   {
@@ -152,7 +152,7 @@
    "platform": "youtube",
    "url": "https://youtu.be/LkvBdKHJpkM",
    "postedAt": "2026-11-26T18:11:55.025Z",
-   "views": 1219,
+   "views": 1237,
    "likes": 20,
    "comments": 0
   },
@@ -163,8 +163,30 @@
    "platform": "youtube",
    "url": "https://youtu.be/qYB8-n9eqqU",
    "postedAt": "2026-11-26T23:11:45.114Z",
-   "views": 843,
-   "likes": 17,
+   "views": 1232,
+   "likes": 30,
+   "comments": 0
+  },
+  {
+   "id": "2026-W49/5-oil-pump",
+   "title": "A film thinner than a hair keeps your engine alive",
+   "lang": "en",
+   "platform": "youtube",
+   "url": "https://youtu.be/mxtiPylZxbk",
+   "postedAt": "2026-11-27T18:11:52.178Z",
+   "views": 1266,
+   "likes": 19,
+   "comments": 0
+  },
+  {
+   "id": "2026-W49/6-abs",
+   "title": "Your ABS pumps the brakes 15 times a second",
+   "lang": "en",
+   "platform": "youtube",
+   "url": "https://youtu.be/VoTuhMC0VhU",
+   "postedAt": "2026-11-27T23:11:40.018Z",
+   "views": 6,
+   "likes": 0,
    "comments": 0
   },
   {
@@ -188,10 +210,10 @@
    "platform": "instagram",
    "url": "https://www.instagram.com/reel/Df45SW4CUg5/",
    "postedAt": "2026-11-18T16:05:55.222Z",
-   "views": 356,
+   "views": 358,
    "likes": 6,
    "comments": 0,
-   "reach": 319,
+   "reach": 320,
    "saves": 0,
    "shares": 0
   },
@@ -216,10 +238,10 @@
    "platform": "instagram",
    "url": "https://www.instagram.com/reel/Df8ZtTQir0z/",
    "postedAt": "2026-11-20T00:46:54.365Z",
-   "views": 172,
+   "views": 173,
    "likes": 1,
    "comments": 0,
-   "reach": 155,
+   "reach": 156,
    "saves": 0,
    "shares": 0
   },
@@ -230,10 +252,10 @@
    "platform": "instagram",
    "url": "https://www.instagram.com/reel/Df8t8KvjznZ/",
    "postedAt": "2026-11-20T03:43:42.754Z",
-   "views": 138,
+   "views": 139,
    "likes": 1,
    "comments": 0,
-   "reach": 128,
+   "reach": 129,
    "saves": 0,
    "shares": 0
   },
@@ -258,10 +280,10 @@
    "platform": "instagram",
    "url": "https://www.instagram.com/reel/Df-u0e1kyy0/",
    "postedAt": "2026-11-20T22:29:52.428Z",
-   "views": 129,
+   "views": 130,
    "likes": 0,
    "comments": 0,
-   "reach": 117,
+   "reach": 118,
    "saves": 0,
    "shares": 0
   },
@@ -286,10 +308,10 @@
    "platform": "instagram",
    "url": "https://www.instagram.com/reel/DgEEjI_jr47/",
    "postedAt": "2026-11-23T00:15:58.160Z",
-   "views": 140,
+   "views": 141,
    "likes": 1,
    "comments": 0,
-   "reach": 118,
+   "reach": 119,
    "saves": 0,
    "shares": 0
   },
@@ -328,10 +350,10 @@
    "platform": "instagram",
    "url": "https://www.instagram.com/reel/DgGh-91mHw7/",
    "postedAt": "2026-11-23T23:11:39.363Z",
-   "views": 130,
+   "views": 131,
    "likes": 0,
    "comments": 0,
-   "reach": 116,
+   "reach": 117,
    "saves": 0,
    "shares": 0
   },
@@ -384,10 +406,10 @@
    "platform": "instagram",
    "url": "https://www.instagram.com/reel/DgLoUSFh5RL/",
    "postedAt": "2026-11-25T22:43:11.011Z",
-   "views": 139,
+   "views": 140,
    "likes": 2,
    "comments": 0,
-   "reach": 118,
+   "reach": 119,
    "saves": 0,
    "shares": 0
   },
@@ -412,10 +434,38 @@
    "platform": "instagram",
    "url": "https://www.instagram.com/reel/DgOQZAZqTPq/",
    "postedAt": "2026-11-26T23:11:48.610Z",
-   "views": 1188,
+   "views": 1190,
    "likes": 16,
    "comments": 0,
-   "reach": 1064,
+   "reach": 1066,
+   "saves": 0,
+   "shares": 0
+  },
+  {
+   "id": "2026-W49/11-starter-motor",
+   "title": "A tiny gear starts your whole engine",
+   "lang": "en",
+   "platform": "instagram",
+   "url": "https://www.instagram.com/reel/DgQS7WPhDB5/",
+   "postedAt": "2026-11-27T18:11:55.585Z",
+   "views": 126,
+   "likes": 1,
+   "comments": 0,
+   "reach": 111,
+   "saves": 0,
+   "shares": 0
+  },
+  {
+   "id": "2026-W49/12-catalytic-converter",
+   "title": "Your exhaust pipe hides precious metals",
+   "lang": "en",
+   "platform": "instagram",
+   "url": "https://www.instagram.com/reel/DgQ1KxLBALD/",
+   "postedAt": "2026-11-27T23:11:42.769Z",
+   "views": 128,
+   "likes": 0,
+   "comments": 0,
+   "reach": 115,
    "saves": 0,
    "shares": 0
   },
@@ -459,7 +509,7 @@
    "platform": "youtube",
    "url": "https://youtu.be/U3cJvy7Mlvw",
    "postedAt": "2026-11-21T14:40:07.365Z",
-   "views": 1228,
+   "views": 1231,
    "likes": 9,
    "comments": 0
   },
@@ -481,7 +531,7 @@
    "platform": "youtube",
    "url": "https://youtu.be/vLJZM9Pw8Fw",
    "postedAt": "2026-11-23T13:17:41.526Z",
-   "views": 1490,
+   "views": 1493,
    "likes": 15,
    "comments": 0
   },
@@ -492,7 +542,7 @@
    "platform": "youtube",
    "url": "https://youtu.be/gQkbLdyj7lk",
    "postedAt": "2026-11-24T13:20:46.793Z",
-   "views": 1337,
+   "views": 1350,
    "likes": 10,
    "comments": 0
   },
@@ -503,8 +553,8 @@
    "platform": "youtube",
    "url": "https://youtu.be/cnQEtLNVzvs",
    "postedAt": "2026-11-25T13:11:50.227Z",
-   "views": 1226,
-   "likes": 10,
+   "views": 1250,
+   "likes": 12,
    "comments": 0
   },
   {
@@ -514,7 +564,7 @@
    "platform": "youtube",
    "url": "https://youtu.be/1AVVoY0_WXU",
    "postedAt": "2026-11-25T13:27:18.555Z",
-   "views": 1313,
+   "views": 1327,
    "likes": 11,
    "comments": 0
   },
@@ -525,7 +575,7 @@
    "platform": "youtube",
    "url": "https://youtu.be/-JeXo3cn4m4",
    "postedAt": "2026-11-26T05:12:11.002Z",
-   "views": 1306,
+   "views": 1311,
    "likes": 13,
    "comments": 0
   },
@@ -536,8 +586,8 @@
    "platform": "youtube",
    "url": "https://youtu.be/Fz-gReyMo4k",
    "postedAt": "2026-11-26T13:11:49.303Z",
-   "views": 1292,
-   "likes": 7,
+   "views": 1303,
+   "likes": 8,
    "comments": 0
   },
   {
@@ -547,8 +597,30 @@
    "platform": "youtube",
    "url": "https://youtu.be/Ht4yz6Wisuw",
    "postedAt": "2026-11-27T05:11:34.752Z",
-   "views": 820,
+   "views": 1212,
+   "likes": 16,
+   "comments": 0
+  },
+  {
+   "id": "2026-W49/5-oil-pump",
+   "title": "Lapisan oli setipis rambut menjaga mesinmu tetap hidup",
+   "lang": "id",
+   "platform": "youtube",
+   "url": "https://youtu.be/asTXas7dRnY",
+   "postedAt": "2026-11-27T13:11:34.813Z",
+   "views": 1385,
    "likes": 12,
+   "comments": 0
+  },
+  {
+   "id": "2026-W49/6-abs",
+   "title": "ABS-mu memompa rem 15 kali per detik",
+   "lang": "id",
+   "platform": "youtube",
+   "url": "https://youtu.be/xF62JQDvPzs",
+   "postedAt": "2026-11-28T05:11:40.836Z",
+   "views": 1316,
+   "likes": 9,
    "comments": 0
   },
   {
@@ -782,12 +854,40 @@
    "platform": "instagram",
    "url": "https://www.instagram.com/reel/DgO5kVUuHzw/",
    "postedAt": "2026-11-27T05:11:39.665Z",
-   "views": 128,
+   "views": 129,
    "likes": 1,
    "comments": 0,
-   "reach": 108,
+   "reach": 109,
    "saves": 0,
    "shares": 1
+  },
+  {
+   "id": "2026-W49/10-suspension-damper",
+   "title": "Tanpa ini, mobilmu bakal memantul terus",
+   "lang": "id",
+   "platform": "instagram",
+   "url": "https://www.instagram.com/reel/DgPwk6VN--u/",
+   "postedAt": "2026-11-27T13:11:40.579Z",
+   "views": 129,
+   "likes": 0,
+   "comments": 0,
+   "reach": 117,
+   "saves": 0,
+   "shares": 0
+  },
+  {
+   "id": "2026-W49/11-starter-motor",
+   "title": "Gigi kecil ini menghidupkan seluruh mesinmu",
+   "lang": "id",
+   "platform": "instagram",
+   "url": "https://www.instagram.com/reel/DgReXw8sJ8d/",
+   "postedAt": "2026-11-28T05:11:44.219Z",
+   "views": 146,
+   "likes": 1,
+   "comments": 0,
+   "reach": 127,
+   "saves": 0,
+   "shares": 0
   }
  ],
  "history": [
@@ -1070,6 +1170,34 @@
    "platform": "instagram",
    "followers": 0,
    "views": 3387
+  },
+  {
+   "date": "2026-11-28",
+   "lang": "en",
+   "platform": "youtube",
+   "followers": 11,
+   "views": 15370
+  },
+  {
+   "date": "2026-11-28",
+   "lang": "en",
+   "platform": "instagram",
+   "followers": 1,
+   "views": 4160
+  },
+  {
+   "date": "2026-11-28",
+   "lang": "id",
+   "platform": "youtube",
+   "followers": 6,
+   "views": 14529
+  },
+  {
+   "date": "2026-11-28",
+   "lang": "id",
+   "platform": "instagram",
+   "followers": 0,
+   "views": 3663
   }
  ]
 }
