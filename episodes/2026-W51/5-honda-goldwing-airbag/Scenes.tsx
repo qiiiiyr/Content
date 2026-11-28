@@ -1,5 +1,5 @@
 import {interpolate} from 'remotion';
-import {HudLine, Rod, Stage, Wheel, mat, ringPath, useFocus, useScene, type CamKey} from '../../../src/stage';
+import {HudLine, Readout, Rod, Stage, Wheel, mat, ringPath, useFocus, pullBack, useScene, type CamKey} from '../../../src/stage';
 import {Callout, TimeTag, ramp} from '../../../src/Looks';
 import {PaperTag} from '../../../src/Tag';
 import type {SceneProps} from '../../../src/types';
@@ -98,12 +98,12 @@ const Hook = ({lang}: SceneProps) => {
 	const {p} = useScene();
 	const x = interpolate(p, [0, 0.5], [-3, 3.8], clamp);
 	const bag = interpolate(p, [0.5, 0.62], [0, 1], clamp);
-	const cam: CamKey[] = [
+	const cam = pullBack([
 		{t: 0, pos: [-2, 7, 24], look: [1.5, 3.2, 0]},
 		{t: 0.45, pos: [0, 6.8, 22], look: [3, 3.4, 0]},
 		{t: 0.5, pos: [3.5, 7.2, 11], look: [4.8, 5, 0], cut: true},
 		{t: 1, pos: [3, 7, 10], look: [4.6, 5.1, 0]},
-	];
+	]);
 	return (
 		<>
 			<Stage cam={cam}>
@@ -117,12 +117,12 @@ const Hook = ({lang}: SceneProps) => {
 
 const Where = ({lang}: SceneProps) => {
 	const {p} = useScene();
-	const cam: CamKey[] = [
+	const cam = pullBack([
 		{t: 0, pos: [8, 7.5, 16], look: [1, 4, 0]},
 		{t: 0.5, pos: [7, 7, 14.5], look: [1, 4.2, 0]},
 		{t: 0.55, pos: [-7, 8, 13], look: [-0.5, 5, 0], cut: true},
 		{t: 1, pos: [-6.4, 7.8, 12], look: [-0.4, 5, 0]},
-	];
+	]);
 	return (
 		<>
 			<Stage cam={cam}>
@@ -136,12 +136,12 @@ const Where = ({lang}: SceneProps) => {
 
 const Sensors = ({lang}: SceneProps) => {
 	const {p, sec} = useScene();
-	const cam: CamKey[] = [
-		{t: 0, pos: [7, 4, 8], look: [3.5, 3, 0]},
-		{t: 0.5, pos: [6.4, 3.8, 7.2], look: [3.5, 3, 0]},
-		{t: 0.55, pos: [9, 3.2, -4], look: [3.4, 3, 0], cut: true},
-		{t: 1, pos: [8.4, 3.1, -3.4], look: [3.4, 3, 0]},
-	];
+	const cam = pullBack([
+		{t: 0, pos: [5, 6.5, 9], look: [2.6, 1.8, 0]},
+		{t: 0.5, pos: [4.6, 6.2, 8.2], look: [2.6, 1.8, 0]},
+		{t: 0.55, pos: [7.5, 6, -6.5], look: [2.6, 1.8, 0], cut: true},
+		{t: 1, pos: [7, 5.8, -6], look: [2.6, 1.8, 0]},
+	]);
 	const pulse = 0.25 + ((sec * 0.8) % 1) * 0.35;
 	return (
 		<>
@@ -160,12 +160,12 @@ const Sensors = ({lang}: SceneProps) => {
 
 const Decide = ({lang}: SceneProps) => {
 	const {p} = useScene();
-	const cam: CamKey[] = [
+	const cam = pullBack([
 		{t: 0, pos: [2, 4.6, 9], look: [1.2, 3.2, 0]},
 		{t: 0.5, pos: [1.4, 4.4, 8], look: [1, 3.2, 0]},
 		{t: 0.55, pos: [-2.5, 4.2, 6.5], look: [-0.6, 3.3, 0.7], cut: true},
 		{t: 1, pos: [-2.1, 4, 5.8], look: [-0.6, 3.3, 0.7]},
-	];
+	]);
 	return (
 		<>
 			<Stage cam={cam}>
@@ -181,12 +181,12 @@ const Inflate = ({lang}: SceneProps) => {
 	const {p} = useScene();
 	const r = ramp(p, 0.1, 0.75, 0.25);
 	const bag = interpolate(r.q, [0.15, 0.6], [0, 1], clamp);
-	const cam: CamKey[] = [
+	const cam = pullBack([
 		{t: 0, pos: [5, 7.4, 10], look: [1.4, 5.2, 0]},
 		{t: 0.5, pos: [4.4, 7.2, 9], look: [1.4, 5.2, 0]},
 		{t: 0.55, pos: [-3, 7.6, 9], look: [1, 5.4, 0], cut: true},
 		{t: 1, pos: [-2.6, 7.4, 8.2], look: [1, 5.4, 0]},
-	];
+	]);
 	return (
 		<>
 			<Stage cam={cam}>
@@ -201,12 +201,12 @@ const Inflate = ({lang}: SceneProps) => {
 const Straps = ({lang}: SceneProps) => {
 	const {p} = useScene();
 	const lean = interpolate(p, [0.15, 0.7], [0, 1], clamp);
-	const cam: CamKey[] = [
+	const cam = pullBack([
 		{t: 0, pos: [3, 7.5, 7], look: [1.3, 5, 0]},
 		{t: 0.5, pos: [2.6, 7.3, 6.4], look: [1.3, 5, 0]},
 		{t: 0.55, pos: [0, 7.5, 16], look: [1, 4.6, 0], cut: true},
 		{t: 1, pos: [0.5, 7.3, 14.5], look: [1, 4.6, 0]},
-	];
+	]);
 	return (
 		<>
 			<Stage cam={cam}>
@@ -219,7 +219,7 @@ const Straps = ({lang}: SceneProps) => {
 
 const Finale = () => (
 	<>
-		<Stage cam={[{t: 0, pos: [-2, 7, 24], look: [1.5, 3.2, 0]}, {t: 1, pos: [-4, 7.5, 27], look: [1.5, 3.4, 0]}]}>
+		<Stage cam={pullBack([{t: 0, pos: [-2, 7, 24], look: [1.5, 3.2, 0]}, {t: 1, pos: [-4, 7.5, 27], look: [1.5, 3.4, 0]}])}>
 			<Bike x={3.8} bag={1} lean={0.6} />
 			<Barrier />
 		</Stage>

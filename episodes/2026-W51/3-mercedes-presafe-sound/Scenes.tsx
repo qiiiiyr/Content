@@ -1,5 +1,5 @@
 import {interpolate} from 'remotion';
-import {Car, HudLine, Readout, Stage, mat, useFocus, useScene, type CamKey} from '../../../src/stage';
+import {Car, HudLine, Readout, Stage, mat, useFocus, pullBack, useScene, type CamKey} from '../../../src/stage';
 import {Callout, TimeTag, ramp} from '../../../src/Looks';
 import {PaperTag} from '../../../src/Tag';
 import type {SceneProps} from '../../../src/types';
@@ -107,12 +107,12 @@ const Approach = ({x, rings, t}: {x: number; rings: number; t: number}) => (
 
 const Hook = ({lang}: SceneProps) => {
 	const {p, sec} = useScene();
-	const cam: CamKey[] = [
+	const cam = pullBack([
 		{t: 0, pos: [-4, 6, 20], look: [0, 2.4, 0]},
 		{t: 0.45, pos: [-2, 5.6, 17], look: [1, 2.6, 0]},
 		{t: 0.5, pos: [-2.2, 4.6, 9], look: [-0.6, 3.3, 0], cut: true},
 		{t: 1, pos: [-1.6, 4.4, 8], look: [-0.5, 3.3, 0]},
-	];
+	]);
 	return (
 		<>
 			<Stage cam={cam}>{p < 0.5 ? <Approach x={-3 + p * 4} rings={interpolate(p, [0.15, 0.25], [0, 1], clamp)} t={sec} /> : <><Ear buzz={0.4} /><Waves t={sec} /></>}</Stage>
@@ -125,12 +125,12 @@ const Hook = ({lang}: SceneProps) => {
 const Decide = ({lang}: SceneProps) => {
 	const {p, sec} = useScene();
 	const x = -2 + p * 3;
-	const cam: CamKey[] = [
+	const cam = pullBack([
 		{t: 0, pos: [10, 9, 20], look: [2, 2, 0]},
 		{t: 0.5, pos: [9, 8, 18], look: [2.5, 2, 0]},
 		{t: 0.55, pos: [x - 4.5, 5.2, 7.5], look: [x - 0.9, 3.8, 0.9], cut: true},
 		{t: 1, pos: [x - 4, 5, 6.8], look: [x - 0.9, 3.8, 0.9]},
-	];
+	]);
 	return (
 		<>
 			<Stage cam={cam}>
@@ -145,12 +145,12 @@ const Decide = ({lang}: SceneProps) => {
 
 const Loud = ({lang}: SceneProps) => {
 	const {p, sec} = useScene();
-	const cam: CamKey[] = [
-		{t: 0, pos: [-0.5, 4.4, 9.5], look: [-0.5, 3.4, 0]},
-		{t: 0.5, pos: [-1.2, 4.2, 8.5], look: [-0.7, 3.4, 0]},
-		{t: 0.55, pos: [-5.5, 3.6, 6], look: [-1.6, 3.5, 0], cut: true},
-		{t: 1, pos: [-5, 3.5, 5.4], look: [-1.6, 3.5, 0]},
-	];
+	const cam = pullBack([
+		{t: 0, pos: [-0.5, 4.4, 9.5], look: [-0.5, 3.0, 0]},
+		{t: 0.5, pos: [-1.2, 4.2, 8.5], look: [-0.7, 3.0, 0]},
+		{t: 0.55, pos: [-4, 4.6, 7], look: [-1, 3.1, 0], cut: true},
+		{t: 1, pos: [-3.5, 4.4, 6.4], look: [-1, 3.1, 0]},
+	]);
 	return (
 		<>
 			<Stage cam={cam}>
@@ -164,12 +164,12 @@ const Loud = ({lang}: SceneProps) => {
 
 const Muscle = ({lang}: SceneProps) => {
 	const {sec} = useScene();
-	const cam: CamKey[] = [
+	const cam = pullBack([
 		{t: 0, pos: [2.5, 3.6, 8], look: [0.2, 3, 0]},
 		{t: 0.5, pos: [1.6, 3.4, 7], look: [0.2, 3, 0]},
 		{t: 0.55, pos: [-2.5, 2.4, 6.4], look: [0.1, 2.9, 0], cut: true},
 		{t: 1, pos: [-2, 2.3, 5.8], look: [0.1, 2.9, 0]},
-	];
+	]);
 	return (
 		<>
 			<Stage cam={cam}>
@@ -185,12 +185,12 @@ const Tighten = ({lang}: SceneProps) => {
 	const {p, sec} = useScene();
 	const r = ramp(p, 0.15, 0.7, 0.3);
 	const tense = interpolate(r.q, [0.2, 0.55], [0, 1], clamp);
-	const cam: CamKey[] = [
+	const cam = pullBack([
 		{t: 0, pos: [-3, 4.6, 9], look: [-0.6, 3.2, 0]},
 		{t: 0.45, pos: [-2.2, 4.3, 8], look: [-0.4, 3.2, 0]},
 		{t: 0.5, pos: [1.8, 2.8, 6], look: [0.2, 2.9, 0], cut: true},
 		{t: 1, pos: [1.4, 2.7, 5.4], look: [0.2, 2.9, 0]},
-	];
+	]);
 	return (
 		<>
 			<Stage cam={cam}>
@@ -206,12 +206,12 @@ const Tighten = ({lang}: SceneProps) => {
 
 const Braced = ({lang}: SceneProps) => {
 	const {p, sec} = useScene();
-	const cam: CamKey[] = [
+	const cam = pullBack([
 		{t: 0, pos: [-0.5, 4.6, 10], look: [-0.4, 3.4, 0]},
 		{t: 0.5, pos: [-1, 4.4, 9], look: [-0.5, 3.4, 0]},
 		{t: 0.55, pos: [6, 6.5, 18], look: [2.5, 2.2, 0], cut: true},
 		{t: 1, pos: [5.4, 6.2, 16.5], look: [2.6, 2.2, 0]},
-	];
+	]);
 	return (
 		<>
 			<Stage cam={cam}>
@@ -233,7 +233,7 @@ const Finale = () => {
 	const {sec} = useScene();
 	return (
 		<>
-			<Stage cam={[{t: 0, pos: [-6, 7, 22], look: [1, 2.4, 0]}, {t: 1, pos: [-8, 7.5, 25], look: [1, 2.6, 0]}]}>
+			<Stage cam={pullBack([{t: 0, pos: [-6, 7, 22], look: [1, 2.4, 0]}, {t: 1, pos: [-8, 7.5, 25], look: [1, 2.6, 0]}])}>
 				<Approach x={2.2} rings={0} t={sec} />
 			</Stage>
 			<PaperTag at={0.5} lines={{en: ['CUTAWAY', 'SAFETY LAB', 'No. 025'], id: ['BONGKAR PASANG', 'LAB KESELAMATAN', 'No. 025']}} />

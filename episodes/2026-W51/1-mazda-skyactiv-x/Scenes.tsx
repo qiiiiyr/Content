@@ -1,5 +1,5 @@
 import {interpolate} from 'remotion';
-import {Car, Engine, HudLine, Readout, Stage, cycleState, ringPath, useScene, type CamKey, type EngineState} from '../../../src/stage';
+import {Car, Engine, HudLine, Readout, Stage, cycleState, ringPath, pullBack, useScene, type CamKey, type EngineState} from '../../../src/stage';
 import {Callout, TimeTag, ramp} from '../../../src/Looks';
 import {PaperTag} from '../../../src/Tag';
 import type {SceneProps} from '../../../src/types';
@@ -24,12 +24,12 @@ const Kernel = ({k}: {k: number}) => <HudLine path={ringPath(CHAMBER, interpolat
 
 const Hook = ({lang}: SceneProps) => {
 	const {p, sec} = useScene();
-	const cam: CamKey[] = [
+	const cam = pullBack([
 		{t: 0, pos: [10, 6.5, 24], look: [1.2, 1.6, 0]},
 		{t: 0.4, pos: [8.5, 6, 21], look: [1.6, 1.8, 0]},
 		{t: 0.45, pos: [3, 5.4, 9], look: [0, 3.9, 0], cut: true},
 		{t: 1, pos: [2.2, 5.2, 7.6], look: [0, 4.1, 0]},
-	];
+	]);
 	const k = interpolate(p, [0.5, 0.95], [0, 1], clamp);
 	return (
 		<>
@@ -54,12 +54,12 @@ const Hook = ({lang}: SceneProps) => {
 const SparkOrNot = ({lang}: SceneProps) => {
 	const {p, sec} = useScene();
 	const deg = 250 + p * 900;
-	const cam: CamKey[] = [
+	const cam = pullBack([
 		{t: 0, pos: [3.5, 6.2, 10], look: [0, 4.2, 0]},
 		{t: 0.48, pos: [2.6, 5.8, 8.8], look: [0, 4.2, 0]},
 		{t: 0.5, pos: [-3.5, 5.6, 9.5], look: [0, 4, 0], cut: true},
 		{t: 1, pos: [-2.6, 5.3, 8.4], look: [0, 4, 0]},
-	];
+	]);
 	const petrol = p < 0.5;
 	const s = cycleState(deg, sec);
 	return (
@@ -74,12 +74,12 @@ const SparkOrNot = ({lang}: SceneProps) => {
 const Squeeze = ({lang}: SceneProps) => {
 	const {p, sec} = useScene();
 	const deg = interpolate(p, [0, 0.92], [185, 350], clamp);
-	const cam: CamKey[] = [
+	const cam = pullBack([
 		{t: 0, pos: [4, 4.5, 10], look: [0, 3.4, 0]},
 		{t: 0.5, pos: [3.2, 4.2, 9], look: [0, 3.5, 0]},
 		{t: 0.52, pos: [-2.4, 5.6, 7.4], look: [0, 4.4, 0], cut: true},
 		{t: 1, pos: [-1.8, 5.4, 6.8], look: [0, 4.5, 0]},
-	];
+	]);
 	return (
 		<>
 			<Stage cam={cam}>
@@ -96,12 +96,12 @@ const Ignite = ({lang}: SceneProps) => {
 	const {p, sec} = useScene();
 	const r = ramp(p, 0.12, 0.7, 0.3);
 	const k = interpolate(r.q, [0.05, 0.85], [0, 1], clamp);
-	const cam: CamKey[] = [
+	const cam = pullBack([
 		{t: 0, pos: [2.4, 5.6, 6.8], look: [0, 4.7, 0]},
 		{t: 0.5, pos: [1.6, 5.4, 6.2], look: [0, 4.8, 0]},
 		{t: 0.55, pos: [-3.6, 5, 9.5], look: [0, 4, 0], cut: true},
 		{t: 1, pos: [-3, 4.8, 8.8], look: [0, 4, 0]},
-	];
+	]);
 	return (
 		<>
 			<Stage cam={cam}>
@@ -117,12 +117,12 @@ const Ignite = ({lang}: SceneProps) => {
 
 const Economy = ({lang}: SceneProps) => {
 	const {p, sec} = useScene();
-	const cam: CamKey[] = [
+	const cam = pullBack([
 		{t: 0, pos: [-9, 7, 22], look: [0.5, 1.5, 0]},
 		{t: 0.5, pos: [-7, 6.5, 20], look: [1, 1.6, 0]},
 		{t: 0.55, pos: [7, 4.4, 9], look: [2.7, 1.8, 1.5], cut: true},
 		{t: 1, pos: [6.2, 4.2, 8], look: [2.7, 1.9, 1.5]},
-	];
+	]);
 	return (
 		<>
 			<Stage cam={cam}>
@@ -139,12 +139,12 @@ const Economy = ({lang}: SceneProps) => {
 const Fallback = ({lang}: SceneProps) => {
 	const {p, sec} = useScene();
 	const deg = 200 + p * 1100;
-	const cam: CamKey[] = [
+	const cam = pullBack([
 		{t: 0, pos: [-4, 3.6, 12], look: [0, 3.3, 0]},
 		{t: 0.5, pos: [-3, 3.8, 11], look: [0, 3.4, 0]},
 		{t: 0.55, pos: [2.8, 6.4, 8], look: [0, 4.6, 0], cut: true},
 		{t: 1, pos: [2.2, 6.1, 7.2], look: [0, 4.7, 0]},
-	];
+	]);
 	return (
 		<>
 			<Stage cam={cam}>
@@ -159,7 +159,7 @@ const Finale = () => {
 	const {sec} = useScene();
 	return (
 		<>
-			<Stage cam={[{t: 0, pos: [9, 6.5, 24], look: [1.2, 1.6, 0]}, {t: 1, pos: [12, 7, 27], look: [1.5, 1.8, 0]}]}>
+			<Stage cam={pullBack([{t: 0, pos: [9, 6.5, 24], look: [1.2, 1.6, 0]}, {t: 1, pos: [12, 7, 27], look: [1.5, 1.8, 0]}])}>
 				<Car rotation={[0, -0.5, 0]} xray>
 					<Engine s={cycleState(sec * 1100, sec)} valves={false} />
 				</Car>

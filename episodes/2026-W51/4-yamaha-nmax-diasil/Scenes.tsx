@@ -1,5 +1,5 @@
 import {interpolate} from 'remotion';
-import {Engine, HudLine, Readout, Scooter, Stage, Stream, cycleState, mat, pistonY, useFocus, useScene, type CamKey} from '../../../src/stage';
+import {Engine, HudLine, Readout, Scooter, Stage, Stream, cycleState, mat, pistonY, useFocus, pullBack, useScene, type CamKey} from '../../../src/stage';
 import {Callout, TimeTag, ramp} from '../../../src/Looks';
 import {PaperTag} from '../../../src/Tag';
 import type {SceneProps} from '../../../src/types';
@@ -78,12 +78,12 @@ const ringAt = (deg: number): V3 => [-0.4, 1.2 + pistonY(deg) * 0.75 + 0.25, WAL
 
 const Hook = ({lang}: SceneProps) => {
 	const {p, sec} = useScene();
-	const cam: CamKey[] = [
+	const cam = pullBack([
 		{t: 0, pos: [6, 5, 21], look: [-0.6, 2, 0]},
 		{t: 0.4, pos: [5, 4.6, 18], look: [-0.8, 2, 0]},
 		{t: 0.45, pos: [0.8, 5.4, 9.5], look: [0, 3.6, 0], cut: true},
 		{t: 1, pos: [0.4, 5.1, 8.4], look: [0, 3.6, 0]},
-	];
+	]);
 	return (
 		<>
 			<Stage cam={cam}>
@@ -104,12 +104,12 @@ const Hook = ({lang}: SceneProps) => {
 const Sleeve = ({lang}: SceneProps) => {
 	const {p, sec} = useScene();
 	const out = interpolate(p, [0.55, 0.85], [0, 1], clamp);
-	const cam: CamKey[] = [
+	const cam = pullBack([
 		{t: 0, pos: [3, 5, 10], look: [0, 3.6, 0]},
 		{t: 0.5, pos: [2.2, 4.8, 9], look: [0, 3.6, 0]},
 		{t: 0.55, pos: [-3.5, 7, 13], look: [0, 5.4, 0], cut: true},
 		{t: 1, pos: [-3, 7.4, 12], look: [0, 5.8, 0]},
-	];
+	]);
 	return (
 		<>
 			<Stage cam={cam}>
@@ -122,12 +122,12 @@ const Sleeve = ({lang}: SceneProps) => {
 
 const DiASil = ({lang}: SceneProps) => {
 	const {sec} = useScene();
-	const cam: CamKey[] = [
+	const cam = pullBack([
 		{t: 0, pos: [-2.5, 4.4, 9], look: [0, 3.5, 0]},
 		{t: 0.5, pos: [-1.6, 4.2, 8], look: [0, 3.5, 0]},
 		{t: 0.55, pos: [3.2, 6.5, 8], look: [0, 4.2, 0], cut: true},
 		{t: 1, pos: [2.6, 6.2, 7.2], look: [0, 4.2, 0]},
-	];
+	]);
 	return (
 		<>
 			<Stage cam={cam}>
@@ -143,12 +143,12 @@ const Rings = ({lang}: SceneProps) => {
 	const {p} = useScene();
 	const r = ramp(p, 0.15, 0.8, 0.28);
 	const deg = r.q * 540;
-	const cam: CamKey[] = [
+	const cam = pullBack([
 		{t: 0, pos: [1.2, 4.6, 5], look: [-0.5, 3.6, -0.3]},
 		{t: 0.5, pos: [0.8, 4.4, 4.4], look: [-0.5, 3.6, -0.3]},
 		{t: 0.55, pos: [-1.8, 3.4, 5], look: [-0.5, 3.4, -0.3], cut: true},
 		{t: 1, pos: [-1.4, 3.3, 4.4], look: [-0.5, 3.4, -0.3]},
-	];
+	]);
 	return (
 		<>
 			<Stage cam={cam}>
@@ -163,12 +163,12 @@ const Rings = ({lang}: SceneProps) => {
 
 const Heat = ({lang}: SceneProps) => {
 	const {sec} = useScene();
-	const cam: CamKey[] = [
+	const cam = pullBack([
 		{t: 0, pos: [0.5, 6.5, 11], look: [0, 4, 0]},
 		{t: 0.5, pos: [0, 6.2, 10], look: [0, 4, 0]},
 		{t: 0.55, pos: [-5, 4.5, 8], look: [-0.8, 3.8, 0], cut: true},
 		{t: 1, pos: [-4.4, 4.4, 7.2], look: [-0.8, 3.8, 0]},
-	];
+	]);
 	const paths: V3[][] = [-0.7, 0, 0.7].map((y) => [[-0.2, MID + y, -0.2], [-1.4, MID + y + 0.1, -0.5], [-2.9, MID + y + 0.5, -0.8]]);
 	return (
 		<>
@@ -186,12 +186,12 @@ const Heat = ({lang}: SceneProps) => {
 
 const BlueCore = ({lang}: SceneProps) => {
 	const {sec} = useScene();
-	const cam: CamKey[] = [
+	const cam = pullBack([
 		{t: 0, pos: [-1.5, 3.2, 8], look: [-1.6, 2.2, 0.9]},
 		{t: 0.5, pos: [-0.8, 3, 7], look: [-1.6, 2.2, 0.9]},
 		{t: 0.55, pos: [6, 5, 21], look: [-0.6, 2, 0], cut: true},
 		{t: 1, pos: [7, 5.4, 23], look: [-0.6, 2, 0]},
-	];
+	]);
 	return (
 		<>
 			<Stage cam={cam}>
@@ -209,7 +209,7 @@ const Finale = () => {
 	const go = Math.max(0, p - 0.2) ** 2 * 14;
 	return (
 		<>
-			<Stage cam={[{t: 0, pos: [6, 5, 21], look: [-0.6, 2, 0]}, {t: 1, pos: [8, 5.6, 25], look: [0.5, 2, 0]}]}>
+			<Stage cam={pullBack([{t: 0, pos: [6, 5, 21], look: [-0.6, 2, 0]}, {t: 1, pos: [8, 5.6, 25], look: [0.5, 2, 0]}])}>
 				<Scooter position={[go * 0.88, 0, -go * 0.48]} rotation={[0, -0.5, 0]} wheel={go / 1.1} xray>
 					<Engine s={cycleState(sec * 1000, sec)} valves={false} />
 				</Scooter>

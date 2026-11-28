@@ -1270,6 +1270,17 @@ export const ringPath = (c: V3, r: number, upright = false, n = 24): V3[] =>
 		return upright ? [c[0] + Math.cos(a) * r, c[1] + Math.sin(a) * r, c[2]] : [c[0] + Math.cos(a) * r, c[1], c[2] + Math.sin(a) * r];
 	});
 
+/** Moves shots back along their view line so the subject sits in the upper frame with room around it: close shots
+ * (nearer than 14) get k times the distance, whole-vehicle shots (14-30) 1.35 times and aim lower. */
+export const pullBack = (keys: CamKey[], k = 1.6): CamKey[] =>
+	keys.map((key) => {
+		const d = Math.hypot(...key.pos.map((v, i) => v - key.look[i]));
+		const f = d < 14 ? k : d < 30 ? 1.35 : 1;
+		const pos = key.pos.map((v, i) => key.look[i] + (v - key.look[i]) * f) as V3;
+		// whole-vehicle shots aim a little lower, which lifts the vehicle above the caption band
+		return {...key, pos, look: d >= 14 && d < 30 ? [key.look[0], key.look[1] - 1.4, key.look[2]] : key.look};
+	});
+
 /** A generic hatchback (no maker's styling or logo), front toward +x, wheels on the floor, about 10 long and 4 tall.
  * The engine bay is at the front: pass it as children (an <Engine scale={0.3}> fits). With xray the body is glass so the
  * engine and cabin show. wheel: wheel turn in radians. Body parts are tagged 'car' for focus. */
@@ -1277,13 +1288,19 @@ export const Car = ({position = [0, 0, 0], rotation = [0, 0, 0], wheel = 0, xray
 	const body = useMemo(() => new RoundedBoxGeometry(9.6, 1.7, 4, 4, 0.6), []);
 	const cabin = useMemo(() => new RoundedBoxGeometry(5.2, 1.6, 3.6, 4, 0.55), []);
 	const paint = {color, metalness: 0.4, roughness: 0.3, clearcoat: 1, clearcoatRoughness: 0.15};
-	const glass = <meshPhysicalMaterial color="#d6ecf0" transparent opacity={0.16} roughness={0.05} clearcoat={1} depthWrite={false} />;
+	const glass = <meshPhysicalMaterial color="#d6ecf0" transparent opacity={0.28} roughness={0.05} clearcoat={1} depthWrite={false} />;
+	// x-ray paint stays tinted so the body still reads on dark and sunset sets
+	const ghost = <meshPhysicalMaterial color={color} transparent opacity={0.42} roughness={0.2} clearcoat={1} depthWrite={false} />;
 	return (
 		<group position={position} rotation={rotation}>
 			{[3.2, -3.2].flatMap((x) => [1.9, -1.9].map((z) => <Wheel key={`${x}${z}`} r={1.05} angle={-wheel} position={[x, 1.05, z]} />))}
 			<group userData={{part: 'car'}}>
 				<mesh geometry={body} position={[0, 1.95, 0]} castShadow={!xray} receiveShadow>
-					{xray ? glass : <meshPhysicalMaterial {...paint} />}
+					{xray ? ghost : <meshPhysicalMaterial {...paint} />}
+				</mesh>
+				<mesh position={[0, 1.15, 0]} castShadow>
+					<boxGeometry args={[9.2, 0.15, 3.6]} />
+					<meshStandardMaterial {...mat.dark} />
 				</mesh>
 				<mesh geometry={cabin} position={[-0.6, 3.5, 0]} castShadow={!xray}>
 					{glass}
@@ -1309,7 +1326,7 @@ export const Car = ({position = [0, 0, 0], rotation = [0, 0, 0], wheel = 0, xray
 				))}
 			</group>
 			{/* the engine sits under the bonnet */}
-			<group position={[3.1, 0.9, 0]} scale={0.3}>
+			<group position={[3.1, 0.9, 0]} scale={0.36}>
 				{children}
 			</group>
 		</group>
